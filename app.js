@@ -1,9 +1,10 @@
 /**
- * Sangar AI Library — Core Application Logic
- * Interactive Prompt Generator for Motion Graphics, Library, and Tool Hub.
+ * Sangar AI Library v2.0 Pro — Core Application Logic
+ * Interactive Prompt Generator for Motion Graphics, Hero Frames (Midjourney/Flux),
+ * After Effects Expressions Studio, Storyboards & Tool Hub.
  */
 
-// Embedded fallback data to guarantee 100% offline & file:// protocol compatibility
+// Embedded fallback data for seamless offline & file:// protocol operation
 const DEFAULT_CONFIG = {
   presets: [
     {
@@ -219,6 +220,9 @@ const DEFAULT_CONFIG = {
 // Global App State
 const state = {
   config: DEFAULT_CONFIG,
+  heroConfig: null,
+  expressions: [],
+  storyboards: [],
   promptsLibrary: [],
   glossary: [],
   tools: [],
@@ -230,8 +234,11 @@ const state = {
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   loadStoredFavorites();
-  loadExternalData().then(() => {
+  loadAllData().then(() => {
     populateGeneratorSelects();
+    initHeroFrameGenerator();
+    renderExpressions();
+    renderStoryboards();
     renderPromptsLibrary();
     renderGlossary();
     renderToolsDirectory();
@@ -269,28 +276,34 @@ function switchTab(tabId) {
 }
 
 /**
- * Fetch external JSON data if served over HTTP, otherwise keep fallbacks
+ * Fetch external JSON datasets with robust fallbacks
  */
-async function loadExternalData() {
+async function loadAllData() {
   try {
-    const [genRes, libRes, toolRes, glossRes] = await Promise.all([
+    const [genRes, heroRes, exprRes, storyRes, libRes, toolRes, glossRes] = await Promise.all([
       fetch('data/motion-generator.json').catch(() => null),
+      fetch('data/hero-frames-generator.json').catch(() => null),
+      fetch('data/after-effects-tools.json').catch(() => null),
+      fetch('data/storyboard-templates.json').catch(() => null),
       fetch('data/prompts-library.json').catch(() => null),
       fetch('data/ai-tools.json').catch(() => null),
       fetch('data/animation-glossary.json').catch(() => null)
     ]);
 
     if (genRes && genRes.ok) state.config = await genRes.json();
+    if (heroRes && heroRes.ok) state.heroConfig = await heroRes.json();
+    if (exprRes && exprRes.ok) state.expressions = await exprRes.json();
+    if (storyRes && storyRes.ok) state.storyboards = await storyRes.json();
     if (libRes && libRes.ok) state.promptsLibrary = await libRes.json();
     if (toolRes && toolRes.ok) state.tools = await toolRes.json();
     if (glossRes && glossRes.ok) state.glossary = await glossRes.json();
   } catch (err) {
-    console.info("Using embedded datasets for seamless offline operation.");
+    console.info("Using embedded fallbacks where necessary.");
   }
 }
 
 /**
- * Populate Form Dropdowns
+ * Populate Motion Generator Form Selects
  */
 function populateGeneratorSelects() {
   populateSelect('projectTypeSelect', state.config.projectTypes, 'logo_reveal');
@@ -305,7 +318,7 @@ function populateGeneratorSelects() {
 
 function populateSelect(selectId, items, defaultVal) {
   const select = document.getElementById(selectId);
-  if (!select) return;
+  if (!select || !items) return;
   select.innerHTML = '';
   items.forEach(item => {
     const opt = document.createElement('option');
@@ -317,7 +330,237 @@ function populateSelect(selectId, items, defaultVal) {
 }
 
 /**
- * Setup Event Listeners
+ * HERO FRAMES GENERATOR MODULE (Midjourney & Flux)
+ */
+function initHeroFrameGenerator() {
+  if (!state.heroConfig) return;
+
+  populateSelect('heroEngineSelect', state.heroConfig.engines, 'octane_render');
+  populateSelect('heroLensSelect', state.heroConfig.lenses, 'lens_85mm');
+  populateSelect('heroMaterialSelect', state.heroConfig.materials, 'titanium_gold');
+  populateSelect('heroLightingSelect', state.heroConfig.lighting, 'studio_softbox');
+
+  const heroForm = document.getElementById('heroFrameForm');
+  if (heroForm) {
+    heroForm.addEventListener('input', updateHeroFramePrompt);
+    heroForm.addEventListener('change', updateHeroFramePrompt);
+  }
+
+  const stylizeRange = document.getElementById('heroStylizeRange');
+  const stylizeVal = document.getElementById('heroStylizeVal');
+  if (stylizeRange && stylizeVal) {
+    stylizeRange.addEventListener('input', () => {
+      stylizeVal.textContent = stylizeRange.value;
+      updateHeroFramePrompt();
+    });
+  }
+
+  document.querySelectorAll('.hero-preset-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const pId = chip.getAttribute('data-preset');
+      applyHeroPreset(pId);
+    });
+  });
+
+  const resetHeroBtn = document.getElementById('resetHeroBtn');
+  if (resetHeroBtn) {
+    resetHeroBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      applyHeroPreset('hero_logo_3d');
+    });
+  }
+
+  setupCopyBtn('copyHeroPromptBtn', () => document.getElementById('heroPromptOutput').value, 'Prompt Midjourney copiado');
+  setupCopyBtn('copyHeroActionBtn', () => document.getElementById('heroPromptOutput').value, 'Prompt Midjourney copiado');
+
+  updateHeroFramePrompt();
+}
+
+function applyHeroPreset(presetId) {
+  if (!state.heroConfig || !state.heroConfig.presets) return;
+  const p = state.heroConfig.presets.find(x => x.id === presetId);
+  if (!p) return;
+
+  setSelectValue('heroEngineSelect', p.engine);
+  setSelectValue('heroLensSelect', p.lens);
+  setSelectValue('heroMaterialSelect', p.material);
+  setSelectValue('heroLightingSelect', p.lighting);
+  setSelectValue('heroArSelect', p.aspectRatio);
+
+  const subjectInput = document.getElementById('heroSubjectInput');
+  if (subjectInput) subjectInput.value = p.subject;
+
+  const stylizeRange = document.getElementById('heroStylizeRange');
+  const stylizeVal = document.getElementById('heroStylizeVal');
+  if (stylizeRange && stylizeVal) {
+    stylizeRange.value = p.stylize || 250;
+    stylizeVal.textContent = stylizeRange.value;
+  }
+
+  const rawToggle = document.getElementById('heroStyleRawToggle');
+  if (rawToggle) rawToggle.checked = Boolean(p.styleRaw);
+
+  updateHeroFramePrompt();
+  showToast(`Preset Hero cargado: ${p.name}`, '💎');
+}
+
+function updateHeroFramePrompt() {
+  if (!state.heroConfig) return;
+
+  const subject = document.getElementById('heroSubjectInput')?.value.trim() || "3D logo mark";
+  const engineId = document.getElementById('heroEngineSelect')?.value;
+  const lensId = document.getElementById('heroLensSelect')?.value;
+  const matId = document.getElementById('heroMaterialSelect')?.value;
+  const lightId = document.getElementById('heroLightingSelect')?.value;
+  const ar = document.getElementById('heroArSelect')?.value || "16:9";
+  const stylize = document.getElementById('heroStylizeRange')?.value || "250";
+  const isRaw = document.getElementById('heroStyleRawToggle')?.checked;
+
+  const engObj = state.heroConfig.engines?.find(e => e.id === engineId) || {};
+  const lensObj = state.heroConfig.lenses?.find(l => l.id === lensId) || {};
+  const matObj = state.heroConfig.materials?.find(m => m.id === matId) || {};
+  const lightObj = state.heroConfig.lighting?.find(li => li.id === lightId) || {};
+
+  let parts = [translateSubjectToEn(subject)];
+  if (matObj.en) parts.push(matObj.en);
+  if (engObj.en) parts.push(engObj.en);
+  if (lensObj.en) parts.push(lensObj.en);
+  if (lightObj.en) parts.push(lightObj.en);
+
+  let params = [`--v 6.1`, `--ar ${ar}`];
+  if (isRaw) params.push(`--style raw`);
+  if (stylize) params.push(`--stylize ${stylize}`);
+
+  const fullPrompt = `${parts.join(", ")} ${params.join(" ")}`;
+
+  const outputEl = document.getElementById('heroPromptOutput');
+  if (outputEl) outputEl.value = fullPrompt;
+
+  const heroParamsBar = document.getElementById('heroParamsBar');
+  if (heroParamsBar) {
+    heroParamsBar.innerHTML = '';
+    params.forEach(p => {
+      const span = document.createElement('span');
+      span.className = 'param-pill';
+      span.textContent = p;
+      heroParamsBar.appendChild(span);
+    });
+  }
+}
+
+/**
+ * AFTER EFFECTS EXPRESSIONS MODULE
+ */
+function renderExpressions() {
+  const container = document.getElementById('expressionsGridContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  state.expressions.forEach(expr => {
+    const card = document.createElement('div');
+    card.className = 'expr-card';
+    card.innerHTML = `
+      <div class="card-top">
+        <h3 class="card-title">${expr.name}</h3>
+        <span class="expr-prop-tag">${expr.property}</span>
+      </div>
+      <p class="card-desc">${expr.description}</p>
+      <div class="expr-howto">
+        <strong>💡 Cómo usarlo:</strong> ${expr.howToUse}
+      </div>
+      <div class="card-prompt-code" style="color: #6ee7b7;">${expr.code}</div>
+      <div class="card-actions">
+        <button class="btn btn-primary btn-copy-expr" style="font-size: 0.8rem; padding: 0.4rem 0.9rem; width: 100%;">
+          📋 Copiar Expresión para After Effects
+        </button>
+      </div>
+    `;
+
+    card.querySelector('.btn-copy-expr').addEventListener('click', () => {
+      navigator.clipboard.writeText(expr.code).then(() => {
+        showToast(`Expresión copiada: ${expr.name}`, '🪄');
+      });
+    });
+
+    container.appendChild(card);
+  });
+}
+
+/**
+ * STORYBOARDS & SCRIPTS MODULE
+ */
+function renderStoryboards() {
+  const container = document.getElementById('storyboardContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  state.storyboards.forEach(sb => {
+    const wrap = document.createElement('div');
+    wrap.className = 'storyboard-wrapper';
+
+    let shotsHtml = sb.shots.map(s => `
+      <div class="shot-card">
+        <span class="shot-number-badge">Plano ${s.shot}</span>
+        <h4 style="font-size: 0.92rem; font-weight: 700; margin-bottom: 0.4rem; color: #f8fafc;">${s.name}</h4>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.6rem;">${s.goal}</p>
+        <div class="shot-detail-row">
+          <span>🎥</span> <strong>Cámara:</strong> ${s.camera}
+        </div>
+        <div class="shot-detail-row">
+          <span>🎵</span> <strong>Audio/SFX:</strong> ${s.audio}
+        </div>
+        <div class="card-prompt-code" style="margin-top: 0.6rem; font-size: 0.76rem; max-height: 90px;">
+          ${s.promptIdea}
+        </div>
+        <button class="btn-copy-mini btn-copy-shot-prompt" style="margin-top: auto; align-self: flex-start;">
+          Copiar Prompt Plano ${s.shot}
+        </button>
+      </div>
+    `).join('');
+
+    wrap.innerHTML = `
+      <div class="storyboard-header">
+        <div>
+          <h3 style="font-size: 1.3rem; font-weight: 700;">${sb.title}</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">${sb.description}</p>
+        </div>
+        <div style="display: flex; gap: 0.6rem; align-items: center;">
+          <span class="tool-tag">${sb.duration}</span>
+          <span class="tool-tag" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">${sb.format}</span>
+          <button class="btn btn-outline btn-copy-all-shots" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+            📋 Copiar Guión Completo
+          </button>
+        </div>
+      </div>
+      <div class="shots-timeline-grid">
+        ${shotsHtml}
+      </div>
+    `;
+
+    // Copy single shot buttons
+    wrap.querySelectorAll('.btn-copy-shot-prompt').forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(sb.shots[idx].promptIdea).then(() => {
+          showToast(`Prompt Plano ${idx+1} copiado`, '📋');
+        });
+      });
+    });
+
+    // Copy full script button
+    wrap.querySelector('.btn-copy-all-shots').addEventListener('click', () => {
+      const fullScript = `GUIÓN TÉCNICO Y STORYBOARD — ${sb.title}\nDuración: ${sb.duration} | Formato: ${sb.format}\n\n` +
+        sb.shots.map(s => `[PLANO ${s.shot}: ${s.name}]\nObjetivo: ${s.goal}\nCámara: ${s.camera}\nAudio: ${s.audio}\nPrompt IA: ${s.promptIdea}\n`).join('\n');
+      navigator.clipboard.writeText(fullScript).then(() => {
+        showToast('Guión técnico completo copiado', '📋');
+      });
+    });
+
+    container.appendChild(wrap);
+  });
+}
+
+/**
+ * Setup Main Event Listeners
  */
 function setupEventListeners() {
   const form = document.getElementById('promptGeneratorForm');
@@ -346,7 +589,7 @@ function setupEventListeners() {
   });
 
   // Preset chips
-  document.querySelectorAll('.preset-chip').forEach(chip => {
+  document.querySelectorAll('.presets-bar .preset-chip:not(.hero-preset-chip)').forEach(chip => {
     chip.addEventListener('click', () => {
       const presetId = chip.getAttribute('data-preset');
       applyPreset(presetId);
@@ -407,8 +650,7 @@ function setupCopyBtn(btnId, getTextFn, successMsg) {
     if (!text) return;
     navigator.clipboard.writeText(text).then(() => {
       showToast(successMsg, '📋');
-    }).catch(err => {
-      // Fallback
+    }).catch(() => {
       fallbackCopy(text);
       showToast(successMsg, '📋');
     });
@@ -584,17 +826,20 @@ MOTOR DESTINO: ${engineObj.name || 'Runway'}`;
 }
 
 /**
- * Simple English dictionary mapping for common Spanish subject phrases
+ * English dictionary mapping for common Spanish subject phrases
  */
 function translateSubjectToEn(spanishSubject) {
   const dict = [
     { es: /logotipo minimalista.*líneas geométricas/i, en: "a sleek minimalist 3D geometric logo mark" },
+    { es: /monograma geométrico 3D flotante/i, en: "a floating 3D geometric monogram with beveled edges" },
+    { es: /botella de perfume.*cristal/i, en: "a luxury faceted glass perfume bottle on black volcanic stone" },
+    { es: /plataforma de datos cuánticos.*isométrica/i, en: "an isometric quantum data platform with floating server racks" },
+    { es: /estructura biomórfica de cromo/i, en: "a biomorphic liquid chrome sculpture suspended in zero gravity" },
     { es: /logotipo/i, en: "a 3D brand logo" },
     { es: /monograma/i, en: "a luxury geometric monogram" },
     { es: /frase de impacto tipográfica.*serif/i, en: "bold contrasting typography letterforms in serif and sans-serif" },
     { es: /tipografía bold/i, en: "bold massive 3D typography letters" },
     { es: /reloj de alta gama/i, en: "a luxury high-end skeleton watch with visible sapphire gear mechanisms" },
-    { es: /escultura biomórfica de cromo/i, en: "a biomorphic liquid chrome sculpture perpetually morphing" },
     { es: /panel de control holográfico/i, en: "a floating futuristic holographic HUD interface dashboard" },
     { es: /esfera de vidrio/i, en: "an iridescent translucent frosted glass sphere" },
     { es: /zapatilla/i, en: "a futuristic techwear sneaker with layered exploded components" },
@@ -799,7 +1044,6 @@ function saveCurrentToFavorites() {
 
 function saveCustomFavorite(item) {
   if (!item.id) item.id = Date.now().toString();
-  // Check if exists
   const exists = state.favorites.some(f => f.prompt_en === item.prompt_en);
   if (exists) {
     showToast('Este prompt ya está en tus favoritos', 'ℹ️');

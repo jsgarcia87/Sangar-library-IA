@@ -1,0 +1,58 @@
+[
+  {
+    "id": "inertia_bounce",
+    "name": "Rebote Elástico (Inertia Bounce)",
+    "property": "Escala o Posición",
+    "description": "Crea una oscilación elástica con amortiguación natural cada vez que la capa llega a un fotograma clave, evitando tener que animar el rebote a mano.",
+    "howToUse": "Crea 2 keyframes (ej. Escala 0% a 100%). Haz Alt+Clic en el cronómetro de Escala y pega este código.",
+    "code": "// Inertia Bounce - Sangar AI Library\namp = 0.06; // Amplitud del rebote\nfreq = 3.5; // Frecuencia de oscilaciones por segundo\ndecay = 5.0; // Velocidad de frenado\n\nn = 0;\nif (numKeys > 0){\n  n = nearestKey(time).index;\n  if (key(n).time > time) n--;\n}\n\nif (n == 0){\n  t = 0;\n} else {\n  t = time - key(n).time;\n}\n\nif (n > 0 && t < 1){\n  v = velocityAtTime(key(n).time - thisComp.frameDuration/10);\n  value + v*(amp*Math.sin(freq*t*2*Math.PI)/Math.exp(decay*t));\n} else {\n  value;\n}"
+  },
+  {
+    "id": "smooth_wiggle",
+    "name": "Wiggle Suave y Orgánico",
+    "property": "Posición, Rotación o Cámara",
+    "description": "Añade una vibración o balanceo orgánico continuo a la capa sin necesidad de fotogramas clave.",
+    "howToUse": "Alt+Clic en Posición o Rotación. Ajusta la frecuencia (veces por segundo) y la magnitud (píxeles o grados).",
+    "code": "// Smooth Organic Wiggle - Sangar AI Library\nfreq = 2; // Veces por segundo\nmag = 25; // Magnitud del desplazamiento en píxeles o grados\n\nwiggle(freq, mag);"
+  },
+  {
+    "id": "loop_pingpong",
+    "name": "Bucle Infinito (LoopOut Ping-Pong / Cycle)",
+    "property": "Cualquier propiedad con keyframes",
+    "description": "Repite la animación de tus fotogramas clave de forma infinita hacia adelante y hacia atrás (pingpong) o cíclica (cycle).",
+    "howToUse": "Crea al menos 2 keyframes. Alt+Clic en el cronómetro y pega la expresión.",
+    "code": "// Seamless LoopOut PingPong - Sangar AI Library\nloopOut(\"pingpong\"); // O usa loopOut(\"cycle\") para repetir en una sola dirección"
+  },
+  {
+    "id": "auto_fade",
+    "name": "Fade In y Fade Out Automático",
+    "property": "Opacidad",
+    "description": "Desvanece la capa suavemente al inicio y al final de la barra de la capa automáticamente sin ningún keyframe manual.",
+    "howToUse": "Alt+Clic en el cronómetro de Opacidad. La duración se ajusta en 'fadeTime' (en segundos).",
+    "code": "// Auto Fade In / Fade Out - Sangar AI Library\nfadeTime = 0.4; // Duración de la transición en segundos\n\nfadeIn = linear(time, inPoint, inPoint + fadeTime, 0, 100);\nfadeOut = linear(time, outPoint - fadeTime, outPoint, 0, 100);\n\nif (time < inPoint + fadeTime){\n  fadeIn;\n} else if (time > outPoint - fadeTime){\n  100 - fadeOut;\n} else {\n  100;\n}"
+  },
+  {
+    "id": "count_up_numbers",
+    "name": "Contador Numérico Dinámico con Prefijo/Sufijo",
+    "property": "Texto de Origen (Source Text)",
+    "description": "Crea una animación fluida de números ascendentes para estadísticas, precios o métricas (ej. 0 a 100.000 €).",
+    "howToUse": "Crea una capa de Texto. Añade un deslizador (Efecto > Controles de expresión > Control deslizante). Alt+Clic en 'Texto de origen' y pega:",
+    "code": "// Dynamic Count-Up Numbers - Sangar AI Library\nval = Math.round(effect(\"Slider Control\")(\"Slider\"));\nprefix = \"$\"; // Prefijo (ej: $, €, o vacío \"\")\nsuffix = \"K\"; // Sufijo (ej: %, K, o vacío \"\")\n\nprefix + val.toLocaleString() + suffix;"
+  },
+  {
+    "id": "follow_leader_delay",
+    "name": "Seguimiento con Retardo (Follow Leader Delay)",
+    "property": "Posición de capas secundarias",
+    "description": "Hace que una capa siga la trayectoria de la capa superior pero con un desfase temporal orgánico (efecto cadena o serpiente).",
+    "howToUse": "En la capa que quieres que siga a la capa superior (Capa 1), haz Alt+Clic en Posición y pega:",
+    "code": "// Follow Leader with Delay - Sangar AI Library\ndelay = 5; // Retardo en fotogramas\nleaderLayer = thisComp.layer(index - 1); // Capa anterior en la jerarquía\n\nleaderLayer.transform.position.valueAtTime(time - framesToTime(delay));"
+  },
+  {
+    "id": "neon_flicker",
+    "name": "Parpadeo Estocástico Neón Cyberpunk",
+    "property": "Opacidad de la luz o neón",
+    "description": "Simula un tubo de gas neón con fallos eléctricos realistas y parpadeos impredecibles.",
+    "howToUse": "Alt+Clic en Opacidad de la capa o del efecto Resplandor (Glow).",
+    "code": "// Realistic Neon Flicker - Sangar AI Library\nminVal = 15; // Opacidad mínima en el fallo\nmaxVal = 100; // Opacidad máxima\nprob = 75; // Probabilidad de encendido (0 - 100)\n\nsegTime = Math.floor(time * 24); // 24 fps check\nseedRandom(segTime, true);\n\nif (random(100) > prob){\n  random(minVal, 60);\n} else {\n  maxVal;\n}"
+  }
+]

@@ -1,0 +1,84 @@
+[
+  {
+    "id": "reel_viral_15s",
+    "title": "Reel / TikTok Viral de Alta Retención (15s)",
+    "description": "Estructura de 4 fases diseñada para maximizar el tiempo de retención y 'hook' en los primeros 2 segundos.",
+    "duration": "15 segundos",
+    "format": "9:16 Vertical",
+    "shots": [
+      {
+        "shot": 1,
+        "name": "00:00 - 00:02 | El Gancho Visual (The Hook)",
+        "goal": "Detener el scroll del usuario con un movimiento súbito o interrogante visual.",
+        "camera": "Crash zoom punch-in instantáneo",
+        "audio": "Efecto de impacto (Sub-drop o quién-sabe qué golpe de glitch sónico)",
+        "promptIdea": "Kinetic typography slamming into screen with intense chromatic aberration and dust shockwave, 9:16 format"
+      },
+      {
+        "shot": 2,
+        "name": "00:02 - 00:07 | Planteamiento del Problema / Revelación",
+        "goal": "Mostrar el dolor o la solución mediante una transición fluida en morphing.",
+        "camera": "Tracking horizontal continuo suave",
+        "audio": "Risers y percusión rítmica acelerando",
+        "promptIdea": "Seamless morphing transition from chaotic messy wires into an ultra-clean sleek minimalist 3D device"
+      },
+      {
+        "shot": 3,
+        "name": "00:07 - 00:12 | El Clímax / Demostración",
+        "goal": "Mostrar el valor clave del producto o la idea con un ángulo de cámara dinámico.",
+        "camera": "Giro orbital 360° fluido",
+        "audio": "Beat completo rompiendo (drop musical)",
+        "promptIdea": "Floating 3D product exploding into layers in mid-air, glowing interfaces and pristine studio light"
+      },
+      {
+        "shot": 4,
+        "name": "00:12 - 00:15 | Llamada a la Acción (CTA) & Outro",
+        "goal": "Fijar la marca y decir claramente qué hacer a continuación.",
+        "camera": "Dolly out suave settling en el centro",
+        "audio": "Firma sónica de marca (Logo audio chime)",
+        "promptIdea": "Minimalist brand logo reveal with golden rim light and clean kinetic text 'Enlace en bio'"
+      }
+    ]
+  },
+  {
+    "id": "commercial_30s",
+    "title": "Spot Comercial de Producto Tecnológico (30s)",
+    "description": "Estructura cinematográfica para anuncios de televisión, YouTube preroll y campañas de marca de alto impacto.",
+    "duration": "30 segundos",
+    "format": "16:9 Panorámico",
+    "shots": [
+      {
+        "shot": 1,
+        "name": "00:00 - 00:05 | Atmósfera & Misterio",
+        "goal": "Establecer el tono premium y la escala.",
+        "camera": "Macro probe lens desplazándose por texturas",
+        "audio": "Sinfonía electrónica misteriosa con tonos graves",
+        "promptIdea": "Extreme macro closeup of brushed titanium surface and dark obsidian stone with soft rim lighting"
+      },
+      {
+        "shot": 2,
+        "name": "00:05 - 00:14 | Revelado del Objeto & Físicas",
+        "goal": "Presentar el producto interactuando con su entorno.",
+        "camera": "Órbita continua de 360 grados con rack focus",
+        "audio": "Transición de viento (whoosh) y crescendo de cuerdas",
+        "promptIdea": "Futuristic device emerging from dark water with liquid ripples and glowing light reflections"
+      },
+      {
+        "shot": 3,
+        "name": "00:14 - 00:23 | Demostración de Capacidades",
+        "goal": "Visualizar la tecnología o el beneficio invisible mediante gráficos holográficos.",
+        "camera": "FPV flythrough a través de los componentes",
+        "audio": "Pulsos de energía y microinteracciones de interfaz",
+        "promptIdea": "Floating spatial computing holographic cards expanding from the device with laser accuracy"
+      },
+      {
+        "shot": 4,
+        "name": "00:23 - 00:30 | Hero Shot Final & Sello de Marca",
+        "goal": "Cierre icónico que perdura en la memoria del espectador.",
+        "camera": "Slow dolly out con luz de estudio cenital",
+        "audio": "Resolución armónica y golpe de logo final",
+        "promptIdea": "Complete 3D product standing proudly on matte pedestal, clean typography and logo lockup"
+      }
+    ]
+  }
+]

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sangar AI Library — Motion Graphics & AI Prompt Studio</title>
+  <title>Sangar AI Library — Motion Graphics, Hero Frames & AI Prompt Studio</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,24 +20,33 @@
           <div class="brand-title">Sangar <span>AI Library</span></div>
           <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: -2px;">Creative Prompt & Motion Studio</div>
         </div>
-        <span class="brand-tag">v1.0 Pro</span>
+        <span class="brand-tag">v2.0 Pro</span>
       </a>
 
       <nav class="main-nav">
         <button class="nav-tab-btn active" data-tab="generator">
-          <span>🎬</span> Generador Motion
+          <span>🎬</span> Generador Vídeo
+        </button>
+        <button class="nav-tab-btn" data-tab="heroframes">
+          <span>💎</span> Hero Frames (MJ/Flux)
+        </button>
+        <button class="nav-tab-btn" data-tab="expressions">
+          <span>🪄</span> Expresiones After Effects
+        </button>
+        <button class="nav-tab-btn" data-tab="storyboard">
+          <span>📋</span> Storyboards
         </button>
         <button class="nav-tab-btn" data-tab="library">
           <span>📚</span> Biblioteca Prompts
         </button>
         <button class="nav-tab-btn" data-tab="glossary">
-          <span>🧠</span> Guía & Motion Design
+          <span>🧠</span> Guía & Motion
         </button>
         <button class="nav-tab-btn" data-tab="tools">
-          <span>🛠️</span> Directorio de IAs
+          <span>🛠️</span> Herramientas IA
         </button>
         <button class="nav-tab-btn" data-tab="favorites">
-          <span>⭐</span> Mis Favoritos <span class="badge-counter" id="favCountBadge">0</span>
+          <span>⭐</span> Favoritos <span class="badge-counter" id="favCountBadge">0</span>
         </button>
       </nav>
     </div>
@@ -242,6 +251,179 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB: HERO FRAMES (MIDJOURNEY & FLUX)       -->
+    <!-- ========================================== -->
+    <section id="tab-heroframes" class="tab-pane">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <h1>Generador de Hero Frames (Midjourney v6.1 & Flux)</h1>
+          <p>Diseña el fotograma maestro perfecto en ultra alta resolución (Hero Frame). Es el punto de partida esencial para conseguir movimiento consistente en el flujo Image-to-Video.</p>
+        </div>
+      </div>
+
+      <!-- Quick Preset Selector Chips -->
+      <div class="presets-bar">
+        <span class="presets-label">⚡ Presets Hero Frame:</span>
+        <button class="preset-chip hero-preset-chip" data-preset="hero_logo_3d">Logotipo 3D Octane</button>
+        <button class="preset-chip hero-preset-chip" data-preset="hero_product_commercial">Producto de Lujo Hasselblad</button>
+        <button class="preset-chip hero-preset-chip" data-preset="hero_isometric_tech">Escena Isométrica Tech</button>
+        <button class="preset-chip hero-preset-chip" data-preset="hero_abstract_sculpture">Escultura Cromo Líquido</button>
+      </div>
+
+      <div class="generator-layout">
+        <!-- Configuration Card -->
+        <div class="config-card">
+          <div class="card-header-clean">
+            <h2><span>💎</span> Dirección de Arte del Fotograma Clave</h2>
+            <button id="resetHeroBtn" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+              ↺ Restaurar
+            </button>
+          </div>
+
+          <form id="heroFrameForm">
+            <div class="form-group-grid">
+              
+              <!-- Sujeto Principal -->
+              <div class="col-span-2">
+                <label class="field-label" for="heroSubjectInput">Sujeto / Objeto Maestro</label>
+                <input type="text" id="heroSubjectInput" class="custom-input" value="Monograma geométrico 3D flotante con bordes biselados" placeholder="Ej: Reloj de zafiro flotante, zapatilla técnica, isotipo...">
+              </div>
+
+              <!-- Motor / Medio -->
+              <div>
+                <label class="field-label" for="heroEngineSelect">Motor de Render 3D / Medio</label>
+                <select id="heroEngineSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Lente y Perspectiva -->
+              <div>
+                <label class="field-label" for="heroLensSelect">Lente & Perspectiva de Cámara</label>
+                <select id="heroLensSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Material & Acabado -->
+              <div>
+                <label class="field-label" for="heroMaterialSelect">Materiales & Texturas</label>
+                <select id="heroMaterialSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Iluminación -->
+              <div>
+                <label class="field-label" for="heroLightingSelect">Iluminación de Estudio</label>
+                <select id="heroLightingSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Aspect Ratio -->
+              <div>
+                <label class="field-label" for="heroArSelect">Relación de Aspecto (--ar)</label>
+                <select id="heroArSelect" class="custom-select">
+                  <option value="16:9">16:9 Panorámico (YouTube, Vídeo)</option>
+                  <option value="9:16">9:16 Vertical (Reels, TikTok)</option>
+                  <option value="1:1">1:1 Cuadrado (Instagram)</option>
+                  <option value="4:5">4:5 Vertical Feed</option>
+                  <option value="21:9">21:9 Cinemático</option>
+                </select>
+              </div>
+
+              <!-- Stylize Slider -->
+              <div class="slider-group">
+                <div class="slider-label-val">
+                  <span style="font-weight: 600; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Parámetro --stylize</span>
+                  <span id="heroStylizeVal" style="font-weight: 700; color: var(--accent-purple);">250</span>
+                </div>
+                <input type="range" id="heroStylizeRange" min="50" max="750" value="250" step="50" class="range-input">
+              </div>
+
+              <!-- Style Raw Toggle -->
+              <div class="toggle-row col-span-2">
+                <div class="toggle-info">
+                  <strong>Modo --style raw</strong>
+                  <span>Reduce el sobreprocesado artístico de Midjourney para un render más fiel y técnico</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="heroStyleRawToggle" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <!-- Output Card -->
+        <div class="output-column">
+          <div class="output-card highlight" style="border-color: var(--accent-purple);">
+            <div class="output-header">
+              <h3><span>💎</span> Prompt Midjourney v6.1 / Flux</h3>
+              <span class="target-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3);">Hero Frame</span>
+            </div>
+
+            <!-- Parameters Bar -->
+            <div id="heroParamsBar" class="params-container">
+              <span class="param-pill">--v 6.1</span>
+              <span class="param-pill">--ar 16:9</span>
+              <span class="param-pill">--style raw</span>
+              <span class="param-pill">--stylize 250</span>
+            </div>
+
+            <div class="prompt-box-wrapper">
+              <div class="prompt-box-header">
+                <span class="prompt-box-title">Prompt Listo para Midjourney / Flux</span>
+                <button id="copyHeroPromptBtn" class="btn-copy-mini">Copiar</button>
+              </div>
+              <textarea id="heroPromptOutput" class="prompt-textarea" style="min-height: 180px;" readonly></textarea>
+            </div>
+
+            <div class="tip-callout" style="border-color: rgba(168, 85, 247, 0.3);">
+              <span class="tip-icon">💡</span>
+              <div class="tip-content">
+                <strong>Consejo Image-to-Video:</strong>
+                <p id="heroTipText">Una vez generada la imagen en Midjourney, descárgala en PNG sin compresión. Luego entra en Runway o Kling, súbela y activa la pestaña 'Generador Motion' para animarla.</p>
+              </div>
+            </div>
+
+            <button id="copyHeroActionBtn" class="btn btn-primary" style="background: linear-gradient(135deg, #a855f7, #6366f1); width: 100%;">
+              <span>📋</span> Copiar Prompt Maestro
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB: EXPRESIONES AFTER EFFECTS             -->
+    <!-- ========================================== -->
+    <section id="tab-expressions" class="tab-pane">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <h1>Colección de Expresiones Profesionales para After Effects</h1>
+          <p>Acelera tu ritmo de animación un 500%. Solo haz Alt+Clic en el cronómetro de cualquier propiedad en After Effects y pega estos scripts probados con rebotes físicos y bucles infinitos.</p>
+        </div>
+      </div>
+
+      <div id="expressionsGridContainer" class="prompts-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB: STORYBOARDS Y GUIONES                 -->
+    <!-- ========================================== -->
+    <section id="tab-storyboard" class="tab-pane">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <h1>Plantillas de Storyboards & Guiones Técnicos</h1>
+          <p>Estructuras narrativas y minutaje técnico para anuncios virales de 15s y spots comerciales de 30s con el desglose plano a plano de prompts para cada escena.</p>
+        </div>
+      </div>
+
+      <div id="storyboardContainer" style="display: flex; flex-direction: column; gap: 2rem;">
+        <!-- Injected via JavaScript -->
       </div>
     </section>
 

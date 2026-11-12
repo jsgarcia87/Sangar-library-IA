@@ -1,0 +1,84 @@
+{
+  "presets": [
+    {
+      "id": "hero_logo_3d",
+      "name": "💎 Hero Frame: Logotipo 3D Octane Render",
+      "subject": "Monograma geométrico 3D flotante con bordes biselados",
+      "engine": "octane_render",
+      "lens": "lens_85mm",
+      "lighting": "studio_softbox",
+      "material": "titanium_gold",
+      "aspectRatio": "16:9",
+      "stylize": 200,
+      "styleRaw": true,
+      "tip": "El render en Octane con luz de estudio proporciona una definición de bordes limpia ideal para la brocha de movimiento de Runway."
+    },
+    {
+      "id": "hero_product_commercial",
+      "name": "⌚ Hero Frame: Fotografía de Producto de Lujo",
+      "subject": "Botella de perfume de cristal facetado sobre piedra volcánica negra",
+      "engine": "hasselblad_photo",
+      "lens": "lens_macro",
+      "lighting": "moody_rim",
+      "material": "frosted_glass",
+      "aspectRatio": "16:9",
+      "stylize": 250,
+      "styleRaw": true,
+      "tip": "Usa una lente macro para destacar las texturas microscópicas del material antes de que la cámara comience a moverse."
+    },
+    {
+      "id": "hero_isometric_tech",
+      "name": "🖥️ Hero Frame: Escena Isométrica Tech & Data",
+      "subject": "Plataforma de datos cuánticos isométrica con racks de servidores flotantes",
+      "engine": "unreal_engine_5",
+      "lens": "lens_isometric",
+      "lighting": "cyber_cyan",
+      "material": "matte_obsidian",
+      "aspectRatio": "16:9",
+      "stylize": 150,
+      "styleRaw": false,
+      "tip": "La vista ortográfica isométrica permite animar transiciones de interfaz y visualización de datos sin distorsión de perspectiva."
+    },
+    {
+      "id": "hero_abstract_sculpture",
+      "name": "🌀 Hero Frame: Escultura Fluida Cromada",
+      "subject": "Estructura biomórfica de cromo líquido suspendida en gravedad cero",
+      "engine": "redshift_3d",
+      "lens": "lens_35mm_anamorphic",
+      "lighting": "iridescent_prism",
+      "material": "liquid_chrome",
+      "aspectRatio": "16:9",
+      "stylize": 300,
+      "styleRaw": true,
+      "tip": "Un stylize alto (300) produce reflejos cáusticos de arcoíris y curvaturas orgánicas muy atractivas."
+    }
+  ],
+  "engines": [
+    { "id": "octane_render", "name": "Cinema 4D & Octane Render 3D", "en": "high-end 3D render in Octane Render and Cinema 4D, photorealistic raytracing, subsurface scattering, 8k resolution" },
+    { "id": "redshift_3d", "name": "Redshift 3D Studio Lighting", "en": "clean Redshift 3D render, accurate physically based rendering (PBR), clean specular reflections" },
+    { "id": "unreal_engine_5", "name": "Unreal Engine 5 (Lumen & Nanite)", "en": "Unreal Engine 5 render, cinematic real-time global illumination, Lumen bounce lighting, hyper-detailed" },
+    { "id": "hasselblad_photo", "name": "Fotografía Hasselblad 100MP", "en": "commercial studio photography shot on Hasselblad H6D-100c, razor-sharp focus, pristine color calibration" },
+    { "id": "cel_shading_vector", "name": "Gráfico Vectorial & Cel-Shading", "en": "crisp vector graphic illustration, clean geometric edges, flat cel-shading with subtle gradient shading" }
+  ],
+  "lenses": [
+    { "id": "lens_85mm", "name": "85mm Telefoto (Bokeh Suave y Separación)", "en": "shot on 85mm f/1.4 lens, creamy background bokeh, shallow depth of field, optical clarity" },
+    { "id": "lens_35mm_anamorphic", "name": "35mm Anamórfico Cinemático", "en": "35mm anamorphic prime lens, subtle horizontal lens flares, cinematic widescreen aesthetic" },
+    { "id": "lens_macro", "name": "Lente Macro de Sonda (Detalle Extremo)", "en": "ultra closeup macro probe lens, tactile surface textures, crisp micro-details in high focus" },
+    { "id": "lens_isometric", "name": "Perspectiva Isométrica Ortográfica", "en": "clean isometric orthographic view, 30-degree architectural angle, zero perspective distortion" },
+    { "id": "lens_24mm_wide", "name": "24mm Gran Angular Dinámico", "en": "24mm wide-angle lens, dynamic expansive perspective, strong sense of scale and presence" }
+  ],
+  "materials": [
+    { "id": "titanium_gold", "name": "Titanio Anodizado & Oro 24K", "en": "brushed dark anodized titanium with 24k polished gold trim, pristine metallic bevels" },
+    { "id": "frosted_glass", "name": "Vidrio Translúcido & Acrílico Esmerilado", "en": "frosted translucent acrylic glass, internal light scattering, caustic refraction patterns" },
+    { "id": "liquid_chrome", "name": "Cromo Líquido & Mercurio", "en": "mirror finish liquid chrome, mercury droplets with surface tension, reflective environment map" },
+    { "id": "matte_obsidian", "name": "Obsidiana Negra Mate & Basalto", "en": "monolithic matte black volcanic obsidian, subtle mineral flecks, deep absorbing blacks" },
+    { "id": "iridescent_carbon", "name": "Fibra de Carbono & Polímero Reflectante", "en": "woven matte carbon fiber texture, iridescent metallic pearlescent coat, technical precision" }
+  ],
+  "lighting": [
+    { "id": "studio_softbox", "name": "Luz de Estudio Softbox 3 Puntos", "en": "commercial studio 3-point softbox lighting, soft neutral shadows, immaculate highlight rolloff" },
+    { "id": "moody_rim", "name": "Claroscuro & Luz de Borde Dorada", "en": "dramatic dark studio chiaroscuro, sharp golden rim light separating silhouette from black backdrop" },
+    { "id": "cyber_cyan", "name": "Neón Cian & Magenta Volumétrico", "en": "volumetric cyan and deep violet glow, atmospheric haze, illuminated edge highlights" },
+    { "id": "iridescent_prism", "name": "Dispersión Prisma & Cáusticas de Cristal", "en": "prismatic chromatic dispersion, rainbow caustic patterns, complex HDR reflection mapping" },
+    { "id": "clean_minimalist", "name": "Blanco Puro Minimalista (High-Key)", "en": "high-key pristine white minimalist studio, soft diffused ambient occlusion shadows" }
+  ]
+}
