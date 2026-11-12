@@ -1,0 +1,134 @@
+[
+  {
+    "id": "runway",
+    "name": "Runway Gen-3 Alpha",
+    "developer": "Runway ML",
+    "category": "Video Generativo & Motion",
+    "badge": "Líder en Control Creativo",
+    "rating": 4.9,
+    "pricing": "Freemium / Suscripción (desde $12/mes)",
+    "strengths": [
+      "Control de cámara cinematográfico líder (Dolly, Zoom, Roll, Pan, Tilt)",
+      "Motion Brush avanzado para animar áreas específicas con físicas distintas",
+      "Excelente fidelidad con Image-to-Video partiendo de Midjourney",
+      "Soporte de texto a vídeo con calidad hiperrealista y alta resolución"
+    ],
+    "weaknesses": [
+      "Consumo rápido de créditos de generación",
+      "Puede sufrir distorsiones en movimientos anatómicos muy rápidos"
+    ],
+    "bestFor": "Motion designers profesionales, publicidad y planos con control de cámara estricto.",
+    "website": "https://runwayml.com",
+    "promptingTip": "Estructura siempre: [Sujeto principal] + [Acción/Física de movimiento] + [Estilo/Iluminación] + [Movimiento de cámara]. Sé muy descriptivo con la luz y la lente."
+  },
+  {
+    "id": "kling",
+    "name": "Kling AI 1.5",
+    "developer": "Kuaishou Technology",
+    "category": "Video Generativo & Físicas Realistas",
+    "badge": "Mejores Físicas & Movimiento",
+    "rating": 4.8,
+    "pricing": "Créditos diarios gratuitos / Planes Pro",
+    "strengths": [
+      "Físicas del mundo real increíbles (líquidos, telas, gravedad, colisiones)",
+      "Generación de clips de hasta 10 segundos con alta coherencia temporal",
+      "Modo Pro con resolución 1080p nativa y gran nitidez",
+      "Excelente interpretación de prompts complejos en inglés"
+    ],
+    "weaknesses": [
+      "Tiempos de cola de renderizado en versión gratuita",
+      "Menor control paramétrico de cámara que Runway"
+    ],
+    "bestFor": "Animación de fluidos, dinámicas de ropa/tejidos, personajes y loops orgánicos.",
+    "website": "https://klingai.com",
+    "promptingTip": "Especifica el peso y la masa del objeto (ej. 'heavy metallic sphere falling with natural momentum'). Kling destaca cuando comprende la masa y elasticidad."
+  },
+  {
+    "id": "luma",
+    "name": "Luma Dream Machine",
+    "developer": "Luma AI",
+    "category": "Video Generativo & 3D NeRFs",
+    "badge": "Velocidad & Comprensión Espacial",
+    "rating": 4.7,
+    "pricing": "Generaciones gratuitas / Planes Pro",
+    "strengths": [
+      "Velocidad de generación ultra rápida",
+      "Gran consistencia geométrica 3D entre fotogramas",
+      "Capacidad sobresaliente para orbitar objetos y mover la cámara en profundidad",
+      "Excelente herramienta de interpolación entre keyframes iniciales y finales"
+    ],
+    "weaknesses": [
+      "A veces añade ligeras deformaciones en los bordes",
+      "Menor precisión con tipografía vectorial"
+    ],
+    "bestFor": "Showcase de productos 3D, vuelos de cámara espaciales y transiciones entre 2 estados.",
+    "website": "https://lumalabs.ai/dream-machine",
+    "promptingTip": "Utiliza la función de 'Start Frame' y 'End Frame' para crear transiciones de morphing precisas entre dos diseños."
+  },
+  {
+    "id": "minimax",
+    "name": "Hailuo AI (MiniMax)",
+    "developer": "MiniMax",
+    "category": "Video Cinemático Hiperrealista",
+    "badge": "Realismo Visual Excepcional",
+    "rating": 4.8,
+    "pricing": "Gratuito / Freemium",
+    "strengths": [
+      "Texturas de materiales fotorealistas y renderizado de piel / metales impecable",
+      "Respeto asombroso por la coherencia del estilo visual a lo largo del clip",
+      "Renderizado cinemático con estética de película de cine de alto presupuesto",
+      "Acceso muy accesible y rápido"
+    ],
+    "weaknesses": [
+      "Opciones de control de cámara más limitadas por comandos explícitos",
+      "Orientado principalmente a planos de 6 segundos"
+    ],
+    "bestFor": "Intros cinematográficas, planos de detalle ultra-nítidos y texturas de materiales.",
+    "website": "https://hailuoai.video",
+    "promptingTip": "Describe el entorno de luz y la atmósfera con términos fotográficos: 'anamorphic lens flare, Kodak Vision3 500T grain, softbox rim lighting'."
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney v6.1",
+    "developer": "Midjourney",
+    "category": "Hero Frames & Concept Art",
+    "badge": "El Rey de los Fotogramas Clave",
+    "rating": 4.9,
+    "pricing": "Suscripción (desde $10/mes)",
+    "strengths": [
+      "Insuperable en estética visual, dirección de arte e iluminación",
+      "Punto de partida obligado para el flujo Image-to-Video moderno",
+      "Control preciso de ratio de aspecto (`--ar 16:9`, `--ar 9:16`)",
+      "Soporte de estilo consistente con `--sref` y personajes con `--cref`"
+    ],
+    "weaknesses": [
+      "No genera vídeo nativamente (es un generador de imágenes estáticas)",
+      "Requiere usar Discord o la nueva interfaz web de Midjourney"
+    ],
+    "bestFor": "Crear el fotograma maestro (Hero Frame) que luego alimentarás a Runway o Kling.",
+    "website": "https://midjourney.com",
+    "promptingTip": "Usa `--style raw` y un `--stylize` moderado (100 a 250) cuando busques un look limpio para motion graphics que no parezca sobreprocesado."
+  },
+  {
+    "id": "aftereffects_ai",
+    "name": "ChatGPT / Claude (ExtendScript & Art Director)",
+    "developer": "OpenAI / Anthropic",
+    "category": "Código & Storyboards para After Effects",
+    "badge": "Automatización & Lógica de Motion",
+    "rating": 4.8,
+    "pricing": "Gratuito / Plus / Pro",
+    "strengths": [
+      "Generación de expresiones matemáticas para After Effects (wiggle, ease, linear, inertia bounce)",
+      "Creación de scripts completos en ExtendScript (.jsx) para automatizar capas y keyframes",
+      "Estructuración de storyboards y guiones plano a plano con minutaje exacto",
+      "Asistencia en conceptualización y copywriting para piezas animadas"
+    ],
+    "weaknesses": [
+      "Requiere copiar y pegar el código en After Effects manualmente",
+      "En scripts muy largos de ExtendScript puede requerir depuración"
+    ],
+    "bestFor": "Automatizar animación de capas en After Effects con expresiones matemáticas y planificar secuencias completas.",
+    "website": "https://chatgpt.com",
+    "promptingTip": "Pídele: 'Escribe una expresión de After Effects para rebote elástico (inertia bounce) aplicada a la propiedad Escala con decaimiento suave'."
+  }
+]

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sangar AI Library — Motion Graphics & AI Prompt Studio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-logo">S</div>
+        <div>
+          <div class="brand-title">Sangar <span>AI Library</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: -2px;">Creative Prompt & Motion Studio</div>
+        </div>
+        <span class="brand-tag">v1.0 Pro</span>
+      </a>
+
+      <nav class="main-nav">
+        <button class="nav-tab-btn active" data-tab="generator">
+          <span>🎬</span> Generador Motion
+        </button>
+        <button class="nav-tab-btn" data-tab="library">
+          <span>📚</span> Biblioteca Prompts
+        </button>
+        <button class="nav-tab-btn" data-tab="glossary">
+          <span>🧠</span> Guía & Motion Design
+        </button>
+        <button class="nav-tab-btn" data-tab="tools">
+          <span>🛠️</span> Directorio de IAs
+        </button>
+        <button class="nav-tab-btn" data-tab="favorites">
+          <span>⭐</span> Mis Favoritos <span class="badge-counter" id="favCountBadge">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="main-wrapper">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: GENERADOR MOTION GRAPHICS           -->
+    <!-- ========================================== -->
+    <section id="tab-generator" class="tab-pane active">
+      
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <div class="hero-text">
+          <h1>Generador Pro de Prompts para Motion Graphics</h1>
+          <p>Convierte conceptos visuales en instrucciones de alta precisión para Runway Gen-3, Kling, Luma, Sora, Midjourney o After Effects con descriptores de movimiento cinematográfico.</p>
+        </div>
+      </div>
+
+      <!-- Quick Preset Selector Chips -->
+      <div class="presets-bar">
+        <span class="presets-label">⚡ Presets Rápidos:</span>
+        <button class="preset-chip" data-preset="cyberpunk_logo">Cyberpunk Logo Reveal</button>
+        <button class="preset-chip" data-preset="kinetic_typography">Tipografía TikTok / Reels</button>
+        <button class="preset-chip" data-preset="luxury_product">Showcase Lujo 3D</button>
+        <button class="preset-chip" data-preset="abstract_chrome_loop">Bucle Mercurio Líquido</button>
+        <button class="preset-chip" data-preset="futuristic_ui">Interfaz Holográfica UI</button>
+        <button class="preset-chip" data-preset="claymation_fun">Stop-Motion Pastel</button>
+      </div>
+
+      <!-- Generator Layout Grid -->
+      <div class="generator-layout">
+        
+        <!-- Left: Configuration Form -->
+        <div class="config-card">
+          <div class="card-header-clean">
+            <h2><span>⚙️</span> Parámetros de la Escena</h2>
+            <button id="resetFormBtn" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+              ↺ Restaurar
+            </button>
+          </div>
+
+          <form id="promptGeneratorForm">
+            <div class="form-group-grid">
+
+              <!-- Tipo de Proyecto -->
+              <div>
+                <label class="field-label" for="projectTypeSelect">Tipo de Pieza / Objetivo</label>
+                <select id="projectTypeSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Motor de Destino -->
+              <div>
+                <label class="field-label" for="targetEngineSelect">Motor de IA de Destino</label>
+                <select id="targetEngineSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Sujeto Principal (Full Width) -->
+              <div class="col-span-2">
+                <label class="field-label" for="subjectInput">Sujeto / Elemento Principal a Animar</label>
+                <input type="text" id="subjectInput" class="custom-input" placeholder="Ej: Logotipo geométrico tridimensional de líneas limpias..." value="Logotipo minimalista con líneas geométricas limpias">
+                <div class="quick-subjects-row">
+                  <span style="font-size: 0.72rem; color: var(--text-dim); align-self: center;">Ideas:</span>
+                  <button type="button" class="quick-sub-btn" data-subject="Logotipo minimalista flotante en 3D">Monograma 3D</button>
+                  <button type="button" class="quick-sub-btn" data-subject="Texto bold con tipografía sans-serif de gran escala">Tipografía Bold</button>
+                  <button type="button" class="quick-sub-btn" data-subject="Esfera de vidrio iridiscente con refracción interna">Esfera de Vidrio</button>
+                  <button type="button" class="quick-sub-btn" data-subject="Zapatilla de diseño técnico con detalles reflectantes">Zapatilla Sneaker</button>
+                  <button type="button" class="quick-sub-btn" data-subject="Tarjeta de crédito holográfica de cristal">Tarjeta Fintech UI</button>
+                </div>
+              </div>
+
+              <!-- Estilo Visual -->
+              <div>
+                <label class="field-label" for="styleSelect">Estilo Visual & Material</label>
+                <select id="styleSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Dinámica de Movimiento -->
+              <div>
+                <label class="field-label" for="motionSelect">Física & Dinámica de Movimiento</label>
+                <select id="motionSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Movimiento de Cámara -->
+              <div>
+                <label class="field-label" for="cameraSelect">Movimiento de Cámara</label>
+                <select id="cameraSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Iluminación y Color -->
+              <div>
+                <label class="field-label" for="lightingSelect">Iluminación & Atmósfera Cromática</label>
+                <select id="lightingSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Ritmo / Tempo -->
+              <div>
+                <label class="field-label" for="tempoSelect">Ritmo & Tempo</label>
+                <select id="tempoSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Relación de Aspecto -->
+              <div>
+                <label class="field-label" for="aspectRatioSelect">Formato / Relación de Aspecto</label>
+                <select id="aspectRatioSelect" class="custom-select"></select>
+              </div>
+
+              <!-- Seamless Loop Toggle -->
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Bucle Continuo (Seamless Loop)</strong>
+                  <span>Optimizado para fondos VJ y reproducción perpetua</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="loopToggle">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- Intensidad de Movimiento Slider -->
+              <div class="slider-group">
+                <div class="slider-label-val">
+                  <span style="font-weight: 600; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Intensidad de Movimiento</span>
+                  <span id="motionStrengthVal" style="font-weight: 700; color: var(--primary);">6 / 10</span>
+                </div>
+                <input type="range" id="motionStrengthRange" min="1" max="10" value="6" class="range-input">
+              </div>
+
+              <!-- Detalles Adicionales / Instrucciones Personalizadas (Full Width) -->
+              <div class="col-span-2">
+                <label class="field-label" for="extraDetailsInput">Detalles o Modificadores Extra (Opcional)</label>
+                <input type="text" id="extraDetailsInput" class="custom-input" placeholder="Ej: Destellos dorados en el segundo 2, acabado mate, sin artefactos...">
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Real-time Live Output -->
+        <div class="output-column">
+          <div class="output-card highlight">
+            <div class="output-header">
+              <h3><span>✨</span> Prompt Generado</h3>
+              <span id="targetEngineBadge" class="target-badge">Runway Gen-3 Alpha</span>
+            </div>
+
+            <!-- Parameters Bar -->
+            <div id="parametersBar" class="params-container">
+              <span class="param-pill">--ar 16:9</span>
+              <span class="param-pill">--fps 24</span>
+              <span class="param-pill">motion: 6</span>
+            </div>
+
+            <!-- Prompt Principal en Inglés -->
+            <div class="prompt-box-wrapper">
+              <div class="prompt-box-header">
+                <span class="prompt-box-title">Prompt para el Motor (Inglés Optimizado)</span>
+                <button id="copyPromptEnBtn" class="btn-copy-mini">Copiar</button>
+              </div>
+              <textarea id="promptOutputEn" class="prompt-textarea" readonly></textarea>
+            </div>
+
+            <!-- Prompt en Español -->
+            <div class="prompt-box-wrapper">
+              <div class="prompt-box-header">
+                <span class="prompt-box-title">Traducción & Concepto (Español)</span>
+                <button id="copyPromptEsBtn" class="btn-copy-mini">Copiar</button>
+              </div>
+              <textarea id="promptOutputEs" class="prompt-textarea secondary" readonly></textarea>
+            </div>
+
+            <!-- Meta Prompt para LLMs / Storyboard -->
+            <div class="prompt-box-wrapper">
+              <div class="prompt-box-header">
+                <span class="prompt-box-title">Meta-Prompt para ChatGPT / Claude (Storyboard & Expresiones AE)</span>
+                <button id="copyMetaPromptBtn" class="btn-copy-mini">Copiar</button>
+              </div>
+              <textarea id="metaPromptOutput" class="prompt-textarea secondary" style="min-height: 80px;" readonly></textarea>
+            </div>
+
+            <!-- Director Tip Box -->
+            <div class="tip-callout">
+              <span class="tip-icon">💡</span>
+              <div class="tip-content">
+                <strong>Consejo del Director de Arte:</strong>
+                <p id="directorTipText">Usa iluminación de borde (rim lighting) para separar claramente la geometría del fondo y resaltar los reflejos especulares durante la animación.</p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons-group">
+              <button id="copyFullActionBtn" class="btn btn-primary">
+                <span>📋</span> Copiar Prompt Listo
+              </button>
+              <button id="saveFavoriteBtn" class="btn btn-secondary">
+                <span>⭐</span> Guardar en Favoritos
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: BIBLIOTECA DE PROMPTS CURADOS       -->
+    <!-- ========================================== -->
+    <section id="tab-library" class="tab-pane">
+      
+      <div class="library-controls">
+        <div class="search-box-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="librarySearchInput" class="search-input" placeholder="Buscar por palabra clave, estilo, técnica o motor...">
+        </div>
+
+        <div class="filter-pills" id="categoryFilterContainer">
+          <button class="filter-pill active" data-cat="all">Todos</button>
+          <button class="filter-pill" data-cat="logo_reveal">Logo Reveal</button>
+          <button class="filter-pill" data-cat="kinetic_typography">Tipografía Cinética</button>
+          <button class="filter-pill" data-cat="abstract_loop">Bucles & VJ</button>
+          <button class="filter-pill" data-cat="ui_animation">UI & Spatial</button>
+          <button class="filter-pill" data-cat="product_showcase">Productos 3D</button>
+        </div>
+      </div>
+
+      <!-- Prompts Grid Container -->
+      <div id="promptsGridContainer" class="prompts-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: GUÍA & MOTION DESIGN GLOSSARY       -->
+    <!-- ========================================== -->
+    <section id="tab-glossary" class="tab-pane">
+      
+      <div class="hero-banner" style="margin-bottom: 2rem;">
+        <div class="hero-text">
+          <h1>Principios y Glosario de Motion Graphics para IA</h1>
+          <p>Aprende a formular órdenes de animación utilizando el vocabulario profesional de la industria: físicas, cámaras, ópticas y el flujo de trabajo moderno Image-to-Video.</p>
+        </div>
+      </div>
+
+      <!-- Workflow Guide Card -->
+      <div class="config-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #818cf8;">
+          🚀 El Flujo Profesional "Image-to-Video" (El Secreto de la Consistencia)
+        </h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem;">
+          Generar vídeo puramente a partir de texto (Text-to-Video) suele provocar que la IA invente logotipos deformados o tipografías ilegibles. Para un resultado profesional en Motion Graphics, sigue esta fórmula:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-purple);">
+            <strong style="color: white; font-size: 0.95rem;">Paso 1: Keyframe Maestro</strong>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem;">
+              Crea tu diseño exacto de logotipo, tipografía o interfaz en Illustrator / Figma / Midjourney v6.1 en alta resolución (Hero Frame).
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
+            <strong style="color: white; font-size: 0.95rem;">Paso 2: Image-to-Video</strong>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem;">
+              Sube la imagen a Runway Gen-3 o Kling. Aplica nuestro prompt centrándote <em>exclusivamente en la física de movimiento</em> y la trayectoria de cámara.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-cyan);">
+            <strong style="color: white; font-size: 0.95rem;">Paso 3: Motion Brush</strong>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem;">
+              Pinta con la brocha de movimiento únicamente las partes que deben moverse (ej. las partículas o el líquido) dejando el isotipo estático.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-emerald);">
+            <strong style="color: white; font-size: 0.95rem;">Paso 4: Postproducción</strong>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem;">
+              Lleva el render a After Effects o Premiere para añadir efectos de sonido (SFX), tipografías finales nítidas y corrección de color.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glossary Terms Grid -->
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem;">
+        📖 Términos Clave de Animación & Snippets para Prompts
+      </h3>
+      <div id="glossaryGridContainer" class="glossary-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: DIRECTORIO DE HERRAMIENTAS IA       -->
+    <!-- ========================================== -->
+    <section id="tab-tools" class="tab-pane">
+      
+      <div class="hero-banner" style="margin-bottom: 2rem;">
+        <div class="hero-text">
+          <h1>Directorio Comparativo de Herramientas IA para Vídeo & Motion</h1>
+          <p>Conoce las fortalezas, debilidades y mejores casos de uso de los principales modelos de generación visual del ecosistema.</p>
+        </div>
+      </div>
+
+      <div id="toolsGridContainer" class="tools-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: MIS FAVORITOS / HISTORIAL           -->
+    <!-- ========================================== -->
+    <section id="tab-favorites" class="tab-pane">
+      
+      <div class="card-header-clean" style="margin-bottom: 1.5rem;">
+        <div>
+          <h2><span>⭐</span> Mis Prompts Guardados</h2>
+          <p style="font-size: 0.85rem; color: var(--text-dim);">Tus prompts creados y guardados localmente en este navegador.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="exportFavoritesBtn" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+            📥 Exportar JSON
+          </button>
+          <button id="clearFavoritesBtn" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; color: var(--accent-rose);">
+            🗑️ Vaciar Favoritos
+          </button>
+        </div>
+      </div>
+
+      <div id="favoritesGridContainer" class="prompts-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Toast Notification System -->
+  <div id="toastNotice" class="toast-notice">
+    <span id="toastIcon">📋</span>
+    <span id="toastMessage">¡Copiado al portapapeles!</span>
+  </div>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <p>🪐 <strong>Sangar AI Library</strong> — Tu biblioteca creativa y generador de prompts para Motion Graphics.</p>
+    <p style="margin-top: 0.35rem; font-size: 0.76rem;">Basado en estándares profesionales de motion design y modelos de difusión de vídeo de última generación.</p>
+  </footer>
+
+  <!-- App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

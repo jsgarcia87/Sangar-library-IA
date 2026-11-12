@@ -1,0 +1,74 @@
+[
+  {
+    "id": "gold-001",
+    "category": "logo_reveal",
+    "title": "Minimalist Obsidian & Gold Monogram Reveal",
+    "description": "Revelado premium para marcas de lujo y firmas de diseño. Una lámina de oro fundido se desliza sobre roca volcánica de obsidiana hasta sellar un logotipo geométrico.",
+    "tags": ["Lujo", "3D", "Obsidiana", "Oro", "Cinemático"],
+    "prompt_en": "Cinematic 3D logo reveal, a raw matte black obsidian block splitting open along precise geometric fractures, revealing glowing molten 24k gold surging upward and cooling into a sleek minimalist monogram logo, camera executing a slow orbital 45-degree angle drift, dramatic chiaroscuro lighting, volumetric rim light, photorealistic physically based rendering, 8k resolution, motion blur --ar 16:9 --fps 24",
+    "prompt_es": "Revelado de logotipo 3D cinematográfico: un bloque de obsidiana negra mate se abre siguiendo fracturas geométricas precisas, dejando ver oro fundido de 24k brillante que asciende y se enfría hasta formar un monograma minimalista y elegante. La cámara realiza una suave órbita a 45 grados, iluminación claroscuro dramática, luz de borde volumétrica, renderizado hiperrealista PBR en 8k.",
+    "recommended_tool": "Runway Gen-3 / Kling 1.5",
+    "parameters": "--ar 16:9 --motion 5 --fps 24",
+    "tips": "Para el mejor resultado, genera primero la imagen del monograma dorado en Midjourney y luego utiliza Image-to-Video en Runway con un Brush de movimiento sobre el área dorada."
+  },
+  {
+    "id": "gold-002",
+    "category": "kinetic_typography",
+    "title": "Bold Swiss Kinetic Words Exploding into Grid",
+    "description": "Animación tipográfica de alta energía inspirada en el diseño gráfico suizo y cartelería brutalista para vídeos cortos de redes.",
+    "tags": ["Tipografía", "Suizo", "Brutalismo", "Redes Sociales", "TikTok/Reels"],
+    "prompt_en": "Kinetic typography animation, bold black Helvetica Neue style typography on raw off-white Swiss poster background, words stretching elastically and snapping crisply into an organized dynamic 3x3 grid, snappy ease-in-out overshoot physics, camera stationary flat lay, high contrast, clean vector aesthetic, rhythmic fast cuts matching a 128 BPM electronic beat --ar 9:16",
+    "prompt_es": "Animación de tipografía cinética: texto bold estilo Helvética Neue negra sobre un fondo de póster suizo blanco roto. Las palabras se estiran elásticamente y encajan con un chasquido nítido en una cuadrícula dinámica de 3x3. Físicas snappy con amortiguación ease-in-out, cámara fija cenital, alto contraste, estética vectorial limpia.",
+    "recommended_tool": "Kling 1.5 / Runway Gen-3",
+    "parameters": "--ar 9:16 --motion 7 --fps 30",
+    "tips": "Asegúrate de especificar 'vector flat style' para evitar que la IA invente texturas 3D no deseadas."
+  },
+  {
+    "id": "gold-003",
+    "category": "abstract_loop",
+    "title": "Hypnotic Iridescent Glass Spheres Perpetual Motion",
+    "description": "Bucle continuo hipnótico de esferas de vidrio iridiscente entrelazándose en gravedad cero con refracciones de luz espectrales.",
+    "tags": ["Loop", "Vidrio", "Iridiscente", "VJ", "Fondo"],
+    "prompt_en": "Hypnotic seamless looping motion graphic, cluster of iridescent translucent frosted glass spheres orbiting and intertwining weightlessly in zero gravity, soft pastel chromatic aberration and rainbow dispersion caustics, slow rotational camera drift, clean minimalist studio lighting with diffused pink and mint green softboxes, perfectly seamless loop --ar 16:9 --loop",
+    "prompt_es": "Gráfico en movimiento con bucle continuo hipnótico: grupo de esferas de vidrio translúcido iridiscente orbitando y entrelazándose sin peso en gravedad cero. Aberración cromática pastel suave y cáusticas de arcoíris, suave paneo orbital de cámara, iluminación de estudio minimalista con softboxes rosa y verde menta, bucle infinito perfecto.",
+    "recommended_tool": "Luma Dream Machine / Sora",
+    "parameters": "--ar 16:9 --loop --motion 4",
+    "tips": "Al recortar el vídeo en tu editor de montaje (Premiere o After Effects), aplica un cross-dissolve de 0.5s entre el principio y el final para garantizar la continuidad infinita."
+  },
+  {
+    "id": "gold-004",
+    "category": "ui_animation",
+    "title": "Futuristic Spatial Computing VisionOS Interface",
+    "description": "Animación de interfaz de usuario espacial con paneles de vidrio flotantes, microinteracciones de hover y respuesta táctil lumínica.",
+    "tags": ["UI/UX", "Spatial Computing", "VisionOS", "Glassmorphism", "Tech"],
+    "prompt_en": "Futuristic spatial computing UI motion graphic, floating translucent glassmorphism cards and analytics widgets hovering in 3D air, glowing pulse microinteractions upon virtual user focus, smooth spring-damping card expansion, subtle background bokeh of an ultra-modern architectural loft, soft cyan and violet UI illumination, camera shallow depth of field rack focus --ar 16:9",
+    "prompt_es": "Motion graphic de interfaz de computación espacial futurista: tarjetas flotantes translúcidas estilo glassmorphism y widgets de analíticas suspendidos en el aire tridimensional. Microinteracciones de pulsos de luz al enfocar, expansión suave de tarjetas con rebote spring, desenfoque bokeh sutil de fondo de un loft moderno, iluminación cian y violeta suave.",
+    "recommended_tool": "Runway Gen-3 Alpha",
+    "parameters": "--ar 16:9 --motion 4 --fps 24",
+    "tips": "Ideal para demos de producto SaaS y conceptos de aplicaciones de próxima generación."
+  },
+  {
+    "id": "gold-005",
+    "category": "product_showcase",
+    "title": "Exploded Cyberpunk Sneaker Deconstruction",
+    "description": "Despiece técnico en 3D de una zapatilla de deporte futurista, donde cada capa (suela de aire, tejido técnico, cordones magnéticos) se separa en el aire.",
+    "tags": ["Producto", "3D", "Exploded View", "Sneaker", "Comercial"],
+    "prompt_en": "Cinematic 3D commercial motion graphic, futuristic techwear sneaker floating and exploding into separate layered components in mid-air, transparent air cushion sole, woven carbon fiber knit mesh, magnetic lace tensioners floating in precise isometric alignment, technical glowing blueprint wireframe overlays, dramatic dark studio rim light, smooth 180 degree camera sweep --ar 16:9",
+    "prompt_es": "Motion graphic comercial 3D cinemático: zapatilla de deporte técnica futurista que flota y se descompone en capas separadas en el aire (suela de cámara de aire transparente, tejido de fibra de carbono, tensores magnéticos) en alineación isométrica precisa, overlays de alambre técnico brillante, iluminación de borde de estudio oscuro.",
+    "recommended_tool": "Kling 1.5 / Runway Gen-3",
+    "parameters": "--ar 16:9 --motion 5",
+    "tips": "El término 'exploded view' y 'isometric alignment' le indica a los motores de IA que mantengan las proporciones técnicas de ingeniería en lugar de dispersar las piezas al azar."
+  },
+  {
+    "id": "gold-006",
+    "category": "logo_reveal",
+    "title": "Liquid Mercury Chrome Droplets Merging into Brand",
+    "description": "Gotas de mercurio líquido flotante que chocan y se fusionan por tensión superficial formando el isotipo de la marca.",
+    "tags": ["Chrome", "Mercurio", "Fluidos", "Logo Reveal", "VFX"],
+    "prompt_en": "3D motion design logo reveal, multiple liquid chrome mercury droplets floating and gravitationally pulling towards the center, colliding with realistic fluid surface tension dynamics, merging seamlessly into a glossy high-polish metallic brand mark, studio environment reflection with soft overhead lightbox, smooth slow dolly in --ar 16:9",
+    "prompt_es": "Revelado de logotipo en motion design 3D: múltiples gotas de mercurio cromado líquido flotan y son atraídas gravitacionalmente hacia el centro, colisionando con dinámicas de tensión superficial de fluidos realistas, fusionándose a la perfección en un emblema de marca metálico pulido. Reflejos de estudio suaves, zoom dolly in cinematográfico.",
+    "recommended_tool": "Runway Gen-3 / Sora",
+    "parameters": "--ar 16:9 --motion 6",
+    "tips": "Usa 'surface tension dynamics' para obtener esa fusión orgánica tan satisfactoria propia de los vídeos virales de 3D."
+  }
+]

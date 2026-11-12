@@ -1,0 +1,58 @@
+[
+  {
+    "term": "Anticipación & Rebote Elástico (Overshoot & Anticipation)",
+    "category": "Principios de Animación",
+    "description": "El movimiento previo que prepara la acción (anticipación) seguido de una llegada con inercia donde el objeto supera ligeramente su posición final antes de asentarse (overshoot).",
+    "promptSnippet": "anticipation wind-up followed by rapid snap entrance with elastic overshoot damping settling softly",
+    "recommendedUse": "Logotipos, botones de UI y elementos tipográficos que entran a escena para darles dinamismo y vida."
+  },
+  {
+    "term": "Ease In & Ease Out (Frenado y Aceleración Suave)",
+    "category": "Principios de Animación",
+    "description": "Gradación de la velocidad al inicio y al final de una animación. En la vida real nada se mueve a velocidad constante: los objetos aceleran y frenan paulatinamente.",
+    "promptSnippet": "aggressive cubic-bezier ease-in with silky smooth ease-out deceleration",
+    "recommendedUse": "Cualquier transición de cámara o desplazamiento de capas en After Effects o vídeo IA."
+  },
+  {
+    "term": "Dolly In & Crash Zoom",
+    "category": "Movimientos de Cámara",
+    "description": "El Dolly In es un avance físico de la cámara hacia el sujeto creando sensación de inmersión y cambio de perspectiva. El Crash Zoom es una aproximación focal instantánea y dramática.",
+    "promptSnippet": "smooth cinematic slow dolly-in push camera movement accelerating into dramatic focal closeup",
+    "recommendedUse": "Intros de producto, revelado de logotipos o transiciones hacia un clímax visual."
+  },
+  {
+    "term": "Órbita 360° (Orbital Sweep)",
+    "category": "Movimientos de Cámara",
+    "description": "La cámara gira circularmente alrededor del objeto manteniendo el foco continuo sobre él, revelando su tridimensionalidad, volumen y reflejos.",
+    "promptSnippet": "continuous 360-degree orbital camera sweep rotating around the subject with parallax depth",
+    "recommendedUse": "Modelos 3D, zapatillas, botellas, dispositivos tecnológicos y packaging."
+  },
+  {
+    "term": "Profundidad de Campo Reducida (Rack Focus & Bokeh)",
+    "category": "Lente & Iluminación",
+    "description": "Uso de aperturas de diafragma amplias (f/1.4 - f/2.8) para aislar el elemento enfocado del fondo o primer plano, creando un desenfoque cremoso (bokeh) y transición de foco.",
+    "promptSnippet": "extremely shallow depth of field, creamy spherical background bokeh, smooth rack focus transition",
+    "recommendedUse": "Interfaces de usuario abstractas, partículas luminosas y piezas de estilo cinematográfico."
+  },
+  {
+    "term": "Luz de Borde (Rim Light / Kicker)",
+    "category": "Lente & Iluminación",
+    "description": "Fuente de luz colocada detrás o a los lados del sujeto para perfilar su contorno con una línea brillante que lo separa visualmente del fondo oscuro.",
+    "promptSnippet": "crisp specular rim light tracing the silhouette with razor-sharp edge illumination against dark obsidian",
+    "recommendedUse": "Logos oscuros, renders de tecnología y objetos de lujo donde el contraste volumétrico es crucial."
+  },
+  {
+    "term": "Bucle Continuo (Seamless Loop)",
+    "category": "Técnicas de Formato",
+    "description": "Una animación cuyo último fotograma coincide perfectamente en posición, velocidad y luminosidad con el primer fotograma, creando una reproducción perpetua infinita.",
+    "promptSnippet": "seamless continuous loop, the ending frame perfectly synchronizes with initial position, perpetual fluid motion",
+    "recommendedUse": "Fondos de pantalla, visuales para directos/VJ, loops de Instagram y cabeceras web."
+  },
+  {
+    "term": "Tipografía Cinética (Kinetic Typography)",
+    "category": "Técnicas de Formato",
+    "description": "Texto animado que transmite significado y emoción no solo por las palabras escritas, sino por su ritmo, peso visual, deformación y coreografía en pantalla.",
+    "promptSnippet": "kinetic typography, dynamic scaling words, rhythmically pulsing letterforms, clean vector edges",
+    "recommendedUse": "Vídeos explicativos, reels virales, anuncios de impacto y secuencias de créditos."
+  }
+]

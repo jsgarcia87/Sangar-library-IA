@@ -1,0 +1,205 @@
+{
+  "presets": [
+    {
+      "id": "cyberpunk_logo",
+      "name": "⚡ Cyberpunk Neon Logo Reveal",
+      "projectType": "logo_reveal",
+      "subject": "Logotipo minimalista con líneas geométricas limpias",
+      "style": "cyberpunk_neon",
+      "motion": "electric_assembly",
+      "camera": "dolly_in_rapid",
+      "lighting": "neon_dual",
+      "tempo": "snappy_dynamic",
+      "aspectRatio": "16:9",
+      "isLoop": false,
+      "targetEngine": "runway_gen3",
+      "tip": "Usa destellos de neón y partículas eléctricas antes de estabilizar el logo para maximizar el impacto visual."
+    },
+    {
+      "id": "kinetic_typography",
+      "name": "💥 Tipografía Cinética para Reels / TikTok",
+      "projectType": "kinetic_typography",
+      "subject": "Frase de impacto tipográfica con fuentes serif y sans-serif en contraste",
+      "style": "swiss_minimalist",
+      "motion": "elastic_snap",
+      "camera": "kinetic_tracking",
+      "lighting": "studio_clean",
+      "tempo": "fast_rhythmic",
+      "aspectRatio": "9:16",
+      "isLoop": true,
+      "targetEngine": "kling",
+      "tip": "Mantén las transiciones de palabras entre 0.3 y 0.5 segundos para retener la atención del espectador."
+    },
+    {
+      "id": "luxury_product",
+      "name": "✨ Showcase de Producto de Lujo 3D",
+      "projectType": "product_showcase",
+      "subject": "Reloj de alta gama con esfera de cristal de zafiro y engranajes vistos",
+      "style": "dark_luxury",
+      "motion": "smooth_float",
+      "camera": "orbit_360",
+      "lighting": "moody_rim",
+      "tempo": "slow_cinematic",
+      "aspectRatio": "16:9",
+      "isLoop": false,
+      "targetEngine": "luma",
+      "tip": "La iluminación de borde (rim lighting) resaltará la silueta del objeto creando profundidad tridimensional."
+    },
+    {
+      "id": "abstract_chrome_loop",
+      "name": "🌀 Bucle Abstracto de Mercurio Líquido",
+      "projectType": "abstract_loop",
+      "subject": "Escultura biomórfica de cromo líquido flotante que cambia de forma continuamente",
+      "style": "liquid_chrome",
+      "motion": "fluid_morphing",
+      "camera": "slow_dolly_drift",
+      "lighting": "iridescent_hdr",
+      "tempo": "hypnotic_slow",
+      "aspectRatio": "16:9",
+      "isLoop": true,
+      "targetEngine": "sora",
+      "tip": "Activa siempre el modificador de 'seamless loop' para usarlo como fondo VJ o backdrop de presentaciones."
+    },
+    {
+      "id": "futuristic_ui",
+      "name": "🌐 Interfaz Holográfica UI Sci-Fi",
+      "projectType": "ui_animation",
+      "subject": "Panel de control holográfico flotante con gráficos circulares y métricas cuánticas",
+      "style": "holographic_scifi",
+      "motion": "hud_unfolding",
+      "camera": "shallow_dof_pan",
+      "lighting": "cyan_glow",
+      "tempo": "snappy_dynamic",
+      "aspectRatio": "16:9",
+      "isLoop": false,
+      "targetEngine": "runway_gen3",
+      "tip": "Combina profundidad de campo reducida para enfocar un elemento de la interfaz mientras el resto se desdibuja con bokeh."
+    },
+    {
+      "id": "claymation_fun",
+      "name": "🎨 Stop-Motion Claymation Pastel",
+      "projectType": "brand_animation",
+      "subject": "Personaje geométrico y formas de plastilina suave interactuando de forma divertida",
+      "style": "claymation_pastel",
+      "motion": "stopmotion_bounce",
+      "camera": "fixed_isometric",
+      "lighting": "soft_studio",
+      "tempo": "playful_stopmotion",
+      "aspectRatio": "1:1",
+      "isLoop": true,
+      "targetEngine": "kling",
+      "tip": "Especificar 'stop-motion a 12 fps' aporta un encanto orgánico artesanal que los clientes adoran."
+    }
+  ],
+  "projectTypes": [
+    { "id": "logo_reveal", "label": "Animación / Revelado de Logo (Logo Reveal)", "en": "logo reveal animation" },
+    { "id": "kinetic_typography", "label": "Tipografía Cinética (Kinetic Typography)", "en": "kinetic typography text motion" },
+    { "id": "product_showcase", "label": "Showcase de Producto 3D (Product Visualizer)", "en": "3D product showcase commercial" },
+    { "id": "abstract_loop", "label": "Loop Abstracto / Fondo VJ (Abstract Seamless Loop)", "en": "abstract hypnotic seamless looping background" },
+    { "id": "ui_animation", "label": "Microinteracción / UI Holográfica (UI Motion)", "en": "futuristic UI interface microinteraction" },
+    { "id": "transition_morph", "label": "Transición Dinámica / Morphing (Scene Transition)", "en": "seamless dynamic morphing transition" },
+    { "id": "cinematic_titles", "label": "Títulos y Créditos Cinemáticos (Title Sequence)", "en": "cinematic opening title sequence" },
+    { "id": "social_ad", "label": "Anuncio Dinámico para Redes (Social Media Motion Ad)", "en": "high-energy social media motion graphic ad" }
+  ],
+  "visualStyles": [
+    { "id": "cyberpunk_neon", "label": "Cyberpunk Neón & Dark City", "en": "dark futuristic cyberpunk aesthetic with glowing neon tube accents, high contrast and moody reflections" },
+    { "id": "swiss_minimalist", "label": "Minimalismo Suizo / Bauhaus", "en": "Swiss design typography, Bauhaus minimalist motion, clean geometric layout, high visual clarity and negative space" },
+    { "id": "liquid_chrome", "label": "Liquid Chrome & Mercurio 3D", "en": "ultra-reflective liquid chrome metal, fluid mercury ripples, iridescent caustic highlights, clean 3D render" },
+    { "id": "dark_luxury", "label": "Lujo Oscuro (Obsidiana y Oro Mate)", "en": "high-end luxury aesthetic, matte black obsidian textures, brushed gold metallic accents, sophisticated atmosphere" },
+    { "id": "holographic_scifi", "label": "Holográfico Sci-Fi & HUD", "en": "semi-transparent glowing holographic HUD display, volumetric light rays, floating luminous glass elements" },
+    { "id": "claymation_pastel", "label": "Claymation & Plastilina Pastel", "en": "tactile plasticine claymation style, soft fingerprint textures, cheerful pastel color palette, stop-motion charm" },
+    { "id": "glassmorphism_3d", "label": "Glassmorphism 3D Translúcido", "en": "frosted glassmorphism 3D panels, refractive light dispersion, chromatic aberration, frosted acrylic blur" },
+    { "id": "y2k_retro", "label": "Retro Y2K / Acid Graphic Motion", "en": "Y2K millennium chrome aesthetic, metallic bubbles, vaporwave digital accents, retro-futuristic vibes" },
+    { "id": "paper_cutout", "label": "Papel Recortado & Stop Motion", "en": "layered textured paper craft cutout animation, subtle cast shadows, tactile depth and handcrafted feel" },
+    { "id": "cinematic_photoreal", "label": "Cinematográfico Hiperrealista", "en": "cinematic photo-realism, 8k resolution, photorealistic physically-based rendering (PBR), anamorphic lens bokeh" }
+  ],
+  "motionDynamics": [
+    { "id": "electric_assembly", "label": "Ensamblaje Eléctrico / Piezas Magnéticas", "en": "snapping together magnetically with subtle electric spark arcs and kinetic lock-in shockwave" },
+    { "id": "fluid_morphing", "label": "Morphing Fluido y Continuo", "en": "smooth liquid morphing transformation, shifting geometries with continuous organic deformation" },
+    { "id": "elastic_snap", "label": "Rebote Elástico / Overshoot Snappy", "en": "snappy entrance with elastic overshoot bounce, playful anticipation and crisp settling ease" },
+    { "id": "smooth_float", "label": "Flotación Ingrávida / Gravedad Cero", "en": "gentle zero-gravity weightless floating, subtle orbital drift with calm natural physics" },
+    { "id": "particle_dissolve", "label": "Disolución y Recomposición de Partículas", "en": "disintegrating into millions of luminous micro-particles and magically reforming smoothly" },
+    { "id": "hud_unfolding", "label": "Despliegue Holográfico / Scanline Reveal", "en": "laser scanline sweep revealing elements, digital wireframes expanding into solid illuminated graphics" },
+    { "id": "stopmotion_bounce", "label": "Saltitos Stop-Motion (12 FPS)", "en": "stepped 12 frames-per-second stop-motion stutter movement with bouncy organic physics" },
+    { "id": "vortex_spin", "label": "Vórtice Centrífugo y Aceleración", "en": "swirling vortex centrifugal spin accelerating rapidly then decelerating into precise composition" },
+    { "id": "datamosh_glitch", "label": "Glitch Digital y Datamoshing", "en": "controlled digital glitch distortions, chromatic RGB split, snappy frame drops and pixel displacement" }
+  ],
+  "cameraMovements": [
+    { "id": "dolly_in_rapid", "label": "Slow Dolly In a Rápido Snap", "en": "smooth slow dolly-in camera push gradually accelerating into an intense dramatic closeup" },
+    { "id": "orbit_360", "label": "Giro Orbital 360° Cinemático", "en": "cinematic 360-degree continuous camera orbit around the main subject showcasing full volume and depth" },
+    { "id": "kinetic_tracking", "label": "Tracking Lateral Dinámico", "en": "rapid horizontal tracking shot locked onto the action with smooth motion blur on the background" },
+    { "id": "shallow_dof_pan", "label": "Panoramica con Foco Selectivo (Bokeh)", "en": "gentle camera pan with shallow depth of field, creamy bokeh and rack focus shifting attention" },
+    { "id": "top_down_cenital", "label": "Plano Cenital con Rotación (Top-Down)", "en": "overhead top-down 90-degree flat lay view with slow hypnotic rotational movement" },
+    { "id": "fpv_flythrough", "label": "Vuelo FPV Inmersivo a Través de Objetos", "en": "dynamic FPV drone flythrough threading cleanly through gaps between geometric floating elements" },
+    { "id": "crash_zoom", "label": "Crash Zoom & Quick Pull-Back", "en": "instant crash zoom punch-in followed by a smooth cushioned pull back settling into place" },
+    { "id": "static_locked", "label": "Cámara Fija (Trípode Estable)", "en": "locked-off static tripod camera allowing the internal motion graphics physics to command full focus" }
+  ],
+  "lightingColor": [
+    { "id": "neon_dual", "label": "Neón Dual (Cian & Magenta)", "en": "electric dual-tone lighting with saturated cyan and vibrant magenta rim lights, deep black shadows" },
+    { "id": "studio_clean", "label": "Estudio Blanco Softbox Impecable", "en": "pristine high-key studio softbox lighting, ultra clean diffuse reflections, neutral color grading" },
+    { "id": "moody_rim", "label": "Claroscuro con Luz de Borde (Rim Light)", "en": "dramatic chiaroscuro lighting, crisp golden rim light outlining silhouette against a dark backdrop" },
+    { "id": "iridescent_hdr", "label": "Iridiscencia Prisma & Cáusticas HDR", "en": "prismatic chromatic reflections, rainbow specular dispersion, complex studio HDR environment maps" },
+    { "id": "cyan_glow", "label": "Glow Cian Holográfico & Rayos Volumétricos", "en": "ethereal cyan volumetric glow, God rays penetrating mist, high luminance emission" },
+    { "id": "soft_studio", "label": "Luz Cálida Natural & Sombras Suaves", "en": "warm morning sunlight ambient fill, diffused soft ambient occlusion shadows, gentle contrast" },
+    { "id": "monochrome_gold", "label": "Monocromo Negro & Acentos en Oro", "en": "monochromatic deep graphite and velvet black with rich 24k polished gold reflective accents" },
+    { "id": "acid_hypercolor", "label": "Hipercolor Ácido & Contraste Extremo", "en": "acid green and electric violet hyper-saturated lighting, futuristic energetic color grading" }
+  ],
+  "tempos": [
+    { "id": "snappy_dynamic", "label": "Ágil y Enérgico (Snappy con Ease In-Out)", "en": "snappy 2-second dynamic tempo with aggressive ease-in and cushioned ease-out" },
+    { "id": "fast_rhythmic", "label": "Rápido al Ritmo (BPM 128 TikTok/Reels)", "en": "high-paced rhythmic cut matching 128 BPM music beat, quick energetic bursts" },
+    { "id": "slow_cinematic", "label": "Cinematográfico Contemplativo (Slow-Mo 60fps)", "en": "slow-motion graceful tempo, luxurious cinematic pacing with floating momentum" },
+    { "id": "hypnotic_slow", "label": "Bucle Hipnótico Continuo", "en": "hypnotic perpetual motion, seamless rhythmic breathing rhythm with no harsh breaks" },
+    { "id": "playful_stopmotion", "label": "Juguetón y Alegre (Chunky Physics)", "en": "playful cadence with organic chunky physics and delightful micro-pauses" }
+  ],
+  "targetEngines": [
+    {
+      "id": "runway_gen3",
+      "name": "Runway Gen-3 Alpha",
+      "syntax": "--fps 24",
+      "instructions": "Optimizado para Runway Gen-3 con descriptores cinematográficos de cámara y movimiento.",
+      "bestFor": "Control cinemático de cámara y transiciones complejas."
+    },
+    {
+      "id": "kling",
+      "name": "Kling AI 1.5",
+      "syntax": "--motion 6 --duration 5s",
+      "instructions": "Optimizado para Kling AI con especificación de físicas suaves y coherencia temporal.",
+      "bestFor": "Físicas hiperrealistas de materiales y animación de personajes o fluidos."
+    },
+    {
+      "id": "luma",
+      "name": "Luma Dream Machine",
+      "syntax": "--camera orbit --fps 24",
+      "instructions": "Optimizado para Luma con comandos claros de trayectorias de cámara y morphing tridimensional.",
+      "bestFor": "Showcase de productos y movimientos de cámara 3D inmersivos."
+    },
+    {
+      "id": "sora",
+      "name": "OpenAI Sora / Minimax Hailuo",
+      "syntax": "--style photoreal --resolution 4k",
+      "instructions": "Descripciones narrativas ricas en física de la luz, materiales y microdetalles visuales.",
+      "bestFor": "Simulaciones visuales ultracomplejas y secuencias largas."
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney v6.1 (Keyframe inicial)",
+      "syntax": "--v 6.1 --ar {AR} --style raw --stylize 250",
+      "instructions": "Genera el fotograma de inicio perfecto (Hero Frame) para animar luego en Runway/Kling.",
+      "bestFor": "Crear el frame de máxima calidad estética antes del Image-to-Video."
+    },
+    {
+      "id": "llm_director",
+      "name": "ChatGPT / Claude (Director de Arte)",
+      "syntax": "[Meta-Prompt]",
+      "instructions": "Prompt instructivo para que un LLM te desglose el storyboard escena por escena o código ExtendScript de After Effects.",
+      "bestFor": "Planificación de guiones técnicos y creación de expresiones para After Effects."
+    }
+  ],
+  "aspectRatios": [
+    { "id": "16:9", "label": "16:9 Panorámico (YouTube, Presentaciones, TV)", "value": "16:9" },
+    { "id": "9:16", "label": "9:16 Vertical (Reels, TikTok, Shorts)", "value": "9:16" },
+    { "id": "1:1", "label": "1:1 Cuadrado (Instagram Feed, Web)", "value": "1:1" },
+    { "id": "4:5", "label": "4:5 Vertical Feed (Instagram)", "value": "4:5" },
+    { "id": "21:9", "label": "21:9 Ultra-Panorámico Cinemático", "value": "21:9" }
+  ]
+}

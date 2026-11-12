@@ -1,0 +1,22 @@
+{
+  "name": "sangar-library-ia",
+  "version": "1.0.0",
+  "description": "Tu biblioteca personal de recursos de IA, generador de prompts para motion graphics, animaciones y guías creativas.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 server.py",
+    "dev": "python3 server.py",
+    "serve": "npx -y serve . -l 3000"
+  },
+  "keywords": [
+    "motion-graphics",
+    "ai-prompts",
+    "runway-gen3",
+    "kling-ai",
+    "luma-dream-machine",
+    "prompt-engineering",
+    "after-effects"
+  ],
+  "author": "Sangar",
+  "license": "MIT"
+}
