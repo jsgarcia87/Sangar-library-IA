@@ -1,98 +1,90 @@
-# 🪐 Sangar AI Library
+# 🪐 Sangar AI & Creative Components Studio
 
-> Tu biblioteca personal de recursos de Inteligencia Artificial, generadores de prompts especializados, guías de motion design y herramientas creativas.
+> Tu suite personal de recursos de Inteligencia Artificial, generadores de prompts especializados, animaciones creativas y componentes UI interactivos estilo **21st.dev**.
 
 ---
 
-## 🚀 ¿Qué es Sangar AI Library?
+## 🚀 Las Dos Grandes Librerías Integradas
 
-**Sangar AI Library** es un centro de control y biblioteca creativa diseñada para potenciar la creación de contenidos visuales, animaciones, motion graphics y flujos de trabajo con IA. 
+Este repositorio contiene dos aplicaciones web interactivas complementarias:
 
-Inspirado y expandido a partir de herramientas como el generador de prompts de Founderz, este proyecto lleva la idea al siguiente nivel convirtiéndolo en una suite propia, offline-first, personalizable y sin limitaciones.
+| Suite | Archivo | Descripción |
+|---|---|---|
+| **🎬 Sangar AI Motion Studio** | [`index.html`](file:///Users/jesussanchez/Documents/GitHub/Sangar-library-IA/index.html) | Generador de prompts para Runway Gen-3, Kling, Sora, Hero Frames para Midjourney v6.1 / Flux, expresiones de After Effects y storyboards. |
+| **✨ Sangar UI Components (21st.dev Style)** | [`components.html`](file:///Users/jesussanchez/Documents/GitHub/Sangar-library-IA/components.html) | Registro de componentes interactivos para Design Engineers con previsualización en vivo y código listo para copiar en React, Tailwind CSS o HTML/CSS. |
 
 ---
 
 ## ✨ Características Principales
 
 ### 1. 🎬 Generador Pro de Prompts para Motion Graphics
-Un generador interactivo con soporte multi-motor (Runway Gen-3, Kling 1.5, Luma Dream Machine, Sora, Midjourney v6 y LLMs directores de arte):
-- **Presets instantáneos**: Logo reveals, kinetic typography, 3D showcases, UI holográficas, loops abstractos y más.
-- **Control granular**: Sujeto, estilo visual, dinámicas de movimiento, comportamiento de cámara, iluminación, paleta cromática, tempo/ritmo y formatos de pantalla.
-- **Modo Seamless Loop**: Instrucciones precisas para crear bucles infinitos perfectos.
-- **Salida bilingüe y técnica**: Genera el prompt optimizado en inglés (ideal para motores de vídeo) y en español, con parámetros técnicos y meta-prompts para ChatGPT/Claude.
-- **Historial y Favoritos locales**: Guarda tus creaciones directamente en tu navegador (LocalStorage).
+- **Soporte Multi-Motor:** Runway Gen-3 Alpha, Kling AI 1.5, Luma Dream Machine, OpenAI Sora / MiniMax Hailuo y LLMs directores de arte.
+- **Hero Frames (Midjourney & Flux):** Diseña el fotograma inicial en Octane Render, Redshift o Hasselblad para el flujo *Image-to-Video*.
+- **Expresiones After Effects:** Rebote elástico (*Inertia bounce*), bucles infinitos (*LoopOut*), wiggle orgánico y contadores dinámicos sin keyframes manuales.
+- **Storyboards de 15s y 30s:** Desglose plano por plano con prompts, movimientos de cámara y diseño de sonido.
 
-### 2. 📚 Biblioteca de Prompts de Oro ("Gold Standard")
-Colección curada de fórmulas y prompts probados para diferentes disciplinas:
-- Animación de logotipos y marcas (*Brand Motion*).
-- Tipografía cinética (*Kinetic Typography*).
-- Entornos 3D, cgi y fluidos.
-- Transiciones y microinteracciones de interfaz (UI/UX).
-- Fondos VJ y texturas en movimiento continuo.
-
-### 3. 🧠 Guía & Glosario de Motion Design para IA
-- Adaptación de los 12 principios clásicos de la animación al lenguaje de los modelos de difusión de vídeo.
-- Diccionario visual de movimientos de cámara (Dolly, Crash Zoom, Orbit, Whip Pan).
-- Fórmulas de prompting de alta fidelidad.
-
-### 4. 🛠️ Directorio de Herramientas IA
-Comparativa actualizada de motores de vídeo (Runway, Kling, Luma, MiniMax Hailuo, Sora, Midjourney, Pika) con sus fortalezas, debilidades y mejores casos de uso.
+### 2. ⚡ Sangar UI Components (Inspirado en 21st.dev)
+- **Live Interactive Previews:** Puedes probar e interactuar con cada componente en tiempo real dentro del navegador.
+- **Spotlight Border Card:** Halo de luz radial reactivo que sigue la posición del ratón.
+- **Border Beam Glow:** Haz de luz infinito recorriendo el perímetro con gradiente cónico.
+- **Kinetic Text Scramble / Decryptor:** Descifrado dinámico de texto al pasar el cursor.
+- **Magnetic Dynamic Button:** Botón con física de atracción magnética hacia el ratón.
+- **macOS Floating Dock:** Barra de navegación con magnificación parabólica suave.
+- **3D Perspective Tilt Glass Card:** Tarjeta translúcida con rotación tridimensional en los ejes X/Y.
+- **Morphing Dynamic Island:** Widget expandible para notificaciones y reproductores.
+- **Shimmer Sweep Button:** Barrido especular metálico sobre el botón.
+- **Doble pestaña de código:** Código listo para copiar en **HTML/CSS/JS** o en **React + Tailwind CSS**.
 
 ---
 
-## 🖥️ Cómo Ejecutar la Aplicación
+## 🖥️ Cómo Ejecutar el Proyecto
 
-No necesitas instalar dependencias complejas. La aplicación está diseñada para funcionar inmediatamente:
+Puedes abrir cualquiera de las aplicaciones directamente:
 
-### Opción 1: Servidor Python rápido (Recomendado)
+### Con Servidor Local (Recomendado)
 ```bash
 python3 server.py
 ```
-O simplemente:
-```bash
-python3 -m http.server 3000
-```
-Luego abre tu navegador en: [http://localhost:3000](http://localhost:3000)
-
-### Opción 2: Abrir directamente
-Puedes abrir directamente el archivo `index.html` en cualquier navegador web moderno (Chrome, Safari, Firefox, Edge, Brave).
-
-### Opción 3: Con Node / npm
+O con npm:
 ```bash
 npm start
 ```
+- Para el Generador Motion & IA: [http://localhost:3000/index.html](http://localhost:3000/index.html)
+- Para la Biblioteca de Componentes 21st.dev: [http://localhost:3000/components.html](http://localhost:3000/components.html)
+
+### Directamente en el navegador
+Haz doble clic en `index.html` o `components.html` desde el Finder de macOS. Funcionan sin dependencias externas.
 
 ---
 
-## 📁 Estructura del Repositorio
+## 📁 Estructura del Proyecto
 
 ```
 Sangar-library-IA/
-├── index.html                   # Interfaz interactiva de la biblioteca y generador
-├── app.js                       # Lógica de la aplicación, generador, filtros y almacenamiento
-├── styles.css                   # Diseño estilizado dark mode con efectos luminosos
-├── server.py                    # Servidor local ligero en Python
+├── index.html                   # Suite de IA, Motion Graphics, Hero Frames y Expresiones
+├── components.html              # Biblioteca de Componentes Interactivos estilo 21st.dev
+├── app.js                       # Lógica de la suite de IA y prompts
+├── components.js                # Motor interactivo de componentes (spotlight, tilt, scramble)
+├── styles.css                   # Estilos principales modo oscuro
+├── components.css               # Estilos y keyframes de animaciones de componentes
+├── server.py                    # Servidor local ligero
 ├── package.json                 # Scripts de conveniencia
-├── data/                        # Datos estructurados en JSON (fáciles de ampliar)
-│   ├── motion-generator.json    # Parámetros, presets y vocabulario del generador
-│   ├── prompts-library.json     # Catálogo de prompts de alta calidad listos para usar
-│   ├── ai-tools.json            # Directorio comparativo de herramientas IA de vídeo
-│   └── animation-glossary.json  # Conceptos y términos clave de motion graphics
-└── docs/                        # Guías y documentación en Markdown
-    ├── motion-graphics-guide.md # Guía para dominar el motion graphics con IA
-    ├── prompt-engineering-video.md # Fórmulas avanzadas para Runway, Kling y Sora
-    └── tools-comparison.md      # Análisis profundo de cada motor
+├── data/                        # Bases de datos JSON modulares
+│   ├── ui-components.json       # Componentes con código HTML y React (21st.dev style)
+│   ├── motion-generator.json    # Parámetros y presets para vídeo con IA
+│   ├── hero-frames-generator.json # Parámetros para Midjourney y Flux
+│   ├── after-effects-tools.json # Expresiones matemáticas para After Effects
+│   ├── storyboard-templates.json # Plantillas narrativas de 15s y 30s
+│   ├── prompts-library.json     # Prompts curados de motion graphics
+│   ├── ai-tools.json            # Directorio comparativo de herramientas
+│   └── animation-glossary.json  # Glosario técnico de animación
+└── docs/                        # Guías y documentación técnica
+    ├── after-effects-expressions.md
+    ├── motion-graphics-guide.md
+    ├── prompt-engineering-video.md
+    └── tools-comparison.md
 ```
 
 ---
 
-## 💡 Cómo Añadir Nuevos Recursos
-
-Todo el contenido está desacoplado en la carpeta `data/`:
-1. Para añadir nuevos presets o estilos al generador: edita `data/motion-generator.json`.
-2. Para agregar nuevos prompts a la biblioteca: añade un objeto en `data/prompts-library.json`.
-3. Para actualizar herramientas de IA: edita `data/ai-tools.json`.
-
----
-
-Creado para **Sangar AI** — Tu laboratorio personal de Inteligencia Artificial Creativa.
+Creado para **Sangar AI & Creative Studio** — Tu laboratorio personal de Diseño, Animación y Código Creativo.

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sangar UI Components — 21st.dev Style Interactive Library</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="components.html" class="brand-wrapper">
+        <div class="brand-logo" style="background: linear-gradient(135deg, #06b6d4, #a855f7);">21</div>
+        <div>
+          <div class="brand-title">Sangar <span>Components</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: -2px;">The Design Engineer UI Showcase (21st.dev style)</div>
+        </div>
+        <span class="brand-tag" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; border-color: rgba(6, 182, 212, 0.3);">UI Registry</span>
+      </a>
+
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <a href="index.html" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.45rem 0.9rem; text-decoration: none;">
+          🎬 Volver al Generador Motion & IA ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <div class="hero-banner" style="background: linear-gradient(135deg, rgba(14, 18, 30, 0.95), rgba(9, 11, 18, 0.98));">
+      <div class="hero-text">
+        <h1>Biblioteca de Componentes & Animaciones Creativas</h1>
+        <p>Inspirada en <strong>21st.dev</strong> y el movimiento de <em>Design Engineering</em>. Microinteracciones de alto impacto, tarjetas 3D, halos de luz reactivos y animaciones interactivas listas para copiar en React, Tailwind CSS o Vanilla HTML/JS.</p>
+      </div>
+      <div style="text-align: right; display: flex; flex-direction: column; gap: 0.5rem;">
+        <span style="font-size: 0.82rem; color: var(--text-dim);">Componentes listos para copiar:</span>
+        <strong style="font-size: 1.8rem; color: var(--accent-cyan); font-family: var(--font-mono);">8+ Curados</strong>
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="library-controls">
+      <div class="search-box-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="compSearchInput" class="search-input" placeholder="Buscar componentes (spotlight, magnetic, dock, 3d, tilt, beam)...">
+      </div>
+
+      <div class="filter-pills" id="compCategoryPills">
+        <button class="filter-pill active" data-cat="all">Todos</button>
+        <button class="filter-pill" data-cat="cards">Tarjetas & Glow</button>
+        <button class="filter-pill" data-cat="buttons">Botones Magnéticos</button>
+        <button class="filter-pill" data-cat="text">Tipografía & Scramble</button>
+        <button class="filter-pill" data-cat="navigation">Navegación & Docks</button>
+      </div>
+    </div>
+
+    <!-- Components Showcase Grid -->
+    <div id="componentsShowcaseGrid" class="components-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Toast Notice -->
+  <div id="toastNotice" class="toast-notice">
+    <span id="toastIcon">📋</span>
+    <span id="toastMessage">¡Código copiado al portapapeles!</span>
+  </div>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <p>⚡ <strong>Sangar Components</strong> — Inspirado en 21st.dev y el estándar de diseño de las mejores interfaces interactivas.</p>
+    <p style="margin-top: 0.35rem; font-size: 0.76rem;">Compatible con React, Next.js, Vue, Tailwind CSS y sitios web modernos.</p>
+  </footer>
+
+  <script src="components.js"></script>
+</body>
+</html>
