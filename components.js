@@ -533,12 +533,30 @@ export const ShimmerButton = ({ text, onClick }) => (
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+  syncFavBadge();
   loadComponents().then(() => {
+    const countPill = document.getElementById('compCountPill');
+    if (countPill) {
+      countPill.innerHTML = `<i data-lucide="layers"></i> ${componentsData.length} Componentes Curados`;
+    }
     renderComponentsShowcase(componentsData);
-    setupComponentInteractions();
     setupFilters();
+    registerComponentsInCmd();
+    if (window.SangarShell) window.SangarShell.renderIcons();
   });
 });
+
+function syncFavBadge() {
+  const badge = document.getElementById('favCountBadge');
+  if (!badge) return;
+  try {
+    const raw = localStorage.getItem('sangar_library_favorites');
+    const favs = raw ? JSON.parse(raw) : [];
+    badge.textContent = Array.isArray(favs) ? favs.length : 0;
+  } catch (_) {
+    badge.textContent = '0';
+  }
+}
 
 async function loadComponents() {
   try {
@@ -559,55 +577,67 @@ function renderComponentsShowcase(items) {
   grid.innerHTML = '';
 
   if (items.length === 0) {
-    grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 4rem; color: var(--text-dim);">No se encontraron componentes.</div>`;
+    grid.innerHTML = `
+      <div class="sg-empty" style="grid-column: 1 / -1;">
+        <div class="sg-empty__img"><i data-lucide="layers"></i></div>
+        <div class="sg-empty__title">No se encontraron componentes</div>
+        <p class="sg-empty__desc">Prueba con otro término de búsqueda o selecciona otra categoría.</p>
+      </div>
+    `;
+    if (window.SangarShell) window.SangarShell.renderIcons(grid);
     return;
   }
 
   items.forEach(comp => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'component-showcase-card';
+    card.id = `comp-${comp.id}`;
     card.innerHTML = `
       <div class="comp-card-header">
         <div class="comp-card-title">
-          <h3>${comp.name}</h3>
-          <p>${comp.description}</p>
+          <h2>${escapeHtml(comp.name)}</h2>
+          <p>${escapeHtml(comp.description)}</p>
         </div>
-        <div class="comp-tabs-switch" data-comp-id="${comp.id}">
-          <button class="comp-tab-btn active" data-view="preview">Preview</button>
-          <button class="comp-tab-btn" data-view="code-html">HTML / CSS</button>
-          <button class="comp-tab-btn" data-view="code-react">React</button>
+        <div class="comp-tabs-switch" data-comp-id="${escapeHtml(comp.id)}" role="tablist" aria-label="Vista de ${escapeHtml(comp.name)}">
+          <button type="button" class="comp-tab-btn active" data-view="preview" role="tab" aria-selected="true">Preview</button>
+          <button type="button" class="comp-tab-btn" data-view="code-html" role="tab" aria-selected="false">HTML / CSS</button>
+          <button type="button" class="comp-tab-btn" data-view="code-react" role="tab" aria-selected="false">React</button>
         </div>
       </div>
 
       <!-- Preview Stage -->
-      <div class="comp-preview-stage" id="preview-stage-${comp.id}">
+      <div class="comp-preview-stage" id="preview-stage-${escapeHtml(comp.id)}">
         ${comp.previewHtml}
       </div>
 
       <!-- Code Stage (HTML) -->
-      <div class="comp-code-stage" id="code-html-stage-${comp.id}">
+      <div class="comp-code-stage" id="code-html-stage-${escapeHtml(comp.id)}">
         <div class="code-subtabs">
           <span class="code-type-pill">HTML + CSS + Vanilla JS</span>
-          <button class="btn-copy-mini btn-copy-code" data-code-type="html" data-comp-id="${comp.id}">Copiar Código</button>
+          <button type="button" class="btn-copy-mini btn-copy-code" data-code-type="html" data-comp-id="${escapeHtml(comp.id)}">
+            <i data-lucide="copy"></i> Copiar Código
+          </button>
         </div>
         <pre class="comp-code-block"><code>${escapeHtml(comp.codeHtml)}</code></pre>
       </div>
 
       <!-- Code Stage (React) -->
-      <div class="comp-code-stage" id="code-react-stage-${comp.id}">
+      <div class="comp-code-stage" id="code-react-stage-${escapeHtml(comp.id)}">
         <div class="code-subtabs">
           <span class="code-type-pill">React + Tailwind CSS</span>
-          <button class="btn-copy-mini btn-copy-code" data-code-type="react" data-comp-id="${comp.id}">Copiar Código</button>
+          <button type="button" class="btn-copy-mini btn-copy-code" data-code-type="react" data-comp-id="${escapeHtml(comp.id)}">
+            <i data-lucide="copy"></i> Copiar Código
+          </button>
         </div>
         <pre class="comp-code-block"><code>${escapeHtml(comp.codeReact)}</code></pre>
       </div>
 
       <div class="comp-card-footer">
         <div class="card-tags">
-          ${(comp.tags || []).map(t => `<span class="tag-badge">#${t}</span>`).join('')}
+          ${(comp.tags || []).map(t => `<span class="tag-badge">#${escapeHtml(t)}</span>`).join('')}
         </div>
-        <button class="btn btn-outline btn-copy-footer" data-comp-id="${comp.id}" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
-          📋 Copiar Todo
+        <button type="button" class="sg-btn sg-btn--outline sg-btn--sm btn-copy-footer" data-comp-id="${escapeHtml(comp.id)}">
+          <i data-lucide="copy"></i> Copiar HTML
         </button>
       </div>
     `;
@@ -616,8 +646,12 @@ function renderComponentsShowcase(items) {
     card.querySelectorAll('.comp-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const view = btn.getAttribute('data-view');
-        card.querySelectorAll('.comp-tab-btn').forEach(b => b.classList.remove('active'));
+        card.querySelectorAll('.comp-tab-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
 
         const prevStage = card.querySelector(`#preview-stage-${comp.id}`);
         const htmlStage = card.querySelector(`#code-html-stage-${comp.id}`);
@@ -634,20 +668,18 @@ function renderComponentsShowcase(items) {
       btn.addEventListener('click', () => {
         const type = btn.getAttribute('data-code-type');
         const code = type === 'react' ? comp.codeReact : comp.codeHtml;
-        navigator.clipboard.writeText(code).then(() => {
-          showToast(`Código ${type.toUpperCase()} copiado`, '📋');
-        });
+        copyText(code, `Código ${type.toUpperCase()} copiado`);
       });
     });
 
     card.querySelector('.btn-copy-footer').addEventListener('click', () => {
-      navigator.clipboard.writeText(comp.codeHtml).then(() => {
-        showToast(`Código copiado: ${comp.name}`, '📋');
-      });
+      copyText(comp.codeHtml, `Código copiado: ${comp.name}`);
     });
 
     grid.appendChild(card);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(grid);
 
   // Re-bind interactive micro-interactions for live demos
   attachInteractiveDemos();
@@ -751,11 +783,11 @@ function setupFilters() {
     searchInput.addEventListener('input', applyFilters);
   }
 
-  const pills = document.querySelectorAll('#compCategoryPills .filter-pill');
+  const pills = document.querySelectorAll('#compCategoryPills .sg-filter-pill');
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
+      pills.forEach(p => p.classList.remove('is-active'));
+      pill.classList.add('is-active');
       applyFilters();
     });
   });
@@ -763,7 +795,7 @@ function setupFilters() {
 
 function applyFilters() {
   const query = document.getElementById('compSearchInput')?.value.toLowerCase().trim() || '';
-  const activeCat = document.querySelector('#compCategoryPills .filter-pill.active')?.getAttribute('data-cat') || 'all';
+  const activeCat = document.querySelector('#compCategoryPills .sg-filter-pill.is-active')?.getAttribute('data-cat') || 'all';
 
   const filtered = componentsData.filter(item => {
     const matchesCat = (activeCat === 'all' || item.category === activeCat);
@@ -777,8 +809,63 @@ function applyFilters() {
   renderComponentsShowcase(filtered);
 }
 
-function setupComponentInteractions() {
-  // Global hooks if needed
+function registerComponentsInCmd() {
+  if (!window.SangarShell || typeof window.SangarShell.registerSearchItems !== 'function') return;
+
+  const items = componentsData.map(comp => ({
+    id: `comp-${comp.id}`,
+    scope: 'components',
+    title: comp.name,
+    subtitle: comp.description,
+    keywords: (comp.tags || []).join(' '),
+    icon: 'layers',
+    badge: comp.category,
+    action: () => {
+      const target = document.getElementById(`comp-${comp.id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        const search = document.getElementById('compSearchInput');
+        if (search) {
+          search.value = comp.name;
+          applyFilters();
+        }
+      }
+    }
+  }));
+
+  items.push(
+    { id: 'view-generator', scope: 'views', title: 'Generador de Vídeo IA', subtitle: 'Abrir Sangar AI Motion Studio', icon: 'clapperboard', badge: 'Módulo', action: () => { window.location.href = 'index.html#generator'; } },
+    { id: 'view-heroframes', scope: 'views', title: 'Hero Frames (Midjourney & Flux)', subtitle: 'Fotogramas maestros Image-to-Video', icon: 'gem', badge: 'Módulo', action: () => { window.location.href = 'index.html#heroframes'; } },
+    { id: 'view-expressions', scope: 'views', title: 'Expresiones After Effects', subtitle: 'Scripts probados para AE', icon: 'wand-sparkles', badge: 'Módulo', action: () => { window.location.href = 'index.html#expressions'; } },
+    { id: 'view-library', scope: 'views', title: 'Biblioteca de Prompts', subtitle: 'Prompts curados por categoría', icon: 'book-open', badge: 'Módulo', action: () => { window.location.href = 'index.html#library'; } }
+  );
+
+  window.SangarShell.registerSearchItems(items);
+}
+
+function copyText(text, successMsg) {
+  if (!text) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(successMsg);
+    }).catch(() => {
+      fallbackCopy(text);
+      showToast(successMsg);
+    });
+  } else {
+    fallbackCopy(text);
+    showToast(successMsg);
+  }
+}
+
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
 }
 
 function escapeHtml(string) {
@@ -790,19 +877,8 @@ function escapeHtml(string) {
     .replace(/'/g, '&#039;');
 }
 
-let toastTimeout = null;
-function showToast(message, icon = '✓') {
-  const toast = document.getElementById('toastNotice');
-  const msgEl = document.getElementById('toastMessage');
-  const iconEl = document.getElementById('toastIcon');
-
-  if (!toast) return;
-  if (msgEl) msgEl.textContent = message;
-  if (iconEl) iconEl.textContent = icon;
-
-  toast.classList.add('show');
-  if (toastTimeout) clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2500);
+function showToast(message) {
+  if (window.SangarShell && typeof window.SangarShell.showToast === 'function') {
+    window.SangarShell.showToast(message, 'success');
+  }
 }

@@ -3,84 +3,267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sangar UI Components — 21st.dev Style Interactive Library</title>
+  <meta name="color-scheme" content="light dark">
+  <meta name="view-transition" content="same-origin">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('sg-theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+          var m = document.querySelector('meta[name="color-scheme"]');
+          if (m) m.content = t;
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <title>Sangar UI Components — 21st.dev Style &amp; Studio OS</title>
+  <link rel="icon" type="image/svg+xml" href="public/assets/logos/sangar-s-negro.svg">
+  <link rel="stylesheet" href="public/assets/app.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="components.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" async onload="window.SangarShell && window.SangarShell.renderIcons()"></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link visually-hidden">Saltar al contenido principal</a>
 
-  <!-- Top Navigation Header -->
-  <header class="app-header">
-    <div class="header-container">
-      <a href="components.html" class="brand-wrapper">
-        <div class="brand-logo" style="background: linear-gradient(135deg, #06b6d4, #a855f7);">21</div>
-        <div>
-          <div class="brand-title">Sangar <span>Components</span></div>
-          <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: -2px;">The Design Engineer UI Showcase (21st.dev style)</div>
-        </div>
-        <span class="brand-tag" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; border-color: rgba(6, 182, 212, 0.3);">UI Registry</span>
+  <div class="sg-app">
+    <!-- Fixed Dark Sidebar (#191716) -->
+    <aside class="sg-sidebar" id="sg-sidebar" aria-label="Navegación principal">
+      <div class="sg-sidebar__top-row">
+        <a href="index.html#generator" class="sg-sidebar__logo" style="text-decoration: none;">
+          <img src="public/assets/logos/sangar-s-blanco.svg" alt="Sangar Studio">
+          <span class="sg-sidebar__brand">Sangar <span>OS</span></span>
+        </a>
+        <button type="button" id="btn-sidebar-collapse" class="sg-sidebar-collapse-btn" aria-label="Colapsar menú lateral" aria-expanded="true">
+          <i data-lucide="panel-left-close"></i>
+        </button>
+      </div>
+
+      <a href="index.html#generator" class="sg-workspace-switcher" title="Cambiar a AI Motion Studio">
+        <span class="sg-workspace-switcher__badge">21</span>
+        <span class="sg-workspace-switcher__info">
+          <span class="sg-workspace-switcher__name" style="display:block;">UI Components</span>
+          <span class="sg-workspace-switcher__sub" style="display:block;">Volver a AI Motion Studio</span>
+        </span>
+        <i data-lucide="chevrons-up-down" class="sg-workspace-switcher__chevron"></i>
       </a>
 
-      <div style="display: flex; gap: 0.75rem; align-items: center;">
-        <a href="index.html" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.45rem 0.9rem; text-decoration: none;">
-          🎬 Volver al Generador Motion & IA ↗
-        </a>
+      <nav class="sg-nav" aria-label="Módulos del estudio">
+        <div class="sg-nav__section">
+          <div class="sg-nav__label">Creación &amp; Prompts</div>
+          <a href="index.html#generator" class="sg-nav__item">
+            <i data-lucide="clapperboard"></i>
+            <span class="sg-nav__text">Generador Vídeo</span>
+          </a>
+          <a href="index.html#heroframes" class="sg-nav__item">
+            <i data-lucide="gem"></i>
+            <span class="sg-nav__text">Hero Frames</span>
+          </a>
+          <a href="index.html#expressions" class="sg-nav__item">
+            <i data-lucide="wand-sparkles"></i>
+            <span class="sg-nav__text">Expresiones AE</span>
+          </a>
+          <a href="index.html#storyboard" class="sg-nav__item">
+            <i data-lucide="film"></i>
+            <span class="sg-nav__text">Storyboards</span>
+          </a>
+        </div>
+
+        <div class="sg-nav__section">
+          <div class="sg-nav__label">Biblioteca &amp; Estudio</div>
+          <a href="index.html#library" class="sg-nav__item">
+            <i data-lucide="book-open"></i>
+            <span class="sg-nav__text">Biblioteca Prompts</span>
+          </a>
+          <a href="index.html#glossary" class="sg-nav__item">
+            <i data-lucide="graduation-cap"></i>
+            <span class="sg-nav__text">Guía &amp; Glosario</span>
+          </a>
+          <a href="index.html#tools" class="sg-nav__item">
+            <i data-lucide="cpu"></i>
+            <span class="sg-nav__text">Herramientas IA</span>
+          </a>
+          <a href="index.html#favorites" class="sg-nav__item">
+            <i data-lucide="star"></i>
+            <span class="sg-nav__text">Favoritos</span>
+            <span class="sg-nav__badge" id="favCountBadge">0</span>
+          </a>
+        </div>
+
+        <div class="sg-nav__section">
+          <div class="sg-nav__label">Design Engineering</div>
+          <a href="components.html" class="sg-nav__item is-active" aria-current="page">
+            <i data-lucide="layers"></i>
+            <span class="sg-nav__text">Componentes 21st.dev</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sg-sidebar__footer">
+        <button type="button" class="sg-nav__item" data-open-cmd>
+          <i data-lucide="help-circle"></i>
+          <span class="sg-nav__text">Paleta de Comandos</span>
+          <span class="sg-nav__badge">⌘K</span>
+        </button>
+
+        <div class="sg-profile-card">
+          <div class="sg-sidebar__avatar">SG</div>
+          <div class="sg-profile-card__info">
+            <div class="sg-profile-card__name">Sangar Studio</div>
+            <div class="sg-profile-card__role">Design Engineering OS</div>
+          </div>
+        </div>
       </div>
+    </aside>
+
+    <div class="sg-sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- Main Workspace -->
+    <div class="sg-main">
+      <header class="sg-topbar sg-topbar--fusion">
+        <div class="sg-topbar__left">
+          <button type="button" id="btn-sidebar-toggle" class="sg-sidebar-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="sg-sidebar">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="sg-topbar__greeting-block">
+            <div class="sg-topbar__greeting" id="topbar-greeting">Sangar Studio</div>
+            <div class="sg-topbar__subtitle">Sangar UI Components · Registro 21st.dev Style</div>
+          </div>
+        </div>
+
+        <button type="button" id="btn-cmd-palette" class="sg-global-search" data-open-cmd aria-label="Abrir búsqueda rápida y paleta de comandos">
+          <i data-lucide="search"></i>
+          <span class="sg-global-search__placeholder">Buscar componentes (spotlight, magnetic, dock, tilt…)</span>
+          <kbd class="sg-kbd">⌘K</kbd>
+        </button>
+
+        <div class="sg-topbar__actions">
+          <a href="index.html#generator" class="sg-btn sg-btn--primary sg-btn--sm">
+            <i data-lucide="clapperboard"></i>
+            <span class="sg-btn-label">Generador IA</span>
+          </a>
+
+          <button type="button" id="btn-notifications" class="sg-utility-btn" aria-label="Ver novedades y consejos del estudio" aria-expanded="false" aria-controls="notifications-popover">
+            <i data-lucide="bell"></i>
+            <span class="sg-utility-badge" id="notif-badge">2</span>
+          </button>
+
+          <button type="button" id="btn-theme-toggle" class="sg-theme-toggle" aria-label="Cambiar tema de color" aria-pressed="false">
+            <i data-lucide="sun" class="sg-icon-sun"></i>
+            <i data-lucide="moon" class="sg-icon-moon"></i>
+          </button>
+
+          <a href="index.html#favorites" class="sg-profile-pill" title="Ver prompts favoritos">
+            <span class="sg-profile-pill__avatar">SG</span>
+            <span class="sg-profile-pill__name">Studio OS</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="sg-content" id="main-content" tabindex="-1">
+        <!-- Hero Banner -->
+        <div class="sg-greeting sg-greeting--compact">
+          <h1 class="sg-greeting__title">Biblioteca de Componentes &amp; Animaciones Creativas</h1>
+          <p class="sg-greeting__desc">Inspirada en <strong>21st.dev</strong> y el movimiento de Design Engineering. Microinteracciones táctiles, tarjetas 3D, halos de luz reactivos y código listo para copiar en React + Tailwind o Vanilla HTML/CSS.</p>
+          <div class="sg-greeting__actions">
+            <a href="index.html#generator" class="sg-btn sg-btn--secondary">
+              <i data-lucide="clapperboard"></i> Volver al Generador Motion
+            </a>
+            <span class="sg-btn sg-btn--outline" id="compCountPill" style="cursor:default;">
+              <i data-lucide="layers"></i> 8 Componentes Curados
+            </span>
+          </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="library-controls">
+          <div class="search-box-wrapper">
+            <span class="search-icon"><i data-lucide="search"></i></span>
+            <input type="text" id="compSearchInput" class="search-input" aria-label="Buscar componentes UI" placeholder="Buscar componentes (spotlight, magnetic, dock, 3d, tilt, beam)...">
+          </div>
+
+          <div class="sg-filter-pills" id="compCategoryPills" role="group" aria-label="Filtrar componentes por categoría">
+            <button type="button" class="sg-filter-pill is-active" data-cat="all">Todos</button>
+            <button type="button" class="sg-filter-pill" data-cat="cards">Tarjetas &amp; Glow</button>
+            <button type="button" class="sg-filter-pill" data-cat="buttons">Botones Magnéticos</button>
+            <button type="button" class="sg-filter-pill" data-cat="text">Tipografía &amp; Scramble</button>
+            <button type="button" class="sg-filter-pill" data-cat="navigation">Navegación &amp; Docks</button>
+          </div>
+        </div>
+
+        <!-- Components Showcase Grid -->
+        <div id="componentsShowcaseGrid" class="components-grid sg-stagger"></div>
+      </main>
+
+      <footer class="app-footer">
+        <div>
+          <strong>Sangar UI Components</strong> — Warm Studio OS · Inspirado en 21st.dev para React, Tailwind CSS y HTML/JS.
+        </div>
+        <div>
+          <a href="index.html#generator" class="sg-fusion-card__link">
+            Ir al Generador de Motion Graphics <i data-lucide="arrow-up-right"></i>
+          </a>
+        </div>
+      </footer>
     </div>
-  </header>
-
-  <main class="main-wrapper">
-
-    <!-- Hero Banner -->
-    <div class="hero-banner" style="background: linear-gradient(135deg, rgba(14, 18, 30, 0.95), rgba(9, 11, 18, 0.98));">
-      <div class="hero-text">
-        <h1>Biblioteca de Componentes & Animaciones Creativas</h1>
-        <p>Inspirada en <strong>21st.dev</strong> y el movimiento de <em>Design Engineering</em>. Microinteracciones de alto impacto, tarjetas 3D, halos de luz reactivos y animaciones interactivas listas para copiar en React, Tailwind CSS o Vanilla HTML/JS.</p>
-      </div>
-      <div style="text-align: right; display: flex; flex-direction: column; gap: 0.5rem;">
-        <span style="font-size: 0.82rem; color: var(--text-dim);">Componentes listos para copiar:</span>
-        <strong style="font-size: 1.8rem; color: var(--accent-cyan); font-family: var(--font-mono);">8+ Curados</strong>
-      </div>
-    </div>
-
-    <!-- Filter & Search Controls -->
-    <div class="library-controls">
-      <div class="search-box-wrapper">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="compSearchInput" class="search-input" placeholder="Buscar componentes (spotlight, magnetic, dock, 3d, tilt, beam)...">
-      </div>
-
-      <div class="filter-pills" id="compCategoryPills">
-        <button class="filter-pill active" data-cat="all">Todos</button>
-        <button class="filter-pill" data-cat="cards">Tarjetas & Glow</button>
-        <button class="filter-pill" data-cat="buttons">Botones Magnéticos</button>
-        <button class="filter-pill" data-cat="text">Tipografía & Scramble</button>
-        <button class="filter-pill" data-cat="navigation">Navegación & Docks</button>
-      </div>
-    </div>
-
-    <!-- Components Showcase Grid -->
-    <div id="componentsShowcaseGrid" class="components-grid">
-      <!-- Injected via JavaScript -->
-    </div>
-
-  </main>
-
-  <!-- Toast Notice -->
-  <div id="toastNotice" class="toast-notice">
-    <span id="toastIcon">📋</span>
-    <span id="toastMessage">¡Código copiado al portapapeles!</span>
   </div>
 
-  <!-- App Footer -->
-  <footer class="app-footer">
-    <p>⚡ <strong>Sangar Components</strong> — Inspirado en 21st.dev y el estándar de diseño de las mejores interfaces interactivas.</p>
-    <p style="margin-top: 0.35rem; font-size: 0.76rem;">Compatible con React, Next.js, Vue, Tailwind CSS y sitios web modernos.</p>
-  </footer>
+  <!-- Notifications Popover -->
+  <div class="sg-popover-panel" id="notifications-popover" role="region" aria-label="Avisos del estudio">
+    <div class="sg-popover-panel__head">
+      <span class="sg-popover-panel__title">Novedades de Sangar OS</span>
+      <button type="button" id="btn-mark-notifs-read" class="btn-copy-mini">Marcar leídas</button>
+    </div>
+    <div class="sg-popover-panel__body">
+      <a href="index.html#heroframes" class="sg-notif-item" data-notif-id="notif-hero">
+        <span class="sg-notif-item__icon"><i data-lucide="gem"></i></span>
+        <span>
+          <strong style="display:block;font-size:13px;color:var(--sg-negro);">Flujo Image-to-Video</strong>
+          <span style="font-size:12px;color:var(--sg-gris-55);">Diseña primero tu Hero Frame en Midjourney v6.1 antes de animar en Runway o Kling.</span>
+        </span>
+      </a>
+      <a href="components.html" class="sg-notif-item" data-notif-id="notif-21st">
+        <span class="sg-notif-item__icon"><i data-lucide="layers"></i></span>
+        <span>
+          <strong style="display:block;font-size:13px;color:var(--sg-negro);">Registro Sangar UI Components</strong>
+          <span style="font-size:12px;color:var(--sg-gris-55);">8 componentes interactivos estilo 21st.dev listos para copiar en React o HTML.</span>
+        </span>
+      </a>
+    </div>
+  </div>
 
+  <!-- Command Palette (<dialog> native modal) -->
+  <dialog id="cmd-palette" class="sg-cmd-dialog" closedby="any" aria-labelledby="cmd-palette-title">
+    <h2 id="cmd-palette-title" class="visually-hidden">Paleta de Comandos de Sangar Components</h2>
+    <div class="sg-cmd-head">
+      <i data-lucide="search" aria-hidden="true"></i>
+      <input type="search" id="cmd-palette-input" class="sg-cmd-input" placeholder="Buscar componentes o ir a módulos de AI Studio…" autofocus aria-label="Buscar en Sangar Components">
+      <button type="button" id="cmd-palette-close" class="sg-btn sg-btn--ghost sg-btn--sm" aria-label="Cerrar paleta de comandos">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="sg-cmd-scopes" id="cmd-palette-scopes" role="group" aria-label="Filtrar alcance de búsqueda">
+      <button type="button" class="sg-filter-pill is-active" data-scope="all">Todos</button>
+      <button type="button" class="sg-filter-pill" data-scope="components">Componentes</button>
+      <button type="button" class="sg-filter-pill" data-scope="views">Módulos AI</button>
+    </div>
+    <div id="cmd-palette-results" class="sg-cmd-results" role="listbox" aria-label="Resultados de búsqueda"></div>
+    <div class="sg-cmd-foot">
+      <div class="sg-cmd-hints">
+        <span><kbd class="sg-kbd">↑↓</kbd> Navegar</span>
+        <span><kbd class="sg-kbd">Enter</kbd> Seleccionar</span>
+        <span><kbd class="sg-kbd">Esc</kbd> Cerrar</span>
+      </div>
+      <span>Sangar Studio OS</span>
+    </div>
+  </dialog>
+
+  <!-- Toast Stack & Screen Reader Announcer -->
+  <div id="sg-toast-wrap" class="sg-toast-wrap" aria-hidden="true"></div>
+  <div id="sg-live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="shell.js"></script>
   <script src="components.js"></script>
 </body>
 </html>

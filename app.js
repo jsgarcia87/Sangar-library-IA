@@ -230,6 +230,17 @@ const state = {
   activeTab: 'generator'
 };
 
+const TAB_LABELS = {
+  generator: 'Generador de Motion Graphics',
+  heroframes: 'Hero Frames (Midjourney & Flux)',
+  expressions: 'Expresiones After Effects',
+  storyboard: 'Storyboards & Guiones Técnicos',
+  library: 'Biblioteca de Prompts Curados',
+  glossary: 'Guía & Glosario de Motion',
+  tools: 'Directorio de Herramientas IA',
+  favorites: 'Mis Prompts Guardados'
+};
+
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
@@ -243,8 +254,17 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGlossary();
     renderToolsDirectory();
     renderFavorites();
+    updateKpiCounts();
+    registerCommandPaletteItems();
     setupEventListeners();
     updateGeneratorPrompt(); // Initial prompt generation
+
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash && TAB_LABELS[initialHash]) {
+      switchTab(initialHash, false);
+    }
+
+    if (window.SangarShell) window.SangarShell.renderIcons();
   });
 });
 
@@ -259,20 +279,63 @@ function initTabs() {
       switchTab(targetTab);
     });
   });
+
+  document.querySelectorAll('[data-tab-jump]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const targetTab = el.getAttribute('data-tab-jump');
+      if (targetTab && TAB_LABELS[targetTab]) {
+        e.preventDefault();
+        switchTab(targetTab);
+      }
+    });
+  });
+
+  const quickHero = document.getElementById('topbar-quick-hero');
+  if (quickHero) {
+    quickHero.addEventListener('click', () => switchTab('heroframes'));
+  }
+
+  window.addEventListener('hashchange', () => {
+    const hashTab = window.location.hash.replace('#', '');
+    if (hashTab && TAB_LABELS[hashTab] && hashTab !== state.activeTab) {
+      switchTab(hashTab, false);
+    }
+  });
 }
 
-function switchTab(tabId) {
+function switchTab(tabId, updateHash = true) {
+  if (!TAB_LABELS[tabId]) return;
   state.activeTab = tabId;
+
   document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+    const active = btn.getAttribute('data-tab') === tabId;
+    btn.classList.toggle('is-active', active);
+    if (active) btn.setAttribute('aria-current', 'page');
+    else btn.removeAttribute('aria-current');
   });
+
   document.querySelectorAll('.tab-pane').forEach(pane => {
     pane.classList.toggle('active', pane.id === `tab-${tabId}`);
   });
 
+  const subtitle = document.getElementById('topbar-subtitle');
+  if (subtitle) {
+    subtitle.textContent = `Sangar AI Library · ${TAB_LABELS[tabId]}`;
+  }
+
+  if (updateHash && window.location.hash !== `#${tabId}`) {
+    history.replaceState(null, '', `#${tabId}`);
+  }
+
   if (tabId === 'favorites') {
     renderFavorites();
   }
+
+  if (window.SangarShell && typeof window.SangarShell.closeMobileDrawer === 'function') {
+    window.SangarShell.closeMobileDrawer();
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /**
@@ -357,6 +420,8 @@ function initHeroFrameGenerator() {
 
   document.querySelectorAll('.hero-preset-chip').forEach(chip => {
     chip.addEventListener('click', () => {
+      document.querySelectorAll('.hero-preset-chip').forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
       const pId = chip.getAttribute('data-preset');
       applyHeroPreset(pId);
     });
@@ -366,6 +431,7 @@ function initHeroFrameGenerator() {
   if (resetHeroBtn) {
     resetHeroBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      document.querySelectorAll('.hero-preset-chip').forEach(c => c.classList.remove('is-active'));
       applyHeroPreset('hero_logo_3d');
     });
   }
@@ -401,7 +467,7 @@ function applyHeroPreset(presetId) {
   if (rawToggle) rawToggle.checked = Boolean(p.styleRaw);
 
   updateHeroFramePrompt();
-  showToast(`Preset Hero cargado: ${p.name}`, '💎');
+  showToast(`Preset Hero cargado: ${p.name}`, 'success');
 }
 
 function updateHeroFramePrompt() {
@@ -456,34 +522,36 @@ function renderExpressions() {
   if (!container) return;
   container.innerHTML = '';
 
+  const esc = window.SangarShell ? window.SangarShell.escapeHtml : (s) => s;
+
   state.expressions.forEach(expr => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'expr-card';
     card.innerHTML = `
       <div class="card-top">
-        <h3 class="card-title">${expr.name}</h3>
-        <span class="expr-prop-tag">${expr.property}</span>
+        <h2 class="card-title">${esc(expr.name)}</h2>
+        <span class="sg-badge sg-badge--success">${esc(expr.property)}</span>
       </div>
-      <p class="card-desc">${expr.description}</p>
+      <p class="card-desc">${esc(expr.description)}</p>
       <div class="expr-howto">
-        <strong>💡 Cómo usarlo:</strong> ${expr.howToUse}
+        <strong>Cómo usarlo:</strong> ${esc(expr.howToUse)}
       </div>
-      <div class="card-prompt-code" style="color: #6ee7b7;">${expr.code}</div>
+      <pre class="card-prompt-code"><code>${esc(expr.code)}</code></pre>
       <div class="card-actions">
-        <button class="btn btn-primary btn-copy-expr" style="font-size: 0.8rem; padding: 0.4rem 0.9rem; width: 100%;">
-          📋 Copiar Expresión para After Effects
+        <button type="button" class="sg-btn sg-btn--primary sg-btn--sm btn-copy-expr" style="width: 100%;">
+          <i data-lucide="copy"></i> Copiar Expresión para After Effects
         </button>
       </div>
     `;
 
     card.querySelector('.btn-copy-expr').addEventListener('click', () => {
-      navigator.clipboard.writeText(expr.code).then(() => {
-        showToast(`Expresión copiada: ${expr.name}`, '🪄');
-      });
+      copyText(expr.code, `Expresión copiada: ${expr.name}`, 'success');
     });
 
     container.appendChild(card);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(container);
 }
 
 /**
@@ -494,26 +562,28 @@ function renderStoryboards() {
   if (!container) return;
   container.innerHTML = '';
 
+  const esc = window.SangarShell ? window.SangarShell.escapeHtml : (s) => s;
+
   state.storyboards.forEach(sb => {
-    const wrap = document.createElement('div');
+    const wrap = document.createElement('article');
     wrap.className = 'storyboard-wrapper';
 
     let shotsHtml = sb.shots.map(s => `
       <div class="shot-card">
-        <span class="shot-number-badge">Plano ${s.shot}</span>
-        <h4 style="font-size: 0.92rem; font-weight: 700; margin-bottom: 0.4rem; color: #f8fafc;">${s.name}</h4>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.6rem;">${s.goal}</p>
+        <span class="sg-badge sg-badge--coral" style="align-self:flex-start;">Plano ${esc(s.shot)}</span>
+        <h4>${esc(s.name)}</h4>
+        <p class="shot-goal">${esc(s.goal)}</p>
         <div class="shot-detail-row">
-          <span>🎥</span> <strong>Cámara:</strong> ${s.camera}
+          <i data-lucide="clapperboard"></i>
+          <span><strong>Cámara:</strong> ${esc(s.camera)}</span>
         </div>
         <div class="shot-detail-row">
-          <span>🎵</span> <strong>Audio/SFX:</strong> ${s.audio}
+          <i data-lucide="sparkles"></i>
+          <span><strong>Audio/SFX:</strong> ${esc(s.audio)}</span>
         </div>
-        <div class="card-prompt-code" style="margin-top: 0.6rem; font-size: 0.76rem; max-height: 90px;">
-          ${s.promptIdea}
-        </div>
-        <button class="btn-copy-mini btn-copy-shot-prompt" style="margin-top: auto; align-self: flex-start;">
-          Copiar Prompt Plano ${s.shot}
+        <pre class="card-prompt-code"><code>${esc(s.promptIdea)}</code></pre>
+        <button type="button" class="btn-copy-mini btn-copy-shot-prompt" style="margin-top: auto; align-self: flex-start;">
+          <i data-lucide="copy"></i> Copiar Prompt Plano ${esc(s.shot)}
         </button>
       </div>
     `).join('');
@@ -521,14 +591,14 @@ function renderStoryboards() {
     wrap.innerHTML = `
       <div class="storyboard-header">
         <div>
-          <h3 style="font-size: 1.3rem; font-weight: 700;">${sb.title}</h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">${sb.description}</p>
+          <h2>${esc(sb.title)}</h2>
+          <p>${esc(sb.description)}</p>
         </div>
-        <div style="display: flex; gap: 0.6rem; align-items: center;">
-          <span class="tool-tag">${sb.duration}</span>
-          <span class="tool-tag" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">${sb.format}</span>
-          <button class="btn btn-outline btn-copy-all-shots" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
-            📋 Copiar Guión Completo
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <span class="sg-badge sg-badge--neutral">${esc(sb.duration)}</span>
+          <span class="sg-badge sg-badge--info">${esc(sb.format)}</span>
+          <button type="button" class="sg-btn sg-btn--outline sg-btn--sm btn-copy-all-shots">
+            <i data-lucide="copy"></i> Copiar Guión Completo
           </button>
         </div>
       </div>
@@ -537,26 +607,22 @@ function renderStoryboards() {
       </div>
     `;
 
-    // Copy single shot buttons
     wrap.querySelectorAll('.btn-copy-shot-prompt').forEach((btn, idx) => {
       btn.addEventListener('click', () => {
-        navigator.clipboard.writeText(sb.shots[idx].promptIdea).then(() => {
-          showToast(`Prompt Plano ${idx+1} copiado`, '📋');
-        });
+        copyText(sb.shots[idx].promptIdea, `Prompt Plano ${idx + 1} copiado`, 'success');
       });
     });
 
-    // Copy full script button
     wrap.querySelector('.btn-copy-all-shots').addEventListener('click', () => {
       const fullScript = `GUIÓN TÉCNICO Y STORYBOARD — ${sb.title}\nDuración: ${sb.duration} | Formato: ${sb.format}\n\n` +
         sb.shots.map(s => `[PLANO ${s.shot}: ${s.name}]\nObjetivo: ${s.goal}\nCámara: ${s.camera}\nAudio: ${s.audio}\nPrompt IA: ${s.promptIdea}\n`).join('\n');
-      navigator.clipboard.writeText(fullScript).then(() => {
-        showToast('Guión técnico completo copiado', '📋');
-      });
+      copyText(fullScript, 'Guión técnico completo copiado', 'success');
     });
 
     container.appendChild(wrap);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(container);
 }
 
 /**
@@ -591,6 +657,8 @@ function setupEventListeners() {
   // Preset chips
   document.querySelectorAll('.presets-bar .preset-chip:not(.hero-preset-chip)').forEach(chip => {
     chip.addEventListener('click', () => {
+      document.querySelectorAll('.presets-bar .preset-chip:not(.hero-preset-chip)').forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
       const presetId = chip.getAttribute('data-preset');
       applyPreset(presetId);
     });
@@ -601,8 +669,9 @@ function setupEventListeners() {
   if (resetBtn) {
     resetBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      document.querySelectorAll('.presets-bar .preset-chip:not(.hero-preset-chip)').forEach(c => c.classList.remove('is-active'));
       applyPreset('cyberpunk_logo');
-      showToast('Parámetros restaurados al valor por defecto', '↺');
+      showToast('Parámetros restaurados al valor por defecto', 'info');
     });
   }
 
@@ -631,14 +700,29 @@ function setupEventListeners() {
     searchInput.addEventListener('input', filterPromptsLibrary);
   }
 
-  const catPills = document.querySelectorAll('#categoryFilterContainer .filter-pill');
+  const catPills = document.querySelectorAll('#categoryFilterContainer .sg-filter-pill');
   catPills.forEach(pill => {
     pill.addEventListener('click', () => {
-      catPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
+      catPills.forEach(p => p.classList.remove('is-active'));
+      pill.classList.add('is-active');
       filterPromptsLibrary();
     });
   });
+}
+
+function copyText(text, successMsg, variant = 'success') {
+  if (!text) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(successMsg, variant);
+    }).catch(() => {
+      fallbackCopy(text);
+      showToast(successMsg, variant);
+    });
+  } else {
+    fallbackCopy(text);
+    showToast(successMsg, variant);
+  }
 }
 
 function setupCopyBtn(btnId, getTextFn, successMsg) {
@@ -646,14 +730,7 @@ function setupCopyBtn(btnId, getTextFn, successMsg) {
   if (!btn) return;
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    const text = getTextFn();
-    if (!text) return;
-    navigator.clipboard.writeText(text).then(() => {
-      showToast(successMsg, '📋');
-    }).catch(() => {
-      fallbackCopy(text);
-      showToast(successMsg, '📋');
-    });
+    copyText(getTextFn(), successMsg, 'success');
   });
 }
 
@@ -699,7 +776,7 @@ function applyPreset(presetId) {
   }
 
   updateGeneratorPrompt();
-  showToast(`Preset cargado: ${preset.name}`, '⚡');
+  showToast(`Preset cargado: ${preset.name}`, 'success');
 }
 
 function setSelectValue(selectId, val) {
@@ -862,44 +939,50 @@ function renderPromptsLibrary(itemsToRender = null) {
   const container = document.getElementById('promptsGridContainer');
   if (!container) return;
 
+  const esc = window.SangarShell ? window.SangarShell.escapeHtml : (s) => s;
   const items = itemsToRender || state.promptsLibrary;
   container.innerHTML = '';
 
   if (items.length === 0) {
-    container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-dim);">No se encontraron prompts coincidentes.</div>`;
+    container.innerHTML = `
+      <div class="sg-empty" style="grid-column: 1 / -1;">
+        <div class="sg-empty__img"><i data-lucide="search"></i></div>
+        <div class="sg-empty__title">Sin coincidencias</div>
+        <p class="sg-empty__desc">No se encontraron prompts coincidentes con tu búsqueda o categoría actual.</p>
+      </div>
+    `;
+    if (window.SangarShell) window.SangarShell.renderIcons(container);
     return;
   }
 
   items.forEach(item => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'prompt-card';
     card.innerHTML = `
       <div class="card-top">
-        <h3 class="card-title">${item.title}</h3>
-        <span class="tool-tag">${item.recommended_tool}</span>
+        <h2 class="card-title">${esc(item.title)}</h2>
+        <span class="sg-badge sg-badge--coral">${esc(item.recommended_tool)}</span>
       </div>
-      <p class="card-desc">${item.description}</p>
+      <p class="card-desc">${esc(item.description)}</p>
       <div class="card-tags">
-        ${(item.tags || []).map(t => `<span class="tag-badge">#${t}</span>`).join('')}
+        ${(item.tags || []).map(t => `<span class="tag-badge">#${esc(t)}</span>`).join('')}
       </div>
-      <div class="card-prompt-code">${item.prompt_en}</div>
+      <pre class="card-prompt-code"><code>${esc(item.prompt_en)}</code></pre>
       <div class="card-actions">
-        <span style="font-size: 0.76rem; color: var(--text-dim); font-family: var(--font-mono);">${item.parameters || ''}</span>
-        <div style="display: flex; gap: 0.4rem;">
-          <button class="btn btn-secondary btn-copy-card" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
-            📋 Copiar
+        <span class="card-params-mono">${esc(item.parameters || '')}</span>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="sg-btn sg-btn--secondary sg-btn--sm btn-copy-card">
+            <i data-lucide="copy"></i> Copiar
           </button>
-          <button class="btn btn-outline btn-save-card" style="font-size: 0.78rem; padding: 0.35rem 0.65rem;">
-            ⭐
+          <button type="button" class="sg-btn sg-btn--outline sg-btn--sm btn-save-card" aria-label="Guardar ${esc(item.title)} en favoritos">
+            <i data-lucide="star"></i>
           </button>
         </div>
       </div>
     `;
 
     card.querySelector('.btn-copy-card').addEventListener('click', () => {
-      navigator.clipboard.writeText(item.prompt_en).then(() => {
-        showToast(`Copiado: ${item.title}`, '📋');
-      });
+      copyText(item.prompt_en, `Copiado: ${item.title}`, 'success');
     });
 
     card.querySelector('.btn-save-card').addEventListener('click', () => {
@@ -914,15 +997,17 @@ function renderPromptsLibrary(itemsToRender = null) {
 
     container.appendChild(card);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(container);
 }
 
 function filterPromptsLibrary() {
   const query = document.getElementById('librarySearchInput')?.value.toLowerCase().trim() || '';
-  const activeCat = document.querySelector('#categoryFilterContainer .filter-pill.active')?.getAttribute('data-cat') || 'all';
+  const activeCat = document.querySelector('#categoryFilterContainer .sg-filter-pill.is-active')?.getAttribute('data-cat') || 'all';
 
   const filtered = state.promptsLibrary.filter(item => {
     const matchesCat = (activeCat === 'all' || item.category === activeCat);
-    const matchesQuery = !query || 
+    const matchesQuery = !query ||
       item.title.toLowerCase().includes(query) ||
       item.description.toLowerCase().includes(query) ||
       item.prompt_en.toLowerCase().includes(query) ||
@@ -941,28 +1026,30 @@ function renderGlossary() {
   if (!container) return;
   container.innerHTML = '';
 
+  const esc = window.SangarShell ? window.SangarShell.escapeHtml : (s) => s;
+
   state.glossary.forEach(term => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'glossary-card';
     card.innerHTML = `
-      <div class="glossary-cat">${term.category}</div>
-      <h4 class="glossary-title">${term.term}</h4>
-      <p class="glossary-desc">${term.description}</p>
-      <div class="glossary-snippet">${term.promptSnippet}</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
-        <span style="font-size: 0.75rem; color: var(--text-dim);">Uso recomendado: ${term.recommendedUse}</span>
-        <button class="btn-copy-mini" style="margin-left: 0.5rem; flex-shrink: 0;">Copiar Snippet</button>
+      <div class="glossary-cat">${esc(term.category)}</div>
+      <h3 class="glossary-title">${esc(term.term)}</h3>
+      <p class="glossary-desc">${esc(term.description)}</p>
+      <div class="glossary-snippet">${esc(term.promptSnippet)}</div>
+      <div class="card-actions">
+        <span style="font-size: 12px; color: var(--sg-gris-55);">Uso: ${esc(term.recommendedUse)}</span>
+        <button type="button" class="btn-copy-mini" style="flex-shrink: 0;"><i data-lucide="copy"></i> Copiar Snippet</button>
       </div>
     `;
 
     card.querySelector('.btn-copy-mini').addEventListener('click', () => {
-      navigator.clipboard.writeText(term.promptSnippet).then(() => {
-        showToast(`Snippet copiado: ${term.term}`, '✂️');
-      });
+      copyText(term.promptSnippet, `Snippet copiado: ${term.term}`, 'success');
     });
 
     container.appendChild(card);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(container);
 }
 
 /**
@@ -973,35 +1060,39 @@ function renderToolsDirectory() {
   if (!container) return;
   container.innerHTML = '';
 
+  const esc = window.SangarShell ? window.SangarShell.escapeHtml : (s) => s;
+
   state.tools.forEach(tool => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'tool-card';
     card.innerHTML = `
       <div class="tool-header">
         <div>
-          <h3 class="tool-name">${tool.name}</h3>
-          <span class="tool-dev">${tool.developer} • ${tool.category}</span>
+          <h2 class="tool-name">${esc(tool.name)}</h2>
+          <span class="tool-dev">${esc(tool.developer)} · ${esc(tool.category)}</span>
         </div>
-        <span class="tool-rating">★ ${tool.rating}</span>
+        <span class="sg-badge sg-badge--warning">★ ${esc(tool.rating)}</span>
       </div>
-      <div style="font-size: 0.78rem; font-weight: 600; color: #818cf8; text-transform: uppercase; margin-bottom: 0.4rem;">
-        ${tool.badge}
+      <div>
+        <span class="sg-badge sg-badge--coral">${esc(tool.badge)}</span>
       </div>
       <ul class="tool-features-list">
-        ${(tool.strengths || []).map(s => `<li>${s}</li>`).join('')}
+        ${(tool.strengths || []).map(s => `<li>${esc(s)}</li>`).join('')}
       </ul>
-      <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: var(--radius-sm); margin: 0.75rem 0; font-size: 0.8rem; color: var(--text-muted);">
-        <strong>💡 Pro-tip:</strong> ${tool.promptingTip}
+      <div class="tool-protip">
+        <strong>Pro-tip:</strong> ${esc(tool.promptingTip)}
       </div>
-      <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-        <span style="font-size: 0.8rem; color: var(--text-dim);">${tool.pricing}</span>
-        <a href="${tool.website}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.78rem; padding: 0.35rem 0.8rem; text-decoration: none;">
-          Visitar Web ↗
+      <div class="card-actions">
+        <span style="font-size: 12px; color: var(--sg-gris-55);">${esc(tool.pricing)}</span>
+        <a href="${esc(tool.website)}" target="_blank" rel="noopener noreferrer" class="sg-btn sg-btn--outline sg-btn--sm">
+          Visitar Web <i data-lucide="arrow-up-right"></i>
         </a>
       </div>
     `;
     container.appendChild(card);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(container);
 }
 
 /**
@@ -1020,19 +1111,112 @@ function loadStoredFavorites() {
 function updateFavoritesBadge() {
   const badge = document.getElementById('favCountBadge');
   if (badge) badge.textContent = state.favorites.length;
+  const kpiFav = document.getElementById('kpiFavoritesCount');
+  if (kpiFav) kpiFav.textContent = state.favorites.length;
+}
+
+function updateKpiCounts() {
+  const promptsEl = document.getElementById('kpiPromptsCount');
+  const exprEl = document.getElementById('kpiExpressionsCount');
+  const toolsEl = document.getElementById('kpiToolsCount');
+  if (promptsEl && state.promptsLibrary.length) promptsEl.textContent = state.promptsLibrary.length;
+  if (exprEl && state.expressions.length) exprEl.textContent = state.expressions.length;
+  if (toolsEl && state.tools.length) toolsEl.textContent = state.tools.length;
+  updateFavoritesBadge();
+}
+
+function registerCommandPaletteItems() {
+  if (!window.SangarShell || typeof window.SangarShell.registerSearchItems !== 'function') return;
+
+  const items = [
+    { id: 'view-generator', scope: 'views', title: 'Generador de Vídeo IA', subtitle: 'Runway Gen-3, Kling, Luma, Sora y Meta-Prompts', icon: 'clapperboard', badge: 'Módulo', action: () => switchTab('generator') },
+    { id: 'view-heroframes', scope: 'views', title: 'Hero Frames (Midjourney & Flux)', subtitle: 'Fotogramas maestros para Image-to-Video', icon: 'gem', badge: 'Módulo', action: () => switchTab('heroframes') },
+    { id: 'view-expressions', scope: 'views', title: 'Expresiones After Effects', subtitle: 'Scripts de rebote, wiggle y bucles', icon: 'wand-sparkles', badge: 'Módulo', action: () => switchTab('expressions') },
+    { id: 'view-storyboard', scope: 'views', title: 'Storyboards & Guiones', subtitle: 'Plantillas de 15s y 30s plano a plano', icon: 'film', badge: 'Módulo', action: () => switchTab('storyboard') },
+    { id: 'view-library', scope: 'views', title: 'Biblioteca de Prompts', subtitle: 'Colección curada lista para copiar', icon: 'book-open', badge: 'Módulo', action: () => switchTab('library') },
+    { id: 'view-glossary', scope: 'views', title: 'Guía & Glosario de Motion', subtitle: 'Flujo Image-to-Video y snippets', icon: 'graduation-cap', badge: 'Módulo', action: () => switchTab('glossary') },
+    { id: 'view-tools', scope: 'views', title: 'Directorio de Herramientas IA', subtitle: 'Comparativa de modelos de vídeo y diseño', icon: 'cpu', badge: 'Módulo', action: () => switchTab('tools') },
+    { id: 'view-favorites', scope: 'views', title: 'Mis Favoritos', subtitle: 'Prompts guardados localmente', icon: 'star', badge: 'Módulo', action: () => switchTab('favorites') },
+    { id: 'view-components', scope: 'views', title: 'Componentes UI (21st.dev)', subtitle: 'Abrir librería interactiva de componentes', icon: 'layers', badge: 'Suite', action: () => { window.location.href = 'components.html'; } }
+  ];
+
+  (state.config.presets || []).forEach(p => {
+    items.push({
+      id: `preset-${p.id}`,
+      scope: 'presets',
+      title: p.name,
+      subtitle: p.subject,
+      keywords: `${p.style} ${p.targetEngine}`,
+      icon: 'zap',
+      badge: 'Preset',
+      action: () => {
+        switchTab('generator');
+        applyPreset(p.id);
+      }
+    });
+  });
+
+  state.promptsLibrary.forEach((p, idx) => {
+    items.push({
+      id: `prompt-${p.id || idx}`,
+      scope: 'prompts',
+      title: p.title,
+      subtitle: `${p.recommended_tool} · ${p.description}`,
+      keywords: (p.tags || []).join(' '),
+      icon: 'book-open',
+      badge: 'Prompt',
+      action: () => {
+        switchTab('library');
+        const search = document.getElementById('librarySearchInput');
+        if (search) {
+          search.value = p.title;
+          filterPromptsLibrary();
+        }
+      }
+    });
+  });
+
+  state.expressions.forEach(expr => {
+    items.push({
+      id: `expr-${expr.id}`,
+      scope: 'expressions',
+      title: expr.name,
+      subtitle: `${expr.property} · ${expr.description}`,
+      icon: 'wand-sparkles',
+      badge: 'AE Script',
+      action: () => {
+        switchTab('expressions');
+        copyText(expr.code, `Expresión copiada: ${expr.name}`, 'success');
+      }
+    });
+  });
+
+  state.tools.forEach(tool => {
+    items.push({
+      id: `tool-${tool.id}`,
+      scope: 'tools',
+      title: tool.name,
+      subtitle: `${tool.developer} · ${tool.badge}`,
+      icon: 'cpu',
+      badge: `★ ${tool.rating}`,
+      action: () => switchTab('tools')
+    });
+  });
+
+  window.SangarShell.registerSearchItems(items);
 }
 
 function saveCurrentToFavorites() {
   const en = document.getElementById('promptOutputEn')?.value;
   const es = document.getElementById('promptOutputEs')?.value;
   const engine = document.getElementById('targetEngineBadge')?.textContent;
-  const subject = document.getElementById('subjectInput')?.value;
+  const subject = document.getElementById('subjectInput')?.value || 'Prompt';
 
   if (!en) return;
 
   const item = {
     id: Date.now().toString(),
-    title: `Motion: ${subject.slice(0, 30)}...`,
+    title: `Motion: ${subject.slice(0, 32)}${subject.length > 32 ? '…' : ''}`,
     engine: engine,
     prompt_en: en,
     prompt_es: es,
@@ -1046,14 +1230,14 @@ function saveCustomFavorite(item) {
   if (!item.id) item.id = Date.now().toString();
   const exists = state.favorites.some(f => f.prompt_en === item.prompt_en);
   if (exists) {
-    showToast('Este prompt ya está en tus favoritos', 'ℹ️');
+    showToast('Este prompt ya está en tus favoritos', 'info');
     return;
   }
 
   state.favorites.unshift(item);
   persistFavorites();
   updateFavoritesBadge();
-  showToast('¡Guardado en tus Favoritos!', '⭐');
+  showToast('Guardado en tus Favoritos', 'success');
 }
 
 function persistFavorites() {
@@ -1069,40 +1253,47 @@ function renderFavorites() {
   if (!container) return;
   container.innerHTML = '';
 
+  const esc = window.SangarShell ? window.SangarShell.escapeHtml : (s) => s;
+
   if (state.favorites.length === 0) {
     container.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--text-dim); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
-        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Aún no tienes ningún prompt guardado.</p>
-        <p style="font-size: 0.85rem;">Genera un prompt con el Generador o haz clic en la estrella (⭐) en cualquier tarjeta de la biblioteca para guardarlo aquí.</p>
+      <div class="sg-empty" style="grid-column: 1 / -1;">
+        <div class="sg-empty__img"><i data-lucide="star"></i></div>
+        <div class="sg-empty__title">Aún no tienes prompts guardados</div>
+        <p class="sg-empty__desc">Genera un prompt con el Generador o pulsa el botón estrella en cualquier tarjeta de la biblioteca para guardarlo aquí.</p>
+        <button type="button" class="sg-btn sg-btn--primary" id="empty-go-generator">
+          <i data-lucide="clapperboard"></i> Ir al Generador
+        </button>
       </div>
     `;
+    const goBtn = container.querySelector('#empty-go-generator');
+    if (goBtn) goBtn.addEventListener('click', () => switchTab('generator'));
+    if (window.SangarShell) window.SangarShell.renderIcons(container);
     return;
   }
 
   state.favorites.forEach((fav, index) => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'prompt-card';
     card.innerHTML = `
       <div class="card-top">
-        <h3 class="card-title">${fav.title}</h3>
-        <span class="tool-tag">${fav.engine || 'AI Engine'}</span>
+        <h2 class="card-title">${esc(fav.title)}</h2>
+        <span class="sg-badge sg-badge--coral">${esc(fav.engine || 'AI Engine')}</span>
       </div>
-      <p class="card-desc" style="font-size: 0.8rem; color: var(--text-dim);">Guardado el: ${fav.created}</p>
-      <div class="card-prompt-code">${fav.prompt_en}</div>
+      <p class="card-desc" style="font-size: 12px; color: var(--sg-gris-55);">Guardado el: ${esc(fav.created)}</p>
+      <pre class="card-prompt-code"><code>${esc(fav.prompt_en)}</code></pre>
       <div class="card-actions">
-        <button class="btn btn-outline btn-delete-fav" style="font-size: 0.75rem; color: var(--accent-rose); border-color: rgba(244, 63, 94, 0.3);">
-          Eliminar
+        <button type="button" class="sg-btn sg-btn--outline sg-btn--sm btn-delete-fav" style="color: var(--sg-danger); border-color: var(--sg-danger-bg);">
+          <i data-lucide="trash-2"></i> Eliminar
         </button>
-        <button class="btn btn-primary btn-copy-fav" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
-          📋 Copiar
+        <button type="button" class="sg-btn sg-btn--primary sg-btn--sm btn-copy-fav">
+          <i data-lucide="copy"></i> Copiar
         </button>
       </div>
     `;
 
     card.querySelector('.btn-copy-fav').addEventListener('click', () => {
-      navigator.clipboard.writeText(fav.prompt_en).then(() => {
-        showToast('Prompt copiado al portapapeles', '📋');
-      });
+      copyText(fav.prompt_en, 'Prompt copiado al portapapeles', 'success');
     });
 
     card.querySelector('.btn-delete-fav').addEventListener('click', () => {
@@ -1110,11 +1301,13 @@ function renderFavorites() {
       persistFavorites();
       updateFavoritesBadge();
       renderFavorites();
-      showToast('Prompt eliminado de favoritos', '🗑️');
+      showToast('Prompt eliminado de favoritos', 'info');
     });
 
     container.appendChild(card);
   });
+
+  if (window.SangarShell) window.SangarShell.renderIcons(container);
 }
 
 function clearAllFavorites() {
@@ -1124,13 +1317,13 @@ function clearAllFavorites() {
     persistFavorites();
     updateFavoritesBadge();
     renderFavorites();
-    showToast('Favoritos vaciados', '🗑️');
+    showToast('Favoritos vaciados', 'info');
   }
 }
 
 function exportFavoritesAsJson() {
   if (state.favorites.length === 0) {
-    showToast('No hay favoritos para exportar', 'ℹ️');
+    showToast('No hay favoritos para exportar', 'info');
     return;
   }
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state.favorites, null, 2));
@@ -1140,27 +1333,15 @@ function exportFavoritesAsJson() {
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();
-  showToast('Archivo JSON exportado', '📥');
+  showToast('Archivo JSON exportado', 'success');
 }
 
 /**
- * Toast Notice System
+ * Toast Notice System (delegates to SangarShell)
  */
-let toastTimeout = null;
-function showToast(message, icon = '✓') {
-  const toast = document.getElementById('toastNotice');
-  const msgEl = document.getElementById('toastMessage');
-  const iconEl = document.getElementById('toastIcon');
-
-  if (!toast) return;
-
-  if (msgEl) msgEl.textContent = message;
-  if (iconEl) iconEl.textContent = icon;
-
-  toast.classList.add('show');
-
-  if (toastTimeout) clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2500);
+function showToast(message, variant = 'default') {
+  if (window.SangarShell && typeof window.SangarShell.showToast === 'function') {
+    const mapped = ['success', 'danger', 'info', 'default'].includes(variant) ? variant : 'success';
+    window.SangarShell.showToast(message, mapped);
+  }
 }
