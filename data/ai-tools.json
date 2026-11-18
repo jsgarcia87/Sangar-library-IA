@@ -130,5 +130,93 @@
     "bestFor": "Automatizar animación de capas en After Effects con expresiones matemáticas y planificar secuencias completas.",
     "website": "https://chatgpt.com",
     "promptingTip": "Pídele: 'Escribe una expresión de After Effects para rebote elástico (inertia bounce) aplicada a la propiedad Escala con decaimiento suave'."
+  },
+  {
+    "id": "higgsfield",
+    "name": "Higgsfield AI",
+    "developer": "Higgsfield",
+    "category": "Video Generativo & Social UGC",
+    "badge": "Integración Claude & UGC",
+    "rating": 4.8,
+    "pricing": "Freemium (Créditos gratuitos al registrarse / Planes Pro)",
+    "strengths": [
+      "Conexión directa con Claude y asistentes conversacionales mediante conectores/MCP",
+      "Generación especializada de contenido publicitario vertical 9:16 de alta retención",
+      "Capacidad sobresaliente para recrear formato UGC (persona real con smartphone)",
+      "Excelente renderizado de macros, partículas brillantes y fluidos densos en cámara lenta"
+    ],
+    "weaknesses": [
+      "Límite de duración por plano en planes estándar",
+      "Menor granularidad de keyframing manual comparado con software de postproducción"
+    ],
+    "bestFor": "Anuncios para TikTok/Reels, contenido UGC para marcas y comerciales de producto directo desde Claude.",
+    "website": "https://higgsfield.ai",
+    "promptingTip": "Especifica el formato ('vertical 9:16'), el plano y el dispositivo emulado: 'estilo grabado con celular, luz ambiental natural de gimnasio, persona mostrando producto a cámara'."
+  },
+  {
+    "id": "remotion",
+    "name": "Remotion (@remotion/three)",
+    "developer": "Remotion (Jonny Burger)",
+    "category": "Vídeo Programático & 3D en React",
+    "badge": "Vídeo por Código & Render GPU",
+    "rating": 4.9,
+    "pricing": "Open Source / Licencia comercial para empresas",
+    "strengths": [
+      "Genera animaciones de vídeo 3D mediante código React, Three.js y WebGL sin After Effects ni Blender",
+      "Integración nativa con agentes de IA (npx remotion skills add)",
+      "Renderizado automatizado por línea de comandos y pipelines CI/CD",
+      "Soporte de aceleración GPU en Apple Silicon y tarjetas modernas (--gl=angle)"
+    ],
+    "weaknesses": [
+      "Requiere conocimientos de desarrollo web en React/TypeScript",
+      "No cuenta con una interfaz visual de timeline tradicional tipo Premiere"
+    ],
+    "bestFor": "Automatización masiva de vídeos personalizados, gráficos dinámicos con datos y animaciones 3D reproducibles.",
+    "website": "https://remotion.dev",
+    "promptingTip": "Instala @remotion/three y usa useCurrentFrame() junto con interpolate() para controlar cualquier propiedad de Three.js fotograma a fotograma."
+  },
+  {
+    "id": "claude_code",
+    "name": "Claude Code (Anthropic)",
+    "developer": "Anthropic",
+    "category": "Agente CLI & Prototipado 3D / Web",
+    "badge": "Agente Autónomo en Terminal",
+    "rating": 4.9,
+    "pricing": "Incluido en suscripción Claude / API de Anthropic",
+    "strengths": [
+      "Capacidad de crear proyectos completos de videojuegos 3D con Three.js y Vite en minutos",
+      "Soporte nativo de plugins y servidores MCP (Figma, Playwright, Unreal Engine)",
+      "Adopción de skills de diseño profesionales (Emil Kowalski, Impeccable UI, Taste Skill)",
+      "Autonomía para depurar en local, ejecutar tests y corregir errores visuales con Playwright"
+    ],
+    "weaknesses": [
+      "Requiere familiaridad básica con la terminal de comandos",
+      "Consumo de tokens de contexto en proyectos de código muy extensos"
+    ],
+    "bestFor": "Crear prototipos web interactivos no genéricos, desarrollo iterativo de videojuegos y automatizaciones de diseño.",
+    "website": "https://claude.ai",
+    "promptingTip": "Combina: 'Usa Taste Skill y toma como referencia [web de inspiración] para espacios y ritmo. Al terminar, prueba con Playwright MCP en móvil y escritorio'."
+  },
+  {
+    "id": "unreal_mcp",
+    "name": "Unreal Engine 5 + Unreal-MCP",
+    "developer": "Epic Games / Comunidad MCP",
+    "category": "Motor AAA & Agentes de IA",
+    "badge": "Control de Motor 3D por Agente",
+    "rating": 4.7,
+    "pricing": "Gratuito / Regalías comerciales de Epic Games",
+    "strengths": [
+      "Control del editor de Unreal Engine 5 mediante lenguaje natural con Claude Code",
+      "Permite crear cámaras cinemáticas, ajustar iluminación Lumen y spawnear actores",
+      "Puente directo entre LLMs y proyectos de videojuegos de gran presupuesto",
+      "Inspección programática de assets y jerarquía de niveles"
+    ],
+    "weaknesses": [
+      "Requiere hardware potente (GPU dedicada compatible con DirectX 12 / Metal)",
+      "Configuración inicial del plugin C++ y compilación en el proyecto local"
+    ],
+    "bestFor": "Directores técnicos de videojuegos, previz cinemática y automatización de escenas en Unreal Engine.",
+    "website": "https://github.com/aadeshrao123/Unreal-MCP",
+    "promptingTip": "Conecta el servidor MCP a Claude Code y pide: 'Revisa los actores en el nivel actual y añade una cámara cinemática orbital enfocando el objeto principal'."
   }
 ]

@@ -54,5 +54,47 @@
     "description": "Texto animado que transmite significado y emoción no solo por las palabras escritas, sino por su ritmo, peso visual, deformación y coreografía en pantalla.",
     "promptSnippet": "kinetic typography, dynamic scaling words, rhythmically pulsing letterforms, clean vector edges",
     "recommendedUse": "Vídeos explicativos, reels virales, anuncios de impacto y secuencias de créditos."
+  },
+  {
+    "term": "Sincronía de Zancada y Parallax (Walk Cycle Parallax Sync)",
+    "category": "Principios de Animación",
+    "description": "Regla matemática para evitar el patinaje de pies en bucles de caminata: la velocidad de desplazamiento del fondo debe ser exactamente igual a (longitud de la zancada en píxeles) ÷ (duración del paso en cuadros). El fondo debe repetirse dos veces seguidas para que el fotograma final enlace con el inicial sin saltos.",
+    "promptSnippet": "background velocity strictly equal to stride_length / step_duration, seamless 120-frame loop with zero foot sliding",
+    "recommendedUse": "Animaciones 2D y 3D en bucle con personajes caminando sobre fondos en scroll lateral."
+  },
+  {
+    "term": "Animación a Treses (Shooting on Threes / Stop-Motion Cadence)",
+    "category": "Técnicas de Formato",
+    "description": "Técnica clásica de animación donde la pose del personaje cambia únicamente una vez cada 3 fotogramas sobre una base de 30 fps (equivalente a 10 fps reales). Aporta la textura física y el encanto artesanal inconfundible de las películas de LEGO y plastilina.",
+    "promptSnippet": "stepped stop-motion cadence animated on threes (10fps poses inside a 30fps canvas), authentic plastic toy brick charm",
+    "recommendedUse": "Estilos LEGO, claymation, paper-cutout y animaciones nostálgicas que buscan alejarse de la suavidad sintética de la IA."
+  },
+  {
+    "term": "Grabación Nativa de Canvas con MediaRecorder (canvas.captureStream)",
+    "category": "Técnicas de Formato",
+    "description": "API nativa de navegadores modernos que permite conectar el flujo visual de un elemento <canvas> en tiempo real (captureStream(30)) a un codificador MediaRecorder para generar y descargar un archivo de vídeo MP4/WebM sin requerir software de captura de pantalla ni servidores de render.",
+    "promptSnippet": "include video export button using canvas.captureStream(30) and MediaRecorder capturing exactly 120 frames into downloadable webm/mp4",
+    "recommendedUse": "Artifacts de Claude, prototipos en canvas interactivo y visualizadores que el usuario desea guardar en video para publicar en redes."
+  },
+  {
+    "term": "Low-Poly con Flat Shading (Estética Retro 3D / PS2)",
+    "category": "Lente & Iluminación",
+    "description": "Técnica de renderizado 3D de principios de los 2000: geometrías simplificadas donde cada faceta triangular o cuadrilátera tiene un sombreado uniforme sin interpolación de normales (flatShading: true), combinada con resolución interna reducida (~270×480) y niebla ambiental volumétrica.",
+    "promptSnippet": "retro 128-bit PlayStation 2 3D aesthetic, low poly models with flatShading: true, scaled 270x480 resolution with pixelated edges, warm ambient fog",
+    "recommendedUse": "Estéticas Y2K, nostalgia de videojuegos retro, escenas de Three.js ligeras y vídeos musicales de vaporwave."
+  },
+  {
+    "term": "Taste Skill & Dirección de Arte Anti-Genérica",
+    "category": "Principios de Animación",
+    "description": "Enfoque de diseño y prompting de sistemas que toma una página web o pieza de referencia para extraer su escala tipográfica, proporciones de espacios en blanco, ritmo de microinteracciones y armonía cromática, instruyendo al LLM para aplicarlos con la identidad propia del proyecto.",
+    "promptSnippet": "apply Taste Skill and Impeccable principles: derive typography hierarchy, spatial cadence and microinteractions from reference while maintaining unique branding",
+    "recommendedUse": "Creación de interfaces web profesionales, landing pages de producto y componentes interactivos para evitar el look genérico de las herramientas automáticas."
+  },
+  {
+    "term": "Vídeo 3D por Código con Remotion (@remotion/three)",
+    "category": "Técnicas de Formato",
+    "description": "Paradigma de diseño de vídeo donde la animación se construye como una aplicación React determinista. Cada fotograma se calcula matemáticamente mediante useCurrentFrame() e interpolate(), permitiendo compilar vídeo 3D acelerado por GPU sin herramientas tradicionales como Blender o After Effects.",
+    "promptSnippet": "deterministic code-driven 3D video composition using @remotion/three and ThreeCanvas, animated via useCurrentFrame() and GPU angle renderer",
+    "recommendedUse": "Vídeos personalizados automatizados a gran escala, infografías de datos dinámicas y producciones de vídeo reproducibles por CLI."
   }
 ]

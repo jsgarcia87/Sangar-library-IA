@@ -80,5 +80,120 @@
         "promptIdea": "Complete 3D product standing proudly on matte pedestal, clean typography and logo lockup"
       }
     ]
+  },
+  {
+    "id": "higgsfield_perfume_10s",
+    "title": "Spot Publicitario de Lujo en Cámara Lenta (10s - Higgsfield)",
+    "description": "Estructura publicitaria vertical 9:16 para productos premium y cosmética: macro de fluidos en slow-motion, revelado de producto con iluminación cálida y cierre de marca de alta gama.",
+    "duration": "10 segundos",
+    "format": "9:16 Vertical",
+    "shots": [
+      {
+        "shot": 1,
+        "name": "00:00 - 00:03 | Macro de Fluido de Oro (The Sensory Hook)",
+        "goal": "Atrapar la atención sensorial con físicas de oro líquido viscoso en cámara lenta extrema.",
+        "camera": "Lente macro en dolly in milimétrico",
+        "audio": "Gota de agua cristalina y sub-bajo cálido envolvente",
+        "promptIdea": "Extreme macro closeup of molten liquid 24k gold dripping and flowing in ultra slow motion over dark obsidian stone, warm studio rim light, 9:16 vertical"
+      },
+      {
+        "shot": 2,
+        "name": "00:03 - 00:07 | Revelado del Frasco Facetado",
+        "goal": "Mostrar la silueta del producto interactuando con los reflejos dorados.",
+        "camera": "Paneo vertical ascendente con foco selectivo suave",
+        "audio": "Textura de cuerdas ascendentes y atmósfera etérea",
+        "promptIdea": "Luxury faceted glass perfume bottle surrounded by liquid gold ripples on glossy black reflective surface, studio softbox illumination, volumetric depth"
+      },
+      {
+        "shot": 3,
+        "name": "00:07 - 00:10 | Hero Shot & Sello Monograma",
+        "goal": "Fijar el estatus de marca con tipografía dorada flotante y silueta nítida.",
+        "camera": "Slow dolly out estabilizando en el centro",
+        "audio": "Firma sonora delicada de alta gama y silencio elegante",
+        "promptIdea": "Full perfume bottle centered on pedestal, golden brand logo shimmering softly, clean high-fashion typography, deep black background"
+      }
+    ]
+  },
+  {
+    "id": "ugc_fitness_10s",
+    "title": "Video UGC de Alta Conversión para Redes (10s - Fitness/Producto)",
+    "description": "Guion estructurado para generar contenido orgánico creíble en TikTok y Reels con formato de grabación de smartphone, lenguaje corporal natural y llamada a la acción.",
+    "duration": "10 segundos",
+    "format": "9:16 Vertical",
+    "shots": [
+      {
+        "shot": 1,
+        "name": "00:00 - 00:03 | Gancho Selfie en Ambiente Real",
+        "goal": "Transmitir autenticidad inmediata sin parecer un anuncio corporativo pulido.",
+        "camera": "Cámara frontal de celular con microtemblor en mano",
+        "audio": "Voz natural entusiasta y murmullo lejano de gimnasio",
+        "promptIdea": "Young athletic creator holding sports water bottle close to front-facing smartphone camera in busy modern gym, natural handheld movement, genuine expression"
+      },
+      {
+        "shot": 2,
+        "name": "00:03 - 00:07 | Demostración de Uso y Beneficio Clave",
+        "goal": "Mostrar el producto en acción resolviendo una necesidad en el momento adecuado.",
+        "camera": "Toma media dinámica bebiendo agua junto a máquinas de pesas",
+        "audio": "Sonido satisfactorio de apertura hermética de la tapa y respiración",
+        "promptIdea": "Close-up action shot opening the sports bottle with one hand, cold mist escaping, drinking with workout equipment blurred in background"
+      },
+      {
+        "shot": 3,
+        "name": "00:07 - 00:10 | Recomendación Directa & CTA Orgánico",
+        "goal": "Mirada directa a cámara incitando al espectador a probar la solución.",
+        "camera": "Primer plano sonriendo y señalando abajo hacia la descripción",
+        "audio": "«Pruébalo tú mismo, enlace directo aquí abajo» y clic sónico",
+        "promptIdea": "Creator smiling directly into camera giving thumbs up and gesturing towards bottom of screen, vibrant gym lighting, crisp casual atmosphere"
+      }
+    ]
+  },
+  {
+    "id": "gamedev_5rounds",
+    "title": "Pipeline de Desarrollo de Videojuego 3D en 5 Rondas (Three.js & Vite)",
+    "description": "Metodología de iteración guiada para crear un videojuego completo en navegador mediante Claude Code, desde la física básica hasta el final con créditos y vehículos.",
+    "duration": "5 Rondas Iterativas",
+    "format": "Web 3D Interactiva",
+    "shots": [
+      {
+        "shot": 1,
+        "name": "Ronda 1 | El Bucle Central (Core Gameplay & Isla)",
+        "goal": "Tener un personaje controlable y un objetivo claro en menos de 10 minutos.",
+        "camera": "Tercera persona orbital con seguimiento de ratón",
+        "audio": "Sin audio en la primera fase (foco en código y físicas)",
+        "promptIdea": "Crea un juego 3D con Three.js y Vite: avión estrellado en isla volcánica, personaje WASD + espacio, recolectar 5 piezas con contador HUD"
+      },
+      {
+        "shot": 2,
+        "name": "Ronda 2 | Inmersión Sensorial (Audio, Nubes & Agua)",
+        "goal": "Añadir realismo estético con efectos de sonido y shaders procedurales.",
+        "camera": "Cámara dinámica con suavizado de amortiguación (lerp)",
+        "audio": "Ruido de olas, pasos sobre arena y campanilla al recoger pieza",
+        "promptIdea": "Agrega sonidos de olas y pasos, cielo con nubes procedurales y shader de agua con reflejos especulares de luz solar"
+      },
+      {
+        "shot": 3,
+        "name": "Ronda 3 | Narrativa & Intro Cinemática",
+        "goal": "Generar contexto emocional antes de que comience el control del jugador.",
+        "camera": "Cámara cinemática fija con sacudidas de turbulencia",
+        "audio": "Truenos lejanos, alarma de avión y viento huracanado",
+        "promptIdea": "Agrega escena inicial no interactiva: avión cayendo en picada en medio de una tormenta eléctrica antes de estrellarse en la playa"
+      },
+      {
+        "shot": 4,
+        "name": "Ronda 4 | Desafío & Enemigos Patrulleros",
+        "goal": "Introducir tensión y mecánicas de sigilo / esquiva con IA básica.",
+        "camera": "Alerta visual en pantalla cuando un enemigo detecta al jugador",
+        "audio": "Latido tenso cuando hay un enemigo cerca y sfx de respawn",
+        "promptIdea": "Agrega 3 enemigos que patrullen entre waypoints y persigan al jugador si se acerca a menos de 8 metros; respawn en punto seguro si te tocan"
+      },
+      {
+        "shot": 5,
+        "name": "Ronda 5 | Clímax & Pantalla de Victoria (Planeador)",
+        "goal": "Recompensa final épica y cierre con créditos de producción.",
+        "camera": "Cámara aérea en picado mientras el jugador vuela sobre la isla",
+        "audio": "Música triunfal de victoria con fanfarria orquestal",
+        "promptIdea": "Al reparar el avión o conseguir las 5 piezas, desbloquea un planeador para volar libremente por el volcán y muestra pantalla de victoria con créditos"
+      }
+    ]
   }
 ]

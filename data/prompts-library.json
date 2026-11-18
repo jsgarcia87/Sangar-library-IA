@@ -4,7 +4,13 @@
     "category": "logo_reveal",
     "title": "Minimalist Obsidian & Gold Monogram Reveal",
     "description": "Revelado premium para marcas de lujo y firmas de diseño. Una lámina de oro fundido se desliza sobre roca volcánica de obsidiana hasta sellar un logotipo geométrico.",
-    "tags": ["Lujo", "3D", "Obsidiana", "Oro", "Cinemático"],
+    "tags": [
+      "Lujo",
+      "3D",
+      "Obsidiana",
+      "Oro",
+      "Cinemático"
+    ],
     "prompt_en": "Cinematic 3D logo reveal, a raw matte black obsidian block splitting open along precise geometric fractures, revealing glowing molten 24k gold surging upward and cooling into a sleek minimalist monogram logo, camera executing a slow orbital 45-degree angle drift, dramatic chiaroscuro lighting, volumetric rim light, photorealistic physically based rendering, 8k resolution, motion blur --ar 16:9 --fps 24",
     "prompt_es": "Revelado de logotipo 3D cinematográfico: un bloque de obsidiana negra mate se abre siguiendo fracturas geométricas precisas, dejando ver oro fundido de 24k brillante que asciende y se enfría hasta formar un monograma minimalista y elegante. La cámara realiza una suave órbita a 45 grados, iluminación claroscuro dramática, luz de borde volumétrica, renderizado hiperrealista PBR en 8k.",
     "recommended_tool": "Runway Gen-3 / Kling 1.5",
@@ -16,7 +22,13 @@
     "category": "kinetic_typography",
     "title": "Bold Swiss Kinetic Words Exploding into Grid",
     "description": "Animación tipográfica de alta energía inspirada en el diseño gráfico suizo y cartelería brutalista para vídeos cortos de redes.",
-    "tags": ["Tipografía", "Suizo", "Brutalismo", "Redes Sociales", "TikTok/Reels"],
+    "tags": [
+      "Tipografía",
+      "Suizo",
+      "Brutalismo",
+      "Redes Sociales",
+      "TikTok/Reels"
+    ],
     "prompt_en": "Kinetic typography animation, bold black Helvetica Neue style typography on raw off-white Swiss poster background, words stretching elastically and snapping crisply into an organized dynamic 3x3 grid, snappy ease-in-out overshoot physics, camera stationary flat lay, high contrast, clean vector aesthetic, rhythmic fast cuts matching a 128 BPM electronic beat --ar 9:16",
     "prompt_es": "Animación de tipografía cinética: texto bold estilo Helvética Neue negra sobre un fondo de póster suizo blanco roto. Las palabras se estiran elásticamente y encajan con un chasquido nítido en una cuadrícula dinámica de 3x3. Físicas snappy con amortiguación ease-in-out, cámara fija cenital, alto contraste, estética vectorial limpia.",
     "recommended_tool": "Kling 1.5 / Runway Gen-3",
@@ -28,7 +40,13 @@
     "category": "abstract_loop",
     "title": "Hypnotic Iridescent Glass Spheres Perpetual Motion",
     "description": "Bucle continuo hipnótico de esferas de vidrio iridiscente entrelazándose en gravedad cero con refracciones de luz espectrales.",
-    "tags": ["Loop", "Vidrio", "Iridiscente", "VJ", "Fondo"],
+    "tags": [
+      "Loop",
+      "Vidrio",
+      "Iridiscente",
+      "VJ",
+      "Fondo"
+    ],
     "prompt_en": "Hypnotic seamless looping motion graphic, cluster of iridescent translucent frosted glass spheres orbiting and intertwining weightlessly in zero gravity, soft pastel chromatic aberration and rainbow dispersion caustics, slow rotational camera drift, clean minimalist studio lighting with diffused pink and mint green softboxes, perfectly seamless loop --ar 16:9 --loop",
     "prompt_es": "Gráfico en movimiento con bucle continuo hipnótico: grupo de esferas de vidrio translúcido iridiscente orbitando y entrelazándose sin peso en gravedad cero. Aberración cromática pastel suave y cáusticas de arcoíris, suave paneo orbital de cámara, iluminación de estudio minimalista con softboxes rosa y verde menta, bucle infinito perfecto.",
     "recommended_tool": "Luma Dream Machine / Sora",
@@ -40,7 +58,13 @@
     "category": "ui_animation",
     "title": "Futuristic Spatial Computing VisionOS Interface",
     "description": "Animación de interfaz de usuario espacial con paneles de vidrio flotantes, microinteracciones de hover y respuesta táctil lumínica.",
-    "tags": ["UI/UX", "Spatial Computing", "VisionOS", "Glassmorphism", "Tech"],
+    "tags": [
+      "UI/UX",
+      "Spatial Computing",
+      "VisionOS",
+      "Glassmorphism",
+      "Tech"
+    ],
     "prompt_en": "Futuristic spatial computing UI motion graphic, floating translucent glassmorphism cards and analytics widgets hovering in 3D air, glowing pulse microinteractions upon virtual user focus, smooth spring-damping card expansion, subtle background bokeh of an ultra-modern architectural loft, soft cyan and violet UI illumination, camera shallow depth of field rack focus --ar 16:9",
     "prompt_es": "Motion graphic de interfaz de computación espacial futurista: tarjetas flotantes translúcidas estilo glassmorphism y widgets de analíticas suspendidos en el aire tridimensional. Microinteracciones de pulsos de luz al enfocar, expansión suave de tarjetas con rebote spring, desenfoque bokeh sutil de fondo de un loft moderno, iluminación cian y violeta suave.",
     "recommended_tool": "Runway Gen-3 Alpha",
@@ -52,7 +76,13 @@
     "category": "product_showcase",
     "title": "Exploded Cyberpunk Sneaker Deconstruction",
     "description": "Despiece técnico en 3D de una zapatilla de deporte futurista, donde cada capa (suela de aire, tejido técnico, cordones magnéticos) se separa en el aire.",
-    "tags": ["Producto", "3D", "Exploded View", "Sneaker", "Comercial"],
+    "tags": [
+      "Producto",
+      "3D",
+      "Exploded View",
+      "Sneaker",
+      "Comercial"
+    ],
     "prompt_en": "Cinematic 3D commercial motion graphic, futuristic techwear sneaker floating and exploding into separate layered components in mid-air, transparent air cushion sole, woven carbon fiber knit mesh, magnetic lace tensioners floating in precise isometric alignment, technical glowing blueprint wireframe overlays, dramatic dark studio rim light, smooth 180 degree camera sweep --ar 16:9",
     "prompt_es": "Motion graphic comercial 3D cinemático: zapatilla de deporte técnica futurista que flota y se descompone en capas separadas en el aire (suela de cámara de aire transparente, tejido de fibra de carbono, tensores magnéticos) en alineación isométrica precisa, overlays de alambre técnico brillante, iluminación de borde de estudio oscuro.",
     "recommended_tool": "Kling 1.5 / Runway Gen-3",
@@ -64,11 +94,394 @@
     "category": "logo_reveal",
     "title": "Liquid Mercury Chrome Droplets Merging into Brand",
     "description": "Gotas de mercurio líquido flotante que chocan y se fusionan por tensión superficial formando el isotipo de la marca.",
-    "tags": ["Chrome", "Mercurio", "Fluidos", "Logo Reveal", "VFX"],
+    "tags": [
+      "Chrome",
+      "Mercurio",
+      "Fluidos",
+      "Logo Reveal",
+      "VFX"
+    ],
     "prompt_en": "3D motion design logo reveal, multiple liquid chrome mercury droplets floating and gravitationally pulling towards the center, colliding with realistic fluid surface tension dynamics, merging seamlessly into a glossy high-polish metallic brand mark, studio environment reflection with soft overhead lightbox, smooth slow dolly in --ar 16:9",
     "prompt_es": "Revelado de logotipo en motion design 3D: múltiples gotas de mercurio cromado líquido flotan y son atraídas gravitacionalmente hacia el centro, colisionando con dinámicas de tensión superficial de fluidos realistas, fusionándose a la perfección en un emblema de marca metálico pulido. Reflejos de estudio suaves, zoom dolly in cinematográfico.",
     "recommended_tool": "Runway Gen-3 / Sora",
     "parameters": "--ar 16:9 --motion 6",
     "tips": "Usa 'surface tension dynamics' para obtener esa fusión orgánica tan satisfactoria propia de los vídeos virales de 3D."
+  },
+  {
+    "id": "anim-001",
+    "category": "animation_styles",
+    "title": "Bucle Pixel Art Retro en Canvas 1080×1920 (Walk Cycle)",
+    "description": "Animación vertical 9:16 en pixel art retro con un ciclo de caminata fluido de 4 segundos a 30 fps (120 cuadros), fondo en parallax sincronizado y botón de descarga de video con MediaRecorder.",
+    "tags": [
+      "Pixel Art",
+      "Canvas HTML5",
+      "Bucle 120f",
+      "Walk Cycle",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con <canvas> vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de un chico con sudadera naranja con capucha, pantalón azul y tenis blancos que camina hacia la derecha con una taza de café humeante en la mano. La cámara lo sigue: él queda en el centro y el fondo pasa hacia la izquierda: ventana con la ciudad de noche y la luna, escritorio con un monitor que muestra un gráfico que sube, una planta, una estantería con libros, un reloj en la pared y una lámpara colgante. Ciclo de paso natural (4 pasos en el bucle), brazos en contrafase y el vapor del café moviéndose. El fondo avanza exactamente lo mismo que la zancada para que los pies no patinen, y el mundo se repite sin saltos al reiniciar.\n\nEstilo: PIXEL ART. Dibuja todo en un lienzo interno de 135×240 y escálalo ×8 sin suavizado (image-rendering: pixelated). Paleta cerrada de unos 24 colores: cuarto morado de noche, luz cálida de la lámpara, verdes y amarillos vivos en el gráfico. Contorno oscuro de 1 píxel en el personaje y los muebles. Animación del paso con pocas poses, como un videojuego retro.\n\nAñade un botón «Grabar video» que grabe 4 s del canvas con MediaRecorder (canvas.captureStream(30)) y descargue el archivo.",
+    "prompt_es": "Animación vertical 9:16 en Pixel Art de 4 segundos en bucle perfecto a 30 fps. Chico caminando con café humeante, fondo con parallax nocturno sin patinaje de pies. Lienzo interno de 135×240 escalado ×8 sin interpolación, paleta de 24 tonos y botón MediaRecorder para exportar vídeo.",
+    "recommended_tool": "Claude Artifacts / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps · 120 cuadros · Paleta 24 colores · Lienzo 135×240 (×8)",
+    "tips": "Para evitar que los pies patinen, la velocidad del fondo debe ser exactamente: longitud de zancada ÷ duración del paso. Usa image-rendering: pixelated."
+  },
+  {
+    "id": "anim-002",
+    "category": "animation_styles",
+    "title": "Animación Tradicional en Pizarra con Tiza (Hand-Drawn Chalk)",
+    "description": "Efecto de dibujo en tiza sobre pizarra escolar con marco de madera. Trazos irregulares con textura granulada que hierven dinámicamente cada 3 fotogramas.",
+    "tags": [
+      "Pizarra",
+      "Tiza",
+      "Stop Motion",
+      "Textura Granulada",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con <canvas> vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de un chico con sudadera naranja con capucha, pantalón azul y tenis blancos que camina hacia la derecha con una taza de café humeante en la mano. La cámara lo sigue: él queda en el centro y el fondo pasa hacia la izquierda: ventana con la ciudad de noche y la luna, escritorio con un monitor que muestra un gráfico que sube, una planta, una estantería con libros, un reloj en la pared y una lámpara colgante. Ciclo de paso natural (4 pasos en el bucle), brazos en contrafase y el vapor del café moviéndose. El fondo avanza exactamente lo mismo que la zancada para que los pies no patinen, y el mundo se repite sin saltos al reiniciar.\n\nEstilo: PIZARRA CON TIZA. Fondo de pizarra verde oscuro con marco de madera y restos de borrado. Todo dibujado con trazos de tiza blanca, irregulares y con textura granulada; los trazos «hierven» (cambian un poco cada 3 cuadros) como en una animación hecha a mano. Rellenos suaves de tiza de color solo en la sudadera y el pantalón. Un rótulo escrito a mano arriba: «Oficina 101».\n\nAñade un botón «Grabar video» que grabe 4 s del canvas con MediaRecorder (canvas.captureStream(30)) y descargue el archivo.",
+    "prompt_es": "Animación artesanal sobre pizarra verde oscuro con marco de madera. Trazos de tiza blanca con vibración 'boiling' cada 3 cuadros simulando animación tradicional a mano, detalles en color tiza y rótulo rotulado.",
+    "recommended_tool": "Claude Artifacts / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps · Boiling 3 frames · Textura pizarra",
+    "tips": "El efecto de 'hervido' o boiling se logra desplazando las coordenadas de los puntos del trazo con una función pseudoaleatoria basada en Math.floor(frame / 3)."
+  },
+  {
+    "id": "anim-003",
+    "category": "animation_styles",
+    "title": "Boceto Luminoso Neón Cyberpunk en Fondo Oscuro",
+    "description": "Líneas de neón brillante sin relleno sobre fondo azul noche con halo central. Doble trazo por elemento: un halo ancho difuso y una línea interior blanca nítida.",
+    "tags": [
+      "Neón",
+      "Cyberpunk",
+      "Glow",
+      "Boceto Luminoso",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con <canvas> vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de un chico con sudadera naranja con capucha, pantalón azul y tenis blancos que camina hacia la derecha con una taza de café humeante en la mano. La cámara lo sigue: él queda en el centro y el fondo pasa hacia la izquierda: ventana con la ciudad de noche y la luna, escritorio con un monitor que muestra un gráfico que sube, una planta, una estantería con libros, un reloj en la pared y una lámpara colgante. Ciclo de paso natural (4 pasos en el bucle), brazos en contrafase y el vapor del café moviéndose. El fondo avanza exactamente lo mismo que la zancada para que los pies no patinen, y el mundo se repite sin saltos al reiniciar.\n\nEstilo: BOCETO LUMINOSO (NEÓN). Fondo azul noche casi negro con una cuadrícula tenue y un halo azul en el centro. Todo son líneas de neón sin relleno: cian para el cuarto y los muebles, naranja para la sudadera, amarillo para la lámpara y el gráfico, verde para la planta. Cada línea con doble trazo: uno ancho y difuminado (el brillo) y otro fino y blanco por dentro. Los trazos tiemblan muy poco, como un boceto vivo.\n\nAñade un botón «Grabar video» que grabe 4 s del canvas con MediaRecorder (canvas.captureStream(30)) y descargue el archivo.",
+    "prompt_es": "Boceto animado con luces de neón en espacio oscuro: líneas emissivas cian, naranja y verde con doble capa de render (glow gaussiano exterior + filamento blanco central) con microvibración orgánica.",
+    "recommended_tool": "Claude Artifacts / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps · Dual stroke glow · Grid background",
+    "tips": "Aplica shadowBlur y shadowColor en el contexto 2D de canvas antes de trazar la línea exterior, luego traza una segunda línea con lineWidth menor en blanco puro."
+  },
+  {
+    "id": "anim-004",
+    "category": "animation_styles",
+    "title": "Retro 3D PlayStation 2 con Three.js (Low-Poly & Flat Shading)",
+    "description": "Estética nostálgica de consola de principios de los 2000. Geometrías low-poly con sombreado plano (flatShading), render interno a baja resolución (270×480) y niebla cálida.",
+    "tags": [
+      "PS2",
+      "Three.js",
+      "Low Poly",
+      "Flat Shading",
+      "Retro 3D"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con three.js (desde cdnjs), vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de un chico con sudadera naranja con capucha, pantalón azul y tenis blancos que camina hacia la derecha con una taza de café humeante en la mano. La cámara lo sigue: él queda en el centro y el fondo pasa hacia la izquierda: ventana con la ciudad de noche y la luna, escritorio con un monitor que muestra un gráfico que sube, una planta, una estantería con libros, un reloj en la pared y una lámpara colgante. Ciclo de paso natural (4 pasos en el bucle), brazos en contrafase y el vapor del café moviéndose.\n\nEstilo: PLAYSTATION 2 (RETRO 3D). Modela los personajes y objetos con pocas caras (low poly) usando geometrías simples (cajas, cilindros, prismas) y materiales sin brillo con sombreado plano (flatShading: true). Renderiza la escena a baja resolución (~270×480) y escálala al tamaño final sin suavizado para que se noten los píxeles. Luz ambiental cálida y un poco de niebla que funda el fondo.",
+    "prompt_es": "Render 3D low poly retro estilo PlayStation 2 en Three.js con flatShading, baja resolución nativa 270×480 escalada sin suavizado, niebla de distancia y paleta nostálgica.",
+    "recommended_tool": "Three.js / Claude Artifacts",
+    "parameters": "1080×1920 final · 270×480 interno · flatShading: true · scene.fog",
+    "tips": "Desactiva WebGLRenderer antialias y renderiza en un render target pequeño para obtener los bordes dentados auténticos de la era PS2/Dreamcast."
+  },
+  {
+    "id": "anim-005",
+    "category": "animation_styles",
+    "title": "Estilo Cómic / Novela Gráfica (Halftone Ben-Day & Tinta)",
+    "description": "Estética de viñeta de cómic impresa: contornos negros de tinta gruesa con grosor variable, sombras con tramas de puntos semitono (Ben-Day dots), líneas cinéticas de velocidad y bocadillo de diálogo.",
+    "tags": [
+      "Cómic",
+      "Pop Art",
+      "Halftone",
+      "Ben-Day",
+      "Novela Gráfica"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con <canvas> vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de un chico con sudadera naranja con capucha, pantalón azul y tenis blancos que camina hacia la derecha con una taza de café humeante en la mano. Fondo en parallax con oficina y ventana nocturna.\n\nEstilo: CÓMIC AMERICANO. Contornos negros de tinta gruesa (stroke 4-6px) con variación de grosor. Colores planos saturados con sombras formadas por patrones de puntos de semitono (Ben-Day dots). Líneas de acción cinéticas detrás de los pies y vapor del café estilizado. Un bocadillo de cómic flotante con onomatopeya o frase corta. Bucle perfecto de 120 cuadros con botón para grabar vídeo.",
+    "prompt_es": "Ilustración animada estilo cómic pop-art con trama de puntos semitono Ben-Day en zonas de sombra, tinta negra rotulada a mano y líneas cinéticas de acción.",
+    "recommended_tool": "Claude Artifacts / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps · Ben-Day dots pattern · Ink stroke 4-6px",
+    "tips": "Puedes crear un canvasPattern con un pequeño círculo negro sobre fondo transparente para pintar las sombras con trama de medios tonos clásica."
+  },
+  {
+    "id": "anim-006",
+    "category": "animation_styles",
+    "title": "Vector Plano Minimalista (Flat Design con Conos de Luz)",
+    "description": "Estilo vectorial corporativo moderno de alta gama: siluetas geométricas limpias sin contornos negros, sombras duras oblicuas a 45 grados y haces de luz volumétricos translúcidos.",
+    "tags": [
+      "Vector Plano",
+      "Minimalismo",
+      "Flat Design",
+      "Ilustración Moderna"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con <canvas> vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: caminata lateral de un personaje con sudadera naranja en oficina nocturna con fondo en movimiento continuo sin patinaje.\n\nEstilo: VECTOR PLANO MINIMALISTA. Paleta cromática refinada sin líneas de contorno (sin strokes negros). Formas geométricas perfectas, esquinas redondeadas suaves, sombras proyectadas planas y transparentes a 45 grados. Conos de luz translúcidos emanando de la lámpara de techo. Estética moderna tipo editorial tech / Notion / Airbnb.",
+    "prompt_es": "Diseño vectorial plano sin contornos, uso refinado del espacio negativo, paleta pastel sobria y sombras proyectadas a 45 grados con haces de luz transparentes.",
+    "recommended_tool": "Claude Artifacts / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps · No-stroke flat · Alpha transparency 0.15",
+    "tips": "El secreto del vector plano profesional reside en no usar bordes oscuros; delimita las extremidades cambiando el brillo del color de relleno entre planos."
+  },
+  {
+    "id": "anim-007",
+    "category": "animation_styles",
+    "title": "Línea Minimalista Monocroma con Acento de Color (Line Art)",
+    "description": "Elegante animación de línea continua sobre fondo blanco roto / marfil. Trazo negro uniforme de 2px con un único color de acento vibrante (naranja coral) para focalizar la atención.",
+    "tags": [
+      "Line Art",
+      "Minimalismo",
+      "Monocromo",
+      "Editorial",
+      "Estilo Suizo"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con <canvas> vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de personaje caminando con taza de café, oficina minimalista en parallax continuo.\n\nEstilo: LÍNEA MINIMALISTA (LINE ART). Fondo blanco roto (#F8F7F4). Todo dibujado exclusivamente con trazos negros finos y perfectamente uniformes (stroke 2px) sin degradados ni sombras. Un único color de acento (naranja cálido #FF7E67) aplicado únicamente en la sudadera del personaje para dirigir la mirada. Estética de revista de diseño nórdico.",
+    "prompt_es": "Animación de arte lineal ultra limpia: fondo marfil cálido, trazo uniforme de 2px en negro grafito y un único punto focal en color coral cálido.",
+    "recommended_tool": "Claude Artifacts / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps · Stroke 2px · #F8F7F4 bg · #FF7E67 accent",
+    "tips": "Mantén lineCap='round' y lineJoin='round' en todo el canvas para garantizar que las uniones de las líneas se vean suaves y orgánicas."
+  },
+  {
+    "id": "anim-008",
+    "category": "animation_styles",
+    "title": "CGI Hiperrealista en Three.js (MeshPhysicalMaterial & ACES)",
+    "description": "Render 3D fotorealista ejecutado en tiempo real en el navegador: materiales físicos con rugosidad, transmisión de vidrio, luces puntuales volumétricas y tone mapping cinematográfico ACES Filmic.",
+    "tags": [
+      "CGI",
+      "Three.js",
+      "PBR",
+      "Fotorealismo",
+      "WebGL 3D"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con three.js (desde cdnjs), vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: vista lateral de personaje caminando con taza de café humeante en oficina moderna con ventana panorámica nocturna.\n\nEstilo: CGI HIPERREALISTA. Utiliza Three.js con MeshPhysicalMaterial, rugosidad (roughness), metalicidad y mapas de sombras suaves (PCFSoftShadowMap). Configura renderer.toneMapping = THREE.ACESFilmicToneMapping y exposure ajustada. Luz cenital cálida sobre el escritorio, luz de luna fría cian entrando por la ventana y luz de borde dorada en la silueta del personaje.",
+    "prompt_es": "Escena tridimensional hiperrealista en Three.js con materiales físicos PBR, sombras difusas suaves, tone mapping ACES Filmic e iluminación de tres puntos con contraste lumínico.",
+    "recommended_tool": "Three.js / WebGL",
+    "parameters": "1080×1920 · 30 fps · MeshPhysicalMaterial · ACESFilmic · PCFSoftShadowMap",
+    "tips": "Para conseguir el aspecto cinematográfico de estudio, añade una directionalLight cálida de key, un hemiLight para relleno y un spotLight de contra con color cian."
+  },
+  {
+    "id": "anim-009",
+    "category": "animation_styles",
+    "title": "Stop-Motion Estilo LEGO con Animación a Treses (10 FPS)",
+    "description": "Recreación fidedigna del universo de ladrillos de juguete: personajes tipo minifigura con manos en C y piernas rígidas, base con tachuelas (studs), y animación por saltos 'a treses' (cambio cada 3 cuadros).",
+    "tags": [
+      "LEGO",
+      "Stop Motion",
+      "Toy Bricks",
+      "Shooting on Threes",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con three.js o canvas vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: personaje caminando en oficina nocturna con taza en mano.\n\nEstilo: LEGO BRICKS STOP-MOTION. Modela el personaje como una minifigura clásica: cabeza cilíndrica con botón superior, torso trapezoidal, manos amarillas curvadas en 'C', piernas rígidas que pivotan desde la cadera sin doblar rodillas. Escenario construido con ladrillos modulares y tachuelas circulares en el suelo. Animación 'a treses' (la pose cambia únicamente cada 3 cuadros, es decir, a 10 fps reales sobre base de 30 fps) emulando la cadencia de una película stop-motion con piezas reales.",
+    "prompt_es": "Animación stop-motion estilo piezas de LEGO con cadencia escalonada a 10 fps (a treses), minifigura con articulaciones rígidas y entorno modular de ladrillos.",
+    "recommended_tool": "Three.js / HTML5 Canvas",
+    "parameters": "1080×1920 · 30 fps con poses cada 3 frames (10 fps efectivos) · Minifig proportions",
+    "tips": "Para simular stop motion, cuantiza el tiempo calculando const stepFrame = Math.floor(frame / 3) * 3 antes de evaluar las matrices de rotación."
+  },
+  {
+    "id": "anim-010",
+    "category": "animation_styles",
+    "title": "3D Explicativo Isométrico Pastel (RoundedBox & Soft UI)",
+    "description": "Visualización 3D isométrica para vídeos explicativos y landing pages tecnológicas: cámara ortográfica isométrica a 45 grados, geometrías de cantos redondeados y paleta pastel luminosa.",
+    "tags": [
+      "3D Explicativo",
+      "Isométrico",
+      "Pastel",
+      "RoundedBox",
+      "Tech Explainer"
+    ],
+    "prompt_en": "Crea una animación en un artifact HTML de un solo archivo con three.js (desde cdnjs), vertical de 1080×1920, en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nEscena: personaje en oficina isométrica trabajando y caminando con taza de café, elementos flotantes de métricas y gráficos que crecen suavemente.\n\nEstilo: 3D EXPLICATIVO ISOMÉTRICO. Cámara ortográfica (OrthographicCamera) en ángulo isométrico clásico (rotación X: ~35.264°, Y: 45°). Geometrías con esquinas biseladas suaves (RoundedBoxGeometry). Paleta de colores pastel luminosos (lavanda, menta suave, amarillo mantequilla, coral suave). Iluminación difusa sin sombras duras. Animación con interpolaciones suaves ease-in-out.",
+    "prompt_es": "Render isométrico 3D con cámara ortográfica libre de distorsión de perspectiva, formas con biseles curvos suaves, estética pastel y ritmo animado relajante.",
+    "recommended_tool": "Three.js Orthographic / Canvas",
+    "parameters": "1080×1920 · 30 fps · OrthographicCamera · RoundedBoxGeometry · Paleta pastel",
+    "tips": "El uso de OrthographicCamera elimina las líneas de fuga, permitiendo que la composición mantenga proporciones matemáticas perfectas para infografías y vídeos educativos."
+  },
+  {
+    "id": "anim-skill-001",
+    "category": "animation_styles",
+    "title": "Skill Maestra: Animador Multi-Estilo en Bucle Perfecto (Reglas de Oro)",
+    "description": "Instrucción de sistema para Claude y asistentes LLM que genera animaciones verticales 9:16 en bucle perfecto de 120 cuadros, sincronización matemática anti-patinaje y exportador MediaRecorder integrado.",
+    "tags": [
+      "Skill LLM",
+      "System Prompt",
+      "Bucle Continuo",
+      "Canvas Export",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Eres un especialista en diseño de movimiento y programación creativa. Cuando te pida animar una escena, crea un artifact HTML de un solo archivo con <canvas> o three.js vertical (1080×1920), en bucle perfecto de 4 segundos a 30 fps (120 cuadros).\n\nREGLAS DE ORO:\n1. Separa anatomía y estilo: modela las partes del personaje como un esqueleto paramétrico (cadera, rodillas, tobillos, hombros, codos, manos, cabeza). Cada estilo visual es una función de render desacoplada.\n2. Sincronía matemática de zancada: Velocidad del fondo = (Largo de la zancada) / (Duración del paso en cuadros). Dibuja el fondo dos veces seguidas para que al cuadro 119->0 no haya saltos visuales ni patinaje de pies.\n3. Tiempo determinista: Todo depende exclusivamente del índice de fotograma 'f' (0 a 119), nunca de Date.now() ni tiempos asíncronos.\n4. Grabador integrado: Incluye un botón «Grabar video» que capture 4 segundos con canvas.captureStream(30) + MediaRecorder y descargue el archivo de video automáticamente.",
+    "prompt_es": "Meta-prompt / Skill para que cualquier LLM genere animaciones interactivas en HTML5 con bucle infinito matemáticamente perfecto, sin saltos de fotogramas y con grabador nativo.",
+    "recommended_tool": "Claude / ChatGPT / Cursor",
+    "parameters": "System Prompt / Custom Instructions · Regla de 120 fotogramas · canvas.captureStream(30)",
+    "tips": "Pega este texto en los Custom Instructions de Claude o en tu archivo de configuración de agente para que todas tus animaciones salgan listas para exportar."
+  },
+  {
+    "id": "vid-001",
+    "category": "video_ia",
+    "title": "Spot Publicitario de Perfume con Oro Líquido en Cámara Lenta",
+    "description": "Prompt cinemático vertical 9:16 optimizado para el conector de Higgsfield en Claude. Gotas y fluidos de oro cayendo en cámara lenta sobre cristal facetado con iluminación cálida de estudio.",
+    "tags": [
+      "Higgsfield AI",
+      "Spot Comercial",
+      "Slow Motion",
+      "Oro Líquido",
+      "Vertical 9:16"
+    ],
+    "prompt_en": "Crea un anuncio de 10 segundos, vertical 9:16, de un perfume con oro líquido en cámara lenta. Luz de estudio cálida y fondo negro. Gotas de oro fundido viscoso resbalando por la silueta de cristal facetado con reflejos dorados y macro textura hiperrealista, cámara en dolly in suave con desenfoque bokeh cremoso.",
+    "prompt_es": "Anuncio de 10s vertical 9:16 para Higgsfield AI: frasco de perfume de lujo con fluido de oro viscoso en cámara lenta sobre fondo negro, iluminación de estudio suave y macro detalle.",
+    "recommended_tool": "Higgsfield AI (Conector Claude)",
+    "parameters": "9:16 · 10 segundos · Cámara lenta · Luz cálida · Fondo negro",
+    "tips": "Higgsfield destaca especialmente en el renderizado de partículas microscópicas y fluidos densos en movimiento vertical para Stories, TikTok y Reels."
+  },
+  {
+    "id": "vid-002",
+    "category": "video_ia",
+    "title": "Video UGC de Alta Conversión para Fitness / Producto Deportivo",
+    "description": "Generación de video tipo User-Generated Content (UGC): persona joven en ambiente real de gimnasio mostrando producto a cámara frontal con naturalidad y ritmo dinámico.",
+    "tags": [
+      "Higgsfield AI",
+      "UGC",
+      "Reels/TikTok",
+      "Fitness",
+      "Social Ads"
+    ],
+    "prompt_en": "Crea un video tipo UGC de 10 segundos: una persona joven mostrando a cámara una botella de agua deportiva en un gimnasio, estilo grabado con celular. Iluminación natural del gimnasio, movimiento de cámara frontal en mano con ligero temblor orgánico realista, desenfoque de fondo con máquinas de ejercicio, sonrisa espontánea y prueba del producto.",
+    "prompt_es": "Clip UGC de 10 segundos vertical simulando grabación con smartphone en un gimnasio real, persona recomendando producto de fitness con lenguaje corporal natural y creíble.",
+    "recommended_tool": "Higgsfield AI / Kling 1.5",
+    "parameters": "9:16 · 10 segundos · Estilo celular frontal · Luz ambiental gimnasio",
+    "tips": "El modificador 'estilo grabado con celular' reduce el aspecto excesivamente cinematográfico para dar la autenticidad que demanda el público en TikTok y Reels."
+  },
+  {
+    "id": "vid-003",
+    "category": "video_ia",
+    "title": "Secuencia Cinemática de Persecución al Atardecer en el Desierto",
+    "description": "Toma de dron de seguimiento aéreo a un automóvil deportivo clásico atravesando una carretera abierta en el desierto con luz dorada rasante de atardecer.",
+    "tags": [
+      "Higgsfield AI",
+      "Cinematográfico",
+      "Dron FPV",
+      "Auto Clásico",
+      "Golden Hour"
+    ],
+    "prompt_en": "Crea una escena de cine de 8 segundos: un auto clásico rojo avanzando por una carretera en el desierto al atardecer, cámara siguiéndolo desde un dron. Vista aérea en persecución dinámica a 45 grados, polvo elevándose tras las ruedas traseras, reflejos anaranjados sobre la chapa metálica y sombras alargadas en el asfalto.",
+    "prompt_es": "Plano de película de 8 segundos: auto deportivo clásico recorriendo el desierto con seguimiento de dron aéreo, luz dorada de atardecer y textura cinematográfica de 35mm.",
+    "recommended_tool": "Higgsfield AI / Runway Gen-3",
+    "parameters": "16:9 / 9:16 · 8 segundos · Dron tracking · Golden hour · 35mm grain",
+    "tips": "Pide a Higgsfield 'seguimiento desde un dron' para que el motor entienda que la cámara debe mantener velocidad constante emparejada con el coche."
+  },
+  {
+    "id": "vid-004",
+    "category": "video_ia",
+    "title": "Animación 3D Programática con Remotion & Three.js (Pipeline en 5 Pasos)",
+    "description": "Método para generar vídeos 3D en React y Three.js usando Claude Code como animador, sin necesidad de dominar After Effects ni Blender. Renderizado acelerado por GPU vía CLI.",
+    "tags": [
+      "Remotion",
+      "Three.js",
+      "Código React",
+      "3D por Código",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "En mi carpeta mi-video, lee primero las reglas de 3D en .agents/skills. Luego crea un video 3D vertical de 10 segundos: [TU IDEA / CONCEPTO]. Usa ThreeCanvas de @remotion/three, anima todas las transformaciones con useCurrentFrame() interpolado mediante interpolate() de Remotion, aplica materiales brillantes PBR, luz de estudio de 3 puntos y cámara en órbita lenta. Guarda tú mismo los archivos necesarios y compila el video.",
+    "prompt_es": "Prompt de desarrollo para que Claude Code implemente una composición de vídeo 3D en Remotion usando @remotion/three con animación paramétrica de fotogramas y renderizado GPU.",
+    "recommended_tool": "Remotion CLI + Three.js",
+    "parameters": "npx remotion add @remotion/three · npx remotion render --gl=angle · 1080×1920",
+    "tips": "El comando 'npx remotion render --gl=angle' permite acelerar el renderizado en chips Apple Silicon y GPUs modernas aprovechando la capa ANGLE de WebGL."
+  },
+  {
+    "id": "saas-001",
+    "category": "claude_code",
+    "title": "SaaS Comparador de Precios y Gift Cards para Grandes Lanzamientos",
+    "description": "Blueprint de arquitectura Next.js para lanzar un comparador en tiempo real de precios de videojuegos, consolas y tarjetas prepago (PSN, Xbox, Steam) con afiliación y alertas por correo.",
+    "tags": [
+      "SaaS",
+      "Next.js",
+      "Afiliación",
+      "Comparador",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea una web en Next.js que compare precios de GTA 6, de sus ediciones, de las consolas compatibles y de tarjetas de regalo (PlayStation, Xbox, Steam) en varias tiendas digitales. Quiero:\n- Una tabla por producto con tienda, precio, moneda convertida a dólares y la fecha de la última revisión, ordenada del más barato al más caro.\n- Un proceso que revise los precios cada pocas horas. Usa primero las APIs oficiales o los programas de afiliados de cada tienda; si una tienda no tiene API, lee solo su página pública de producto, respetando su robots.txt y sus términos, y sin saturarla.\n- Cada botón «Comprar» con mi enlace de afiliado (déjame un archivo de configuración para pegarlos).\n- Espacios para anuncios que no tapen el contenido, y una alerta por correo cuando un precio baje.\n- Diseño rápido y pensado para celular, con mi propia marca.\nExplícame cada paso, pruébalo en local y dime cómo publicarlo.",
+    "prompt_es": "Especificación completa para que Claude Code construya una plataforma web en Next.js de comparación de ofertas con scraping ético, tracking de precios y monetización de afiliados.",
+    "recommended_tool": "Claude Code / Next.js",
+    "parameters": "Next.js App Router · Cron background updates · Resend API para emails",
+    "tips": "Centraliza los enlaces de afiliado en un archivo 'config/affiliates.ts' para poder actualizarlos en segundos sin tocar la lógica de renderizado."
+  },
+  {
+    "id": "saas-002",
+    "category": "claude_code",
+    "title": "Trend Radar para Creadores de Contenido (YouTube API + Claude API)",
+    "description": "Panel de control web en Next.js con Supabase para monitorizar tendencias de búsqueda, vídeos emergentes con alta tracción y generación automática de títulos virales con IA.",
+    "tags": [
+      "SaaS",
+      "Trend Radar",
+      "YouTube API",
+      "Supabase",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea un panel web en Next.js con base de datos (Supabase) que detecte las tendencias de GTA 6 para creadores de contenido. Quiero:\n- Recoger cada día datos de fuentes con API oficial: YouTube Data API (videos nuevos y sus vistas), Google Trends y, si se puede, Reddit. Nada de scraping que viole términos de uso.\n- Agrupar los temas (misiones, secretos, lugares, trucos, personajes) y calcular cuáles crecen más rápido en las últimas 24 horas y 7 días.\n- Un panel con el top de temas, gráfica de crecimiento, videos de ejemplo y una idea de título para cada tema, generada con la API de Claude.\n- Registro de usuarios con una parte gratis (top 3) y una suscripción mensual para ver todo y recibir un resumen diario por correo.\n- Diseño oscuro, claro de leer en celular, con mi propia marca.\nExplícame qué claves de API necesito y cómo conseguirlas, pruébalo en local y dime cómo publicarlo.",
+    "prompt_es": "Dashboard analítico para creadores de contenido: sincronización diaria de métricas de video, cálculo de tasa de crecimiento porcentual y sugerencias de títulos con LLM.",
+    "recommended_tool": "Claude Code / Supabase / Next.js",
+    "parameters": "YouTube Data API v3 · Supabase Auth/DB · Claude API para titulación",
+    "tips": "Utiliza un trigger programado con Supabase Edge Functions o GitHub Actions para refrescar los datos de YouTube una vez al día sin incurrir en costes de servidor."
+  },
+  {
+    "id": "saas-003",
+    "category": "claude_code",
+    "title": "Generador de Retratos Estilo Portada de Videojuego (Image-to-Image)",
+    "description": "Aplicación web móvil donde el usuario sube un selfie y recibe una ilustración personalizada estilo Miami Synthwave / Vice City con pasarela de créditos y marca de agua compartible.",
+    "tags": [
+      "SaaS",
+      "Avatar IA",
+      "Image-to-Image",
+      "Flux / Fal.ai",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea una app web en Next.js donde el usuario sube una foto suya y recibe un retrato estilo arte de portada de videojuego de acción: ciudad costera de Miami al atardecer, palmeras, luces de neón, colores intensos y estilo ilustrado realista. Quiero:\n- Subir o tomar la foto desde el celular, elegir entre 3 o 4 escenarios (playa, ciudad de noche, auto deportivo, helicóptero) y ver el resultado en segundos.\n- Generar la imagen con una API de imágenes con IA que acepte foto de referencia (recomiéndame la más barata y explícame el costo por imagen).\n- 1 imagen gratis por persona y paquetes de imágenes pagos, con botón para descargar y compartir en Instagram y TikTok con mi marca de agua.\n- Borrar las fotos de los usuarios después de 24 horas y avisarlo en la página.\n- No usar el logo ni el nombre comercial del juego en las imágenes.\nExplícame cada paso, pruébalo en local y dime cómo publicarlo.",
+    "prompt_es": "App web de avatares fotorealistas estilizados: carga directa de cámara móvil, procesamiento mediante API de inferencia rápida (Fal.ai / Replicate Flux) y retención segura de 24 horas.",
+    "recommended_tool": "Claude Code / Fal.ai (Flux)",
+    "parameters": "Fal.ai Flux LoRA / IP-Adapter · Stripe Checkout · Auto-wipe 24h",
+    "tips": "Fal.ai ofrece latencias de menos de 2 segundos para transformaciones imagen a imagen con modelos Flux, ideal para mantener alta conversión en móviles."
+  },
+  {
+    "id": "game-001",
+    "category": "claude_code",
+    "title": "Videojuego 3D en Navegador en 5 Rondas (Three.js & Vite)",
+    "description": "Metodología probada para construir un videojuego tridimensional completo en el navegador mediante desarrollo iterativo por rondas guiadas con Claude Code.",
+    "tags": [
+      "Videojuegos",
+      "Three.js",
+      "Vite",
+      "3D en Navegador",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Crea un videojuego 3D que se juegue en el navegador, usando Vite y Three.js. La historia: un avión se estrella en una isla con un volcán y el jugador tiene que encontrar 5 piezas para reparar el avión y escapar. Quiero:\n- Personaje en tercera persona que se mueve con WASD y salta con espacio.\n- Cámara orbital que lo sigue suavemente con el ratón.\n- La isla con el volcán, vegetación y el mar alrededor.\n- Las 5 piezas repartidas por la isla con un contador HUD en pantalla y una pantalla final cuando las encuentras todas.\n- Usa figuras geométricas simples en lugar de modelos 3D pesados para empezar.\nInstala todo tú mismo, abre el juego en el navegador y dime cómo probarlo.",
+    "prompt_es": "Desarrollo de videojuego 3D completo en navegador: bucle principal de juego, físicas de salto, cámara en tercera persona y sistema de objetivos con Three.js y Vite.",
+    "recommended_tool": "Claude Code / Three.js / Vite",
+    "parameters": "Vite Vanilla/React · Three.js Orbit/PointerLock · Loop 60fps",
+    "tips": "Avanza por rondas: Ronda 1 (Mecánica central) -> Ronda 2 (Audio ambiental y shaders de agua) -> Ronda 3 (Cinemática inicial) -> Ronda 4 (Enemigos patrulleros) -> Ronda 5 (Planeador)."
+  },
+  {
+    "id": "game-002",
+    "category": "claude_code",
+    "title": "Integración de Claude Code con Unreal Engine 5 (Unreal-MCP)",
+    "description": "Conexión de agentes de inteligencia artificial directamente con el editor de Unreal Engine 5 mediante el protocolo Model Context Protocol (MCP) para controlar actores, escenas y assets mediante chat.",
+    "tags": [
+      "Unreal Engine 5",
+      "MCP",
+      "Game Dev AAA",
+      "Agente IA",
+      "Creadores Digitales IA"
+    ],
+    "prompt_en": "Quiero conectar Claude Code con Unreal Engine para que puedas controlar el editor. Lee las instrucciones de https://github.com/aadeshrao123/Unreal-MCP, revisa qué versión de Unreal Engine tengo instalada y, si es compatible, instálalo y configúralo en este proyecto paso a paso. Antes de instalar nada, explícame qué vas a hacer.",
+    "prompt_es": "Protocolo de conexión MCP para manipular Unreal Engine 5 con Claude Code: inspección de versión, compilación del plugin C++ y control conversacional de la escena.",
+    "recommended_tool": "Claude Code + Unreal-MCP",
+    "parameters": "Unreal Engine 5.3+ · MCP Server · Python/C++ Editor Bridge",
+    "tips": "Permite pedirle al agente: 'Crea 10 puntos de spawn aleatorios sobre el terreno', 'Ajusta la intensidad de la luz solar a 50.000 lux' o 'Coloca una cámara cinemática orbital'."
+  },
+  {
+    "id": "web-001",
+    "category": "claude_code",
+    "title": "Diseño Web Profesional de Alto Criterio (Taste Skill + Impeccable + Playwright)",
+    "description": "Instrucción de diseño para Claude Code que elimina el aspecto genérico de las webs hechas por IA. Combina skills de Emil Kowalski, Impeccable UI, Taste Skill y testing automático en desktop y mobile con Playwright.",
+    "tags": [
+      "Web Design",
+      "Taste Skill",
+      "Impeccable",
+      "Emil Kowalski",
+      "Playwright MCP"
+    ],
+    "prompt_en": "Quiero una página web para [TU NEGOCIO O PROYECTO]. Usa las skills de diseño que tengo instaladas (Impeccable, Emil Kowalski y Taste Skill). Toma como referencia [URL DE LA PÁGINA QUE TE GUSTA] para tipografía, ritmo de espacios, microinteracciones y armonía visual, adaptándolo con mi propia marca y paleta de color. Cuando termines de construirla, ábrela con Playwright MCP, prueba que todo funcione perfectamente tanto en computador como en celular, y corrige cualquier fallo de layout antes de entregármela.",
+    "prompt_es": "Master prompt para diseño web no genérico: adopta principios de interacción de Emil Kowalski, dirección de arte de Taste Skill y verificación autónoma en múltiples pantallas con Playwright.",
+    "recommended_tool": "Claude Code + Taste Skill + Playwright",
+    "parameters": "Taste Skill · Impeccable · Emil Kowalski Skills · Playwright MCP",
+    "tips": "Instala las skills ejecutando en Claude Code: 'claude mcp add playwright npx @playwright/mcp@latest' y 'claude mcp add --transport http figma https://mcp.figma.com/mcp'."
   }
 ]

@@ -3,7 +3,12 @@
     "id": "spotlight-card",
     "name": "Spotlight Border Card",
     "category": "cards",
-    "tags": ["Tailwind", "Interactive", "Mouse Tracker", "Cards"],
+    "tags": [
+      "Tailwind",
+      "Interactive",
+      "Mouse Tracker",
+      "Cards"
+    ],
     "description": "Tarjeta moderna con un resplandor radial dinámico que sigue las coordenadas exactas del ratón, iluminando sutilmente los bordes y el fondo.",
     "previewHtml": "<div class=\"comp-spotlight-card\" id=\"spotlightCardDemo\">\n  <div class=\"spotlight-content\">\n    <div class=\"spotlight-icon\">⚡</div>\n    <h3>Sangar Dynamic Spotlight</h3>\n    <p>Mueve el cursor sobre esta tarjeta para ver cómo el halo de luz responde a tu posición en tiempo real.</p>\n    <span class=\"spotlight-tag\">21st.dev Style • Interactive</span>\n  </div>\n</div>",
     "codeHtml": "<!-- HTML & Tailwind / CSS -->\n<div class=\"spotlight-card\" onmousemove=\"handleSpotlight(event, this)\">\n  <div class=\"spotlight-overlay\"></div>\n  <div class=\"card-body\">\n    <div class=\"icon\">⚡</div>\n    <h3>Spotlight Card</h3>\n    <p>Halo de luz dinámico que sigue las coordenadas del ratón.</p>\n  </div>\n</div>\n\n<style>\n.spotlight-card {\n  position: relative;\n  background: #111420;\n  border-radius: 16px;\n  padding: 24px;\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  overflow: hidden;\n}\n.spotlight-card::before {\n  content: '';\n  position: absolute;\n  top: 0; left: 0; right: 0; bottom: 0;\n  background: radial-gradient(400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(99, 102, 241, 0.18), transparent 80%);\n  pointer-events: none;\n  transition: opacity 0.3s ease;\n}\n</style>\n\n<script>\nfunction handleSpotlight(e, card) {\n  const rect = card.getBoundingClientRect();\n  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);\n  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);\n}\n</script>",
@@ -13,7 +18,12 @@
     "id": "border-beam",
     "name": "Border Beam Glow",
     "category": "cards",
-    "tags": ["Animation", "CSS Keyframes", "Border Light", "Tailwind"],
+    "tags": [
+      "Animation",
+      "CSS Keyframes",
+      "Border Light",
+      "Tailwind"
+    ],
     "description": "Efecto de haz de luz ultrabrillante que recorre continuamente el perímetro de una tarjeta en un bucle hipnótico sin fin.",
     "previewHtml": "<div class=\"comp-border-beam-card\">\n  <div class=\"beam-glow\"></div>\n  <div class=\"beam-content\">\n    <span class=\"badge-cyan\">Infinite Beam</span>\n    <h3>Border Beam Light</h3>\n    <p>Un haz de luz volumétrico que viaja a lo largo del borde mediante conic-gradient y máscaras CSS.</p>\n  </div>\n</div>",
     "codeHtml": "<!-- HTML & CSS Border Beam -->\n<div class=\"border-beam-box\">\n  <div class=\"border-beam-glow\"></div>\n  <div class=\"box-content\">\n    <h3>Border Beam</h3>\n    <p>Luz infinita recorriendo el borde de la tarjeta.</p>\n  </div>\n</div>\n\n<style>\n.border-beam-box {\n  position: relative;\n  background: #0f111a;\n  border-radius: 16px;\n  padding: 24px;\n  border: 1px solid #1f2335;\n  overflow: hidden;\n}\n.border-beam-glow {\n  position: absolute;\n  inset: 0;\n  border-radius: inherit;\n  padding: 2px;\n  background: conic-gradient(from var(--beam-angle, 0deg), transparent 75%, #06b6d4 90%, #a855f7 100%);\n  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);\n  -webkit-mask-composite: xor;\n  mask-composite: exclude;\n  pointer-events: none;\n  animation: rotateBeam 4s linear infinite;\n}\n@keyframes rotateBeam {\n  to { transform: rotate(360deg); }\n}\n</style>",
@@ -23,7 +33,12 @@
     "id": "text-scramble",
     "name": "Kinetic Text Decryptor / Scramble",
     "category": "text",
-    "tags": ["Typography", "Cyberpunk", "Kinetic", "Microinteraction"],
+    "tags": [
+      "Typography",
+      "Cyberpunk",
+      "Kinetic",
+      "Microinteraction"
+    ],
     "description": "Texto interactivo con efecto de descifrado criptográfico tipo Matrix/Cyberpunk al pasar el cursor o al cargarse.",
     "previewHtml": "<div class=\"comp-text-scramble-box\">\n  <span class=\"label-dim\">Pasa el ratón por encima:</span>\n  <h2 class=\"scramble-trigger\" id=\"demoScrambleText\" data-value=\"SANGAR DESIGN ENGINE\">SANGAR DESIGN ENGINE</h2>\n  <p class=\"text-xs text-muted\">Re-scramble trigger on hover</p>\n</div>",
     "codeHtml": "<!-- HTML & Vanilla JS Text Scramble -->\n<h2 class=\"scramble-text\" data-value=\"SANGAR CREATIVE STUDIO\">SANGAR CREATIVE STUDIO</h2>\n\n<script>\nconst letters = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*\";\n\ndocument.querySelector('.scramble-text').onmouseover = event => {  \n  let iteration = 0;\n  clearInterval(event.target.interval);\n  const original = event.target.dataset.value;\n  \n  event.target.interval = setInterval(() => {\n    event.target.innerText = original.split(\"\")\n      .map((letter, index) => {\n        if(index < iteration) return original[index];\n        return letters[Math.floor(Math.random() * letters.length)];\n      })\n      .join(\"\");\n    \n    if(iteration >= original.length){\n      clearInterval(event.target.interval);\n    }\n    iteration += 1 / 3;\n  }, 30);\n};\n</script>",
@@ -33,7 +48,12 @@
     "id": "magnetic-button",
     "name": "Magnetic Dynamic Button",
     "category": "buttons",
-    "tags": ["Physics", "Magnetic", "Buttons", "Framer Motion Style"],
+    "tags": [
+      "Physics",
+      "Magnetic",
+      "Buttons",
+      "Framer Motion Style"
+    ],
     "description": "Botón magnético que es atraído físicamente hacia el cursor del usuario cuando se acerca, con retorno elástico suave.",
     "previewHtml": "<div class=\"comp-magnetic-wrapper\" id=\"magneticContainerDemo\">\n  <button class=\"comp-magnetic-btn\" id=\"magneticBtnDemo\">\n    <span class=\"btn-magnetic-text\">Descubrir Recursos ↗</span>\n  </button>\n</div>",
     "codeHtml": "<!-- HTML & JS Magnetic Button -->\n<div class=\"magnetic-wrap\" id=\"magWrap\">\n  <button class=\"magnetic-btn\" id=\"magBtn\">Hover Magnético ↗</button>\n</div>\n\n<style>\n.magnetic-wrap { display: inline-block; padding: 30px; }\n.magnetic-btn {\n  background: linear-gradient(135deg, #6366f1, #a855f7);\n  color: white;\n  border: none;\n  padding: 14px 28px;\n  border-radius: 9999px;\n  font-weight: 600;\n  cursor: pointer;\n  transition: transform 0.15s ease-out;\n  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);\n}\n</style>\n\n<script>\nconst wrap = document.getElementById('magWrap');\nconst btn = document.getElementById('magBtn');\n\nwrap.addEventListener('mousemove', (e) => {\n  const rect = wrap.getBoundingClientRect();\n  const x = (e.clientX - rect.left - rect.width / 2) * 0.4;\n  const y = (e.clientY - rect.top - rect.height / 2) * 0.4;\n  btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;\n});\n\nwrap.addEventListener('mouseleave', () => {\n  btn.style.transform = 'translate(0px, 0px) scale(1)';\n});\n</script>",
@@ -43,7 +63,13 @@
     "id": "macos-dock",
     "name": "macOS Magnified Floating Dock",
     "category": "navigation",
-    "tags": ["Navigation", "macOS", "Dock", "Magnification", "Dock UI"],
+    "tags": [
+      "Navigation",
+      "macOS",
+      "Dock",
+      "Magnification",
+      "Dock UI"
+    ],
     "description": "Barra de navegación flotante estilo dock de macOS con magnificación parabólica suave al pasar el cursor sobre los iconos.",
     "previewHtml": "<div class=\"comp-dock-container\">\n  <div class=\"comp-dock-bar\" id=\"macosDockDemo\">\n    <div class=\"dock-item\" data-tooltip=\"Finder\">📁</div>\n    <div class=\"dock-item\" data-tooltip=\"After Effects\">🎬</div>\n    <div class=\"dock-item\" data-tooltip=\"Figma\">🎨</div>\n    <div class=\"dock-item\" data-tooltip=\"Terminal\">⚡</div>\n    <div class=\"dock-item\" data-tooltip=\"Midjourney\">💎</div>\n    <div class=\"dock-item\" data-tooltip=\"Sangar AI\">🪐</div>\n  </div>\n</div>",
     "codeHtml": "<!-- HTML & CSS macOS Dock -->\n<div class=\"dock-wrapper\">\n  <div class=\"dock\" id=\"dock\">\n    <button class=\"dock-icon\">📁</button>\n    <button class=\"dock-icon\">🎬</button>\n    <button class=\"dock-icon\">🎨</button>\n    <button class=\"dock-icon\">⚡</button>\n    <button class=\"dock-icon\">🪐</button>\n  </div>\n</div>\n\n<style>\n.dock-wrapper { display: flex; justify-content: center; padding: 20px; }\n.dock {\n  display: flex;\n  gap: 12px;\n  padding: 10px 16px;\n  background: rgba(18, 20, 30, 0.75);\n  backdrop-filter: blur(16px);\n  border: 1px solid rgba(255, 255, 255, 0.12);\n  border-radius: 24px;\n}\n.dock-icon {\n  width: 44px; height: 44px;\n  border-radius: 14px;\n  background: #1e2235;\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  font-size: 20px;\n  display: flex; align-items: center; justify-content: center;\n  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);\n  cursor: pointer;\n}\n.dock-icon:hover {\n  transform: scale(1.4) translateY(-10px);\n}\n</style>",
@@ -53,7 +79,12 @@
     "id": "3d-tilt-card",
     "name": "3D Perspective Tilt Glass Card",
     "category": "cards",
-    "tags": ["3D", "Tilt", "Glassmorphism", "Cards"],
+    "tags": [
+      "3D",
+      "Tilt",
+      "Glassmorphism",
+      "Cards"
+    ],
     "description": "Efecto de rotación 3D en perspectiva con brillo especular de cristal que calcula el ángulo según la posición del cursor.",
     "previewHtml": "<div class=\"comp-tilt-card-wrapper\" id=\"tiltCardWrapDemo\">\n  <div class=\"comp-tilt-card\" id=\"tiltCardDemo\">\n    <div class=\"tilt-card-badge\">Spatial 3D</div>\n    <h3>Vision Pro Glass</h3>\n    <p>La tarjeta pivota en los ejes X e Y generando una sensación de profundidad tridimensional real.</p>\n    <div class=\"tilt-glare\"></div>\n  </div>\n</div>",
     "codeHtml": "<!-- HTML, CSS & JS 3D Tilt Card -->\n<div class=\"tilt-container\" id=\"tiltContainer\">\n  <div class=\"tilt-box\" id=\"tiltBox\">\n    <h3>3D Tilt Card</h3>\n    <p>Efecto de rotación en perspectiva tridimensional.</p>\n  </div>\n</div>\n\n<style>\n.tilt-container { perspective: 1000px; display: inline-block; }\n.tilt-box {\n  width: 320px; padding: 24px;\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(12px);\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  border-radius: 20px;\n  color: white;\n  transform-style: preserve-3d;\n  transition: transform 0.1s ease-out;\n}\n</style>\n\n<script>\nconst c = document.getElementById('tiltContainer');\nconst b = document.getElementById('tiltBox');\n\nc.addEventListener('mousemove', (e) => {\n  const rect = c.getBoundingClientRect();\n  const x = e.clientX - rect.left;\n  const y = e.clientY - rect.top;\n  const xRot = ((y - rect.height / 2) / rect.height) * -20;\n  const yRot = ((x - rect.width / 2) / rect.width) * 20;\n  b.style.transform = `rotateX(${xRot}deg) rotateY(${yRot}deg) scale3d(1.05, 1.05, 1.05)`;\n});\n\nc.addEventListener('mouseleave', () => {\n  b.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';\n});\n</script>",
@@ -63,7 +94,12 @@
     "id": "dynamic-island",
     "name": "Morphing Dynamic Island Widget",
     "category": "navigation",
-    "tags": ["Dynamic Island", "Morphing", "Interactive", "Microinteraction"],
+    "tags": [
+      "Dynamic Island",
+      "Morphing",
+      "Interactive",
+      "Microinteraction"
+    ],
     "description": "Cápsula interactiva inspirada en la Dynamic Island de Apple que se expande y contrae fluidamente con físicas de amortiguación al hacer clic.",
     "previewHtml": "<div class=\"comp-island-wrapper\">\n  <div class=\"comp-dynamic-island\" id=\"dynamicIslandDemo\">\n    <div class=\"island-collapsed\">\n      <span class=\"island-dot\"></span>\n      <span class=\"island-text\">Sangar Music • Playing</span>\n      <span class=\"island-wave\">||||</span>\n    </div>\n    <div class=\"island-expanded\" style=\"display: none;\">\n      <div class=\"island-track-info\">\n        <div class=\"track-art\">🎵</div>\n        <div>\n          <strong>Cinematic Motion Beats</strong>\n          <span>Runway & Kling Soundscapes</span>\n        </div>\n      </div>\n      <div class=\"island-controls\">\n        <button class=\"btn-ctrl\">⏮</button>\n        <button class=\"btn-ctrl\">⏸</button>\n        <button class=\"btn-ctrl\">⏭</button>\n      </div>\n    </div>\n  </div>\n</div>",
     "codeHtml": "<!-- HTML & JS Morphing Dynamic Island -->\n<div class=\"dynamic-island\" id=\"island\" onclick=\"toggleIsland()\">\n  <div class=\"island-content\">Tocando: Motion Sounds 🎵</div>\n</div>\n\n<style>\n.dynamic-island {\n  background: #000;\n  color: #fff;\n  border-radius: 9999px;\n  padding: 10px 24px;\n  width: fit-content;\n  cursor: pointer;\n  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);\n  box-shadow: 0 10px 30px rgba(0,0,0,0.6);\n}\n.dynamic-island.expanded {\n  border-radius: 28px;\n  padding: 24px;\n  width: 320px;\n}\n</style>\n\n<script>\nfunction toggleIsland() {\n  document.getElementById('island').classList.toggle('expanded');\n}\n</script>",
@@ -73,10 +109,46 @@
     "id": "shimmer-button",
     "name": "Shimmer Sweep Button",
     "category": "buttons",
-    "tags": ["Buttons", "Shimmer", "Gradient", "Tailwind"],
+    "tags": [
+      "Buttons",
+      "Shimmer",
+      "Gradient",
+      "Tailwind"
+    ],
     "description": "Botón premium con una ráfaga de brillo especular continuo barriendo diagonalmente sobre la superficie metálica.",
     "previewHtml": "<div style=\"display: flex; justify-content: center; padding: 20px;\">\n  <button class=\"comp-shimmer-btn\">\n    <span class=\"shimmer-sweep\"></span>\n    <span class=\"shimmer-text\">Generar con Sangar IA ✨</span>\n  </button>\n</div>",
     "codeHtml": "<!-- HTML & CSS Shimmer Button -->\n<button class=\"shimmer-button\">\n  <span class=\"shimmer-effect\"></span>\n  <span>Crear Proyecto 🚀</span>\n</button>\n\n<style>\n.shimmer-button {\n  position: relative;\n  overflow: hidden;\n  background: #181b29;\n  color: #fff;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n  border-radius: 12px;\n  padding: 14px 28px;\n  font-weight: 600;\n  cursor: pointer;\n}\n.shimmer-effect {\n  position: absolute;\n  top: 0; left: -100%; width: 100%; height: 100%;\n  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);\n  animation: shimmerSweep 2.5s infinite;\n}\n@keyframes shimmerSweep {\n  100% { left: 100%; }\n}\n</style>",
     "codeReact": "// React + Tailwind Shimmer Button\nexport const ShimmerButton = ({ text, onClick }) => (\n  <button\n    onClick={onClick}\n    className=\"group relative overflow-hidden rounded-xl border border-neutral-700 bg-neutral-900 px-6 py-3 font-medium text-white transition-all hover:border-neutral-500 active:scale-95\"\n  >\n    <div className=\"absolute -inset-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent\" />\n    <span className=\"relative z-10 flex items-center gap-2\">{text}</span>\n  </button>\n);"
+  },
+  {
+    "id": "canvas-loop-recorder",
+    "name": "Canvas Loop 30fps & Video Recorder",
+    "category": "animation",
+    "tags": [
+      "Canvas HTML5",
+      "MediaRecorder",
+      "Interactive Loop",
+      "30 FPS",
+      "Creadores Digitales IA"
+    ],
+    "description": "Lienzo de animación matemática en bucle perfecto de 120 cuadros con renderizado determinista y exportación de video nativa mediante canvas.captureStream(30) y MediaRecorder.",
+    "previewHtml": "<div class=\"comp-canvas-recorder-card\" style=\"background: #111420; border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); text-align: center;\">\n  <div style=\"position: relative; width: 100%; max-width: 240px; margin: 0 auto 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,126,103,0.3); background: #0b0c10;\">\n    <canvas id=\"demoLoopCanvas\" width=\"240\" height=\"240\" style=\"display: block; width: 100%; aspect-ratio: 1/1;\"></canvas>\n    <span style=\"position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.7); font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #FF7E67; font-family: monospace;\">● 120f Loop</span>\n  </div>\n  <button type=\"button\" id=\"btnDemoRecordCanvas\" class=\"sg-btn sg-btn--primary sg-btn--sm\" style=\"margin: 0 auto;\">\n    <i data-lucide=\"video\"></i> Grabar 4s Video\n  </button>\n</div>",
+    "codeHtml": "<!-- HTML5 Canvas con bucle determinista y grabador de vídeo WebM -->\n<div class=\"canvas-box\">\n  <canvas id=\"loopCanvas\" width=\"1080\" height=\"1920\"></canvas>\n  <button id=\"recordBtn\" class=\"btn-record\">Grabar 4s Video</button>\n</div>\n\n<script>\nconst canvas = document.getElementById('loopCanvas');\nconst ctx = canvas.getContext('2d');\nlet frame = 0;\nconst totalFrames = 120;\n\nfunction render() {\n  const f = frame % totalFrames;\n  const progress = f / totalFrames;\n  ctx.fillStyle = '#0f111a';\n  ctx.fillRect(0, 0, canvas.width, canvas.height);\n  \n  // Animación en bucle perfecto sin saltos\n  const angle = progress * Math.PI * 2;\n  const cx = canvas.width / 2 + Math.cos(angle) * 150;\n  const cy = canvas.height / 2 + Math.sin(angle) * 80;\n  \n  ctx.fillStyle = '#FF7E67';\n  ctx.beginPath();\n  ctx.arc(cx, cy, 60, 0, Math.PI * 2);\n  ctx.fill();\n  \n  frame++;\n  requestAnimationFrame(render);\n}\nrequestAnimationFrame(render);\n\n// Grabador nativo sin librerías externas\ndocument.getElementById('recordBtn').onclick = () => {\n  frame = 0;\n  const stream = canvas.captureStream(30);\n  const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });\n  const chunks = [];\n  recorder.ondataavailable = e => chunks.push(e.data);\n  recorder.onstop = () => {\n    const blob = new Blob(chunks, { type: 'video/webm' });\n    const a = document.createElement('a');\n    a.href = URL.createObjectURL(blob);\n    a.download = 'animacion-bucle.webm';\n    a.click();\n  };\n  recorder.start();\n  setTimeout(() => recorder.stop(), 4000);\n};\n</script>",
+    "codeReact": "// React + HTML5 Canvas Loop Recorder Hook\nimport React, { useRef, useEffect, useState } from 'react';\n\nexport const CanvasLoopRecorder = () => {\n  const canvasRef = useRef(null);\n  const [recording, setRecording] = useState(false);\n\n  useEffect(() => {\n    const canvas = canvasRef.current;\n    if (!canvas) return;\n    const ctx = canvas.getContext('2d');\n    let f = 0;\n    let handle;\n    const loop = () => {\n      const p = (f % 120) / 120;\n      ctx.fillStyle = '#0f111a';\n      ctx.fillRect(0, 0, canvas.width, canvas.height);\n      ctx.fillStyle = '#FF7E67';\n      ctx.beginPath();\n      ctx.arc(120 + Math.cos(p * Math.PI * 2) * 40, 120 + Math.sin(p * Math.PI * 2) * 20, 24, 0, Math.PI * 2);\n      ctx.fill();\n      f++;\n      handle = requestAnimationFrame(loop);\n    };\n    handle = requestAnimationFrame(loop);\n    return () => cancelAnimationFrame(handle);\n  }, []);\n\n  const handleRecord = () => {\n    setRecording(true);\n    const stream = canvasRef.current.captureStream(30);\n    const rec = new MediaRecorder(stream, { mimeType: 'video/webm' });\n    const chunks = [];\n    rec.ondataavailable = (e) => chunks.push(e.data);\n    rec.onstop = () => {\n      const url = URL.createObjectURL(new Blob(chunks, { type: 'video/webm' }));\n      const a = document.createElement('a');\n      a.href = url;\n      a.download = 'loop-4s.webm';\n      a.click();\n      setRecording(false);\n    };\n    rec.start();\n    setTimeout(() => rec.stop(), 4000);\n  };\n\n  return (\n    <div className=\"flex flex-col items-center gap-4 rounded-2xl bg-neutral-900 p-6 border border-neutral-800\">\n      <canvas ref={canvasRef} width={240} height={240} className=\"rounded-xl border border-neutral-800\" />\n      <button onClick={handleRecord} disabled={recording} className=\"rounded-lg bg-orange-500 px-4 py-2 font-medium text-white hover:bg-orange-600 disabled:opacity-50\">\n        {recording ? 'Grabando 4 segundos...' : 'Grabar Video 4s (MediaRecorder)'}\n      </button>\n    </div>\n  );\n};"
+  },
+  {
+    "id": "taste-skill-badge",
+    "name": "Taste Skill Design Quality Badge",
+    "category": "cards",
+    "tags": [
+      "Design System",
+      "Taste Skill",
+      "Microinteraction",
+      "Quality Metric"
+    ],
+    "description": "Insignia de calidad de diseño con microinteracción de pulso magnético y medidor de fidelidad tipográfica anti-genérica para páginas web y dashboards.",
+    "previewHtml": "<div class=\"comp-taste-badge-demo\" style=\"display: inline-flex; align-items: center; gap: 10px; background: rgba(255,126,103,0.08); border: 1px solid rgba(255,126,103,0.3); border-radius: 9999px; padding: 8px 18px;\">\n  <span style=\"display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #FF7E67; box-shadow: 0 0 10px #FF7E67;\"></span>\n  <span style=\"font-family: var(--font-heading); font-size: 13px; font-weight: 600; color: #FFF;\">Taste Skill Certified</span>\n  <span style=\"font-family: monospace; font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 6px; color: #FF7E67;\">99.4% Anti-Generic</span>\n</div>",
+    "codeHtml": "<!-- HTML & CSS Taste Skill Quality Badge -->\n<div class=\"taste-badge\">\n  <span class=\"pulse-dot\"></span>\n  <span class=\"badge-title\">Taste Skill Certified</span>\n  <span class=\"badge-score\">99.4% Anti-Generic</span>\n</div>\n\n<style>\n.taste-badge {\n  display: inline-flex;\n  align-items: center;\n  gap: 10px;\n  background: rgba(255, 126, 103, 0.08);\n  border: 1px solid rgba(255, 126, 103, 0.3);\n  border-radius: 9999px;\n  padding: 8px 18px;\n  backdrop-filter: blur(12px);\n  transition: all 0.2s ease;\n}\n.taste-badge:hover {\n  border-color: #FF7E67;\n  box-shadow: 0 0 20px rgba(255, 126, 103, 0.25);\n  transform: translateY(-1px);\n}\n.pulse-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: #FF7E67;\n  box-shadow: 0 0 8px #FF7E67;\n  animation: pulseGlow 2s infinite;\n}\n@keyframes pulseGlow {\n  0%, 100% { opacity: 1; transform: scale(1); }\n  50% { opacity: 0.5; transform: scale(0.85); }\n}\n.badge-title {\n  color: #fff;\n  font-size: 13px;\n  font-weight: 600;\n}\n.badge-score {\n  font-family: monospace;\n  font-size: 11px;\n  background: rgba(255, 255, 255, 0.08);\n  padding: 2px 8px;\n  border-radius: 6px;\n  color: #FF7E67;\n}\n</style>",
+    "codeReact": "// React + Tailwind Taste Skill Badge\nexport const TasteSkillBadge = ({ score = '99.4%' }) => (\n  <div className=\"group inline-flex items-center gap-2.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 backdrop-blur-md transition-all hover:border-orange-500 hover:shadow-[0_0_20px_rgba(255,126,103,0.25)]\">\n    <span className=\"h-2 w-2 rounded-full bg-orange-500 shadow-[0_0_8px_#ff7e67] animate-pulse\" />\n    <span className=\"text-xs font-semibold text-white\">Taste Skill Certified</span>\n    <span className=\"rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-orange-400\">\n      {score} Anti-Generic\n    </span>\n  </div>\n);"
   }
 ]
