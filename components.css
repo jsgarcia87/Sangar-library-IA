@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Sangar UI Components — 21st.dev Style Showcase (Warm Studio OS Tokens)
+   Sangar UI Studio — Galería de Referencias & Prompts UI (Warm Studio OS)
    Layered on top of public/assets/app.css + styles.css
    ========================================================================== */
 
@@ -185,7 +185,7 @@
 }
 
 /* ==========================================================================
-   LIVE INTERACTIVE COMPONENT DEMOS (21st.dev Style, Harmonized with Warm Studio)
+   LIVE INTERACTIVE COMPONENT DEMOS (Warm Studio OS Engine)
    ========================================================================== */
 
 /* 1. Spotlight Card */
@@ -590,10 +590,377 @@
   50% { opacity: 0.4; }
 }
 
+/* Aurora & Shader Canvas Animations */
+@keyframes floatAurora {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 20px) scale(1.15); }
+}
+
+@keyframes pulseShader {
+  0% { opacity: 0.8; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1.02); }
+}
+
+.comp-expansion-demo {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.comp-expansion-demo.is-expanded {
+  background: linear-gradient(135deg, rgba(255, 126, 103, 0.25), rgba(18, 20, 30, 0.95)) !important;
+  border-color: #FF7E67 !important;
+  box-shadow: 0 0 25px rgba(255, 126, 103, 0.35) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .beam-glow,
   .shimmer-sweep,
-  .island-dot {
+  .island-dot,
+  .comp-aurora-blob {
     animation: none !important;
   }
+}
+
+/* ==========================================================================
+   SUITE SWITCHER: Sangar Studio Core vs. Librería Moxen
+   ========================================================================== */
+.sg-suite-selector {
+  display: inline-flex;
+  gap: 6px;
+  background: rgba(28, 25, 23, 0.85);
+  border: 1px solid var(--sg-borde, rgba(255, 255, 255, 0.08));
+  border-radius: 9999px;
+  padding: 4px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(12px);
+}
+
+.sg-suite-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-family: var(--sg-texto);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sg-gris-70, #B8B0A8);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.sg-suite-pill:hover {
+  color: var(--sg-blanco, #FFFFFF);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sg-suite-pill.is-active {
+  background: var(--sg-coral, #FF7E67);
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(255, 126, 103, 0.35);
+}
+
+.sg-suite-pill .badge-count {
+  display: inline-block;
+  padding: 2px 7px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  color: inherit;
+}
+
+/* ==========================================================================
+   MOXEN ANIMATIONS SUITE (880 Components)
+   ========================================================================== */
+.moxen-controls {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.moxen-category-scroll {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 4px 2px;
+  scrollbar-width: thin;
+}
+
+.moxen-category-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.moxen-category-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.moxen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 22px;
+  margin-bottom: 32px;
+}
+
+.moxen-card {
+  background: var(--sg-tarjeta-bg, #1C1A18);
+  border: 1px solid var(--sg-tarjeta-borde, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s, box-shadow 0.22s;
+  position: relative;
+}
+
+.moxen-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 126, 103, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 126, 103, 0.12);
+}
+
+.moxen-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #11100E;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.moxen-card__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+.moxen-card:hover .moxen-card__poster {
+  transform: scale(1.02);
+}
+
+.moxen-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.moxen-card__video.is-playing {
+  opacity: 1;
+}
+
+.moxen-card__play-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(18, 16, 15, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.moxen-card__body {
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.moxen-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.moxen-card__category {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--sg-coral, #FF7E67);
+  background: rgba(255, 126, 103, 0.12);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.moxen-card__deps {
+  font-size: 11px;
+  color: var(--sg-gris-55, #8C847C);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.moxen-card__title {
+  font-family: var(--sg-titular);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--sg-blanco, #FFFFFF);
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.moxen-card__tagline {
+  font-size: 12.5px;
+  color: var(--sg-gris-70, #B8B0A8);
+  line-height: 1.45;
+  margin: 0 0 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.moxen-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--sg-borde, rgba(255, 255, 255, 0.06));
+}
+
+.moxen-card__footer .sg-btn {
+  flex: 1;
+  justify-content: center;
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+.moxen-load-more-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 32px 0 48px;
+}
+
+.moxen-counter-text {
+  font-size: 13px;
+  color: var(--sg-gris-55, #8C847C);
+}
+
+/* ==========================================================================
+   MOXEN DETAIL MODAL (<dialog>)
+   ========================================================================== */
+.sg-moxen-dialog {
+  padding: 0;
+  border: 1px solid var(--sg-tarjeta-borde, rgba(255, 255, 255, 0.12));
+  border-radius: 20px;
+  background: var(--sg-modal-bg, #181615);
+  color: var(--sg-texto-color, #E8E2DC);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  max-width: 780px;
+  width: 92vw;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.sg-moxen-dialog::backdrop {
+  background: rgba(10, 9, 8, 0.75);
+  backdrop-filter: blur(10px);
+}
+
+.sg-moxen-modal-inner {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.sg-moxen-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sg-moxen-modal-head h3 {
+  font-family: var(--sg-titular);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.sg-moxen-modal-video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0A0908;
+  position: relative;
+}
+
+.sg-moxen-modal-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sg-moxen-modal-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sg-moxen-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.sg-moxen-prompt-box {
+  background: #11100E;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.sg-moxen-prompt-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sg-moxen-prompt-text {
+  font-family: var(--sg-codigo, monospace);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #E0DAD3;
+  white-space: pre-wrap;
+  max-height: 140px;
+  overflow-y: auto;
+  padding-right: 6px;
 }

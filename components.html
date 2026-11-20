@@ -17,7 +17,7 @@
       } catch (e) {}
     })();
   </script>
-  <title>Sangar UI Components — 21st.dev Style &amp; Studio OS</title>
+  <title>Sangar UI Studio — Galería de Referencias &amp; Prompts UI</title>
   <link rel="icon" type="image/svg+xml" href="public/assets/logos/sangar-s-negro.svg">
   <link rel="stylesheet" href="public/assets/app.css">
   <link rel="stylesheet" href="styles.css">
@@ -41,9 +41,9 @@
       </div>
 
       <a href="index.html#generator" class="sg-workspace-switcher" title="Cambiar a AI Motion Studio">
-        <span class="sg-workspace-switcher__badge">21</span>
+        <span class="sg-workspace-switcher__badge">UI</span>
         <span class="sg-workspace-switcher__info">
-          <span class="sg-workspace-switcher__name" style="display:block;">UI Components</span>
+          <span class="sg-workspace-switcher__name" style="display:block;">Galería de Referencias</span>
           <span class="sg-workspace-switcher__sub" style="display:block;">Volver a AI Motion Studio</span>
         </span>
         <i data-lucide="chevrons-up-down" class="sg-workspace-switcher__chevron"></i>
@@ -93,9 +93,13 @@
 
         <div class="sg-nav__section">
           <div class="sg-nav__label">Design Engineering</div>
-          <a href="components.html" class="sg-nav__item is-active" aria-current="page">
-            <i data-lucide="layers"></i>
-            <span class="sg-nav__text">Componentes 21st.dev</span>
+          <a href="components.html#sangar" class="sg-nav__item is-active" id="navItemSangarCore">
+            <i data-lucide="sparkles"></i>
+            <span class="sg-nav__text">Sangar Studio Core (15)</span>
+          </a>
+          <a href="components.html#moxen" class="sg-nav__item" id="navItemMoxen">
+            <i data-lucide="play-circle"></i>
+            <span class="sg-nav__text">Librería Moxen (880)</span>
           </a>
         </div>
       </nav>
@@ -128,13 +132,13 @@
           </button>
           <div class="sg-topbar__greeting-block">
             <div class="sg-topbar__greeting" id="topbar-greeting">Sangar Studio</div>
-            <div class="sg-topbar__subtitle">Sangar UI Components · Registro 21st.dev Style</div>
+            <div class="sg-topbar__subtitle">Galería de Referencias &amp; Prompts UI · Design Engineering</div>
           </div>
         </div>
 
         <button type="button" id="btn-cmd-palette" class="sg-global-search" data-open-cmd aria-label="Abrir búsqueda rápida y paleta de comandos">
           <i data-lucide="search"></i>
-          <span class="sg-global-search__placeholder">Buscar componentes (spotlight, magnetic, dock, tilt…)</span>
+          <span class="sg-global-search__placeholder">Buscar componentes y prompts (spotlight, bento, aurora, tilt, dock…)</span>
           <kbd class="sg-kbd">⌘K</kbd>
         </button>
 
@@ -162,44 +166,98 @@
       </header>
 
       <main class="sg-content" id="main-content" tabindex="-1">
-        <!-- Hero Banner -->
-        <div class="sg-greeting sg-greeting--compact">
-          <h1 class="sg-greeting__title">Biblioteca de Componentes &amp; Animaciones Creativas</h1>
-          <p class="sg-greeting__desc">Inspirada en <strong>21st.dev</strong> y el movimiento de Design Engineering. Microinteracciones táctiles, tarjetas 3D, halos de luz reactivos y código listo para copiar en React + Tailwind o Vanilla HTML/CSS.</p>
-          <div class="sg-greeting__actions">
-            <a href="index.html#generator" class="sg-btn sg-btn--secondary">
-              <i data-lucide="clapperboard"></i> Volver al Generador Motion
-            </a>
-            <span class="sg-btn sg-btn--outline" id="compCountPill" style="cursor:default;">
-              <i data-lucide="layers"></i> 8 Componentes Curados
-            </span>
-          </div>
+        <!-- Suite Selector: Sangar Studio Core vs. Librería Moxen -->
+        <div class="sg-suite-selector" role="tablist" aria-label="Colecciones de componentes y animaciones">
+          <button type="button" role="tab" id="tabSwitchSangar" class="sg-suite-pill is-active" aria-selected="true" aria-controls="sectionSangar">
+            <i data-lucide="sparkles"></i>
+            <span>Sangar Studio Core</span>
+            <span class="badge-count" id="countBadgeSangar">15</span>
+          </button>
+          <button type="button" role="tab" id="tabSwitchMoxen" class="sg-suite-pill" aria-selected="false" aria-controls="sectionMoxen">
+            <i data-lucide="play-circle"></i>
+            <span>Librería de Animaciones Moxen</span>
+            <span class="badge-count" id="countBadgeMoxen">880</span>
+          </button>
         </div>
 
-        <!-- Filter & Search Controls -->
-        <div class="library-controls">
-          <div class="search-box-wrapper">
-            <span class="search-icon"><i data-lucide="search"></i></span>
-            <input type="text" id="compSearchInput" class="search-input" aria-label="Buscar componentes UI" placeholder="Buscar componentes (spotlight, magnetic, dock, 3d, tilt, beam)...">
+        <!-- Section 1: Sangar Studio Core Components -->
+        <section id="sectionSangar" role="tabpanel" aria-labelledby="tabSwitchSangar">
+          <div class="sg-greeting sg-greeting--compact">
+            <h1 class="sg-greeting__title">Galería de Referencias UI &amp; Prompts para Agentes</h1>
+            <p class="sg-greeting__desc">Colección curada de microinteracciones, componentes interactivos y prompts listos para agentes de código (Claude Code, Cursor, v0). Cada pieza corre en vivo, cuenta con código en HTML/CSS y React, y copia un prompt optimizado para tu asistente.</p>
+            <div class="sg-greeting__actions">
+              <a href="index.html#generator" class="sg-btn sg-btn--secondary">
+                <i data-lucide="clapperboard"></i> Volver al Generador Motion
+              </a>
+              <span class="sg-btn sg-btn--outline" id="compCountPill" style="cursor:default;">
+                <i data-lucide="layers"></i> 15 Componentes Curados
+              </span>
+            </div>
           </div>
 
-          <div class="sg-filter-pills" id="compCategoryPills" role="group" aria-label="Filtrar componentes por categoría">
-            <button type="button" class="sg-filter-pill is-active" data-cat="all">Todos</button>
-            <button type="button" class="sg-filter-pill" data-cat="animation">Canvas &amp; Loops</button>
-            <button type="button" class="sg-filter-pill" data-cat="cards">Tarjetas &amp; Glow</button>
-            <button type="button" class="sg-filter-pill" data-cat="buttons">Botones Magnéticos</button>
-            <button type="button" class="sg-filter-pill" data-cat="text">Tipografía &amp; Scramble</button>
-            <button type="button" class="sg-filter-pill" data-cat="navigation">Navegación &amp; Docks</button>
-          </div>
-        </div>
+          <!-- Filter & Search Controls -->
+          <div class="library-controls">
+            <div class="search-box-wrapper">
+              <span class="search-icon"><i data-lucide="search"></i></span>
+              <input type="text" id="compSearchInput" class="search-input" aria-label="Buscar componentes UI" placeholder="Buscar por nombre, tags o prompt de agente (spotlight, bento, aurora, tilt, dock)...">
+            </div>
 
-        <!-- Components Showcase Grid -->
-        <div id="componentsShowcaseGrid" class="components-grid sg-stagger"></div>
+            <div class="sg-filter-pills" id="compCategoryPills" role="group" aria-label="Filtrar componentes por categoría">
+              <button type="button" class="sg-filter-pill is-active" data-cat="all">Todos</button>
+              <button type="button" class="sg-filter-pill" data-cat="cards">Tarjetas &amp; Bento</button>
+              <button type="button" class="sg-filter-pill" data-cat="buttons">Botones &amp; Badges</button>
+              <button type="button" class="sg-filter-pill" data-cat="text">Tipografía &amp; Scramble</button>
+              <button type="button" class="sg-filter-pill" data-cat="navigation">Navegación &amp; Docks</button>
+              <button type="button" class="sg-filter-pill" data-cat="backgrounds">Fondos &amp; Shaders</button>
+              <button type="button" class="sg-filter-pill" data-cat="animation">Canvas &amp; Loops</button>
+            </div>
+          </div>
+
+          <!-- Components Showcase Grid -->
+          <div id="componentsShowcaseGrid" class="components-grid sg-stagger"></div>
+        </section>
+
+        <!-- Section 2: Moxen Animation Components (880 Items) -->
+        <section id="sectionMoxen" role="tabpanel" aria-labelledby="tabSwitchMoxen" style="display: none;">
+          <div class="sg-greeting sg-greeting--compact">
+            <h1 class="sg-greeting__title">Librería de Animaciones Moxen</h1>
+            <p class="sg-greeting__desc">Catálogo exhaustivo de 880 microinteracciones, transiciones físicas y componentes cinéticos. Pasa el cursor por encima para previsualizar la animación en vídeo o copia en un solo clic el prompt optimizado para tu agente de IA (Claude Code, Cursor, v0, ChatGPT).</p>
+            <div class="sg-greeting__actions">
+              <span class="sg-badge sg-badge--coral"><i data-lucide="zap"></i> 880 Animaciones</span>
+              <span class="sg-badge"><i data-lucide="code-2"></i> 864 Sin Dependencias (HTML/CSS/JS)</span>
+              <span class="sg-badge"><i data-lucide="cpu"></i> WebGL &amp; Canvas</span>
+            </div>
+          </div>
+
+          <!-- Moxen Search & Filters -->
+          <div class="moxen-controls">
+            <div class="search-box-wrapper">
+              <span class="search-icon"><i data-lucide="search"></i></span>
+              <input type="text" id="moxenSearchInput" class="search-input" aria-label="Buscar animaciones Moxen" placeholder="Buscar entre 880 animaciones por nombre, concepto, categoría o dependencia...">
+            </div>
+
+            <div class="moxen-category-scroll" id="moxenCategoryPills" role="group" aria-label="Filtrar animaciones Moxen por categoría">
+              <button type="button" class="sg-filter-pill is-active" data-cat="all">Todas <span class="badge-count">880</span></button>
+            </div>
+          </div>
+
+          <!-- Moxen Grid -->
+          <div id="moxenGridContainer" class="moxen-grid"></div>
+
+          <!-- Moxen Load More -->
+          <div id="moxenLoadMoreWrap" class="moxen-load-more-wrap">
+            <div id="moxenCounterText" class="moxen-counter-text">Mostrando 24 de 880 animaciones</div>
+            <button type="button" id="btnMoxenLoadMore" class="sg-btn sg-btn--secondary">
+              <i data-lucide="chevron-down"></i>
+              <span>Cargar 24 animaciones más</span>
+            </button>
+          </div>
+        </section>
       </main>
 
       <footer class="app-footer">
         <div>
-          <strong>Sangar UI Components</strong> — Warm Studio OS · Inspirado en 21st.dev para React, Tailwind CSS y HTML/JS.
+          <strong>Sangar UI Studio</strong> — Warm Studio OS · Galería de Referencias &amp; Prompts UI para React, Tailwind CSS y HTML/JS.
         </div>
         <div>
           <a href="index.html#generator" class="sg-fusion-card__link">
@@ -224,11 +282,11 @@
           <span style="font-size:12px;color:var(--sg-gris-55);">Diseña primero tu Hero Frame en Midjourney v6.1 antes de animar en Runway o Kling.</span>
         </span>
       </a>
-      <a href="components.html" class="sg-notif-item" data-notif-id="notif-21st">
+      <a href="components.html" class="sg-notif-item" data-notif-id="notif-references">
         <span class="sg-notif-item__icon"><i data-lucide="layers"></i></span>
         <span>
-          <strong style="display:block;font-size:13px;color:var(--sg-negro);">Registro Sangar UI Components</strong>
-          <span style="font-size:12px;color:var(--sg-gris-55);">8 componentes interactivos estilo 21st.dev listos para copiar en React o HTML.</span>
+          <strong style="display:block;font-size:13px;color:var(--sg-negro);">Galería de Referencias &amp; Prompts UI</strong>
+          <span style="font-size:12px;color:var(--sg-gris-55);">15 componentes interactivos con prompts para agentes de código y soporte React + HTML.</span>
         </span>
       </a>
     </div>
@@ -257,6 +315,48 @@
         <span><kbd class="sg-kbd">Esc</kbd> Cerrar</span>
       </div>
       <span>Sangar Studio OS</span>
+    </div>
+  </dialog>
+
+  <!-- Moxen Detail Modal (<dialog> native modal) -->
+  <dialog id="moxenDetailModal" class="sg-moxen-dialog" closedby="any" aria-labelledby="moxenModalTitle">
+    <div class="sg-moxen-modal-inner">
+      <div class="sg-moxen-modal-head">
+        <div>
+          <span id="moxenModalCategory" class="moxen-card__category">Categoría</span>
+          <h3 id="moxenModalTitle" style="margin-top: 4px;">Nombre del Componente</h3>
+        </div>
+        <button type="button" id="moxenModalClose" class="sg-btn sg-btn--ghost sg-btn--sm" aria-label="Cerrar modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="sg-moxen-modal-video-wrap">
+        <video id="moxenModalVideo" loop autoplay muted playsinline controls poster=""></video>
+      </div>
+
+      <div class="sg-moxen-modal-body">
+        <p id="moxenModalTagline" style="font-size: 15px; font-weight: 600; color: #FFF; margin: 0;"></p>
+        <p id="moxenModalDesc" style="font-size: 13.5px; color: var(--sg-gris-70); line-height: 1.5; margin: 0;"></p>
+
+        <div class="sg-moxen-meta-row">
+          <span class="sg-badge" id="moxenModalDeps"><i data-lucide="box"></i> Sin dependencias</span>
+          <span class="sg-badge" id="moxenModalFiles"><i data-lucide="file-code"></i> 3 archivos</span>
+          <a href="#" id="moxenModalExternalLink" target="_blank" rel="noopener noreferrer" class="sg-fusion-card__link" style="margin-left: auto;">
+            Ver en Moxen.cl <i data-lucide="external-link"></i>
+          </a>
+        </div>
+
+        <div class="sg-moxen-prompt-box">
+          <div class="sg-moxen-prompt-box-header">
+            <span style="font-size: 11px; font-weight: 700; color: var(--sg-coral); text-transform: uppercase;">Prompt para Agentes (Claude Code / Cursor / v0 / ChatGPT)</span>
+            <button type="button" id="btnCopyMoxenModalPrompt" class="sg-btn sg-btn--primary sg-btn--xs">
+              <i data-lucide="copy"></i> Copiar Prompt
+            </button>
+          </div>
+          <pre class="sg-moxen-prompt-text" id="moxenModalPromptText"></pre>
+        </div>
+      </div>
     </div>
   </dialog>
 

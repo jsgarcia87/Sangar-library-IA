@@ -1489,7 +1489,8 @@ function registerCommandPaletteItems() {
     { id: 'view-glossary', scope: 'views', title: 'Guía & Glosario de Motion', subtitle: 'Flujo Image-to-Video y snippets', icon: 'graduation-cap', badge: 'Módulo', action: () => switchTab('glossary') },
     { id: 'view-tools', scope: 'views', title: 'Directorio de Herramientas IA', subtitle: 'Comparativa de modelos de vídeo y diseño', icon: 'cpu', badge: 'Módulo', action: () => switchTab('tools') },
     { id: 'view-favorites', scope: 'views', title: 'Mis Favoritos', subtitle: 'Prompts guardados localmente', icon: 'star', badge: 'Módulo', action: () => switchTab('favorites') },
-    { id: 'view-components', scope: 'views', title: 'Componentes UI (21st.dev)', subtitle: 'Abrir librería interactiva de componentes', icon: 'layers', badge: 'Suite', action: () => { window.location.href = 'components.html'; } }
+    { id: 'view-components-core', scope: 'views', title: 'Sangar Studio Core UI (15 componentes)', subtitle: 'Microinteracciones interactivas en vivo con prompts para agentes de código', icon: 'sparkles', badge: 'UI Core', action: () => { window.location.href = 'components.html#sangar'; } },
+    { id: 'view-components-moxen', scope: 'views', title: 'Librería de Animaciones Moxen (880 animaciones)', subtitle: 'Catálogo de 880 microinteracciones, transiciones y componentes cinéticos con vídeo y prompt', icon: 'play-circle', badge: 'Moxen 880', action: () => { window.location.href = 'components.html#moxen'; } }
   ];
 
   (state.config.presets || []).forEach(p => {
