@@ -1,0 +1,57 @@
+/* Cruce · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --cr-fondo: #0a0a0a;
+  --cr-texto: #f4f4f4;
+  --cr-suave: rgba(255, 255, 255, .5);
+  --cr-linea: rgba(255, 255, 255, .14);
+  --cr-hueco: rgba(255, 255, 255, .32);   /* el contorno de la fila de abajo */
+  --cr-recorrido: 400vh;                   /* más alto, más lento cruza */
+}
+:root[data-tema="claro"] {
+  --cr-fondo: #eeeeee;
+  --cr-texto: #0a0a0a;
+  --cr-suave: rgba(0, 0, 0, .5);
+  --cr-linea: rgba(0, 0, 0, .14);
+  --cr-hueco: rgba(0, 0, 0, .24);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--cr-fondo); color: var(--cr-texto); overflow: hidden; }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-cruce] {
+  height: 100%; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: none;
+}
+[data-cruce]::-webkit-scrollbar { display: none; }
+.cr-pista { height: var(--cr-recorrido); }
+/* el escenario se pega arriba mientras la pista pasa por debajo */
+.cr-escenario { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+
+.cr-frase {
+  position: absolute; left: 0; top: 50%; margin: 0; translate: 0 -62%;
+  font-size: 30vh; font-weight: 600; line-height: 1; letter-spacing: -.05em; white-space: nowrap;
+  will-change: transform; transform-origin: 50% 70%;
+}
+/* cada palabra se rellena al pasar por el centro: --ll va de 0 a 1 */
+.cr-palabra {
+  display: inline-block; --ll: 0;
+  color: color-mix(in srgb, var(--cr-texto) calc(var(--ll) * 100%), transparent);
+  -webkit-text-stroke: 2px var(--cr-texto);
+}
+.cr-contra {
+  position: absolute; left: 0; bottom: 17vh; margin: 0; white-space: nowrap; will-change: transform;
+  font-size: 9vh; font-weight: 500; letter-spacing: -.03em; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px var(--cr-hueco);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.cr-rotulo, .cr-cifra {
+  position: absolute; top: 6vh; margin: 0; font-size: .8rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--cr-suave);
+}
+.cr-rotulo { left: 6vw; }
+.cr-cifra { right: 6vw; font-variant-numeric: tabular-nums; }
+.cr-cifra::after { content: " %"; }
+.cr-barra { position: absolute; left: 6vw; right: 6vw; bottom: 8vh; height: 1px; background: var(--cr-linea); }
+.cr-barra i { position: absolute; inset: 0; background: var(--cr-texto); transform-origin: 0 50%; transform: scaleX(0); }

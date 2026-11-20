@@ -1,0 +1,63 @@
+/* Insignia · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --in-fondo: #0a0a0a;
+  --in-texto: #f4f4f4;
+  --in-suave: rgba(255, 255, 255, .5);
+  --in-tarjeta: #151515;
+  --in-borde: rgba(255, 255, 255, .09);
+  --in-insignia: #f4f4f4;       /* la insignia, en negativo */
+  --in-insignia-texto: #0a0a0a;
+  --in-alto: 46px;
+}
+:root[data-tema="claro"] {
+  --in-fondo: #eeeeee;
+  --in-texto: #0a0a0a;
+  --in-suave: rgba(0, 0, 0, .5);
+  --in-tarjeta: #ffffff;
+  --in-borde: rgba(0, 0, 0, .08);
+  --in-insignia: #0a0a0a;
+  --in-insignia-texto: #f4f4f4;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--in-fondo); color: var(--in-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* la insignia salta desde su base: ahí se aplasta al despegar y al caer */
+.in-insignia {
+  position: absolute; top: -13px; right: -13px; height: var(--in-alto); min-width: var(--in-alto);
+  transform-origin: 50% 100%; pointer-events: none; z-index: 1;
+}
+.in-cuerpo {
+  position: relative; height: 100%; display: grid; place-items: center; padding: 0 14px; overflow: hidden;
+  border-radius: 99px; background: var(--in-insignia); color: var(--in-insignia-texto);
+  box-shadow: 0 0 0 5px var(--in-fondo);                /* el recorte alrededor */
+  font-size: 1.35rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums;
+  transition: width .38s cubic-bezier(.22, 1, .36, 1);
+}
+.in-cuerpo span { grid-area: 1 / 1; white-space: nowrap; }
+/* el aro que se abre al cambiar la cifra */
+.in-onda {
+  position: absolute; inset: 0; border-radius: 99px; border: 2px solid var(--in-insignia);
+  opacity: 0; pointer-events: none;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.in-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3.4rem; padding: 2rem 1rem;
+}
+.in-fila { display: flex; gap: clamp(1.5rem, 6vw, 5rem); }
+.in-item { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.in-item figcaption { color: var(--in-suave); font-size: 1.05rem; }
+.in-icono {
+  position: relative; width: 168px; height: 168px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border-radius: 44px; border: 1px solid var(--in-borde); background: var(--in-tarjeta); color: var(--in-texto);
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1);
+}
+.in-icono:active { transform: scale(.95); }
+.in-icono:focus-visible { outline: 2px solid var(--in-suave); outline-offset: 4px; }
+.in-icono svg { width: 62px; height: 62px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.in-pista { margin: 0; color: var(--in-suave); font-size: .95rem; text-align: center; }
+@media (max-width: 640px) { .in-icono { width: 84px; height: 84px; border-radius: 24px; } .in-icono svg { width: 34px; height: 34px; } }

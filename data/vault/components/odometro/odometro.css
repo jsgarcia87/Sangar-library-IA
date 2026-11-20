@@ -1,0 +1,54 @@
+/* Odómetro · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --od-fondo: #0a0a0a;
+  --od-texto: #f4f4f4;
+  --od-suave: rgba(255, 255, 255, .5);
+  --od-linea: rgba(255, 255, 255, .14);
+  --od-alto: 1.12em;        /* lo que mide una cifra en el tambor */
+}
+:root[data-tema="claro"] {
+  --od-fondo: #eeeeee;
+  --od-texto: #0a0a0a;
+  --od-suave: rgba(0, 0, 0, .5);
+  --od-linea: rgba(0, 0, 0, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--od-fondo); color: var(--od-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.od-numero { display: inline-flex; align-items: center; font-variant-numeric: tabular-nums; }
+/* la ventana de cada tambor: deja ver la cifra de delante y un poco de
+   las vecinas, que se funden arriba y abajo */
+.od-col {
+  position: relative; width: .62em; height: var(--od-alto); padding: .3em 0; box-sizing: content-box;
+  margin: -.3em 0; perspective: 1400px; transition: opacity .5s;
+  -webkit-mask-image: linear-gradient(transparent, #000 28%, #000 72%, transparent);
+          mask-image: linear-gradient(transparent, #000 28%, #000 72%, transparent);
+}
+.od-col.is-cero { opacity: .28; }            /* los ceros de la izquierda, apagados */
+.od-rueda { position: absolute; left: 0; right: 0; top: .3em; height: var(--od-alto); transform-style: preserve-3d; }
+.od-cara {
+  position: absolute; inset: 0; display: grid; place-items: center; line-height: 1;
+  backface-visibility: hidden;
+}
+.od-punto { width: .26em; text-align: center; opacity: .5; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.od-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.2rem; padding: 2rem 1rem;
+}
+.od-rotulo { margin: 0; font-size: .85rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--od-suave); }
+.od-lectura {
+  display: flex; align-items: baseline; gap: .25em; font-size: clamp(3rem, 12vw, 11rem); font-weight: 600; letter-spacing: -.02em;
+}
+.od-unidad { font-size: .3em; font-weight: 500; color: var(--od-suave); letter-spacing: 0; }
+.od-boton {
+  padding: .9rem 1.6rem; border-radius: 99px; cursor: pointer; border: 1px solid var(--od-linea);
+  background: none; color: var(--od-texto); font: 500 1rem "General Sans", system-ui, sans-serif;
+  transition: border-color .2s, transform .2s cubic-bezier(.22, 1, .36, 1);
+}
+.od-boton:hover { border-color: var(--od-suave); }
+.od-boton:active { transform: scale(.96); }

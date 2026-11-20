@@ -1,0 +1,57 @@
+/* Barra · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --br-fondo: #0a0a0a;
+  --br-texto: #f4f4f4;
+  --br-suave: rgba(255, 255, 255, .55);
+  --br-linea: rgba(255, 255, 255, .16);
+  --br-punto: 12px;          /* el cursor en reposo */
+  --br-curva: cubic-bezier(.22, 1, .36, 1);
+}
+:root[data-tema="claro"] {
+  --br-fondo: #eeeeee;
+  --br-texto: #0a0a0a;
+  --br-suave: rgba(0, 0, 0, .55);
+  --br-linea: rgba(0, 0, 0, .16);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--br-fondo); color: var(--br-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.br-activo, .br-activo * { cursor: none !important; }
+/* la caja de fuera solo se mueve; la de dentro cambia de forma y queda
+   siempre centrada, aunque esté a mitad de transición */
+.br-cursor {
+  position: fixed; left: 0; top: 0; z-index: 1000; width: 0; height: 0; pointer-events: none;
+  mix-blend-mode: difference;
+}
+.br-cursor:not([data-visible]) { opacity: 0; transition: opacity .3s ease; }
+.br-forma {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  width: var(--br-punto); height: var(--br-punto); border-radius: 99px;
+  background: #fff; border: 0 solid #fff;
+  transition: width .38s var(--br-curva), height .38s var(--br-curva), border-radius .38s var(--br-curva),
+              background-color .25s ease, border-width .25s ease;
+}
+/* sobre texto: una barra de la altura de la línea */
+.br-cursor[data-modo="texto"] .br-forma { width: 3.5px; height: var(--br-alto, 24px); border-radius: 2px; }
+/* quieto sobre texto parpadea, como un cursor de escribir */
+.br-cursor[data-modo="texto"][data-quieto] .br-forma { animation: br-parpadeo 1.05s steps(1) infinite; }
+@keyframes br-parpadeo { 50% { opacity: 0; } }
+/* sobre un botón: un círculo hueco que lo abraza */
+.br-cursor[data-modo="boton"] .br-forma {
+  width: var(--br-aro, 72px); height: var(--br-aro, 72px); background: transparent; border-width: 1.5px;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.br-escena { min-height: 100%; display: grid; place-items: center; padding: 3rem 1.5rem; }
+.br-bloque { width: min(100%, 980px); }
+.br-titulo { margin: 0; font-size: clamp(2.6rem, 7vw, 5.6rem); font-weight: 500; line-height: 1.02; letter-spacing: -.045em; max-width: 13ch; }
+.br-texto { margin: 2rem 0 0; max-width: 38ch; font-size: 1.3rem; line-height: 1.5; color: var(--br-suave); }
+.br-botones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2.6rem; }
+.br-boton {
+  padding: 1rem 1.7rem; border-radius: 99px; border: 1px solid var(--br-linea);
+  background: none; color: var(--br-texto); font: inherit; font-size: 1rem; font-weight: 500;
+}
+.br-boton--lleno { background: var(--br-texto); color: var(--br-fondo); border-color: var(--br-texto); }

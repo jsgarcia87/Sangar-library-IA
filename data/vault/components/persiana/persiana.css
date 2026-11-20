@@ -1,0 +1,36 @@
+/* Persiana · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ps-fondo: #0a0a0a;
+  --ps-texto: #f4f4f4;
+  --ps-suave: rgba(255, 255, 255, .5);
+}
+:root[data-tema="claro"] {
+  --ps-fondo: #eeeeee;
+  --ps-texto: #0a0a0a;
+  --ps-suave: rgba(0, 0, 0, .5);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ps-fondo); color: var(--ps-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el molde invisible da el tamaño; encima, las lamas: copias del texto
+   recortadas cada una a su franja */
+[data-persiana] { position: relative; }
+.ps-molde { visibility: hidden; }
+.ps-lamas { position: absolute; inset: 0; pointer-events: none; }
+.ps-lama {
+  position: absolute; inset: 0; backface-visibility: hidden; will-change: transform, opacity;
+  opacity: 0;            /* cerrada hasta que abre() la gira */
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ps-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.4rem; padding: 2rem 1rem; text-align: center; cursor: pointer; user-select: none;
+}
+.ps-frase {
+  margin: 0; font-size: clamp(3rem, 11.5vw, 11rem); font-weight: 600; line-height: .96; letter-spacing: -.05em;
+}
+.ps-pista { margin: 0; color: var(--ps-suave); font-size: .95rem; }

@@ -1,0 +1,86 @@
+/* Calco · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ca-fondo: #0a0a0a;
+  --ca-texto: #f4f4f4;
+  --ca-suave: rgba(255, 255, 255, .5);
+  --ca-linea: rgba(255, 255, 255, .16);
+  --ca-campo: #121212;
+  --ca-marca: rgba(255, 255, 255, .14);   /* la selección que barre el texto */
+  --ca-cara: #f4f4f4;                     /* el botón */
+  --ca-letra: #0a0a0a;
+  --ca-ok: #1f9d55;
+}
+:root[data-tema="claro"] {
+  --ca-fondo: #eeeeee;
+  --ca-texto: #0a0a0a;
+  --ca-suave: rgba(0, 0, 0, .5);
+  --ca-linea: rgba(0, 0, 0, .14);
+  --ca-campo: #ffffff;
+  --ca-marca: rgba(0, 0, 0, .1);
+  --ca-cara: #0a0a0a;
+  --ca-letra: #f4f4f4;
+  --ca-ok: #4ade80;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ca-fondo); color: var(--ca-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ca-texto { position: relative; white-space: nowrap; }
+.ca-letra { display: inline-block; }
+/* la selección: barre el texto justo antes de que salga la copia */
+.ca-texto::before {
+  content: ""; position: absolute; inset: -.18em -.2em; border-radius: 6px; background: var(--ca-marca);
+  transform: scaleX(0); transform-origin: left; opacity: 0;
+  transition: transform .26s cubic-bezier(.22, 1, .36, 1), opacity .4s;
+}
+.is-copiando .ca-texto::before { transform: none; opacity: 1; }
+
+/* las copias que vuelan: letras sueltas, fijas a la ventana */
+.ca-vuela { position: fixed; left: 0; top: 0; z-index: 30; pointer-events: none; white-space: pre; will-change: transform, opacity; }
+
+.ca-boton { display: inline-flex; align-items: center; gap: .55em; }
+.ca-icono { position: relative; width: 1.15em; height: 1.15em; flex: none; }
+.ca-icono svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ca-icono path, .ca-icono rect { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* el portapapeles traga: se hincha mientras llegan las letras y escupe la palomita */
+.ca-tabla { transform-origin: 50% 60%; transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), opacity .2s; }
+.ca-renglon { stroke-dasharray: 8; stroke-dashoffset: 8; transition: stroke-dashoffset .3s; }
+.is-tragando .ca-tabla { transform: scale(1.22); }
+.is-tragando .ca-renglon { stroke-dashoffset: 0; }
+.ca-palomita path { stroke: var(--ca-ok); stroke-width: 2.6; stroke-dasharray: 24; stroke-dashoffset: 24; }
+.is-copiado .ca-tabla { transform: scale(.4); opacity: 0; }
+.is-copiado .ca-palomita path { stroke-dashoffset: 0; transition: stroke-dashoffset .45s .08s cubic-bezier(.22, 1, .36, 1); }
+
+.ca-palabras { display: inline-grid; text-align: left; }
+.ca-palabras > span { grid-area: 1 / 1; transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .3s; }
+.ca-palabras > span + span { opacity: 0; transform: translateY(60%); }
+.is-copiado .ca-palabras > span:first-child { opacity: 0; transform: translateY(-60%); }
+.is-copiado .ca-palabras > span + span { opacity: 1; transform: none; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ca-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem;
+}
+.ca-campo {
+  display: flex; align-items: center; gap: 2.4rem; height: 104px; padding: 0 12px 0 2.2rem;
+  border: 1px solid var(--ca-linea); border-radius: 26px; background: var(--ca-campo);
+}
+.ca-texto { font: 400 1.75rem/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: -.01em; }
+.ca-boton {
+  height: 80px; padding: 0 1.5em; border: 0; border-radius: 18px; cursor: pointer;
+  background: var(--ca-cara); color: var(--ca-letra);
+  font: 500 1.6rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.01em;
+  -webkit-tap-highlight-color: transparent;
+}
+.ca-boton:focus-visible { outline: 2px solid var(--ca-texto); outline-offset: 4px; }
+.ca-pista { margin: 0; color: var(--ca-suave); font-size: .95rem; }
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  .ca-campo { gap: 1rem; height: 84px; padding-left: 1.2rem; max-width: calc(100vw - 2rem); }
+  .ca-texto { font-size: 1rem; overflow: hidden; text-overflow: ellipsis; }
+  .ca-boton { height: 64px; font-size: 1.2rem; padding: 0 1em; }
+}

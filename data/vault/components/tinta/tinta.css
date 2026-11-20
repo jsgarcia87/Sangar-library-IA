@@ -1,0 +1,36 @@
+/* Tinta · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --tn-fondo: #0a0a0a;
+  --tn-texto: #f4f4f4;
+  --tn-suave: rgba(255, 255, 255, .5);
+  --tn-hueco: rgba(255, 255, 255, .28);     /* el texto antes de la tinta: solo el contorno */
+  --tn-mancha: rgba(255, 255, 255, .07);   /* la huella de la tinta en el papel */
+}
+:root[data-tema="claro"] {
+  --tn-fondo: #eeeeee;
+  --tn-texto: #0a0a0a;
+  --tn-suave: rgba(0, 0, 0, .5);
+  --tn-hueco: rgba(0, 0, 0, .26);
+  --tn-mancha: rgba(0, 0, 0, .06);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--tn-fondo); color: var(--tn-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.tn-lienzo { display: block; width: min(92vw, 1200px); height: auto; overflow: visible; cursor: crosshair; touch-action: manipulation; }
+.tn-lienzo text {
+  font-family: "General Sans", system-ui, sans-serif; font-size: 136px; font-weight: 600; letter-spacing: -6px;
+  text-anchor: middle;
+}
+.tn-fantasma text { fill: none; stroke: var(--tn-hueco); stroke-width: 1.4; }
+.tn-tinta text { fill: var(--tn-texto); }
+.tn-huella { fill: var(--tn-mancha); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.tn-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem; padding: 2rem 1rem; user-select: none;
+}
+.tn-pista { margin: 0; color: var(--tn-suave); font-size: .95rem; text-align: center; }

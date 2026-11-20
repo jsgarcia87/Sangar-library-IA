@@ -1,0 +1,65 @@
+/* Trazo · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --tz-fondo: #0a0a0a;
+  --tz-texto: #f4f4f4;
+  --tz-suave: rgba(255, 255, 255, .5);
+  --tz-tenue: rgba(255, 255, 255, .38);
+  --tz-linea: rgba(255, 255, 255, .1);
+  --tz-tinta: #f4f4f4;       /* el color del ✓ y de la tachadura */
+}
+:root[data-tema="claro"] {
+  --tz-fondo: #eeeeee;
+  --tz-texto: #0a0a0a;
+  --tz-suave: rgba(0, 0, 0, .5);
+  --tz-tenue: rgba(0, 0, 0, .4);
+  --tz-linea: rgba(0, 0, 0, .1);
+  --tz-tinta: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--tz-fondo); color: var(--tz-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.tz-item { position: relative; display: flex; align-items: center; gap: 1.2rem; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* la casilla de verdad sigue ahí, invisible, para el teclado y los lectores */
+.tz-item input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.tz-caja { flex: none; width: 50px; height: 50px; }
+.tz-caja svg, .tz-tacha { display: block; overflow: visible; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.tz-caja svg { width: 100%; height: 100%; }
+.tz-borde { stroke: var(--tz-tenue); stroke-width: 1.8; transition: stroke .3s; }
+.tz-item:hover .tz-borde { stroke: var(--tz-suave); }
+.tz-item input:checked ~ .tz-caja .tz-borde { stroke: var(--tz-suave); }
+.tz-item input:focus-visible ~ .tz-caja { outline: 2px solid var(--tz-suave); outline-offset: 4px; border-radius: 8px; }
+
+/* El ✓ y la tachadura son trazos con pathLength 1: se dibujan corriendo
+   el desfase de 1,1 a 0. Al marcar, como una mano que acelera y frena;
+   al desmarcar, se borran más rápido y al revés. */
+.tz-visto, .tz-tacha path {
+  stroke: var(--tz-tinta); stroke-dasharray: 1 1.2; stroke-dashoffset: 1.1;
+  transition: stroke-dashoffset .22s cubic-bezier(.4, 0, 1, 1);
+}
+.tz-visto { stroke-width: 3; }
+.tz-item input:checked ~ .tz-caja .tz-visto {
+  stroke-dashoffset: 0; transition: stroke-dashoffset .46s cubic-bezier(.55, .05, .35, 1);
+}
+.tz-texto { position: relative; font-size: 1.65rem; letter-spacing: -.015em; transition: color .4s; }
+.tz-tacha { position: absolute; left: -4px; top: 50%; width: calc(100% + 8px); height: 14px; margin-top: -6px; pointer-events: none; }
+.tz-tacha path { stroke-width: 2.4; }
+.tz-item input:checked ~ .tz-texto { color: var(--tz-suave); }
+.tz-item input:checked ~ .tz-texto .tz-tacha path {
+  stroke-dashoffset: 0; transition: stroke-dashoffset .42s cubic-bezier(.5, 0, .3, 1) .34s;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.tz-escena { height: 100%; display: grid; place-items: center; padding: 2rem; }
+.tz-tarjeta { width: min(660px, 100%); padding: 2.4rem 2.6rem; border-radius: 30px; border: 1px solid var(--tz-linea); background: rgba(127, 127, 127, .05); }
+.tz-cabeza { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.6rem; }
+.tz-cabeza h1 { margin: 0; font-size: 2.1rem; font-weight: 500; letter-spacing: -.04em; }
+.tz-cabeza p { margin: 0; color: var(--tz-suave); font-size: 1rem; font-variant-numeric: tabular-nums; }
+.tz-lista { list-style: none; margin: 0; padding: 0; }
+.tz-lista li { padding: 1.05rem 0; border-top: 1px solid var(--tz-linea); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tz-visto, .tz-tacha path { transition-duration: .01s !important; transition-delay: 0s !important; }
+}

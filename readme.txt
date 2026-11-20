@@ -31,7 +31,7 @@ SUITES DE LA PLATAFORMA
 2. Galería de Referencias UI & Prompts de Agentes (components.html)
    - Selector dual de Suites:
      * Sangar Studio Core (15 componentes interactivos curados con código React/HTML y prompts)
-     * Librería de Animaciones Moxen (880 animaciones con preview en vídeo al pasar el ratón)
+     * Sangar Motion Vault (880 animaciones interactivas descargadas en local con vídeo y prompts)
 
    A) Sangar Studio Core (15 Componentes):
       * Spotlight Border Card (seguimiento reactivo del puntero)
@@ -55,14 +55,16 @@ SUITES DE LA PLATAFORMA
       * Código fuente en HTML/CSS/Vanilla JS
       * Código fuente en React + Tailwind CSS
 
-   B) Librería de Animaciones Moxen (880 Componentes):
-      * Catálogo de 880 microinteracciones y transiciones procedentes de moxen.cl/recursos.html.
+   B) Sangar Motion Vault (880 Componentes Locales):
+      * Bóveda privada de 880 microinteracciones y transiciones descargadas íntegramente en local.
+      * Activos offline: posters JPG en public/assets/vault/posters/ y vídeos MP4 en public/assets/vault/videos/.
+      * Código fuente local: archivos index.html, CSS y JS en data/vault/components/{id}/.
       * 24 Categorías: Formularios (119), Sistemas (99), Gráficos (63), Listas (59), Texto (55),
         Navegación (51), Secciones (45), Avisos (40), Precios (39), Generativo (38), Tarjetas (32),
         Media (31), Cargas (27), Diagramas (27), Botones (24), Galerías (22), Iconos (21),
         Interruptores (19), Transiciones (14), 3D (14), Scroll (11), Portadas (11), Fondos (10), Cursor (9).
       * 864 componentes nativos sin dependencias externas (HTML/CSS/JS).
-      * Previsualización instantánea de vídeo al pasar el cursor (preload perezoso).
+      * Previsualización instantánea de vídeo al pasar el cursor (100% local sin peticiones externas).
       * Buscador en tiempo real y filtrado dinámico por categoría y dependencia.
       * Paginación progresiva suave (+24 componentes por tanda).
       * Modal de detalle nativo (<dialog>) con vídeo ampliado, estructura de archivos y

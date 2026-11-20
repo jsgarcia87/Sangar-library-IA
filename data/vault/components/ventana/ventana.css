@@ -1,0 +1,48 @@
+/* Ventana · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --vt-fondo: #0a0a0a;
+  --vt-texto: #f4f4f4;
+  --vt-suave: rgba(255, 255, 255, .5);
+
+  /* Los rellenos por defecto: degradados con grano, sin imágenes que
+     cargar. Cámbialos por tus fotos con la opción `rellenos`. */
+  --vt-grano: repeating-linear-gradient(0deg, rgba(0, 0, 0, .14) 0 1px, transparent 1px 3px);
+  --vt-1: var(--vt-grano), radial-gradient(circle at 25% 30%, #ffb36b, transparent 55%), linear-gradient(135deg, #ff4d2e, #6b1d8f);
+  --vt-2: var(--vt-grano), radial-gradient(circle at 70% 20%, #9ff3ff, transparent 50%), linear-gradient(160deg, #1641ff, #08142f);
+  --vt-3: var(--vt-grano), radial-gradient(circle at 40% 70%, #fff3a3, transparent 55%), linear-gradient(120deg, #2fbf71, #0a3d2b);
+  --vt-4: var(--vt-grano), conic-gradient(from 210deg at 60% 40%, #ff2d75, #ffb0d0, #5b2bff, #ff2d75);
+  --vt-5: var(--vt-grano), radial-gradient(circle at 30% 80%, #ffffff, transparent 45%), linear-gradient(180deg, #8a8a8a, #1a1a1a);
+  --vt-6: var(--vt-grano), radial-gradient(circle at 75% 65%, #ffd166, transparent 50%), linear-gradient(200deg, #ef476f, #3a0ca3);
+  --vt-7: var(--vt-grano), linear-gradient(90deg, #00c2a8 0 33%, #f9f7f1 33% 66%, #ff6b3d 66%);
+  --vt-8: var(--vt-grano), radial-gradient(circle at 50% 40%, #c7f9cc, transparent 50%), linear-gradient(145deg, #22577a, #57cc99);
+}
+:root[data-tema="claro"] { --vt-fondo: #eeeeee; --vt-texto: #0a0a0a; --vt-suave: rgba(0, 0, 0, .5); }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--vt-fondo); color: var(--vt-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.vt-letra { position: relative; display: inline-block; }
+.vt-base { transition: opacity .15s; }
+.vt-letra.is-abierta .vt-base { opacity: 0; }
+.vt-capa {
+  position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: saturate(1.15) contrast(1.1);
+  transition: opacity .13s ease-out;
+}
+.vt-capa.is-on { opacity: 1; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.vt-escena {
+  height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 1.4rem; padding: 2rem; text-align: center;
+}
+.vt-palabra {
+  margin: 0; font-size: clamp(5rem, 24vw, 22rem); font-weight: 600; line-height: .9; letter-spacing: -.06em;
+  user-select: none;
+}
+.vt-palabra .vt-letra { cursor: pointer; }
+.vt-pista { margin: 0; color: var(--vt-suave); font-size: .95rem; }

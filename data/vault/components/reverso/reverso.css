@@ -1,0 +1,127 @@
+/* Reverso · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --rv-fondo: #0a0a0a;
+  --rv-texto: #f4f4f4;
+  --rv-suave: rgba(255, 255, 255, .5);
+  --rv-linea: rgba(255, 255, 255, .14);
+  --rv-caja: rgba(255, 255, 255, .04);
+  --rv-bien: #2fbf71;
+  /* la tarjeta es un objeto: tiene sus colores propios en los dos temas */
+  --rv-carta-1: #2c2c2c;
+  --rv-carta-2: #0f0f0f;
+  --rv-carta-texto: #f4f4f4;
+  --rv-ancho: 440px;
+  --rv-sombra: rgba(0, 0, 0, .75);
+}
+:root[data-tema="claro"] {
+  --rv-fondo: #eeeeee;
+  --rv-texto: #0a0a0a;
+  --rv-suave: rgba(0, 0, 0, .5);
+  --rv-linea: rgba(0, 0, 0, .14);
+  --rv-caja: rgba(255, 255, 255, .7);
+  --rv-bien: #1f9d5a;
+  --rv-sombra: rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rv-fondo); color: var(--rv-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* El marco da la perspectiva y la inclinación hacia el cursor; dentro,
+   la tarjeta gira sobre su eje vertical y muestra el dorso. */
+.rv-pago { perspective: 1400px; }
+.rv-carta-marco {
+  width: var(--rv-ancho); aspect-ratio: 1.586; transform-style: preserve-3d;
+  transform: rotateX(var(--rv-tx, 0deg)) rotateY(var(--rv-ty, 0deg)); transition: transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.rv-carta {
+  position: relative; width: 100%; height: 100%; transform-style: preserve-3d;
+  transition: transform .85s cubic-bezier(.3, 1.25, .45, 1);
+}
+.rv-carta.is-vuelta { transform: rotateY(180deg); }
+.rv-cara {
+  position: absolute; inset: 0; border-radius: 22px; overflow: hidden; color: var(--rv-carta-texto);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(255, 255, 255, .14), transparent 55%),
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 9px),
+    linear-gradient(140deg, var(--rv-carta-1), var(--rv-carta-2));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 30px 60px -28px var(--rv-sombra);
+}
+.rv-dorso { transform: rotateY(180deg); }
+
+.rv-frente { padding: 1.8rem 1.9rem; display: flex; flex-direction: column; }
+.rv-chip {
+  width: 50px; height: 38px; border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent 32%, rgba(0, 0, 0, .25) 32% 34%, transparent 34% 66%, rgba(0, 0, 0, .25) 66% 68%, transparent 68%),
+    linear-gradient(transparent 46%, rgba(0, 0, 0, .25) 46% 54%, transparent 54%),
+    linear-gradient(135deg, #e6e6e6, #9b9b9b);
+}
+.rv-sin-contacto { position: absolute; right: 1.7rem; top: 1.8rem; width: 30px; height: 30px; fill: none; stroke: rgba(255, 255, 255, .6); stroke-width: 1.6; stroke-linecap: round; }
+.rv-numero { display: flex; gap: .9rem; margin: auto 0 1.2rem; font-size: 1.62rem; font-weight: 500; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.rv-numero b { display: flex; font-weight: inherit; }
+.rv-numero i { display: inline-block; width: .66em; font-style: normal; text-align: center; }
+.rv-numero i.is-vacia { opacity: .4; }
+/* cada cifra nueva cae en su sitio */
+.rv-numero i.is-nueva { animation: rv-cae .35s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes rv-cae { from { transform: translateY(-12px); opacity: 0; } }
+.rv-pie { display: flex; justify-content: space-between; }
+.rv-pie p { margin: 0; display: flex; flex-direction: column; gap: .2rem; font-size: 1.02rem; letter-spacing: .06em; }
+.rv-pie p:last-child { text-align: right; }
+.rv-pie small { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; opacity: .55; }
+
+.rv-banda { position: absolute; left: 0; right: 0; top: 30px; height: 52px; background: #050505; }
+.rv-leyenda { position: absolute; right: 1.9rem; top: 104px; margin: 0; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
+.rv-firma {
+  position: absolute; left: 1.9rem; right: 1.9rem; top: 126px; height: 50px; display: flex; justify-content: flex-end; align-items: center;
+  border-radius: 6px; background: repeating-linear-gradient(-45deg, #dcdcdc 0 6px, #cfcfcf 6px 12px);
+}
+.rv-firma span {
+  height: 100%; min-width: 84px; display: grid; place-items: center; padding: 0 .8rem; border-radius: 0 6px 6px 0;
+  background: #fafafa; color: #0a0a0a; font-size: 1.3rem; font-weight: 600; letter-spacing: .14em; font-style: italic;
+}
+
+/* el marco de foco: se desliza hasta la zona de la tarjeta que estás llenando */
+.rv-foco {
+  position: absolute; left: 0; top: 0; border-radius: 12px; pointer-events: none;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .85), 0 0 0 6px rgba(255, 255, 255, .08); opacity: 0;
+  transform: translate(var(--fx, 0px), var(--fy, 0px)); width: var(--fw, 0px); height: var(--fh, 0px);
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1), width .5s cubic-bezier(.22, 1, .36, 1), height .5s cubic-bezier(.22, 1, .36, 1), opacity .3s;
+}
+.rv-foco.is-visible { opacity: 1; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.rv-escena { height: 100%; display: grid; place-items: center; padding: 2rem; }
+.rv-pago { display: flex; align-items: center; gap: 4.5rem; }
+.rv-formulario { width: 380px; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.rv-ancho { grid-column: 1 / -1; }
+.rv-aviso { grid-column: 1 / -1; margin: 0 0 .4rem; color: var(--rv-suave); font-size: .88rem; }
+.rv-campo { display: flex; flex-direction: column; gap: .45rem; font-size: .88rem; color: var(--rv-suave); }
+.rv-campo input {
+  height: 54px; padding: 0 1rem; border: 0; border-radius: 14px; outline: none; background: var(--rv-caja);
+  box-shadow: inset 0 0 0 1px var(--rv-linea); color: var(--rv-texto); font: inherit; font-size: 1.1rem;
+  font-variant-numeric: tabular-nums; transition: box-shadow .2s;
+}
+.rv-campo input::placeholder { color: var(--rv-suave); opacity: .55; }
+.rv-campo input:focus { box-shadow: inset 0 0 0 1.5px var(--rv-texto); }
+.rv-pagar {
+  position: relative; height: 56px; margin-top: .5rem; border: 0; border-radius: 14px; overflow: hidden;
+  background: var(--rv-texto); color: var(--rv-fondo); font: inherit; font-size: 1.05rem; font-weight: 500; cursor: pointer;
+  transition: background-color .3s, color .3s;
+}
+.rv-pagar span { position: absolute; inset: 0; display: grid; place-items: center; transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
+.rv-pagar span + span { transform: translateY(100%); }
+.rv-pagar.is-listo { background: var(--rv-bien); color: #fff; }
+.rv-pagar.is-listo span:first-child { transform: translateY(-100%); }
+.rv-pagar.is-listo span + span { transform: none; }
+
+@media (max-width: 960px) {
+  .rv-pago { flex-direction: column; gap: 2rem; }
+  :root { --rv-ancho: min(440px, calc(100vw - 2rem)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-carta, .rv-carta-marco { transition-duration: .01s; }
+  .rv-numero i.is-nueva { animation: none; }
+}

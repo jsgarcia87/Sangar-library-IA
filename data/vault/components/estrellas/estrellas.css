@@ -1,0 +1,55 @@
+/* Estrellas · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --et-fondo: #0a0a0a;
+  --et-texto: #f4f4f4;
+  --et-suave: rgba(255, 255, 255, .5);
+  --et-apagada: rgba(255, 255, 255, .28);
+  --et-tam: 76px;
+  --et-hueco: 16px;
+}
+:root[data-tema="claro"] {
+  --et-fondo: #eeeeee;
+  --et-texto: #0a0a0a;
+  --et-suave: rgba(0, 0, 0, .5);
+  --et-apagada: rgba(0, 0, 0, .28);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--et-fondo); color: var(--et-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.et-estrellas { position: relative; display: flex; gap: var(--et-hueco); touch-action: manipulation; }
+.et-estrella {
+  position: relative; width: var(--et-tam); height: var(--et-tam); padding: 0; border: 0; background: none;
+  color: var(--et-texto); cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.et-estrella svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.et-estrella path {
+  fill: transparent; stroke: var(--et-apagada); stroke-width: 1.3; stroke-linejoin: round;
+  /* --retraso lo pone el JS: así se encienden una detrás de otra */
+  transition: fill .22s, stroke .22s; transition-delay: var(--retraso, 0ms);
+}
+.et-estrella.is-llena path { fill: var(--et-texto); stroke: var(--et-texto); }
+.et-estrella:focus-visible { outline: none; }
+.et-estrella:focus-visible svg { outline: 2px solid var(--et-suave); outline-offset: 6px; border-radius: 8px; }
+/* los rayos del destello al elegir */
+.et-rayo {
+  position: absolute; left: 50%; top: 50%; width: 3px; height: 14px; margin: -7px 0 0 -1.5px; border-radius: 3px;
+  background: var(--et-texto); pointer-events: none;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.et-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+.et-pregunta { margin: 0 0 2.6rem; font-size: 2.2rem; font-weight: 500; letter-spacing: -.035em; }
+.et-etiqueta { height: 2.2rem; margin: 2.4rem 0 0; overflow: hidden; font-size: 1.5rem; font-weight: 500; letter-spacing: -.02em; }
+.et-etiqueta span { display: inline-block; }
+.et-etiqueta span.is-nueva { animation: et-sube .45s cubic-bezier(.22, 1, .36, 1); }
+@keyframes et-sube { from { transform: translateY(100%); opacity: 0; } }
+.et-pista { margin: 1.4rem 0 0; color: var(--et-suave); font-size: .95rem; }
+
+@media (max-width: 520px) { :root { --et-tam: 48px; --et-hueco: 10px; } }
+@media (prefers-reduced-motion: reduce) {
+  .et-estrella path { transition-delay: 0ms; }
+  .et-etiqueta span.is-nueva { animation: none; }
+}

@@ -1,0 +1,44 @@
+/* Aurora · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ar-fondo: #0a0a0a;
+  --ar-texto: #f4f4f4;
+  --ar-suave: rgba(255, 255, 255, .55);
+  /* las luces de la aurora (las lee el JS): grises con un tinte apagado */
+  --ar-luz-1: rgba(118, 140, 168, .56);
+  --ar-luz-2: rgba(104, 134, 122, .46);
+  --ar-luz-3: rgba(232, 232, 232, .24);
+  --ar-luz-4: rgba(142, 124, 160, .4);
+  --ar-mezcla: screen;       /* cómo se suman las luces entre sí */
+  --ar-grano: .07;
+}
+:root[data-tema="claro"] {
+  --ar-fondo: #eeeeee;
+  --ar-texto: #0a0a0a;
+  --ar-suave: rgba(0, 0, 0, .55);
+  --ar-luz-1: rgba(112, 138, 178, .55);
+  --ar-luz-2: rgba(122, 162, 140, .5);
+  --ar-luz-3: rgba(255, 255, 255, 1);
+  --ar-luz-4: rgba(166, 140, 192, .48);
+  --ar-mezcla: source-over;
+  --ar-grano: .09;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ar-fondo); color: var(--ar-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-aurora] { position: relative; isolation: isolate; overflow: hidden; }
+/* El lienzo se dibuja diminuto y el navegador lo agranda suavizando: el
+   desenfoque sale gratis y cuesta casi nada por cuadro. */
+.ar-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+/* un grano fino encima, para que el degradado no haga escalones */
+[data-aurora]::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--ar-grano);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ar-escena { min-height: 100%; display: grid; place-items: center; text-align: center; padding: 2rem; }
+.ar-etiqueta { margin: 0 0 1.2rem; font-size: .8rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--ar-suave); }
+.ar-titulo { margin: 0; font-size: clamp(3rem, 9vw, 7.4rem); font-weight: 500; line-height: .96; letter-spacing: -.055em; }

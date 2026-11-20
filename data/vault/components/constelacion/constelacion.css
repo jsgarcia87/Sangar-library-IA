@@ -1,0 +1,28 @@
+/* Constelación · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --co-fondo: #0a0a0a;
+  --co-texto: #f4f4f4;
+  --co-suave: rgba(255, 255, 255, .5);
+  --co-estrella: 244, 244, 244;   /* r, g, b de puntos y líneas (lo lee el JS) */
+}
+:root[data-tema="claro"] {
+  --co-fondo: #eeeeee;
+  --co-texto: #0a0a0a;
+  --co-suave: rgba(0, 0, 0, .5);
+  --co-estrella: 10, 10, 10;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--co-fondo); color: var(--co-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-constelacion] { position: relative; isolation: isolate; overflow: hidden; }
+.co-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.co-escena { min-height: 100%; display: grid; place-items: center; text-align: center; padding: 2rem; user-select: none; }
+.co-contenido { pointer-events: none; }
+.co-etiqueta { margin: 0 0 1.2rem; font-size: .8rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--co-suave); }
+.co-titulo { margin: 0; font-size: clamp(2.8rem, 8vw, 6.6rem); font-weight: 500; line-height: .98; letter-spacing: -.05em; }
+.co-pista { margin: 1.6rem 0 0; font-size: .9rem; color: var(--co-suave); }

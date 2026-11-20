@@ -1,0 +1,55 @@
+/* Chicle · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ch-fondo: #0a0a0a;
+  --ch-texto: #f4f4f4;
+  --ch-suave: rgba(255, 255, 255, .5);
+  --ch-linea: rgba(255, 255, 255, .1);
+  --ch-apagado: rgba(255, 255, 255, .14);   /* el riel apagado */
+  --ch-encendido: #f4f4f4;                  /* el riel encendido */
+  --ch-boton: #f4f4f4;                      /* el botón apagado… */
+  --ch-boton-on: #0a0a0a;                   /* …y encendido */
+  --ch-ancho: 124px;
+  --ch-alto: 66px;
+  --ch-margen: 8px;
+}
+:root[data-tema="claro"] {
+  --ch-fondo: #eeeeee;
+  --ch-texto: #0a0a0a;
+  --ch-suave: rgba(0, 0, 0, .5);
+  --ch-linea: rgba(0, 0, 0, .1);
+  --ch-apagado: rgba(0, 0, 0, .14);
+  --ch-encendido: #0a0a0a;
+  --ch-boton: #ffffff;
+  --ch-boton-on: #eeeeee;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ch-fondo); color: var(--ch-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ch-interruptor {
+  position: relative; flex: none; width: var(--ch-ancho); height: var(--ch-alto); padding: 0; border: 0; border-radius: 99px;
+  background: var(--ch-apagado); cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent;
+  transition: background-color .35s cubic-bezier(.22, 1, .36, 1);
+}
+.ch-interruptor[aria-checked="true"] { background: var(--ch-encendido); }
+.ch-interruptor:focus-visible { outline: 2px solid var(--ch-suave); outline-offset: 4px; }
+/* El botón no se mueve con transform: el JS le pone el borde izquierdo,
+   el ancho y el alto, porque cada borde tiene su propio resorte. */
+.ch-bola {
+  position: absolute; left: 0; top: 50%; width: 0; height: 0; border-radius: 99px; pointer-events: none;
+  background: var(--ch-boton); box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+  transition: background-color .3s;
+}
+.ch-interruptor[aria-checked="true"] .ch-bola { background: var(--ch-boton-on); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ch-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem; padding: 2rem; }
+.ch-tarjeta { width: min(680px, 100%); padding: 2.2rem 2.6rem 1rem; border-radius: 30px; border: 1px solid var(--ch-linea); background: rgba(127, 127, 127, .05); }
+.ch-titulo { margin: 0 0 1rem; font-size: 2.3rem; font-weight: 500; letter-spacing: -.04em; }
+.ch-fila { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.3rem 0; border-top: 1px solid var(--ch-linea); }
+.ch-fila p { display: flex; flex-direction: column; gap: .3rem; margin: 0; }
+.ch-fila b { font-size: 1.5rem; font-weight: 500; letter-spacing: -.02em; }
+.ch-fila small { color: var(--ch-suave); font-size: 1.02rem; }
+.ch-pista { margin: 0; color: var(--ch-suave); font-size: .95rem; }

@@ -1,0 +1,85 @@
+/* Arena · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ar-fondo: #0a0a0a;
+  --ar-texto: #f4f4f4;
+  /* la arena: el color de un grano en sombra y a plena luz (r, g, b; lo lee el JS) */
+  --ar-arena-sombra: 92, 92, 92;
+  --ar-arena-luz: 250, 250, 250;
+  /* el vidrio */
+  --ar-cuerpo: rgba(255, 255, 255, .02);
+  --ar-cuerpo-canto: rgba(255, 255, 255, .1);
+  --ar-cuerpo-borde: rgba(255, 255, 255, .07);
+  --ar-pared: rgba(255, 255, 255, .07);
+  --ar-filo: rgba(255, 255, 255, .62);
+  --ar-filo-dentro: rgba(255, 255, 255, .2);
+  --ar-brillo: #fff;
+  /* el metal de las tapas y los postes */
+  --ar-metal-borde: #121212;
+  --ar-metal-centro: #4a4a4a;
+  --ar-ranura: rgba(0, 0, 0, .6);
+  /* el suelo */
+  --ar-sombra: rgba(0, 0, 0, .9);
+  --ar-suelo: rgba(255, 255, 255, .06);
+}
+:root[data-tema="claro"] {
+  --ar-fondo: #eeeeee;
+  --ar-texto: #0a0a0a;
+  --ar-arena-sombra: 0, 0, 0;
+  --ar-arena-luz: 78, 78, 78;
+  --ar-cuerpo: rgba(255, 255, 255, .16);
+  --ar-cuerpo-canto: rgba(0, 0, 0, .07);
+  --ar-cuerpo-borde: rgba(0, 0, 0, .06);
+  --ar-pared: rgba(0, 0, 0, .05);
+  --ar-filo: rgba(0, 0, 0, .55);
+  --ar-filo-dentro: rgba(0, 0, 0, .16);
+  --ar-brillo: #fff;
+  --ar-metal-borde: #050505;
+  --ar-metal-centro: #3a3a3a;
+  --ar-ranura: rgba(0, 0, 0, .7);
+  --ar-sombra: rgba(0, 0, 0, .32);
+  --ar-suelo: rgba(0, 0, 0, 0);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ar-fondo); color: var(--ar-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el reloj mide 300 × 640 unidades; el cuerpo es lo que gira */
+.ar-reloj { position: relative; aspect-ratio: 300 / 640; }
+.ar-cuerpo { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+.ar-capa { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* el vidrio: un cuerpo casi transparente, la pared con su grosor y dos filos */
+.ar-interior { fill: url(#ar-canto); stroke: var(--ar-cuerpo-borde); stroke-width: 3; }
+.ar-c0 { stop-color: var(--ar-cuerpo); }
+.ar-c1 { stop-color: var(--ar-cuerpo-canto); }
+.ar-pared { fill: var(--ar-pared); }
+.ar-filo { fill: none; stroke: var(--ar-filo); stroke-width: 1.1; stroke-linejoin: round; }
+.ar-filo-dentro { fill: none; stroke: var(--ar-filo-dentro); stroke-width: .8; stroke-linejoin: round; }
+.ar-luz { pointer-events: none; }
+.ar-veta { fill: var(--ar-brillo); opacity: .2; }
+.ar-veta-fina { fill: var(--ar-brillo); opacity: .8; }
+.ar-reflejo { fill: var(--ar-brillo); opacity: .32; }
+.ar-hombro { fill: var(--ar-brillo); opacity: .55; }
+.ar-cuello-brillo { fill: var(--ar-brillo); opacity: .7; }
+
+/* las tapas: metal torneado, más claro en el centro que en los cantos */
+.ar-m0 { stop-color: var(--ar-metal-borde); }
+.ar-m1 { stop-color: var(--ar-metal-centro); }
+.ar-metal, .ar-poste { fill: url(#ar-metal); }
+.ar-ranura { fill: var(--ar-ranura); }
+.ar-poste-brillo { fill: var(--ar-brillo); opacity: .45; }
+
+/* en el suelo: un charco de luz tenue y la sombra de contacto */
+.ar-sombra {
+  position: absolute; left: -10%; right: -10%; top: 100%; height: 40px; margin-top: -22px;
+  border-radius: 50%; pointer-events: none;
+  background:
+    radial-gradient(closest-side, var(--ar-sombra), transparent 70%) center / 86% 38% no-repeat,
+    radial-gradient(closest-side, var(--ar-suelo), transparent);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ar-escena { height: 100%; display: grid; place-items: center; overflow: hidden; }
+.ar-reloj { height: min(600px, 76vh); }

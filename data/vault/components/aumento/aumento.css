@@ -1,0 +1,64 @@
+/* Aumento · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --au-fondo: #0a0a0a;
+  --au-papel: #131313;
+  --au-texto: #f4f4f4;
+  --au-suave: rgba(255, 255, 255, .55);
+  --au-linea: rgba(255, 255, 255, .12);
+  --au-aro: rgba(255, 255, 255, .85);    /* el borde de la lupa */
+}
+:root[data-tema="claro"] {
+  --au-fondo: #eeeeee;
+  --au-papel: #fbfbfb;
+  --au-texto: #0a0a0a;
+  --au-suave: rgba(0, 0, 0, .58);
+  --au-linea: rgba(0, 0, 0, .12);
+  --au-aro: rgba(0, 0, 0, .8);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--au-fondo); color: var(--au-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-aumento] { position: relative; touch-action: none; }
+[data-aumento][data-lupa] { cursor: none; }
+/* la lupa: la caja exterior se mueve, la interior crece al aparecer */
+.au-lente {
+  position: absolute; left: 0; top: 0; z-index: 10; pointer-events: none;
+  width: var(--au-tam); height: var(--au-tam); margin: calc(var(--au-tam) / -2) 0 0 calc(var(--au-tam) / -2);
+}
+.au-vidrio {
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden;
+  background: var(--au-papel);
+  box-shadow: 0 0 0 1.5px var(--au-aro), 0 24px 50px -16px rgba(0, 0, 0, .7), inset 0 0 0 6px rgba(127, 127, 127, .08);
+  transform: scale(.3); opacity: 0;
+  transition: transform .45s cubic-bezier(.34, 1.4, .6, 1), opacity .2s ease;
+}
+[data-aumento][data-lupa] .au-vidrio { transform: none; opacity: 1; }
+/* la copia ampliada del documento; el JS la desplaza para que el punto
+   bajo el cursor quede en el centro de la lupa */
+.au-copia { position: absolute; left: 0; top: 0; margin: 0; transform-origin: 0 0; pointer-events: none; }
+/* un brillo de cristal encima, muy leve */
+.au-vidrio::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 30% 22%, rgba(255, 255, 255, .14), transparent 45%);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.au-escena { position: relative; min-height: 100%; display: grid; place-items: center; padding: 2rem 1rem 4rem; }
+.au-documento {
+  width: min(100%, 840px); padding: 40px 52px 36px; border-radius: 22px;
+  background: var(--au-papel); border: 1px solid var(--au-linea);
+}
+.au-cabecera { display: flex; justify-content: space-between; font-size: .72rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--au-suave); }
+.au-titulo { margin: 26px 0 26px; font-size: 3.3rem; font-weight: 500; letter-spacing: -.045em; line-height: 1; }
+.au-columnas { columns: 2; column-gap: 44px; padding-top: 22px; border-top: 1px solid var(--au-linea); }
+.au-columnas p { margin: 0 0 9px; break-inside: avoid; font-size: 9.5px; line-height: 1.55; color: var(--au-suave); }
+.au-columnas b { color: var(--au-texto); font-weight: 600; }
+.au-pie { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 26px; }
+.au-firma { display: grid; gap: 4px; width: 220px; padding-top: 30px; border-bottom: 1px solid var(--au-suave); font-size: 1.05rem; font-style: italic; }
+.au-firma small { font-size: 8px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--au-suave); transform: translateY(16px); }
+.au-sello { width: 96px; height: 96px; fill: none; stroke: var(--au-texto); stroke-width: 1; }
+.au-sello text { fill: var(--au-texto); stroke: none; font-size: 7.2px; font-weight: 500; letter-spacing: .19em; }
+.au-pista { position: absolute; left: 0; right: 0; bottom: 1.6rem; margin: 0; text-align: center; font-size: .9rem; color: var(--au-suave); }

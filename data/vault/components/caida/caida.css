@@ -1,0 +1,36 @@
+/* Caída · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ca-fondo: #0a0a0a;
+  --ca-texto: #f4f4f4;
+  --ca-suave: rgba(255, 255, 255, .5);
+}
+:root[data-tema="claro"] {
+  --ca-fondo: #eeeeee;
+  --ca-texto: #0a0a0a;
+  --ca-suave: rgba(0, 0, 0, .5);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ca-fondo); color: var(--ca-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ca-palabra { white-space: nowrap; }
+/* el hueco recorta arriba y abajo (no a los lados, para que la letra
+   pueda girar): la letra sale por el suelo y entra por el techo */
+.ca-hueco {
+  display: inline-block; vertical-align: top; padding: .06em 0 .12em; margin: -.06em 0 -.12em;
+  clip-path: inset(0 -.4em); cursor: default;
+}
+.ca-letra { display: inline-block; font-style: normal; will-change: transform; transform-origin: 50% 100%; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ca-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem 1rem; text-align: center;
+}
+.ca-texto {
+  margin: 0; font-size: clamp(3rem, 13vw, 12rem); font-weight: 600; line-height: 1; letter-spacing: -.05em;
+  user-select: none; touch-action: pan-y;
+}
+.ca-pista { margin: 0; color: var(--ca-suave); font-size: .95rem; }

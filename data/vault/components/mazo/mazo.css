@@ -1,0 +1,63 @@
+/* Mazo · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --mz-fondo: #0a0a0a;
+  --mz-texto: #f4f4f4;
+  --mz-suave: rgba(255, 255, 255, .45);
+  --mz-oscura: #1a1a1a;          /* las tarjetas alternan oscura y clara */
+  --mz-clara: #f2f2f2;
+  --mz-sombra: rgba(0, 0, 0, .65);
+  --mz-verde: #34d17a;
+  --mz-rojo: #ff5a4e;
+  --mz-ancho: 320px;
+  --mz-alto: 440px;
+}
+:root[data-tema="claro"] {
+  --mz-fondo: #eeeeee;
+  --mz-texto: #0a0a0a;
+  --mz-suave: rgba(0, 0, 0, .5);
+  --mz-clara: #ffffff;
+  --mz-sombra: rgba(0, 0, 0, .22);
+  --mz-verde: #1fa458;
+  --mz-rojo: #e2382c;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--mz-fondo); color: var(--mz-texto); overflow: hidden; }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.mz-mazo { position: relative; width: var(--mz-ancho); height: var(--mz-alto); outline: none; }
+.mz-mazo:focus-visible { outline: 2px solid var(--mz-suave); outline-offset: 24px; border-radius: 30px; }
+/* mazo.js pone a cada tarjeta su sitio en la pila (transform) y, a la
+   de arriba, cuánto se inclina hacia guardar o descartar (--si, --no) */
+.mz-tarjeta {
+  position: absolute; inset: 0; border-radius: 26px; padding: 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: var(--mz-oscura); color: #f4f4f4;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .07) inset, 0 30px 60px -28px var(--mz-sombra);
+  transform-origin: 50% 85%; touch-action: none; user-select: none; -webkit-user-select: none;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1), opacity .4s;
+  will-change: transform;
+}
+.mz-tarjeta--clara { background: var(--mz-clara); color: #0a0a0a; box-shadow: 0 0 0 1px rgba(0, 0, 0, .06) inset, 0 30px 60px -28px var(--mz-sombra); }
+.mz-tarjeta.is-arriba { cursor: grab; }
+.mz-tarjeta.is-arrastrada { cursor: grabbing; transition: none; }
+/* los sellos: aparecen según hacia dónde va la tarjeta */
+.mz-sello {
+  position: absolute; top: 30px; padding: 6px 12px; border-radius: 10px; border: 2px solid currentColor;
+  font-size: .95rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; pointer-events: none;
+}
+.mz-sello--si { left: 26px; color: var(--mz-verde); rotate: -10deg; opacity: var(--si, 0); }
+.mz-sello--no { right: 26px; color: var(--mz-rojo); rotate: 10deg; opacity: var(--no, 0); }
+/* mientras hay sello, el contenido de arriba se aparta */
+.mz-tarjeta header { transition: opacity .2s; opacity: calc(1 - max(var(--si, 0), var(--no, 0)) * 1.4); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.mz-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4.2rem; }
+.mz-tarjeta header { display: flex; justify-content: space-between; font-size: .85rem; font-weight: 500; }
+.mz-tarjeta header span:last-child { opacity: .55; }
+.mz-tarjeta svg { width: 46%; align-self: center; fill: none; stroke: currentColor; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.mz-tarjeta .mz-lleno { fill: currentColor; stroke: none; }
+.mz-tarjeta h2 { margin: 0; font-size: 2.6rem; font-weight: 600; letter-spacing: -.045em; line-height: 1; }
+.mz-tarjeta p { margin: .6rem 0 0; font-size: 1rem; opacity: .6; }
+.mz-pista { margin: 0; color: var(--mz-suave); font-size: .95rem; }

@@ -1,0 +1,55 @@
+/* Cargando · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --cg-fondo: #0a0a0a;
+  --cg-texto: #f4f4f4;
+  --cg-sombra: rgba(255, 255, 255, .22);
+  --cg-ritmo: 1.6s;        /* lo que tarda la ola en volver */
+  --cg-desfase: 75ms;      /* entre una letra y la siguiente */
+  --cg-salto: -.36em;      /* cuánto sube cada letra */
+}
+:root[data-tema="claro"] {
+  --cg-fondo: #eeeeee;
+  --cg-texto: #0a0a0a;
+  --cg-sombra: rgba(0, 0, 0, .2);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--cg-fondo); color: var(--cg-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.cg-letra { position: relative; display: inline-block; }
+/* la letra salta desde su base: se agacha, se estira al subir, flota
+   arriba, se estira al caer y se aplasta al tocar el suelo */
+.cg-letra i {
+  display: inline-block; font-style: normal; transform-origin: 50% 100%;
+  animation: cg-salta var(--cg-ritmo) infinite calc(var(--i) * var(--cg-desfase));
+}
+@keyframes cg-salta {
+  0%   { transform: translateY(0) scale(1, 1); animation-timing-function: ease-out; }
+  7%   { transform: translateY(0) scale(1.1, .88); animation-timing-function: cubic-bezier(.2, .6, .35, 1); }
+  20%  { transform: translateY(calc(var(--cg-salto) * .8)) scale(.94, 1.08); animation-timing-function: ease-out; }
+  29%  { transform: translateY(var(--cg-salto)) scale(1, 1); animation-timing-function: cubic-bezier(.55, 0, .8, .4); }
+  42%  { transform: translateY(0) scale(.95, 1.06); animation-timing-function: ease-out; }
+  48%  { transform: translateY(0) scale(1.12, .86); animation-timing-function: ease-out; }
+  58%  { transform: translateY(0) scale(.98, 1.02); }
+  66%, 100% { transform: translateY(0) scale(1, 1); }
+}
+/* la sombra de cada letra se encoge y se aclara mientras está en el aire */
+.cg-letra::after {
+  content: ""; position: absolute; left: 12%; right: 12%; bottom: .02em; height: .09em; border-radius: 50%;
+  background: var(--cg-sombra); filter: blur(2px); z-index: -1;
+  animation: cg-sombra var(--cg-ritmo) infinite calc(var(--i) * var(--cg-desfase));
+}
+@keyframes cg-sombra {
+  0%, 7%, 48%, 100% { transform: scaleX(1); opacity: 1; }
+  29% { transform: scaleX(.45); opacity: .35; }
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.cg-escena { height: 100%; display: grid; place-items: center; }
+.cg-texto { margin: 0; padding-top: .5em; font-size: clamp(3rem, 12vw, 9.6rem); font-weight: 600; letter-spacing: -.04em; line-height: 1; isolation: isolate; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cg-letra i, .cg-letra::after { animation: none; }
+}

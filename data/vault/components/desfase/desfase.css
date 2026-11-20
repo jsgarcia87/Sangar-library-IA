@@ -1,0 +1,51 @@
+/* Desfase · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --df-fondo: #0a0a0a;
+  --df-texto: #f4f4f4;
+  --df-suave: rgba(255, 255, 255, .45);
+  /* los dos «canales»: un gris claro que se adelanta y uno oscuro que se atrasa */
+  --df-canal-a: rgba(255, 255, 255, .5);
+  --df-canal-b: rgba(255, 255, 255, .2);
+}
+:root[data-tema="claro"] {
+  --df-fondo: #eeeeee;
+  --df-texto: #0a0a0a;
+  --df-suave: rgba(0, 0, 0, .45);
+  --df-canal-a: rgba(0, 0, 0, .42);
+  --df-canal-b: rgba(0, 0, 0, .16);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--df-fondo); color: var(--df-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el texto de verdad va encima; las copias, detrás y sin eventos */
+.df-texto { position: relative; display: inline-block; }
+.df-base { position: relative; z-index: 2; }
+.df-canal {
+  position: absolute; left: 0; top: 0; z-index: 1; white-space: nowrap; pointer-events: none;
+  will-change: transform; user-select: none;
+}
+.df-canal.is-a { color: var(--df-canal-a); }
+.df-canal.is-b { color: var(--df-canal-b); z-index: 0; }
+/* la franja que se descuelga cuando el cursor va deprisa */
+.df-canal.is-corte { color: var(--df-canal-a); opacity: 0; z-index: 3; mix-blend-mode: normal; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.df-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem 1.25rem;
+}
+.df-menu { display: flex; flex-direction: column; align-items: flex-start; }
+.df-item {
+  display: flex; align-items: flex-start; gap: 1.4rem; color: inherit; text-decoration: none;
+  font-size: clamp(2.8rem, 11vw, 10rem); font-weight: 600; line-height: 1; letter-spacing: -.045em;
+}
+.df-item small {
+  margin-top: .5em; font-size: .9rem; font-weight: 500; letter-spacing: .08em; color: var(--df-suave);
+  font-variant-numeric: tabular-nums; transition: color .3s;
+}
+.df-item:hover small, .df-item:focus-visible small { color: var(--df-texto); }
+.df-item:focus-visible { outline: none; }
+.df-pista { margin: 0; color: var(--df-suave); font-size: .95rem; }

@@ -1,0 +1,104 @@
+/* Pasos · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ps-fondo: #0a0a0a;
+  --ps-texto: #f4f4f4;
+  --ps-suave: rgba(255, 255, 255, .5);
+  --ps-tenue: rgba(255, 255, 255, .3);
+  --ps-linea: rgba(255, 255, 255, .12);
+  --ps-caja: rgba(255, 255, 255, .03);
+  --ps-bien: #2fbf71;
+  --ps-nodo: 36px;
+}
+:root[data-tema="claro"] {
+  --ps-fondo: #eeeeee;
+  --ps-texto: #0a0a0a;
+  --ps-suave: rgba(0, 0, 0, .5);
+  --ps-tenue: rgba(0, 0, 0, .3);
+  --ps-linea: rgba(0, 0, 0, .12);
+  --ps-caja: rgba(255, 255, 255, .55);
+  --ps-bien: #1f9d5a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ps-fondo); color: var(--ps-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* La barra: un riel entre el primer y el último nodo, y encima el relleno
+   que avanza. --ps-avance va de 0 a 1 y lo pone el JS. */
+.ps-barra { position: relative; display: flex; justify-content: space-between; margin: 0 0 3rem; padding: 0; list-style: none; }
+.ps-barra::before, .ps-barra::after {
+  content: ""; position: absolute; left: calc(var(--ps-nodo) / 2); right: calc(var(--ps-nodo) / 2); top: calc(var(--ps-nodo) / 2 - 1.5px);
+  height: 3px; border-radius: 3px; background: var(--ps-linea);
+}
+.ps-barra::after {
+  background: var(--ps-texto); transform-origin: 0 50%; transform: scaleX(var(--ps-avance, 0));
+  transition: transform .75s cubic-bezier(.65, 0, .35, 1);
+}
+.ps-nodo { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: .7rem; width: var(--ps-nodo); }
+.ps-nodo span {
+  position: relative; width: var(--ps-nodo); height: var(--ps-nodo); display: grid; place-items: center; border-radius: 50%;
+  background: var(--ps-fondo); box-shadow: inset 0 0 0 2px var(--ps-linea); color: var(--ps-tenue); font-size: .95rem; font-weight: 500;
+  transition: box-shadow .35s, background-color .35s, color .35s, transform .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+.ps-nodo small { white-space: nowrap; color: var(--ps-tenue); font-size: .85rem; transition: color .35s; }
+/* el paso actual: anillo claro y un pulso */
+.ps-nodo.is-actual span { box-shadow: inset 0 0 0 2px var(--ps-texto); color: var(--ps-texto); transform: scale(1.12); }
+.ps-nodo.is-actual span::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid var(--ps-texto);
+  animation: ps-pulso 1.6s cubic-bezier(.22, 1, .36, 1) infinite;
+}
+@keyframes ps-pulso { from { transform: scale(.85); opacity: .7; } to { transform: scale(1.35); opacity: 0; } }
+.ps-nodo.is-actual small, .ps-nodo.is-hecho small { color: var(--ps-texto); }
+/* el paso hecho: se rellena y el número se vuelve ✓ */
+.ps-nodo.is-hecho span { background: var(--ps-texto); box-shadow: inset 0 0 0 2px var(--ps-texto); color: transparent; }
+.ps-nodo svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ps-fondo); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.ps-nodo svg path { stroke-dasharray: 1 1.2; stroke-dashoffset: 1.1; transition: stroke-dashoffset .1s; }
+.ps-nodo.is-hecho svg path { stroke-dashoffset: 0; transition: stroke-dashoffset .4s cubic-bezier(.65, 0, .35, 1) .15s; }
+
+/* las pantallas: el JS anima la que sale hacia un lado y la que entra
+   desde el otro; aquí solo se decide cuál se ve */
+.ps-pantallas { position: relative; height: 290px; }
+.ps-paso, .ps-gracias { position: absolute; inset: 0; margin: 0; padding: 0; border: 0; min-width: 0; visibility: hidden; }
+.ps-paso.is-visible, .ps-gracias.is-visible { visibility: visible; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ps-escena { height: 100%; display: grid; place-items: center; padding: 2rem; }
+.ps-tarjeta { position: relative; width: min(760px, 100%); padding: 2.6rem 2.8rem 2.2rem; border-radius: 30px; border: 1px solid var(--ps-linea); background: var(--ps-caja); }
+.ps-paso legend { float: left; width: 100%; margin: 0 0 1.8rem; padding: 0; font-size: 2.2rem; font-weight: 500; letter-spacing: -.04em; }
+.ps-chips { clear: both; display: flex; flex-wrap: wrap; gap: .8rem; }
+.ps-chips label { cursor: pointer; }
+.ps-chips input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.ps-chips span {
+  display: inline-flex; align-items: center; height: 58px; padding: 0 1.5rem; border-radius: 99px;
+  box-shadow: inset 0 0 0 1px var(--ps-linea); font-size: 1.15rem;
+  transition: background-color .25s, color .25s, box-shadow .25s, transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.ps-chips label:hover span { box-shadow: inset 0 0 0 1px var(--ps-suave); }
+.ps-chips input:checked + span { background: var(--ps-texto); color: var(--ps-fondo); box-shadow: inset 0 0 0 1px var(--ps-texto); transform: scale(1.04); }
+.ps-chips input:focus-visible + span { outline: 2px solid var(--ps-suave); outline-offset: 3px; }
+.ps-resumen { clear: both; display: grid; grid-template-columns: auto 1fr; gap: .7rem 2rem; margin: 0 0 1.8rem; font-size: 1.15rem; }
+.ps-resumen dt { color: var(--ps-suave); }
+.ps-resumen dd { margin: 0; }
+.ps-enviar {
+  height: 58px; padding: 0 2rem; border: 0; border-radius: 99px; background: var(--ps-texto); color: var(--ps-fondo);
+  font: inherit; font-size: 1.1rem; font-weight: 500; cursor: pointer; transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.ps-enviar:active { transform: scale(.96); }
+.ps-gracias { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; text-align: center; }
+.ps-gracias svg { width: 92px; height: 92px; fill: none; stroke: var(--ps-bien); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ps-gracias circle, .ps-gracias path { stroke-dasharray: 1 1.2; stroke-dashoffset: 1.1; }
+.ps-gracias.is-visible circle { stroke-dashoffset: 0; transition: stroke-dashoffset .6s cubic-bezier(.65, 0, .35, 1) .2s; }
+.ps-gracias.is-visible path { stroke-dashoffset: 0; transition: stroke-dashoffset .4s cubic-bezier(.65, 0, .35, 1) .65s; }
+.ps-gracias p { margin: 0; font-size: 1.6rem; font-weight: 500; letter-spacing: -.02em; }
+.ps-atras {
+  position: absolute; right: 2.8rem; bottom: 2.2rem; padding: .5rem .2rem; border: 0; background: none;
+  color: var(--ps-suave); font: inherit; font-size: .95rem; cursor: pointer; transition: opacity .3s, color .2s;
+}
+.ps-atras:hover { color: var(--ps-texto); }
+.ps-atras[hidden] { display: block; opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-barra::after { transition-duration: .01s; }
+  .ps-nodo.is-actual span::after { animation: none; }
+}

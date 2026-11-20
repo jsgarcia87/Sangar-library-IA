@@ -1,0 +1,86 @@
+/* Cremallera · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --cr-fondo: #0a0a0a;
+  --cr-texto: #f4f4f4;
+  --cr-suave: rgba(255, 255, 255, .5);
+  --cr-tela: #f4f4f4;               /* las dos solapas: la cara del botón */
+  --cr-letra: #0a0a0a;
+  --cr-dientes: #8c8c8c;
+  --cr-carro: #2a2a2a;              /* el tirador */
+  --cr-forro: #1a1a1a;              /* lo que se ve al abrir */
+  --cr-carga: rgba(255, 255, 255, .13);
+  --cr-ok: #1f9d55;
+  --cr-alto: 112px;
+}
+:root[data-tema="claro"] {
+  --cr-fondo: #eeeeee;
+  --cr-texto: #0a0a0a;
+  --cr-suave: rgba(0, 0, 0, .5);
+  --cr-tela: #0a0a0a;
+  --cr-letra: #f4f4f4;
+  --cr-dientes: #6a6a6a;
+  --cr-carro: #d8d8d8;
+  --cr-forro: #dcdcdc;
+  --cr-carga: rgba(0, 0, 0, .12);
+  --cr-ok: #4ade80;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--cr-fondo); color: var(--cr-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.cr-boton {
+  position: relative; display: inline-grid; place-items: center; overflow: hidden;
+  min-width: 400px; height: var(--cr-alto); padding: 0 2em; border: 0; border-radius: 22px;
+  background: var(--cr-forro); color: var(--cr-letra); cursor: pointer;
+  font: 500 2.1rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+.cr-boton:focus-visible { outline: 2px solid var(--cr-texto); outline-offset: 6px; }
+/* las etiquetas, en la misma celda; lo absoluto se mide desde el botón entero */
+.cr-etiqueta, .cr-listo { grid-area: 1 / 1; }
+
+/* el forro: la barra de carga y la cifra, bajo las solapas */
+.cr-dentro {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: .6em;
+  color: var(--cr-texto); font-size: .62em; font-weight: 500; letter-spacing: .02em;
+}
+.cr-relleno { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--cr-carga); }
+.cr-cifra { position: relative; min-width: 3.4em; font-variant-numeric: tabular-nums; }
+.cr-dentro > span:not(.cr-relleno) { position: relative; }
+
+/* la tela: las solapas, los dientes y el tirador, dibujados en SVG */
+.cr-tela { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cr-solapa { fill: var(--cr-tela); }
+.cr-dientes { fill: none; stroke: var(--cr-dientes); stroke-width: 7; stroke-dasharray: 3 3; opacity: 0; transition: opacity .25s; }
+.cr-dientes.is-abajo { stroke-dashoffset: 3; }
+.cr-carro { opacity: 0; transition: opacity .25s; }
+.cr-carro rect { fill: var(--cr-carro); }
+.cr-carro .cr-ojal { fill: var(--cr-tela); }
+.is-cosida .cr-dientes, .is-cosida .cr-carro { opacity: 1; }
+
+/* las dos etiquetas: la de siempre y la de «listo» */
+.cr-etiqueta, .cr-listo {
+  position: relative; display: inline-flex; align-items: center; gap: .45em; white-space: nowrap;
+  transition: opacity .3s, transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+.cr-etiqueta svg, .cr-listo svg { width: .85em; height: .85em; }
+.cr-etiqueta path, .cr-listo path { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.cr-listo path { stroke: var(--cr-ok); stroke-width: 2.8; }
+.cr-listo { opacity: 0; transform: translateY(40%); }
+.is-cosida .cr-etiqueta { opacity: 0; transform: translateY(-40%); }
+.is-lista .cr-etiqueta { opacity: 0; transform: translateY(-40%); }
+.is-lista .cr-listo { opacity: 1; transform: none; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.cr-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem;
+}
+.cr-pista { margin: 0; color: var(--cr-suave); font-size: .95rem; }
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  .cr-boton { min-width: 0; width: calc(100vw - 3rem); font-size: 1.6rem; }
+}

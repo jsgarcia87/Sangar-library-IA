@@ -1,0 +1,76 @@
+/* Migas · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --mi-fondo: #0a0a0a;
+  --mi-texto: #f4f4f4;
+  --mi-suave: rgba(255, 255, 255, .5);
+  --mi-miga: rgba(255, 255, 255, .38);     /* el punto de una miga cerrada */
+  --mi-chapa: rgba(255, 255, 255, .07);    /* el fondo de una miga abierta */
+  --mi-chapa-encima: rgba(255, 255, 255, .16);
+  --mi-alto: 62px;
+}
+:root[data-tema="claro"] {
+  --mi-fondo: #eeeeee;
+  --mi-texto: #0a0a0a;
+  --mi-suave: rgba(0, 0, 0, .5);
+  --mi-miga: rgba(0, 0, 0, .35);
+  --mi-chapa: rgba(0, 0, 0, .06);
+  --mi-chapa-encima: rgba(0, 0, 0, .13);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--mi-fondo); color: var(--mi-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.mi-migas ol { display: flex; align-items: center; margin: 0; padding: 0; list-style: none; }
+.mi-migas li { display: flex; align-items: center; }
+/* el separador: una flecha fina que se encoge con las migas */
+.mi-separa { width: 22px; height: 22px; margin: 0 2px; flex: none; color: var(--mi-suave); transition: margin .5s cubic-bezier(.22, 1, .36, 1), opacity .4s, transform .5s cubic-bezier(.22, 1, .36, 1); transition-delay: var(--mi-espera); }
+.mi-separa path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.mi-miga {
+  display: inline-flex; align-items: center; gap: .55em; flex: none;
+  height: var(--mi-alto); padding: 0 1.15rem; border-radius: calc(var(--mi-alto) / 2);
+  background: var(--mi-chapa); color: var(--mi-texto); text-decoration: none; white-space: nowrap;
+  font: 500 1.55rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.01em;
+  transition: height .55s cubic-bezier(.34, 1.3, .5, 1), padding .55s cubic-bezier(.34, 1.3, .5, 1),
+              background-color .3s, gap .4s;
+  transition-delay: var(--mi-espera);
+}
+.mi-miga svg { width: 1.05em; height: 1.05em; flex: none; }
+.mi-miga svg path { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* el texto se abre a su ancho medido (--mi-w), no a uno inventado */
+.mi-miga > span {
+  max-width: var(--mi-w, 12em); overflow: hidden; opacity: 1;
+  transition: max-width .55s cubic-bezier(.22, 1, .36, 1), opacity .35s;
+  transition-delay: var(--mi-espera);
+}
+a.mi-miga:hover, a.mi-miga:focus-visible { background: var(--mi-chapa-encima); outline: none; transition-delay: 0s; }
+.mi-miga[aria-current] { background: none; padding-right: 0; font-weight: 600; }
+
+/* cerradas: las del medio son migas —un punto—, la primera solo el ícono */
+.mi-migas:not(.is-abierta) .is-medio .mi-miga { height: 12px; padding: 0 6px; gap: 0; background: var(--mi-miga); }
+.mi-migas:not(.is-abierta) .is-medio .mi-miga > span,
+.mi-migas:not(.is-abierta) li:first-child .mi-miga > span { max-width: 0; opacity: 0; }
+.mi-migas:not(.is-abierta) li:first-child .mi-miga { gap: 0; }
+.mi-migas:not(.is-abierta) .mi-separa { margin: 0 -4px; opacity: .45; transform: scale(.6); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.mi-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3rem; padding: 2rem;
+}
+/* el camino crece hacia la derecha desde un borde fijo */
+.mi-marco { width: min(900px, 100%); }
+.mi-pista { margin: 0; color: var(--mi-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mi-miga, .mi-miga > span, .mi-separa { transition-duration: .01s; transition-delay: 0s; }
+}
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  .mi-migas ol { flex-wrap: wrap; row-gap: .6rem; }
+  .mi-miga { font-size: 1.15rem; }
+  :root { --mi-alto: 48px; }
+}

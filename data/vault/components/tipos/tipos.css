@@ -1,0 +1,46 @@
+/* Tipos · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --tp-fondo: #0a0a0a;
+  --tp-texto: #f4f4f4;
+  --tp-suave: rgba(255, 255, 255, .5);
+  /* las tipografías por las que pasa: todas del sistema, nada que descargar */
+  --tp-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --tp-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+  --tp-sistema: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+:root[data-tema="claro"] {
+  --tp-fondo: #eeeeee;
+  --tp-texto: #0a0a0a;
+  --tp-suave: rgba(0, 0, 0, .5);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--tp-fondo); color: var(--tp-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.tp-palabra { white-space: nowrap; }
+/* el hueco de cada letra anima su ancho: así la línea se reacomoda
+   sola, sin saltos, cuando una letra se vuelve mono (ancha) o serif */
+.tp-letra {
+  display: inline-flex; justify-content: center; vertical-align: top;
+  transition: width .5s cubic-bezier(.34, 1.36, .5, 1);
+}
+.tp-glifo { display: inline-block; font-style: normal; white-space: pre; transform-origin: 50% 70%; }
+.tp-glifo.is-serif   { font-family: var(--tp-serif); font-weight: 700; letter-spacing: -.02em; }
+.tp-glifo.is-cursiva { font-family: var(--tp-serif); font-weight: 400; font-style: italic; letter-spacing: -.02em; }
+.tp-glifo.is-mono    { font-family: var(--tp-mono); font-weight: 400; letter-spacing: -.04em; }
+.tp-glifo.is-negra   { font-family: var(--tp-sistema); font-weight: 900; letter-spacing: -.05em; }
+.tp-glifo.is-fina    { font-family: var(--tp-sistema); font-weight: 200; letter-spacing: -.03em; }
+.tp-mide { position: absolute; visibility: hidden; white-space: pre; left: -9999px; top: 0; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.tp-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem 1rem; text-align: center;
+}
+.tp-texto {
+  margin: 0; font-size: clamp(3rem, 13.5vw, 12.5rem); font-weight: 600; line-height: 1.02; letter-spacing: -.05em;
+  user-select: none;
+}
+.tp-pista { margin: 0; color: var(--tp-suave); font-size: .95rem; }

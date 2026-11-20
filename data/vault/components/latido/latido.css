@@ -1,0 +1,73 @@
+/* Latido · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --la-fondo: #0a0a0a;
+  --la-texto: #f4f4f4;
+  --la-suave: rgba(255, 255, 255, .5);
+  --la-linea: rgba(255, 255, 255, .2);
+  --la-cara: #121212;
+  --la-corazon: #f4f4f4;     /* el corazón y sus chispas */
+}
+:root[data-tema="claro"] {
+  --la-fondo: #eeeeee;
+  --la-texto: #0a0a0a;
+  --la-suave: rgba(0, 0, 0, .5);
+  --la-linea: rgba(0, 0, 0, .18);
+  --la-cara: #ffffff;
+  --la-corazon: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--la-fondo); color: var(--la-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.la-boton {
+  position: relative; display: inline-flex; align-items: center; gap: .55em;
+  height: 124px; padding: 0 1.25em 0 1em; border: 1px solid var(--la-linea); border-radius: 62px;
+  background: var(--la-cara); color: var(--la-texto); cursor: pointer;
+  font: 500 2.8rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  transition: border-color .4s;
+  -webkit-tap-highlight-color: transparent;
+}
+.la-boton:focus-visible { outline: 2px solid var(--la-texto); outline-offset: 6px; }
+.la-boton.is-gusta { border-color: var(--la-corazon); }
+
+.la-corazon { position: relative; width: 1.5em; height: 1.5em; flex: none; }
+.la-corazon svg { width: 100%; height: 100%; overflow: visible; }
+.la-silueta { fill: none; stroke: var(--la-corazon); stroke-width: 1.7; stroke-linejoin: round; }
+/* el relleno: un círculo que crece desde el centro, recortado por el corazón */
+.la-relleno { fill: var(--la-corazon); r: 0; transition: r .38s cubic-bezier(.22, 1, .36, 1); }
+.is-gusta .la-relleno { r: 15px; }
+
+/* lub-dub: el doble golpe de un latido, y luego uno suave cada tanto */
+.la-latido { transform-origin: 50% 55%; }
+.is-late .la-latido { animation: la-golpe .62s cubic-bezier(.3, .7, .4, 1); }
+@keyframes la-golpe {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(.74); }
+  34%  { transform: scale(1.32); }
+  50%  { transform: scale(.94); }
+  66%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.is-gusta:not(.is-late) .la-latido { animation: la-pulso 1.5s .7s ease-in-out infinite; }
+@keyframes la-pulso { 0%, 40%, 100% { transform: scale(1); } 10% { transform: scale(1.08); } 22% { transform: scale(1.04); } }
+
+/* las chispas se pintan en un lienzo más grande que el botón */
+.la-lienzo { position: absolute; left: 50%; top: 50%; pointer-events: none; }
+
+/* la cuenta: una columna de cifras por dígito, como un cuentakilómetros */
+.la-cuenta { display: inline-flex; height: 1em; overflow: hidden; font-variant-numeric: tabular-nums; }
+.la-columna { display: flex; flex-direction: column; transition: transform .6s cubic-bezier(.34, 1.4, .5, 1); }
+.la-columna > span { height: 1em; line-height: 1; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.la-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3rem; padding: 2rem;
+}
+.la-pista { margin: 0; color: var(--la-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-late .la-latido, .is-gusta:not(.is-late) .la-latido { animation: none; }
+}

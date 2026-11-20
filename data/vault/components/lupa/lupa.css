@@ -1,0 +1,108 @@
+/* Lupa · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --lp-fondo: #0a0a0a;
+  --lp-texto: #f4f4f4;
+  --lp-suave: rgba(255, 255, 255, .5);
+  --lp-linea: rgba(255, 255, 255, .14);
+  --lp-caja: #151515;
+  --lp-alto: 72px;
+  --lp-ancho: 600px;          /* abierta */
+  --lp-curva: cubic-bezier(.7, 0, .2, 1);
+}
+:root[data-tema="claro"] {
+  --lp-fondo: #eeeeee;
+  --lp-texto: #0a0a0a;
+  --lp-suave: rgba(0, 0, 0, .5);
+  --lp-linea: rgba(0, 0, 0, .12);
+  --lp-caja: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--lp-fondo); color: var(--lp-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.lp-buscador { position: relative; width: var(--lp-ancho); max-width: 100%; }
+/* cerrada mide lo mismo que el botón; abierta, todo el ancho */
+.lp-caja {
+  position: relative; width: var(--lp-alto); height: var(--lp-alto); margin: 0 auto;
+  border-radius: 99px; border: 1px solid var(--lp-linea); background: var(--lp-caja);
+  transition: width .62s var(--lp-curva), border-color .25s;
+}
+.lp-buscador.is-abierta .lp-caja { width: 100%; }
+.lp-buscador.is-abierta .lp-caja:focus-within { border-color: var(--lp-suave); }
+.lp-lente {
+  position: absolute; left: -1px; top: -1px; width: var(--lp-alto); height: var(--lp-alto); padding: 0;
+  border: 0; border-radius: 50%; background: none; color: var(--lp-texto); cursor: pointer;
+}
+.lp-lente svg { width: 100%; height: 100%; display: block; }
+.lp-aro, .lp-giro { fill: none; stroke: currentColor; stroke-width: 2.4; }
+/* abierta, el lente se encoge un poco y queda de ícono al principio */
+.lp-lente svg { transform-origin: 32px 32px; transition: transform .62s var(--lp-curva); }
+.lp-buscador.is-abierta .lp-lente svg { transform: translate(6px, 4px) scale(.82); }
+/* mientras busca, el aro se vuelve un indicador que gira */
+.lp-giro { stroke-dasharray: 26 74; opacity: 0; transform-origin: 32px 32px; transition: opacity .2s; }
+.lp-buscador.is-buscando .lp-aro { opacity: .25; }
+.lp-buscador.is-buscando .lp-giro { opacity: 1; animation: lp-gira .7s linear infinite; }
+@keyframes lp-gira { to { transform: rotate(360deg); } }
+
+/* El mango: cerrada, sale del lente hacia abajo a la derecha; abierta,
+   viaja con el borde derecho y se alarga hasta ser un trazo de la ×. */
+.lp-mango, .lp-cierra span {
+  position: absolute; width: 2.4px; border-radius: 2px; background: var(--lp-texto); pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.lp-mango {
+  left: 43.5px; top: 43.5px; height: 11px;
+  transition: left .62s var(--lp-curva), top .62s var(--lp-curva), height .4s var(--lp-curva) .2s;
+}
+.lp-buscador.is-abierta .lp-mango { left: calc(100% - 35px); top: 35px; height: 22px; }
+.lp-cierra {
+  position: absolute; right: 0; top: 0; width: 70px; height: 70px; padding: 0; border: 0; border-radius: 50%;
+  background: none; cursor: pointer; visibility: hidden;
+}
+.lp-buscador.is-abierta .lp-cierra { visibility: visible; }
+.lp-cierra span {
+  left: 35px; top: 35px; height: 22px; transform: translate(-50%, -50%) rotate(45deg) scaleY(0);
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.lp-buscador.is-abierta .lp-cierra span { transform: translate(-50%, -50%) rotate(45deg) scaleY(1); transition-delay: .5s; }
+
+.lp-entrada {
+  position: absolute; left: 70px; right: 70px; top: 0; height: 100%; padding: 0; border: 0; outline: none;
+  background: none; color: var(--lp-texto); font: inherit; font-size: 1.35rem; caret-color: var(--lp-texto);
+  opacity: 0; transform: translateX(-12px); pointer-events: none;
+  transition: opacity .2s, transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.lp-entrada::placeholder { color: var(--lp-suave); }
+.lp-entrada::-webkit-search-cancel-button { display: none; }
+.lp-buscador.is-abierta .lp-entrada { opacity: 1; transform: none; pointer-events: auto; transition-delay: .32s; }
+
+/* los resultados: el panel crece a la altura de la lista */
+.lp-panel {
+  position: absolute; left: 0; right: 0; top: calc(100% + 12px); height: 0; overflow: hidden;
+  border-radius: 24px; background: var(--lp-caja); visibility: hidden; opacity: 0;
+  transition: height .45s cubic-bezier(.22, 1, .36, 1), opacity .25s, visibility 0s .45s;
+}
+.lp-panel.is-lleno { visibility: visible; opacity: 1; box-shadow: inset 0 0 0 1px var(--lp-linea); transition-delay: 0s; }
+.lp-resultados { list-style: none; margin: 0; padding: .5rem; }
+.lp-resultados li {
+  display: flex; align-items: center; gap: .9rem; height: 56px; padding: 0 1rem; border-radius: 16px;
+  color: var(--lp-suave); font-size: 1.12rem; cursor: pointer;
+  animation: lp-entra .45s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i) * 45ms);
+}
+.lp-resultados li:hover, .lp-resultados li.is-activo { background: rgba(127, 127, 127, .1); }
+.lp-resultados li svg { flex: none; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lp-resultados mark { background: none; color: var(--lp-texto); font-weight: 600; }
+.lp-resultados .lp-nada { cursor: default; }
+@keyframes lp-entra { from { opacity: 0; transform: translateY(-8px); } }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.lp-escena { height: 100%; display: flex; flex-direction: column; align-items: center; padding: 15rem 2rem 2rem; gap: 2rem; }
+.lp-pista { margin: 0; color: var(--lp-suave); font-size: .95rem; transition: opacity .3s; }
+.lp-buscador.is-abierta + .lp-pista { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-caja, .lp-mango, .lp-lente svg, .lp-entrada, .lp-panel { transition-duration: .01s; transition-delay: 0s; }
+  .lp-resultados li { animation: none; }
+}

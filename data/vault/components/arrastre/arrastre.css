@@ -1,0 +1,100 @@
+/* Arrastre · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ar-fondo: #0a0a0a;
+  --ar-texto: #f4f4f4;
+  --ar-suave: rgba(255, 255, 255, .5);
+  --ar-linea: rgba(255, 255, 255, .22);
+  --ar-caja: rgba(255, 255, 255, .03);
+  --ar-ficha: #161616;
+  --ar-bien: #2fbf71;
+  --ar-radio: 28px;
+}
+:root[data-tema="claro"] {
+  --ar-fondo: #eeeeee;
+  --ar-texto: #0a0a0a;
+  --ar-suave: rgba(0, 0, 0, .5);
+  --ar-linea: rgba(0, 0, 0, .25);
+  --ar-caja: rgba(255, 255, 255, .45);
+  --ar-ficha: #ffffff;
+  --ar-bien: #1f9d5a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ar-fondo); color: var(--ar-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* En reposo respira: crece y se encoge muy poco, como un pecho. */
+.ar-zona {
+  position: relative; width: min(700px, 100%); height: 380px; border-radius: var(--ar-radio); background: var(--ar-caja);
+  cursor: pointer; outline: none; animation: ar-respira 4.2s ease-in-out infinite;
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1), background-color .3s;
+}
+@keyframes ar-respira { 50% { transform: scale(1.012); } }
+/* con algo encima, toma aire: se agranda y el borde se vuelve continuo */
+.ar-zona.is-encima { animation: none; transform: scale(1.03); background: rgba(127, 127, 127, .08); }
+.ar-zona.is-ocupada { animation: none; cursor: default; }
+.ar-zona:focus-visible { box-shadow: 0 0 0 3px var(--ar-suave); }
+
+.ar-borde { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.ar-borde rect { fill: none; stroke-width: 2; }
+.ar-guiones {
+  stroke: var(--ar-linea); stroke-dasharray: 10 9; animation: ar-marcha 1.6s linear infinite;
+  transition: stroke .3s, stroke-dasharray .3s;
+}
+@keyframes ar-marcha { to { stroke-dashoffset: -19; } }
+.ar-zona.is-encima .ar-guiones { stroke: var(--ar-texto); stroke-dasharray: 19 0; }
+/* el progreso recorre el contorno; el JS cambia el largo del trazo */
+.ar-progreso { stroke: var(--ar-texto); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 0 2; transition: stroke .4s; }
+.ar-zona.is-lista .ar-progreso { stroke: var(--ar-bien); }
+
+.ar-vacio {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  transition: opacity .35s, transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.ar-zona.is-ocupada .ar-vacio { opacity: 0; transform: translateY(-24px) scale(.96); pointer-events: none; }
+.ar-icono {
+  width: 76px; height: 76px; display: grid; place-items: center; margin-bottom: 1.4rem; border-radius: 50%;
+  background: rgba(127, 127, 127, .12); animation: ar-flota 4.2s ease-in-out infinite;
+  transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), background-color .3s, color .3s;
+}
+@keyframes ar-flota { 50% { transform: translateY(-6px); } }
+.ar-zona.is-encima .ar-icono { animation: none; transform: translateY(-12px) scale(1.12); background: var(--ar-texto); color: var(--ar-fondo); }
+.ar-icono svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ar-titulo { position: relative; margin: 0; height: 1.9rem; overflow: hidden; font-size: 1.5rem; font-weight: 500; letter-spacing: -.02em; }
+.ar-reposo, .ar-encima { display: block; transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
+.ar-zona.is-encima .ar-reposo, .ar-zona.is-encima .ar-encima { transform: translateY(-100%); }
+.ar-detalle { margin: .6rem 0 0; color: var(--ar-suave); font-size: 1rem; }
+
+/* los archivos caen dentro de la zona, uno detrás de otro */
+.ar-lista { position: absolute; inset: 0; margin: 0; padding: 2.2rem; list-style: none; display: flex; flex-direction: column; justify-content: center; gap: .8rem; }
+.ar-archivo {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .3rem 1rem; padding: 1rem 1.2rem;
+  border-radius: 18px; background: var(--ar-ficha); box-shadow: 0 0 0 1px rgba(127, 127, 127, .14), 0 14px 30px -18px rgba(0, 0, 0, .6);
+  animation: ar-cae .6s cubic-bezier(.34, 1.4, .64, 1) both; animation-delay: calc(var(--i) * 110ms);
+}
+@keyframes ar-cae { from { opacity: 0; transform: translateY(-36px) scale(.94); } }
+.ar-tipo {
+  grid-row: span 2; width: 44px; height: 52px; display: grid; place-items: end center; padding-bottom: 7px; border-radius: 8px 14px 8px 8px;
+  background: rgba(127, 127, 127, .16); font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+}
+.ar-nombre { font-size: 1.05rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ar-peso { justify-self: end; color: var(--ar-suave); font-size: .9rem; font-variant-numeric: tabular-nums; }
+.ar-barra { grid-column: 2 / 4; height: 4px; border-radius: 4px; background: rgba(127, 127, 127, .18); overflow: hidden; }
+.ar-barra i { display: block; height: 100%; border-radius: inherit; background: var(--ar-texto); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); transition: background-color .3s; }
+.ar-archivo.is-lista .ar-barra i { background: var(--ar-bien); }
+.ar-archivo.is-lista .ar-peso { color: var(--ar-bien); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ar-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem; padding: 2rem; }
+.ar-pie { width: min(700px, 100%); height: 2.6rem; display: flex; align-items: center; justify-content: space-between; color: var(--ar-suave); font-size: .95rem; }
+.ar-limpia {
+  padding: .55rem 1rem; border: 1px solid var(--ar-linea); border-radius: 99px; background: none; color: var(--ar-texto);
+  font: inherit; font-size: .9rem; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.ar-zona.is-ocupada + .ar-pie .ar-limpia { opacity: 1; pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ar-zona, .ar-icono, .ar-guiones { animation: none; }
+  .ar-archivo { animation-duration: .01s; }
+}

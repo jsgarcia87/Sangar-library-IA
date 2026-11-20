@@ -1,0 +1,68 @@
+/* Mirada · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --mr-fondo: #0a0a0a;
+  --mr-texto: #f4f4f4;
+  --mr-suave: rgba(255, 255, 255, .5);
+  --mr-linea: rgba(255, 255, 255, .14);
+  --mr-caja: rgba(255, 255, 255, .04);
+}
+:root[data-tema="claro"] {
+  --mr-fondo: #eeeeee;
+  --mr-texto: #0a0a0a;
+  --mr-suave: rgba(0, 0, 0, .5);
+  --mr-linea: rgba(0, 0, 0, .14);
+  --mr-caja: rgba(255, 255, 255, .7);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--mr-fondo); color: var(--mr-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.mr-campo {
+  position: relative; display: flex; align-items: center; width: min(760px, 100%); height: 124px;
+  padding: 0 1rem 0 2.2rem; border: 1px solid var(--mr-linea); border-radius: 30px; background: var(--mr-caja);
+  transition: border-color .25s;
+}
+.mr-campo:focus-within { border-color: var(--mr-suave); }
+.mr-entrada {
+  flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; outline: none; background: none;
+  color: var(--mr-texto); font: inherit; font-size: 2.6rem; letter-spacing: .04em; caret-color: var(--mr-texto);
+}
+/* al cambiar entre oculta y visible, el texto se enfoca como una lente */
+.mr-entrada.is-cambia { animation: mr-enfoca .45s cubic-bezier(.22, 1, .36, 1); }
+@keyframes mr-enfoca {
+  from { filter: blur(6px); letter-spacing: .3em; opacity: .2; }
+  to { filter: blur(0); letter-spacing: .04em; opacity: 1; }
+}
+
+.mr-ojo {
+  flex: none; width: 124px; height: 96px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 22px;
+  background: none; color: var(--mr-texto); cursor: pointer; transition: background-color .2s;
+}
+.mr-ojo:hover { background: var(--mr-caja); }
+.mr-ojo:focus-visible { outline: 2px solid var(--mr-suave); outline-offset: 2px; }
+.mr-ojo svg { width: 96px; height: 66px; overflow: visible; }
+.mr-parpado { transform-box: view-box; transform-origin: 32px 22px; }
+.mr-contorno { fill: rgba(127, 127, 127, .08); stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.mr-iris-aro { fill: currentColor; }
+.mr-pupila { fill: var(--mr-fondo); }
+.mr-brillo { fill: currentColor; }
+.mr-iris { will-change: transform; }
+/* oculta: la tachadura dibujada; visible: se retira */
+.mr-tacha {
+  fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round;
+  /* el hueco es más largo que el trazo: al retirarlo no queda ni un punto */
+  stroke-dasharray: 1 1.2; stroke-dashoffset: 0; transition: stroke-dashoffset .42s cubic-bezier(.22, 1, .36, 1) .08s;
+}
+.mr-ojo[aria-pressed="true"] .mr-tacha { stroke-dashoffset: 1.1; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.mr-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; }
+.mr-etiqueta { width: min(760px, 100%); color: var(--mr-suave); font-size: 1rem; padding-left: .4rem; }
+.mr-pista { margin: 1.4rem 0 0; color: var(--mr-suave); font-size: .95rem; text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mr-entrada.is-cambia { animation: none; }
+  .mr-tacha { transition: none; }
+}

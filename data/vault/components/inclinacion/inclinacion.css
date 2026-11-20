@@ -1,0 +1,64 @@
+/* Inclinación · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --in-fondo: #0a0a0a;
+  --in-texto: #f4f4f4;
+  --in-suave: rgba(255, 255, 255, .45);
+  --in-tarjeta-a: #1c1c1c;       /* la tarjeta es oscura en los dos temas */
+  --in-tarjeta-b: #0f0f0f;
+  --in-tinta: #f4f4f4;
+  --in-trama: rgba(255, 255, 255, .035);
+  --in-sombra: rgba(0, 0, 0, .7);
+  --in-ancho: 380px;
+  --in-alto: 520px;
+}
+:root[data-tema="claro"] {
+  --in-fondo: #eeeeee;
+  --in-texto: #0a0a0a;
+  --in-suave: rgba(0, 0, 0, .5);
+  --in-sombra: rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--in-fondo); color: var(--in-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* inclinacion.js escribe --rx, --ry (grados), --gx, --gy (el brillo, en %)
+   y --fuerza (0 quieta, 1 inclinada del todo) */
+.in-tarjeta {
+  position: relative; width: var(--in-ancho); height: var(--in-alto); border-radius: 28px;
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d; touch-action: none;
+  /* la sombra se aparta del lado que sube */
+  box-shadow: calc(var(--ry-n, 0) * -26px) calc(34px + var(--rx-n, 0) * 22px) 70px -20px var(--in-sombra);
+}
+.in-cara {
+  position: absolute; inset: 0; border-radius: inherit; padding: 30px; color: var(--in-tinta);
+  display: flex; flex-direction: column; transform-style: preserve-3d;
+  background:
+    repeating-linear-gradient(0deg, var(--in-trama) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(90deg, var(--in-trama) 0 1px, transparent 1px 26px),
+    linear-gradient(150deg, var(--in-tarjeta-a), var(--in-tarjeta-b));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+/* las capas flotan sobre la cara: con preserve-3d, translateZ es altura de verdad */
+[data-profundidad] { transform: translateZ(calc(var(--z) * 1px)); }
+/* el reflejo: una luz que sigue al cursor y una trama que brilla al inclinar */
+.in-reflejo {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; transform: translateZ(1px);
+  background:
+    radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .26), transparent 46%),
+    repeating-linear-gradient(115deg, transparent 0 14px, rgba(255, 255, 255, .05) 14px 15px, transparent 15px 38px);
+  background-position: 0 0, calc(var(--ry-n, 0) * 40px) calc(var(--rx-n, 0) * 40px);
+  mix-blend-mode: screen; opacity: var(--fuerza, 0);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.in-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.6rem; }
+.in-cabeza { display: flex; justify-content: space-between; font-size: .8rem; font-weight: 500; letter-spacing: .14em; color: rgba(255, 255, 255, .55); }
+.in-marca { color: var(--in-tinta); letter-spacing: .02em; font-weight: 600; font-size: .95rem; }
+.in-emblema { width: 62%; margin: auto auto; fill: none; stroke: rgba(255, 255, 255, .28); stroke-width: 1.2; }
+.in-punto { fill: var(--in-tinta); stroke: none; }
+.in-titulo { margin: 0; font-size: 2.9rem; font-weight: 600; line-height: .95; letter-spacing: -.045em; }
+.in-nota { margin: .9rem 0 0; font-size: .85rem; color: rgba(255, 255, 255, .5); }
+.in-pista { margin: 0; color: var(--in-suave); font-size: .95rem; }

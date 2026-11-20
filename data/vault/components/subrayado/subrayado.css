@@ -1,0 +1,51 @@
+/* Subrayado · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --su-fondo: #0a0a0a;
+  --su-texto: #f4f4f4;
+  --su-suave: rgba(255, 255, 255, .42);
+  --su-linea: rgba(255, 255, 255, .12);
+  --su-raya: #f4f4f4;          /* el subrayado */
+  --su-grosor: 4px;
+}
+:root[data-tema="claro"] {
+  --su-fondo: #eeeeee;
+  --su-texto: #0a0a0a;
+  --su-suave: rgba(0, 0, 0, .42);
+  --su-linea: rgba(0, 0, 0, .12);
+  --su-raya: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--su-fondo); color: var(--su-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.su-pestanas { position: relative; display: flex; gap: 3.6rem; border-bottom: 1px solid var(--su-linea); }
+.su-pestana {
+  position: relative; padding: 0 0 1.4rem; border: 0; background: none; cursor: pointer;
+  color: var(--su-suave); font: 500 2.05rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  transition: color .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.su-pestana:hover { color: var(--su-texto); }
+.su-pestana[aria-selected="true"] { color: var(--su-texto); }
+.su-pestana:focus-visible { outline: 2px solid var(--su-texto); outline-offset: 6px; border-radius: 4px; }
+/* la raya: sus dos extremos los mueve el JS, cada uno con su resorte */
+.su-raya {
+  position: absolute; left: 0; bottom: -1px; height: var(--su-grosor); width: 1px;
+  border-radius: var(--su-grosor); background: var(--su-raya);
+  will-change: transform, width; pointer-events: none;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.su-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3rem; padding: 2rem;
+}
+.su-pista { margin: 0; color: var(--su-suave); font-size: .95rem; }
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  .su-pestanas { gap: 1.6rem; max-width: calc(100vw - 2rem); overflow-x: auto; scrollbar-width: none; }
+  .su-pestana { font-size: 1.3rem; flex: none; }
+}

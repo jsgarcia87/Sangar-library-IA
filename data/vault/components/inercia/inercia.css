@@ -1,0 +1,88 @@
+/* Inercia · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --in-fondo: #0a0a0a;
+  --in-tarjeta: #141414;
+  --in-texto: #f4f4f4;
+  --in-suave: rgba(255, 255, 255, .5);
+  --in-linea: rgba(255, 255, 255, .1);
+  --in-ancho: 300px;             /* cada tarjeta */
+  --in-hueco: 20px;
+  --in-margen: clamp(1.25rem, 9vw, 120px);
+}
+:root[data-tema="claro"] {
+  --in-fondo: #eeeeee;
+  --in-tarjeta: #fafafa;
+  --in-texto: #0a0a0a;
+  --in-suave: rgba(0, 0, 0, .5);
+  --in-linea: rgba(0, 0, 0, .1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--in-fondo); color: var(--in-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* touch-action: pan-y deja al dedo el scroll vertical de la página; el
+   arrastre horizontal es nuestro. */
+.in-ventana { overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; outline: none; }
+.in-ventana[data-arrastrando] { cursor: grabbing; }
+.in-pista {
+  display: flex; gap: var(--in-hueco); width: max-content; padding: 0 var(--in-margen);
+  will-change: transform;
+}
+.in-tarjeta { flex: none; width: var(--in-ancho); transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+/* al agarrar, las tarjetas ceden un poco: se nota que las tienes en la mano */
+.in-ventana[data-arrastrando] .in-tarjeta { transform: scale(.965); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.in-escena { min-height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 44px; padding: 3rem 0; }
+.in-cabecera { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding: 0 var(--in-margen); }
+.in-titulo { margin: 0; font-size: clamp(2rem, 4.4vw, 3.4rem); font-weight: 500; line-height: 1.02; letter-spacing: -.04em; }
+.in-avance { display: grid; gap: 12px; justify-items: end; padding-bottom: 6px; }
+.in-cuenta { font-size: .9rem; color: var(--in-suave); font-variant-numeric: tabular-nums; }
+.in-cuenta b { color: var(--in-texto); font-weight: 500; }
+.in-barra { display: block; width: 180px; height: 2px; background: var(--in-linea); border-radius: 2px; overflow: hidden; }
+.in-barra i { display: block; height: 100%; background: var(--in-texto); transform-origin: 0 50%; transform: scaleX(.125); }
+.in-ventana:focus-visible { outline: 2px solid var(--in-texto); outline-offset: -2px; }
+.in-tarjeta {
+  position: relative; height: 380px; padding: 24px; border-radius: 24px;
+  background: var(--in-tarjeta); border: 1px solid var(--in-linea);
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.in-num { position: absolute; top: 22px; left: 24px; font-size: .8rem; letter-spacing: .1em; color: var(--in-suave); }
+.in-tarjeta h2 { margin: 0; font-size: 1.6rem; font-weight: 500; letter-spacing: -.03em; }
+.in-tarjeta p { margin: .35rem 0 0; font-size: .95rem; color: var(--in-suave); }
+.in-pista-texto { margin: 0; padding: 0 var(--in-margen); font-size: .9rem; color: var(--in-suave); }
+
+/* las ocho figuras, solo con CSS */
+.in-forma { position: absolute; left: 50%; top: 42%; width: 120px; height: 120px; transform: translate(-50%, -50%); color: var(--in-texto); }
+.in-forma--idea { border: 1.5px solid; border-radius: 50%; }
+.in-forma--idea::after { content: ""; position: absolute; width: 22px; height: 22px; right: 4px; top: 4px; border-radius: 50%; background: currentColor; }
+.in-forma--boceto { border: 1.5px dashed; border-radius: 6px; transform: translate(-50%, -50%) rotate(12deg); }
+.in-forma--diseno { width: 130px; background: linear-gradient(currentColor, currentColor) 100% 100% / 56px 56px no-repeat; }
+.in-forma--diseno::before { content: ""; position: absolute; left: 0; top: 0; width: 100px; height: 50px; border-radius: 100px 100px 0 0; background: currentColor; }
+.in-forma--codigo::before, .in-forma--codigo::after {
+  content: ""; position: absolute; top: 30px; width: 48px; height: 48px; border: solid currentColor; border-width: 0 0 1.5px 1.5px;
+}
+.in-forma--codigo::before { left: 10px; transform: rotate(45deg); }
+.in-forma--codigo::after { right: 10px; transform: rotate(-135deg); }
+.in-forma--prueba {
+  background: conic-gradient(currentColor 25%, transparent 0 50%, currentColor 0 75%, transparent 0) 0 0 / 40px 40px;
+  border: 1.5px solid;
+}
+.in-forma--lanza { clip-path: polygon(50% 0, 100% 100%, 0 100%); background: currentColor; }
+.in-forma--mide {
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 20px 40% no-repeat,
+    linear-gradient(currentColor, currentColor) 33% 100% / 20px 70% no-repeat,
+    linear-gradient(currentColor, currentColor) 66% 100% / 20px 52% no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 100% / 20px 100% no-repeat;
+}
+.in-forma--mejora { background: repeating-radial-gradient(circle at 0 100%, currentColor 0 1.5px, transparent 1.5px 16px); border-radius: 0 120px 0 0; }
+
+@media (max-width: 640px) {
+  :root { --in-ancho: 240px; }
+  .in-tarjeta { height: 320px; }
+  .in-cabecera { flex-direction: column; align-items: flex-start; }
+  .in-avance { justify-items: start; }
+}

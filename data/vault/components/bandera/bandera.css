@@ -1,0 +1,46 @@
+/* Bandera · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --bd-fondo: #0a0a0a;
+  --bd-texto: #f4f4f4;
+  --bd-suave: rgba(255, 255, 255, .5);
+  --bd-asta: rgba(255, 255, 255, .55);
+}
+:root[data-tema="claro"] {
+  --bd-fondo: #eeeeee;
+  --bd-texto: #0a0a0a;
+  --bd-suave: rgba(0, 0, 0, .5);
+  --bd-asta: rgba(0, 0, 0, .55);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bd-fondo); color: var(--bd-texto); overflow: hidden; }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.bd-palabra { white-space: nowrap; }
+/* --luz (0–1) la pone el script: la letra que da la cara a la luz es la
+   más clara; la que se tuerce hacia atrás se oscurece, como la tela */
+.bd-letra {
+  display: inline-block; font-style: normal; will-change: transform; --luz: 1;
+  color: color-mix(in srgb, var(--bd-texto) calc(55% + var(--luz) * 45%), var(--bd-fondo));
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.bd-escena {
+  min-height: 100%; display: flex; flex-direction: column; justify-content: center;
+  gap: 3rem; padding: 2rem clamp(1.5rem, 9vw, 9rem);
+}
+.bd-mastil { position: relative; padding-left: 1.6vw; }
+.bd-asta {
+  position: absolute; left: 0; top: -1.2em; height: 100vh; width: 3px; border-radius: 3px;
+  background: var(--bd-asta); font-size: clamp(2.6rem, 10.8vw, 10rem);
+}
+.bd-asta::before {
+  content: ""; position: absolute; left: 50%; top: -12px; width: 14px; height: 14px; translate: -50% 0;
+  border-radius: 50%; background: var(--bd-asta);
+}
+.bd-texto {
+  margin: 0; font-size: clamp(2.6rem, 10.8vw, 10rem); font-weight: 600; line-height: 1.02; letter-spacing: -.045em;
+  user-select: none;
+}
+.bd-pista { margin: 0 0 0 1.6vw; color: var(--bd-suave); font-size: .95rem; position: relative; }

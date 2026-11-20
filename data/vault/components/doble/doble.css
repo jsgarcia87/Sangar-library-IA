@@ -1,0 +1,71 @@
+/* Doble · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --db-fondo: #0a0a0a;
+  --db-texto: #f4f4f4;
+  --db-suave: rgba(255, 255, 255, .5);
+  --db-borde: rgba(255, 255, 255, .55);
+  --db-cara: #f4f4f4;           /* la cara lisa */
+  --db-letra: #0a0a0a;
+  --db-alto: 108px;             /* también es la profundidad del bloque */
+}
+:root[data-tema="claro"] {
+  --db-fondo: #eeeeee;
+  --db-texto: #0a0a0a;
+  --db-suave: rgba(0, 0, 0, .5);
+  --db-borde: rgba(0, 0, 0, .55);
+  --db-cara: #0a0a0a;
+  --db-letra: #f4f4f4;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--db-fondo); color: var(--db-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.db-boton {
+  position: relative; display: inline-block; height: var(--db-alto); min-width: 360px;
+  perspective: 900px; text-decoration: none; color: inherit; outline: none;
+  font: 500 2.1rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+/* el bloque: tres caras alrededor de un eje horizontal, a media altura */
+.db-bloque {
+  position: absolute; inset: 0; transform-style: preserve-3d;
+  transform: translateZ(calc(var(--db-alto) / -2)) rotateX(var(--db-giro, 0deg));
+  transition: transform .7s cubic-bezier(.3, 1.35, .45, 1);
+}
+.db-cara {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: .5em;
+  border-radius: 18px; backface-visibility: hidden; overflow: hidden;
+}
+.db-frente { transform: translateZ(calc(var(--db-alto) / 2)); border: 1.5px solid var(--db-borde); color: var(--db-texto); }
+.db-arriba { transform: rotateX(90deg) translateZ(calc(var(--db-alto) / 2)); }
+.db-abajo  { transform: rotateX(-90deg) translateZ(calc(var(--db-alto) / 2)); }
+.db-arriba, .db-abajo { background: var(--db-cara); color: var(--db-letra); }
+.is-lleno .db-frente { background: var(--db-cara); color: var(--db-letra); border-color: var(--db-cara); }
+.is-lleno .db-arriba, .is-lleno .db-abajo { background: transparent; color: var(--db-texto); border: 1.5px solid var(--db-borde); }
+
+/* la sombra de cada cara según mira hacia ti o hacia otro lado: da volumen */
+.db-cara::after { content: ""; position: absolute; inset: 0; background: #000; opacity: 0; transition: opacity .7s cubic-bezier(.22, 1, .36, 1); pointer-events: none; }
+.db-arriba::after, .db-abajo::after { opacity: .55; }
+.is-girado .db-frente::after { opacity: .6; }
+.is-girado .db-arriba::after, .is-girado .db-abajo::after { opacity: 0; }
+
+/* la flecha de la otra cara entra empujada, y sigue empujando */
+.db-flecha { width: 1.6em; height: 1.6em; }
+.db-flecha path { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.is-girado .db-flecha { animation: db-empuja 1.2s .45s cubic-bezier(.45, 0, .55, 1) infinite; }
+@keyframes db-empuja { 0%, 100% { transform: none; } 50% { transform: translateX(10px); } }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.db-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3.4rem; padding: 2rem;
+}
+.db-fila { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; }
+.db-pista { margin: 0; color: var(--db-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .db-bloque, .db-cara::after { transition-duration: .01s; }
+  .is-girado .db-flecha { animation: none; }
+}

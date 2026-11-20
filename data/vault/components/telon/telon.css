@@ -1,0 +1,104 @@
+/* Telón · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --te-fondo: #0a0a0a;
+  --te-texto: #f4f4f4;
+  --te-suave: rgba(255, 255, 255, .5);
+  --te-linea: rgba(255, 255, 255, .07);
+  --te-tela: #f4f4f4;               /* el telón */
+  --te-tinta: #0a0a0a;              /* los enlaces sobre el telón */
+  --te-sombra: rgba(0, 0, 0, .09);  /* el fondo de cada pliegue */
+  --te-brillo: rgba(255, 255, 255, .5);
+  --te-baja: .95s;                  /* lo que tarda en caer */
+}
+:root[data-tema="claro"] {
+  --te-fondo: #eeeeee;
+  --te-texto: #0a0a0a;
+  --te-suave: rgba(0, 0, 0, .5);
+  --te-linea: rgba(0, 0, 0, .07);
+  --te-tela: #0a0a0a;
+  --te-tinta: #f4f4f4;
+  --te-sombra: rgba(0, 0, 0, .5);
+  --te-brillo: rgba(255, 255, 255, .07);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--te-fondo); color: var(--te-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el telón: tiras verticales, cada una un pliegue con luz y sombra */
+.te-telon { position: fixed; inset: 0; z-index: 10; display: flex; pointer-events: none; }
+.te-pliegue {
+  flex: 1; height: 124%; margin-top: -12vh;      /* sobra tela arriba y abajo: el rebote y el festón no dejan huecos */
+  margin-right: -1px;                            /* sin rendijas entre tiras */
+  background:
+    linear-gradient(90deg, var(--te-sombra), transparent 30%, var(--te-brillo) 62%, transparent 82%, var(--te-sombra)),
+    var(--te-tela);
+  border-radius: 0 0 50% 50% / 0 0 26px 26px;    /* el bajo festoneado */
+  transform: translateY(-101%);
+  transition: transform calc(var(--te-baja) * .8) cubic-bezier(.7, 0, .84, 0);
+  transition-delay: calc(var(--te-i) * 40ms);
+}
+/* al caer: arranca de golpe y se pasa un poco, como una tela con peso */
+.is-telon .te-pliegue {
+  transform: none;
+  transition: transform var(--te-baja) cubic-bezier(.6, .05, .3, 1.12);
+  transition-delay: calc(var(--te-j) * 55ms);
+}
+
+/* los enlaces: cada uno sube desde detrás de su propia línea */
+.te-menu { position: fixed; inset: 0; z-index: 11; display: flex; align-items: center; padding: 0 9vw; color: var(--te-tinta); }
+.te-menu[hidden] { display: none; }
+.te-enlaces { margin: 0; padding: 0; list-style: none; }
+.te-enlaces li { overflow: hidden; padding-bottom: .06em; }
+.te-enlaces a {
+  display: inline-flex; align-items: baseline; gap: 1.1rem; color: inherit; text-decoration: none;
+  font-size: clamp(2.6rem, 7.4vh, 4.6rem); font-weight: 500; line-height: 1.12; letter-spacing: -.035em;
+  transform: translateY(110%) rotate(4deg); transform-origin: 0 100%;
+  transition: transform .45s cubic-bezier(.7, 0, .84, 0), opacity .3s;
+  transition-delay: calc((4 - var(--te-i)) * 35ms);
+}
+.te-enlaces small { font-size: .9rem; font-weight: 500; letter-spacing: .04em; opacity: .5; transform: translateY(-1.6em); }
+.is-telon .te-enlaces a {
+  transform: none;
+  transition: transform .8s cubic-bezier(.22, 1, .36, 1), padding .35s cubic-bezier(.22, 1, .36, 1);
+  transition-delay: calc(var(--te-baja) + var(--te-i) * 70ms), 0s;   /* cuando la última tira ya ha caído */
+}
+.te-enlaces a:hover, .te-enlaces a:focus-visible { padding-left: 1.4rem; outline: none; }
+.te-enlaces a::after { content: "→"; opacity: 0; transform: translateX(-10px); transition: opacity .25s, transform .35s cubic-bezier(.22, 1, .36, 1); font-weight: 400; }
+.te-enlaces a:hover::after, .te-enlaces a:focus-visible::after { opacity: 1; transform: none; }
+
+/* la cabecera queda encima del telón y se invierte sobre él */
+.te-cabecera {
+  position: fixed; left: 0; right: 0; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between;
+  padding: 2.2rem 9vw; color: #fff; mix-blend-mode: difference; pointer-events: none;
+}
+.te-cabecera > * { pointer-events: auto; }
+.te-boton {
+  display: inline-flex; align-items: center; gap: 1rem; padding: .6rem 0; border: 0; background: none; cursor: pointer;
+  color: inherit; font: 500 1.15rem/1 "General Sans", system-ui, sans-serif; letter-spacing: .01em;
+}
+.te-boton:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+.te-palabras { display: inline-grid; height: 1.1em; overflow: hidden; text-align: right; }
+.te-palabras span { grid-area: 1 / 1; line-height: 1.1; transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+.te-palabras span + span { transform: translateY(110%); }
+.is-telon .te-palabras span:first-child { transform: translateY(-110%); }
+.is-telon .te-palabras span + span { transform: none; }
+.te-rayas { position: relative; width: 30px; height: 12px; }
+.te-rayas i { position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px; background: currentColor; transition: transform .5s cubic-bezier(.65, 0, .35, 1); }
+.te-rayas i:first-child { top: 0; }
+.te-rayas i:last-child { bottom: 0; }
+.is-telon .te-rayas i:first-child { transform: translateY(5px) rotate(45deg); }
+.is-telon .te-rayas i:last-child { transform: translateY(-5px) rotate(-45deg); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.te-marca { display: inline-flex; align-items: center; gap: .8rem; font-size: 1.15rem; font-weight: 600; letter-spacing: -.01em; }
+.te-marca i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; border: 1.5px solid currentColor; font-style: normal; font-size: .85rem; }
+.te-pagina { height: 100%; padding: 12rem 9vw 0; display: flex; flex-direction: column; gap: 1.2rem; }
+.te-bloque { display: block; border-radius: 14px; background: var(--te-linea); }
+.te-rejilla { margin-top: 3.4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.te-rejilla i { height: 220px; border-radius: 18px; background: var(--te-linea); }
+
+@media (prefers-reduced-motion: reduce) {
+  .te-pliegue, .is-telon .te-pliegue, .te-enlaces a, .is-telon .te-enlaces a { transition-duration: .01s; transition-delay: 0s; }
+}

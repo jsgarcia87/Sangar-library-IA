@@ -1,0 +1,86 @@
+/* Altavoz · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --av-fondo: #0a0a0a;
+  --av-texto: #f4f4f4;
+  --av-suave: rgba(255, 255, 255, .45);
+  --av-boton: rgba(255, 255, 255, .06);
+  --av-linea: rgba(255, 255, 255, .14);
+  --av-eco: rgba(255, 255, 255, .18);
+  --av-tam: 240px;
+  --av-curva: cubic-bezier(.22, 1, .36, 1);
+}
+:root[data-tema="claro"] {
+  --av-fondo: #eeeeee;
+  --av-texto: #0a0a0a;
+  --av-suave: rgba(0, 0, 0, .5);
+  --av-boton: rgba(0, 0, 0, .05);
+  --av-linea: rgba(0, 0, 0, .12);
+  --av-eco: rgba(0, 0, 0, .16);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--av-fondo); color: var(--av-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.av-boton {
+  position: relative; width: var(--av-tam); height: var(--av-tam); padding: 0; border-radius: 50%;
+  border: 1px solid var(--av-linea); background: var(--av-boton); color: var(--av-texto);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: scale .5s var(--av-curva);
+}
+.av-boton:active { scale: .96; }
+.av-boton:focus-visible { outline: 2px solid var(--av-suave); outline-offset: 6px; }
+.av-icono { position: relative; width: 58%; height: 58%; overflow: visible; }
+.av-cuerpo { fill: currentColor; stroke: currentColor; stroke-width: 4; stroke-linejoin: round; transform-origin: 30px 60px; }
+.av-onda path, .av-cruz { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; }
+
+/* Con sonido, las ondas laten una detrás de otra, hacia fuera. */
+.av-onda { animation: av-late 1.6s ease-in-out infinite calc(var(--i) * .18s); }
+@keyframes av-late { 0%, 100% { opacity: .45; } 35% { opacity: 1; } }
+
+/* Silenciar: las ondas se recogen hacia el altavoz, de fuera hacia dentro,
+   y después se dibuja la cruz. Al volver, al revés. */
+.av-onda path {
+  stroke-dasharray: 70; stroke-dashoffset: 0; transform-origin: 40px 60px;
+  transition: stroke-dashoffset .5s var(--av-curva) calc(.1s + var(--i) * .1s), scale .5s var(--av-curva) calc(.1s + var(--i) * .1s), opacity .3s calc(.1s + var(--i) * .1s);
+}
+.av-cruz {
+  stroke-dasharray: 29; stroke-dashoffset: 29; opacity: 0; scale: .4; transform-box: fill-box; transform-origin: center;
+  /* se va encogiéndose hacia su centro y, ya invisible, se «desdibuja» para la próxima vez */
+  transition: opacity .18s, scale .25s var(--av-curva), stroke-dashoffset 0s .3s;
+}
+[aria-pressed="true"] .av-onda path {
+  stroke-dashoffset: 35; scale: .6; opacity: 0;
+  transition: stroke-dashoffset .38s var(--av-curva) calc((2 - var(--i)) * .07s), scale .38s var(--av-curva) calc((2 - var(--i)) * .07s), opacity .25s calc(.1s + (2 - var(--i)) * .07s);
+}
+[aria-pressed="true"] .av-cruz { stroke-dashoffset: 0; opacity: 1; scale: 1; transition: stroke-dashoffset .26s var(--av-curva) .34s, opacity 0s .34s, scale 0s .34s; }
+[aria-pressed="true"] .av-cruz + .av-cruz { transition-delay: .46s; }
+/* el altavoz da un golpe corto al callarse */
+[aria-pressed="true"] .av-cuerpo { animation: av-golpe .45s var(--av-curva) .1s; }
+@keyframes av-golpe { 35% { scale: .86; } }
+
+/* los ecos: anillos que salen del botón mientras suena */
+.av-ecos { position: absolute; inset: -1px; pointer-events: none; transition: opacity .5s; }
+.av-eco {
+  position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--av-eco);
+  animation: av-eco 2.4s cubic-bezier(.3, .6, .4, 1) infinite;
+}
+.av-eco:nth-child(2) { animation-delay: .8s; }
+.av-eco:nth-child(3) { animation-delay: 1.6s; }
+@keyframes av-eco { from { scale: 1; opacity: 1; } to { scale: 2.3; opacity: 0; } }
+[aria-pressed="true"] .av-ecos { opacity: 0; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.av-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.8rem; overflow: hidden; }
+.av-estado { margin: 0; display: grid; font-size: .82rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--av-suave); }
+.av-estado span { grid-area: 1 / 1; text-align: center; transition: opacity .3s, translate .45s var(--av-curva); }
+.av-estado span:last-child { opacity: 0; translate: 0 .6em; }
+.av-escena:has([aria-pressed="true"]) .av-estado span:first-child { opacity: 0; translate: 0 -.6em; }
+.av-escena:has([aria-pressed="true"]) .av-estado span:last-child { opacity: 1; translate: 0 0; }
+.av-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--av-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .av-onda, .av-eco, [aria-pressed="true"] .av-cuerpo { animation: none; }
+  .av-eco { display: none; }
+}

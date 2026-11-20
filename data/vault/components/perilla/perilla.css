@@ -1,0 +1,78 @@
+/* Perilla · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --pr-fondo: #0a0a0a;
+  --pr-texto: #f4f4f4;
+  --pr-suave: rgba(255, 255, 255, .45);
+  --pr-marca: rgba(255, 255, 255, .13);       /* marca apagada */
+  --pr-encendida: #f4f4f4;                    /* marca encendida */
+  --pr-pomo-a: #3a3a3a;                       /* el metal del pomo */
+  --pr-pomo-b: #121212;
+  --pr-estria: rgba(255, 255, 255, .07);
+  --pr-sombra: rgba(0, 0, 0, .8);
+  --pr-tam: min(360px, 84vw);                 /* el círculo de las marcas */
+  --pr-pomo: calc(var(--pr-tam) * .633);
+}
+:root[data-tema="claro"] {
+  --pr-fondo: #eeeeee;
+  --pr-texto: #0a0a0a;
+  --pr-suave: rgba(0, 0, 0, .5);
+  --pr-marca: rgba(0, 0, 0, .12);
+  --pr-encendida: #0a0a0a;
+  --pr-pomo-a: #ffffff;
+  --pr-pomo-b: #cfcfcf;
+  --pr-estria: rgba(0, 0, 0, .08);
+  --pr-sombra: rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--pr-fondo); color: var(--pr-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.pr-perilla {
+  position: relative; width: var(--pr-tam); height: var(--pr-tam); border-radius: 50%;
+  cursor: grab; touch-action: none; outline: none; user-select: none; -webkit-user-select: none;
+}
+.pr-perilla:active { cursor: grabbing; }
+.pr-perilla:focus-visible .pr-pomo { outline: 2px solid var(--pr-suave); outline-offset: 10px; }
+
+/* las marcas: cada una gira a su ángulo y se aleja del centro */
+.pr-marca {
+  position: absolute; left: 50%; top: 50%; width: 4px; height: 16px; margin: -8px 0 0 -2px; border-radius: 2px;
+  background: var(--pr-marca);
+  transform: rotate(var(--a)) translateY(calc(var(--pr-tam) / -2 + 12px));
+  transition: background-color .25s, height .25s, margin .25s;
+}
+.pr-marca.is-on { background: var(--pr-encendida); }
+/* la última encendida, un poco más larga: marca el punto exacto */
+.pr-marca.is-punta { height: 24px; margin-top: -12px; }
+
+/* el pomo gira entero; el brillo de encima no, porque la luz no se mueve */
+.pr-pomo {
+  position: absolute; left: 50%; top: 50%; width: var(--pr-pomo); height: var(--pr-pomo);
+  margin: calc(var(--pr-pomo) / -2) 0 0 calc(var(--pr-pomo) / -2); border-radius: 50%;
+  background: repeating-conic-gradient(var(--pr-estria) 0 2deg, transparent 2deg 6deg), linear-gradient(160deg, var(--pr-pomo-a), var(--pr-pomo-b));
+  box-shadow: 0 30px 50px -18px var(--pr-sombra), 0 2px 0 rgba(255, 255, 255, .06) inset, 0 0 0 1px rgba(255, 255, 255, .06);
+  transform: rotate(var(--pr-giro, 0deg));
+}
+.pr-cara {
+  position: absolute; inset: 16%; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, transparent 0 60%, rgba(0, 0, 0, .12) 61% 100%), linear-gradient(-20deg, var(--pr-pomo-a), var(--pr-pomo-b));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .08) inset, 0 -1px 0 rgba(0, 0, 0, .4) inset, 0 6px 14px -6px rgba(0, 0, 0, .6);
+}
+.pr-indice {
+  position: absolute; left: 50%; top: 21%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%;
+  background: var(--pr-encendida);
+}
+.pr-brillo {
+  position: absolute; left: 50%; top: 50%; width: var(--pr-pomo); height: var(--pr-pomo);
+  margin: calc(var(--pr-pomo) / -2) 0 0 calc(var(--pr-pomo) / -2); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 32% 22%, rgba(255, 255, 255, .16), transparent 46%), conic-gradient(from 200deg, transparent, rgba(255, 255, 255, .06) 30deg, transparent 70deg);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.pr-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; }
+.pr-lectura { margin: 0; display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+.pr-numero { font-size: 3.2rem; font-weight: 500; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.pr-nombre { font-size: .78rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--pr-suave); }
+.pr-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--pr-suave); font-size: .95rem; }

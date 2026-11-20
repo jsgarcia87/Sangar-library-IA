@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- mx-llega -->
+<style>@view-transition{navigation:auto}::view-transition-group(root){animation-duration:0s}::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}</style>
+<script>(function(){try{var d=document,h=d.documentElement,S=sessionStorage,n=performance.getEntriesByType('navigation')[0],y=n?n.type:'navigate',m=JSON.parse(S.getItem('mxTrans')||'null'),a=0;S.removeItem('mxTrans');if(y==='navigate'&&m&&Date.now()-m.t<8000)a=m;else if(y==='back_forward'&&S.getItem('mxDentro'))a={atras:1};var T=window.mxTrans={llega:a,ya:1};if(!a)return;h.classList.add('mx-llega');var s=d.createElement('style');s.textContent='html.mx-llega{--tr-3:#373737;--tr-t:#fff}html[data-theme=light].mx-llega{--tr-3:#c1c1c1;--tr-t:#0a0a0a}#mx-tr-ya{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;overflow:hidden;background:var(--tr-3);color:var(--tr-t)}#mx-tr-ya .tr-palabra{display:flex;width:max-content;overflow:hidden;padding:.16em .05em .18em;white-space:pre;font-family:"General Sans","General Sans Respaldo",system-ui,-apple-system,sans-serif;font-size:100px;font-weight:700;line-height:1;letter-spacing:-.055em;-webkit-font-smoothing:antialiased;visibility:hidden}html.mx-tipo #mx-tr-ya .tr-palabra{visibility:visible}#mx-tr-ya .tr-palabra i{display:block;font-style:normal}#mx-tr-ya .tr-logo svg{display:block;height:auto;overflow:hidden}';d.head.appendChild(s);var e=d.createElement('div');e.id='mx-tr-ya';e.setAttribute('aria-hidden','true');if(a.u&&Math.abs(innerWidth-a.iw)<=24)e.innerHTML='<img alt="" src="'+a.u+'" style="display:block;width:'+a.bw+'px;height:'+a.bh+'px">';else if(a.h&&Math.abs(innerWidth-a.iw)<=24){e.innerHTML='<span class="tr-palabra'+(a.k==='moxen'?' tr-logo':'')+'" style="font-size:'+a.fs+'px">'+a.h+'</span>';var f=function(){h.classList.add('mx-tipo')};if(a.k==='moxen')f();else{d.addEventListener('DOMContentLoaded',function(){(d.fonts&&d.fonts.load?d.fonts.load('700 1em "General Sans"'):Promise.reject()).then(f,f)});setTimeout(f,700)}}h.appendChild(e);if(a.r){T.inj=1;var l=d.createElement('link');l.rel='stylesheet';l.href=a.r+'assets/css/transicion.css'+a.v;d.head.appendChild(l);var j=d.createElement('script');j.src=a.r+'assets/js/transicion.js'+a.v;d.head.appendChild(j)}setTimeout(function(){if(!T.activo){var z=d.getElementById('mx-tr-ya');if(z)z.remove();h.classList.remove('mx-llega')}},10000)}catch(x){}})();</script>
+<!-- /mx-llega -->
+<title>Tomate: temporizador pomodoro con tareas y descanso | Moxen</title>
+<meta name="description" content="Temporizador pomodoro con tareas y descanso. Animación gratis en HTML, CSS y JavaScript con código comentado y licencia de uso.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://moxen.cl/recursos/tomate/">
+<meta property="og:type" content="product">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="Moxen">
+<meta property="og:url" content="https://moxen.cl/recursos/tomate/">
+<meta property="og:title" content="Tomate: temporizador pomodoro con tareas y descanso | Moxen">
+<meta property="og:description" content="Temporizador pomodoro con tareas y descanso. Animación gratis en HTML, CSS y JavaScript con código comentado y licencia de uso.">
+<meta property="og:image" content="https://moxen.cl/assets/video/recursos/tomate.jpg">
+<meta property="og:image:width" content="960">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="Tomate: Temporizador pomodoro con tareas y descanso">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tomate: temporizador pomodoro con tareas y descanso | Moxen">
+<meta name="twitter:description" content="Temporizador pomodoro con tareas y descanso. Animación gratis en HTML, CSS y JavaScript con código comentado y licencia de uso.">
+<meta name="twitter:image" content="https://moxen.cl/assets/video/recursos/tomate.jpg">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=general-sans@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css?v=157">
+<script>document.documentElement.classList.add('js');
+(function(){var t='dark';try{var v=localStorage.getItem('mxTheme');if(v==='light'||v==='dark')t=v;}catch(e){}
+document.documentElement.setAttribute('data-theme',t);})();
+/* llegar con #vivo (desde «Probar en vivo» en la tienda): no saltar de golpe, vivo.js baja con suavidad hasta la escena */
+if(location.hash==='#vivo'){window.mxVivo0=1;history.replaceState(null,'',location.pathname+location.search);}</script>
+<script type="application/ld+json">
+[{"@context": "https://schema.org", "@type": "Product", "name": "Tomate", "description": "Un tomate dibujado en SVG cuyo aro se consume mientras corre el tiempo, con la hoja que respira, sesenta marcas de minuto y el reloj en el centro. Al llegar a cero el aro florece, la paleta se funde del tomate al azul tinta, salen el sol y las colinas del descanso y el pomodoro se suma a la tarea activa de la lista.", "url": "https://moxen.cl/recursos/tomate/", "image": ["https://moxen.cl/assets/video/recursos/tomate.jpg"], "sku": "moxen-tomate", "category": "Animación web · Sistemas", "brand": {"@type": "Brand", "name": "Moxen"}, "offers": {"@type": "Offer", "name": "Free", "price": 0, "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://moxen.cl/recursos/tomate/", "seller": {"@type": "Organization", "@id": "https://moxen.cl/#organizacion", "name": "Moxen"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://moxen.cl/"}, {"@type": "ListItem", "position": 2, "name": "Recursos", "item": "https://moxen.cl/recursos.html"}, {"@type": "ListItem", "position": 3, "name": "Tomate", "item": "https://moxen.cl/recursos/tomate/"}]}]
+</script>
+</head>
+<body data-wa="56935605683" class="es-recurso es-interior" data-recurso="tomate">
+<!-- Generado por productos/empaqueta.py: los textos salen del meta.json del recurso. -->
+
+<header class="nav_wrapper is-pill">
+  <div class="padding-global">
+    <div class="container-global">
+      <nav class="nav_contain" aria-label="Principal">
+        <a class="nav_logo" href="../../" aria-label="Moxen, inicio">
+          <img class="wordmark" src="../../assets/img/moxen-wordmark.svg" alt="Moxen" width="1798" height="324">
+        </a>
+        <div class="nav_izq">
+          <button class="nav_burger" type="button" aria-expanded="false" aria-controls="navMobile">Menú</button>
+          <div class="nav_col">
+            <a class="nav_link" href="../../#obras">Muestras</a>
+            <a class="nav_link" href="../../#servicios">Servicios</a>
+            <a class="nav_link" href="../../#proceso">Proceso</a>
+            <a class="nav_link" href="../../recursos.html">Recursos</a>
+            <a class="nav_link" href="../../herramientas.html">Herramientas</a>
+          </div>
+        </div>
+        <div class="nav_actions">
+          <a class="nav_cta" href="../../#contacto">Conversemos</a>
+        </div>
+        <button class="theme-switch" type="button" id="themeSwitch"
+                aria-label="Cambiar a tema claro" title="Cambiar a tema claro">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="nav_mobile" id="navMobile" hidden>
+  <button class="close" type="button">Cerrar</button>
+  <a href="../../#obras">Muestras</a>
+  <a href="../../#servicios">Servicios</a>
+  <a href="../../#proceso">Proceso</a>
+  <a href="../../recursos.html">Recursos</a>
+  <a href="../../herramientas.html">Herramientas</a>
+  <a href="../../#contacto">Conversemos</a>
+  <div class="nav_mobile-contacto">
+    <a href="https://wa.me/56935605683" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path class="borde" d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="lleno" d="M9.1 7.7c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3-.1.5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5-.1l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.6-.4.8-.6.4-1.4.6-2.3.3-2.2-.7-4-2.5-4.7-4.7-.3-.9-.1-1.8.3-2.4z"/></svg>+56 9 3560 5683</a>
+    <a href="https://t.me/+56935605683" target="_blank" rel="noopener"><svg class="ico-tg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 4.2 3.2 11.1c-.8.3-.8.9 0 1.2l4.3 1.4 1.7 5.2c.2.6.6.7 1 .3l2.5-2.3 4.6 3.4c.7.4 1.2.2 1.4-.6l3.1-14.3c.2-1-.4-1.5-.9-1.2z"/><path d="m7.5 13.7 9.6-6.1-7.2 7"/></svg>Telegram</a>
+    <a href="mailto:contacto@moxen.cl"><svg class="ico-mail" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.2" width="18" height="13.6" rx="2.4"/><path d="m3.6 6.6 8.4 6.3 8.4-6.3"/></svg>contacto@moxen.cl</a>
+    <a href="https://www.instagram.com/moxen.studio/" target="_blank" rel="noopener"><svg class="ico-ig" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="lleno" cx="17.2" cy="6.8" r="1.15"/></svg>@moxen.studio</a>
+  </div>
+</div>
+
+<main class="rp">
+  <div class="padding-global"><div class="container-global">
+    <div class="rp_grid">
+      <!-- la información, en una columna angosta (en escritorio, de alto completo y con su propio scroll): ruta, categoría, título y «Gratis», los botones, la frase, la descripción y la ficha -->
+      <div class="rp_info">
+        <nav class="sv_migas rp_migas" aria-label="Ruta">
+          <a href="../../">Inicio</a><span aria-hidden="true">/</span>
+          <a href="../../recursos.html">Recursos</a><span aria-hidden="true">/</span>
+          <span aria-current="page">Tomate</span>
+        </nav>
+        <header class="rp_cab">
+          <p class="rp_cat"><a href="../../recursos.html?cat=sistemas">Sistemas</a></p>
+          <div class="rp_titulo">
+            <h1 class="rp_nombre">Tomate</h1>
+            <span class="rc_gratis es-grande">Gratis</span>
+          </div>
+        </header>
+        <div class="rp_acciones">
+          <button class="rc_boton es-lleno rp_descarga" type="button" data-descarga="tomate">Descargar</button>
+          <button class="rc_boton rp_agrega" type="button" data-agrega="tomate">Agregar al carrito</button>
+        </div>
+        <div class="rp_detalle">
+          <div class="rp_texto">
+            <p class="rp_frase">Temporizador pomodoro con tareas y descanso</p>
+            <p class="rp_desc">Un tomate dibujado en SVG cuyo aro se consume mientras corre el tiempo, con la hoja que respira, sesenta marcas de minuto y el reloj en el centro. Al llegar a cero el aro florece, la paleta se funde del tomate al azul tinta, salen el sol y las colinas del descanso y el pomodoro se suma a la tarea activa de la lista.</p>
+          </div>
+          <div class="rp_lado">
+            <dl class="rp_ficha">
+              <div><dt>Qué incluye</dt><dd>index.html, tomate.css, tomate.js, <span>README y licencia</span></dd></div>
+              <div><dt>Dependencias</dt><dd>Ninguna</dd></div>
+            </dl>
+            <a class="rp_medida" href="../../#contacto">¿La necesitas a tu medida? Conversemos <span aria-hidden="true">→</span></a>
+            <p class="rp_servicio"><a href="../../servicios/paginas-web/">También hacemos páginas web completas</a></p>
+          </div>
+        </div>
+      </div>
+      <!-- «Probar en vivo»: la demo en un laptop o en un celular, lo más grande que da la pantalla y en el mismo sitio (la carga vivo.js al acercarse) -->
+      <section class="eq_escena" id="vivo" tabindex="-1" aria-labelledby="eq-tit" data-slug="tomate" data-nombre="Tomate">
+        <div class="eq_cab">
+          <h2 class="eq_tit" id="eq-tit">Probar en vivo</h2>
+          <div class="eq_selector" role="tablist" aria-label="Dispositivo" data-vista="escritorio"><span class="eq_pildora" aria-hidden="true"></span><button type="button" role="tab" id="eq-t-escritorio" aria-selected="true" aria-controls="eq-p-escritorio" aria-label="Escritorio" title="Escritorio" data-vista="escritorio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="10.5" rx="1.6"/><path d="M2.5 19h19"/></svg></button><button type="button" role="tab" id="eq-t-celular" aria-selected="false" aria-controls="eq-p-celular" tabindex="-1" aria-label="Móvil" title="Móvil" data-vista="celular"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="3" width="9" height="18" rx="2.2"/><path d="M11 18h2"/></svg></button></div>
+          <button class="eq_pleno" type="button" data-vivo="tomate" data-nombre="Tomate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Pantalla completa</span></button>
+        </div>
+        <div class="eq_zona">
+      <div class="eq_pieza is-mac" data-pieza="escritorio" id="eq-p-escritorio" role="tabpanel" aria-labelledby="eq-t-escritorio">
+        <div class="eq_equipo eq_mac">
+          <div class="eq_pantalla"><iframe class="eq_iframe" data-disp="escritorio" title="Demostración en vivo en escritorio"></iframe></div>
+          <span class="eq_marco" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="eq_pieza is-cel" data-pieza="celular" id="eq-p-celular" role="tabpanel" aria-labelledby="eq-t-celular">
+        <div class="eq_equipo eq_cel">
+          <div class="eq_pantalla"><iframe class="eq_iframe" data-disp="celular" title="Demostración en vivo en celular"></iframe></div>
+          <span class="eq_marco" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+        <script>(function(){var c=document.currentScript.parentNode,v=matchMedia('(max-width:767px)').matches?'celular':'escritorio',s=c.querySelector('.eq_selector');
+c.querySelector('.eq_zona').dataset.vista=s.dataset.vista=v;
+s.querySelectorAll('[role=tab]').forEach(function(b){var on=b.dataset.vista===v;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;});})();</script>
+      </section>
+    </div>
+    <section class="rp_mas" aria-label="Más de Sistemas"><div class="rp_mas-cab"><h2 class="rp_mas-tit"><span>Más de</span> <span>Sistemas</span></h2><a class="rp_mas-todas" href="../../recursos.html?cat=sistemas"><span>Ver todas</span> <i aria-hidden="true">→</i></a></div><div class="rp_mas-grid">
+          <a class="rp_mini" href="../acomodo/">
+            <span class="rp_mini-media"><video data-src="../../assets/video/recursos/acomodo.mp4" poster="../../assets/video/recursos/acomodo.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <b>Acomodo</b><span>Tarjetas que se reordenan arrastrando, sobre resortes</span>
+          </a>
+          <a class="rp_mini" href="../manual/">
+            <span class="rp_mini-media"><video data-src="../../assets/video/recursos/manual.mp4" poster="../../assets/video/recursos/manual.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <b>Manual</b><span>Documentación cuyo componente se vuelve su código</span>
+          </a>
+          <a class="rp_mini" href="../resma/">
+            <span class="rp_mini-media"><video data-src="../../assets/video/recursos/resma.mp4" poster="../../assets/video/recursos/resma.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <b>Resma</b><span>Un mazo de widgets de estado que se hojea y se resuelve</span>
+          </a>
+          <a class="rp_mini" href="../reflector/">
+            <span class="rp_mini-media"><video data-src="../../assets/video/recursos/reflector.mp4" poster="../../assets/video/recursos/reflector.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <b>Reflector</b><span>Buscas y las fichas que coinciden se encienden</span>
+          </a></div></section>
+  </div></div>
+</main>
+
+<dialog class="carrito" id="carrito" aria-labelledby="carrito-tit" aria-modal="true" data-lenis-prevent>
+  <form method="dialog"><button class="rc_cerrar" aria-label="Cerrar">×</button></form>
+  <h2 class="carrito_tit" id="carrito-tit">Tu carrito</h2>
+  <ul class="carrito_lista"></ul>
+  <p class="carrito_vacio">Todavía no agregas animaciones.</p>
+  <div class="carrito_pago">
+    <button class="rc_boton es-lleno carrito_descarga" type="button" data-descarga="carrito">Descargar</button>
+    <p class="carrito_como">Con el cupón descargas una animación a la vez; con el código de la comunidad, todas las que quieras juntas.</p>
+  </div>
+</dialog>
+<button class="carrito_boton" type="button" data-carrito hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+  <span class="carrito_n">0</span><span class="carrito_total">Carrito</span>
+</button>
+
+<!-- «Descargar»: pide el cupón y enseña el que regalamos (lo generan productos/empaqueta.py y carrito.js lo llena) -->
+<dialog class="cd_dialogo" id="mx-cupon" aria-labelledby="cd-tit" aria-modal="true" data-lenis-prevent>
+  <form method="dialog"><button class="rc_cerrar" aria-label="Cerrar">×</button></form>
+  <h2 class="cd_tit" id="cd-tit">Descarga gratis</h2>
+  <p class="cd_para" id="cd-para"></p>
+  <p class="cd_aviso" id="cd-aviso" hidden>Tienes varias animaciones elegidas. El cupón vale para una a la vez; para llevártelas juntas necesitas el código de la comunidad: abajo te contamos cómo conseguirlo.</p>
+  <form class="cd_form" novalidate>
+    <label for="cd-codigo">Pega aquí tu cupón</label>
+    <div class="cd_fila">
+      <input id="cd-codigo" name="codigo" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Cupón o código">
+      <button class="rc_boton es-lleno" type="submit">Descargar</button>
+    </div>
+    <p class="cd_msg" role="status" aria-live="polite"></p>
+    <div class="cd_nota" role="alert" hidden></div>
+    <button class="rc_boton es-lleno cd_parcial" type="button" hidden></button>
+  </form>
+    <section class="cd_regalo" aria-labelledby="cd-regalo">
+      <p class="cd_regalo-tit" id="cd-regalo">¿No lo recuerdas? Este es el cupón. Te lo regalamos, y te invitamos a seguirnos en nuestras redes.</p>
+      <div class="cd_cupon">
+        <code class="cd_cupon-texto" id="cd-cupon">REGALO_MOXEN</code>
+        <button type="button" class="rc_boton cd_copiar" data-copia="#cd-cupon" aria-label="Copiar el cupón">Copiar</button>
+      </div>
+      <a class="rc_boton es-lleno cd_red" href="https://www.instagram.com/moxen.studio/" target="_blank" rel="noopener"><svg class="ico-ig" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="lleno" cx="17.2" cy="6.8" r="1.15"/></svg><span>Seguir en Instagram</span></a>
+    </section>
+  <section class="cd_comunidad" aria-label="Código de la comunidad">
+    <p><b>Sin límite:</b> sigue la cuenta y escríbenos <b>RECURSOS</b> por mensaje directo para recibir el código de la comunidad: descarga todo lo que quieras y varias a la vez.</p>
+    <a class="rc_boton cd_red" href="https://ig.me/m/moxen.studio" target="_blank" rel="noopener"><svg class="ico-ig" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="lleno" cx="17.2" cy="6.8" r="1.15"/></svg><span>Escribir por Instagram</span></a>
+  </section>
+</dialog>
+
+<!-- «Pantalla completa»: la misma demo, en el equipo que se estaba viendo, a toda la ventana (la carga vivo.js solo al abrirse) -->
+<dialog class="vv_dialogo" id="mx-vivo" aria-labelledby="vv-tit" aria-modal="true">
+  <header class="vv_cab">
+    <h2 class="vv_tit" id="vv-tit"><span>Probar en vivo</span> <b id="vv-nombre"></b></h2>
+    <div class="eq_selector vv_tabs" role="group" aria-label="Dispositivo" data-vista="escritorio"><span class="eq_pildora" aria-hidden="true"></span><button type="button" aria-pressed="true" aria-label="Escritorio" title="Escritorio" data-vista="escritorio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="10.5" rx="1.6"/><path d="M2.5 19h19"/></svg></button><button type="button" aria-pressed="false" aria-label="Móvil" title="Móvil" data-vista="celular"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="3" width="9" height="18" rx="2.2"/><path d="M11 18h2"/></svg></button></div>
+    <form method="dialog"><button class="rc_cerrar vv_cerrar" aria-label="Cerrar">×</button></form>
+  </header>
+  <div class="vv_escena">
+    <div class="eq_zona">
+      <div class="eq_pieza is-mac" data-pieza="escritorio">
+        <div class="eq_equipo eq_mac">
+          <div class="eq_pantalla"><iframe class="eq_iframe" data-disp="escritorio" title="Demostración en vivo en escritorio"></iframe></div>
+          <span class="eq_marco" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="eq_pieza is-cel" data-pieza="celular">
+        <div class="eq_equipo eq_cel">
+          <div class="eq_pantalla"><iframe class="eq_iframe" data-disp="celular" title="Demostración en vivo en celular"></iframe></div>
+          <span class="eq_marco" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<footer>
+  <div class="padding-global">
+    <div class="container-global">
+      <div class="footer_wrapper">
+        <div class="footer_top-wrapper">
+          <div class="footer_top-column">
+            <div class="footer_link-title"><h3 class="h3 p">Contacto</h3></div>
+            <div class="footer_link-list">
+              <a class="footer_link-wrap" href="mailto:contacto@moxen.cl">contacto@moxen.cl</a>
+              <a class="footer_link-wrap" href="https://wa.me/56935605683" rel="noopener">+56 9 3560 5683</a>
+              <div class="contacto_iconos"><a href="https://www.instagram.com/moxen.studio/" target="_blank" rel="noopener" aria-label="Instagram de Moxen (@moxen.studio)"><svg class="ico-ig" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle class="lleno" cx="17.2" cy="6.8" r="1.15"/></svg></a><a href="https://wa.me/56935605683" target="_blank" rel="noopener" aria-label="WhatsApp de Moxen"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path class="borde" d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="lleno" d="M9.1 7.7c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3-.1.5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5-.1l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.6-.4.8-.6.4-1.4.6-2.3.3-2.2-.7-4-2.5-4.7-4.7-.3-.9-.1-1.8.3-2.4z"/></svg></a><a href="https://t.me/+56935605683" target="_blank" rel="noopener" aria-label="Telegram de Moxen"><svg class="ico-tg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 4.2 3.2 11.1c-.8.3-.8.9 0 1.2l4.3 1.4 1.7 5.2c.2.6.6.7 1 .3l2.5-2.3 4.6 3.4c.7.4 1.2.2 1.4-.6l3.1-14.3c.2-1-.4-1.5-.9-1.2z"/><path d="m7.5 13.7 9.6-6.1-7.2 7"/></svg></a><a href="mailto:contacto@moxen.cl" aria-label="Correo de Moxen"><svg class="ico-mail" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.2" width="18" height="13.6" rx="2.4"/><path d="m3.6 6.6 8.4 6.3 8.4-6.3"/></svg></a></div>
+            </div>
+          </div>
+          <div class="footer_top-column">
+            <div class="footer_link-title"><h3 class="h3 p">Navegación</h3></div>
+            <div class="footer_link-list">
+              <a class="footer_link-wrap" href="../../#obras">Muestras</a>
+              <a class="footer_link-wrap" href="../../#servicios">Servicios</a>
+              <a class="footer_link-wrap" href="../../#proceso">Proceso</a>
+              <a class="footer_link-wrap" href="../../recursos.html">Recursos</a>
+              <a class="footer_link-wrap" href="../../herramientas.html">Herramientas</a>
+            </div>
+          </div>
+          <div class="footer_top-column">
+            <div class="footer_link-title"><h3 class="h3 p">Servicios</h3></div>
+            <div class="footer_link-list">
+              <a class="footer_link-wrap" href="../../servicios/sistemas-de-gestion/">Sistemas de gestión</a>
+              <a class="footer_link-wrap" href="../../servicios/paginas-web/">Páginas web</a>
+              <a class="footer_link-wrap" href="../../servicios/aplicaciones-moviles/">Aplicaciones móviles</a>
+              <a class="footer_link-wrap" href="../../servicios/inteligencia-artificial/">Inteligencia artificial</a>
+            </div>
+          </div>
+          <div class="footer_top-column is-nota">
+            <div class="footer_link-title"><h3 class="h3 p">Nota del estudio</h3></div>
+            <div class="footer_link-list">
+              <p class="p white">Si llegaste hasta aquí, por algo será. Escríbenos: no pierdes nada con preguntar.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer_bottom-wrapper">
+          <div class="footer_logo-text-wrapper es-marca"><div class="footer_big-text">Moxen</div></div>
+          <div class="footer_bottom-left-side">
+            <div class="footer_bottom-left-col">
+              <div class="footer_bottom-terms-wrapper">
+                <span class="p">© <span id="year">2026</span> <span class="marca">Moxen</span></span>
+                <a class="footer_link-wrap" href="../../privacidad.html">Privacidad</a>
+                <a class="footer_link-wrap" href="../../terminos.html">Términos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="../../assets/js/recursos-textos.js?v=157" defer></script>
+<script src="../../assets/js/recursos-datos.js?v=157" defer></script>
+<script src="../../assets/js/idioma.js?v=157" defer></script>
+<script src="../../assets/js/carrito.js?v=157" defer></script>
+<script src="../../assets/js/vivo.js?v=157" defer></script>
+<script src="../../assets/js/recurso.js?v=157" defer></script>
+<script src="../../assets/js/site.js?v=157" defer></script>
+</body>
+</html>

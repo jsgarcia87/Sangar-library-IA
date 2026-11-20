@@ -1,0 +1,58 @@
+/* Gota · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --gt-fondo: #0a0a0a;
+  --gt-texto: #f4f4f4;
+  --gt-suave: rgba(255, 255, 255, .5);
+  --gt-riel: rgba(255, 255, 255, .14);
+  --gt-ancho: 760px;
+  --gt-tirador: 40px;
+}
+:root[data-tema="claro"] {
+  --gt-fondo: #eeeeee;
+  --gt-texto: #0a0a0a;
+  --gt-suave: rgba(0, 0, 0, .5);
+  --gt-riel: rgba(0, 0, 0, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--gt-fondo); color: var(--gt-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el área de toque es más alta que el riel: se agarra fácil con el dedo */
+.gt-deslizador {
+  position: relative; width: var(--gt-ancho); max-width: 100%; height: 56px; touch-action: none; cursor: pointer; outline: none;
+  --gt-x: 0px;
+}
+.gt-riel { position: absolute; left: 0; right: 0; top: 50%; height: 10px; margin-top: -5px; border-radius: 10px; background: var(--gt-riel); overflow: hidden; }
+.gt-lleno { position: absolute; left: 0; top: 0; bottom: 0; width: var(--gt-x); background: var(--gt-texto); border-radius: inherit; }
+.gt-tirador {
+  position: absolute; left: 0; top: 50%; width: var(--gt-tirador); height: var(--gt-tirador);
+  margin: calc(var(--gt-tirador) / -2) 0 0 calc(var(--gt-tirador) / -2); border-radius: 50%;
+  background: var(--gt-texto); box-shadow: 0 0 0 6px var(--gt-fondo);
+  transform: translateX(var(--gt-x)); transition: box-shadow .2s;
+}
+.gt-deslizador:focus-visible .gt-tirador { box-shadow: 0 0 0 6px var(--gt-fondo), 0 0 0 9px var(--gt-suave); }
+.gt-deslizador.is-arrastra .gt-tirador { cursor: grabbing; }
+
+/* La gota cuelga del tirador por la punta: el JS la inclina y la estira
+   con la velocidad, y al soltar se balancea y vuelve a meterse dentro. */
+.gt-gota {
+  position: absolute; left: 50%; bottom: calc(100% - 5px); width: 76px; height: 92px; margin-left: -38px;
+  transform-origin: 50% 100%; transform: scale(0); pointer-events: none; will-change: transform;
+}
+.gt-gota svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.gt-gota path { fill: var(--gt-texto); }
+.gt-valor {
+  position: absolute; left: 0; right: 0; top: 19px; text-align: center; color: var(--gt-fondo);
+  font-size: 1.6rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.gt-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+.gt-cabeza { width: var(--gt-ancho); max-width: 100%; display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8.5rem; }
+.gt-nombre { margin: 0; color: var(--gt-suave); font-size: 1.05rem; }
+.gt-lectura { margin: 0; font-size: 2.4rem; font-weight: 500; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.gt-marcas { width: var(--gt-ancho); max-width: 100%; display: flex; justify-content: space-between; margin-top: .6rem; color: var(--gt-suave); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.gt-marcas span { width: 0; display: flex; justify-content: center; }
+.gt-pista { margin: 3rem 0 0; color: var(--gt-suave); font-size: .95rem; }

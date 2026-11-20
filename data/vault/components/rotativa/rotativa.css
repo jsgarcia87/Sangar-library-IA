@@ -1,0 +1,50 @@
+/* Rotativa · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --rt-fondo: #0a0a0a;
+  --rt-texto: #f4f4f4;
+  --rt-suave: rgba(255, 255, 255, .5);
+  --rt-cara: #f4f4f4;         /* la cara del cubo, en negativo */
+  --rt-cara-texto: #0a0a0a;
+  --rt-sombra: #3a3a3a;       /* el color de una cara que mira hacia otro lado */
+}
+:root[data-tema="claro"] {
+  --rt-fondo: #eeeeee;
+  --rt-texto: #0a0a0a;
+  --rt-suave: rgba(0, 0, 0, .5);
+  --rt-cara: #0a0a0a;
+  --rt-cara-texto: #f4f4f4;
+  --rt-sombra: #8a8a8a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rt-fondo); color: var(--rt-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* la caja mide la palabra de delante y anima su ancho; el prisma de
+   cuatro caras gira dentro, con su eje en el centro */
+.rt-cubo {
+  position: relative; display: inline-block; height: 1.1em; vertical-align: -.2em; perspective: 12em;
+  transition: width .6s cubic-bezier(.22, 1, .36, 1); cursor: pointer; user-select: none;
+}
+.rt-medida { visibility: hidden; padding: 0 .2em; white-space: nowrap; }
+.rt-prisma {
+  position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform;
+}
+.rt-cara {
+  position: absolute; inset: 0; display: grid; place-items: center; white-space: nowrap;
+  border-radius: .13em; backface-visibility: hidden; --luz: 1;
+  background: color-mix(in srgb, var(--rt-cara) calc(var(--luz) * 100%), var(--rt-sombra));
+  color: var(--rt-cara-texto);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.rt-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem 1rem; text-align: center;
+}
+.rt-frase {
+  margin: 0; display: flex; flex-direction: column; align-items: center; gap: .1em;
+  font-size: clamp(3rem, 11vw, 10rem); font-weight: 600; line-height: 1.04; letter-spacing: -.045em;
+}
+.rt-pista { margin: 0; color: var(--rt-suave); font-size: .95rem; }

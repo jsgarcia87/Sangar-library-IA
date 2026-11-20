@@ -1,0 +1,34 @@
+/* Eco · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ec-fondo: #0a0a0a;
+  --ec-texto: #f4f4f4;
+  --ec-suave: rgba(255, 255, 255, .5);
+  --ec-eco: 244, 244, 244;      /* el color de las copias, en RGB: la opacidad la pone cada una */
+}
+:root[data-tema="claro"] {
+  --ec-fondo: #eeeeee;
+  --ec-texto: #0a0a0a;
+  --ec-suave: rgba(0, 0, 0, .5);
+  --ec-eco: 10, 10, 10;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ec-fondo); color: var(--ec-texto); overflow: hidden; }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ec-eco-caja { position: relative; display: inline-block; }
+.ec-base { position: relative; z-index: 20; display: inline-block; will-change: transform; }
+/* las copias: huecas, detrás, cada vez más tenues (--a la pone el script) */
+.ec-copia {
+  position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none; will-change: transform;
+  color: transparent; -webkit-text-stroke: 1.2px rgba(var(--ec-eco), var(--a, .4));
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ec-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem 1rem; text-align: center; touch-action: none;
+}
+.ec-texto { margin: 0; font-size: clamp(3.4rem, 18vw, 17rem); font-weight: 600; line-height: 1; letter-spacing: -.055em; user-select: none; }
+.ec-pista { margin: 0; color: var(--ec-suave); font-size: .95rem; position: relative; z-index: 30; }

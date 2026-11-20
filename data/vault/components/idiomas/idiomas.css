@@ -1,0 +1,74 @@
+/* Idiomas · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --id-fondo: #0a0a0a;
+  --id-texto: #f4f4f4;
+  --id-suave: rgba(255, 255, 255, .45);
+  --id-carril: rgba(255, 255, 255, .07);
+  --id-linea: rgba(255, 255, 255, .1);
+  --id-curva: cubic-bezier(.22, 1, .36, 1);
+}
+:root[data-tema="claro"] {
+  --id-fondo: #eeeeee;
+  --id-texto: #0a0a0a;
+  --id-suave: rgba(0, 0, 0, .5);
+  --id-carril: rgba(0, 0, 0, .06);
+  --id-linea: rgba(0, 0, 0, .1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--id-fondo); color: var(--id-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.id-selector {
+  position: relative; display: inline-flex; padding: 7px; border-radius: 999px;
+  background: var(--id-carril); box-shadow: inset 0 0 0 1px var(--id-linea);
+  user-select: none; -webkit-user-select: none;
+}
+.id-opcion {
+  position: relative; z-index: 1; width: 112px; height: 64px; padding: 0; border: 0; border-radius: 999px;
+  background: none; color: var(--id-suave); cursor: pointer; transition: color .2s;
+  font: 600 1.2rem/1 "General Sans", system-ui, sans-serif; letter-spacing: .1em;
+}
+.id-opcion:hover { color: var(--id-texto); }
+.id-opcion:focus-visible { outline: 2px solid var(--id-suave); outline-offset: 2px; }
+
+/* el indicador, y encima una copia de las etiquetas en el color del fondo
+   recortada con su misma forma: la letra se invierte justo donde pasa */
+.id-indicador, .id-invertida {
+  position: absolute; inset: 7px; pointer-events: none;
+}
+.id-indicador::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: var(--id-izq, 0px); width: var(--id-ancho, 112px);
+  border-radius: 999px; background: var(--id-texto);
+}
+.id-invertida {
+  z-index: 2; display: flex; color: var(--id-fondo);
+  clip-path: inset(0 calc(100% - var(--id-izq, 0px) - var(--id-ancho, 112px)) 0 var(--id-izq, 0px) round 999px);
+}
+.id-invertida span { width: 112px; display: grid; place-items: center; font: 600 1.2rem/1 "General Sans", system-ui, sans-serif; letter-spacing: .1em; }
+
+/* la frase: las palabras viejas suben y se van, las nuevas suben desde abajo */
+.id-frase { display: grid; }
+.id-capa { grid-area: 1 / 1; }
+.id-palabra { display: inline-block; white-space: pre; }
+.id-sale .id-palabra { animation: id-sale .36s var(--id-curva) calc(var(--i) * 20ms) both; }
+.id-entra .id-palabra { animation: id-entra .8s var(--id-curva) calc(250ms + var(--i) * 48ms) both; }
+@keyframes id-sale { to { opacity: 0; transform: translateY(-.45em) rotate(-2deg); filter: blur(6px); } }
+@keyframes id-entra { from { opacity: 0; transform: translateY(.6em) rotate(3deg); filter: blur(8px); } }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.id-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3.4rem;
+  padding: 2rem; text-align: center;
+}
+.id-frase {
+  margin: 0; max-width: 15ch; min-height: 2.1em; align-content: center;
+  font-size: clamp(2.4rem, 7.4vw, 5.6rem); font-weight: 600; line-height: 1.02; letter-spacing: -.045em;
+}
+.id-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--id-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .id-sale .id-palabra, .id-entra .id-palabra { animation: none; }
+  .id-sale { display: none; }
+}

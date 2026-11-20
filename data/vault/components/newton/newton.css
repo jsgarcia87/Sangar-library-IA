@@ -1,0 +1,30 @@
+/* Newton · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --nw-fondo: #0a0a0a;
+  --nw-texto: #f4f4f4;
+  --nw-marco: #2a2a2a;
+  --nw-hilo: rgba(255, 255, 255, .4);
+  --nw-sombra: rgba(255, 255, 255, .2);
+}
+:root[data-tema="claro"] {
+  --nw-fondo: #eeeeee;
+  --nw-texto: #0a0a0a;
+  --nw-marco: #0a0a0a;
+  --nw-hilo: rgba(0, 0, 0, .45);
+  --nw-sombra: rgba(0, 0, 0, .22);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--nw-fondo); color: var(--nw-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.nw-barra, .nw-poste, .nw-base { fill: var(--nw-marco); }
+.nw-hilo { stroke: var(--nw-hilo); stroke-width: 1.4; fill: none; }
+.nw-bola { fill: url(#nw-acero); }
+.nw-sombra-a { stop-color: var(--nw-sombra); }
+.nw-sombra-b { stop-color: var(--nw-sombra); stop-opacity: 0; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.nw-escena { height: 100%; display: grid; place-items: center; }
+.nw-pendulo { width: min(860px, 92vw); height: auto; overflow: visible; }

@@ -1,0 +1,70 @@
+/* Marea · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ma-fondo: #0a0a0a;
+  --ma-texto: #f4f4f4;
+  --ma-suave: rgba(255, 255, 255, .5);
+  --ma-agua: #f4f4f4;         /* el color con el que se llena */
+  --ma-ola: 26px;             /* la altura de la cresta */
+  --ma-sube: 1.3s;            /* lo que tarda en llenarse */
+}
+:root[data-tema="claro"] {
+  --ma-fondo: #eeeeee;
+  --ma-texto: #0a0a0a;
+  --ma-suave: rgba(0, 0, 0, .5);
+  --ma-agua: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ma-fondo); color: var(--ma-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ma-boton {
+  position: relative; overflow: hidden;
+  isolation: isolate;                  /* la mezcla del texto se queda dentro */
+  display: inline-flex; align-items: center; gap: .5em;
+  height: 112px; padding: 0 2em 0 2.2em; border-radius: 56px; cursor: pointer;
+  border: 1.5px solid var(--ma-agua); background: var(--ma-fondo);
+  font: 500 2.3rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+.ma-texto svg { width: .85em; height: .85em; }
+.ma-texto path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ma-boton:focus-visible { outline: 2px solid var(--ma-texto); outline-offset: 6px; }
+
+/* El texto es blanco y se mezcla por diferencia: sobre el fondo se ve
+   claro y, donde ya hay agua, oscuro. El corte sigue la ola exacta. */
+.ma-texto { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: inherit; color: #fff; mix-blend-mode: difference; }
+
+/* el agua: la ola arriba y el cuerpo debajo; sube entera */
+.ma-agua {
+  position: absolute; left: 0; right: 0; bottom: 0; height: calc(100% + var(--ma-ola));
+  transform: translateY(100%);
+  transition: transform calc(var(--ma-sube) * .75) cubic-bezier(.55, 0, .45, 1);
+  pointer-events: none;
+}
+.ma-agua::after { content: ""; position: absolute; left: 0; right: 0; top: calc(var(--ma-ola) - 1px); bottom: 0; background: var(--ma-agua); }
+.ma-ola {
+  position: absolute; left: 0; top: 0; width: 200%; height: var(--ma-ola);
+  fill: var(--ma-agua); animation: ma-corre 3s linear infinite;
+}
+/* la de atrás va más despacio, al revés y a media tinta: da volumen */
+.ma-ola.is-atras { top: -7px; opacity: .4; animation-duration: 4.4s; animation-direction: reverse; }
+@keyframes ma-corre { to { transform: translateX(-50%); } }
+
+.ma-boton:hover .ma-agua, .ma-boton:focus-visible .ma-agua, .ma-boton.is-llena .ma-agua {
+  transform: translateY(0);
+  transition: transform var(--ma-sube) cubic-bezier(.3, .55, .3, 1);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ma-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem;
+}
+.ma-pista { margin: 0; color: var(--ma-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ma-ola { animation: none; }
+  .ma-agua, .ma-boton:hover .ma-agua { transition-duration: .01s; }
+}

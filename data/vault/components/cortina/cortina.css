@@ -1,0 +1,76 @@
+/* Cortina · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ct-fondo: #0a0a0a;
+  --ct-texto: #f4f4f4;
+  --ct-suave: rgba(255, 255, 255, .55);
+  --ct-linea: rgba(255, 255, 255, .14);
+  /* los pliegues: el pliegue hundido y la cresta que coge la luz */
+  --ct-hondo: #050505;
+  --ct-cresta: #1d1d1d;
+  --ct-ventana: #f4f4f4;
+  --ct-ventana-texto: #0a0a0a;
+  --ct-ventana-suave: rgba(0, 0, 0, .58);
+}
+:root[data-tema="claro"] {
+  --ct-fondo: #eeeeee;
+  --ct-texto: #0a0a0a;
+  --ct-suave: rgba(0, 0, 0, .55);
+  --ct-linea: rgba(0, 0, 0, .14);
+  --ct-hondo: #1a1a1a;
+  --ct-cresta: #3a3a3a;
+  --ct-ventana: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ct-fondo); color: var(--ct-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* cerrada no se ve pero sí ocupa su sitio: así se puede medir */
+.ct-cortina {
+  position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 1.5rem;
+  visibility: hidden; pointer-events: none; overflow: hidden;
+}
+.ct-cortina.is-abierta { visibility: visible; pointer-events: auto; }
+.ct-pliegues { position: absolute; inset: 0; display: flex; }
+.ct-pliegue {
+  flex: 1; height: 100%; margin: 0 -1px;     /* se solapan un píxel: sin rendijas */
+  background: linear-gradient(90deg, var(--ct-hondo), var(--ct-cresta) 46%, var(--ct-hondo));
+  border-radius: 0 0 14px 14px; transform: translateY(-102%);
+  box-shadow: 0 8px 18px -6px rgba(0, 0, 0, .55);
+}
+/* la ventana cuelga de su borde de arriba: de ahí se balancea */
+.ct-ventana {
+  position: relative; width: min(520px, 100%); padding: 2.4rem 2.4rem 2rem; border-radius: 26px;
+  background: var(--ct-ventana); color: var(--ct-ventana-texto); transform-origin: 50% 0;
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .7);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ct-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.2rem; padding: 2rem 1rem; text-align: center;
+}
+.ct-titulo { margin: 0; font-size: clamp(2.6rem, 6.5vw, 5.6rem); font-weight: 600; line-height: 1; letter-spacing: -.045em; }
+.ct-boton {
+  padding: 1rem 1.7rem; border-radius: 99px; border: 0; cursor: pointer;
+  background: var(--ct-texto); color: var(--ct-fondo); font: 500 1.05rem "General Sans", system-ui, sans-serif;
+  transition: transform .2s cubic-bezier(.22, 1, .36, 1);
+}
+.ct-boton:active { transform: scale(.96); }
+.ct-pista { margin: 0; color: var(--ct-suave); font-size: .92rem; }
+
+.ct-icono {
+  width: 56px; height: 56px; display: grid; place-items: center; border-radius: 16px; margin-bottom: 1.4rem;
+  background: rgba(0, 0, 0, .06);
+}
+.ct-icono svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ct-ventana h2 { margin: 0 0 .7rem; font-size: 1.85rem; font-weight: 600; letter-spacing: -.03em; }
+.ct-ventana p { margin: 0 0 2rem; font-size: 1.05rem; line-height: 1.5; color: var(--ct-ventana-suave); }
+.ct-acciones { display: flex; justify-content: flex-end; gap: .7rem; }
+.ct-acciones button {
+  padding: .85rem 1.4rem; border-radius: 99px; cursor: pointer; font: 500 1rem "General Sans", system-ui, sans-serif;
+}
+.ct-secundario { border: 1px solid rgba(0, 0, 0, .14); background: none; color: inherit; }
+.ct-primario { border: 0; background: var(--ct-ventana-texto); color: var(--ct-ventana); }
+.ct-acciones button:focus-visible { outline: 2px solid rgba(0, 0, 0, .4); outline-offset: 2px; }

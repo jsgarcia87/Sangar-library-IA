@@ -97,9 +97,9 @@
             <i data-lucide="sparkles"></i>
             <span class="sg-nav__text">Sangar Studio Core (15)</span>
           </a>
-          <a href="components.html#moxen" class="sg-nav__item" id="navItemMoxen">
-            <i data-lucide="play-circle"></i>
-            <span class="sg-nav__text">Librería Moxen (880)</span>
+          <a href="components.html#vault" class="sg-nav__item" id="navItemMoxen">
+            <i data-lucide="film"></i>
+            <span class="sg-nav__text">Sangar Motion Vault (880)</span>
           </a>
         </div>
       </nav>
@@ -166,7 +166,7 @@
       </header>
 
       <main class="sg-content" id="main-content" tabindex="-1">
-        <!-- Suite Selector: Sangar Studio Core vs. Librería Moxen -->
+        <!-- Suite Selector: Sangar Studio Core vs. Sangar Motion Vault -->
         <div class="sg-suite-selector" role="tablist" aria-label="Colecciones de componentes y animaciones">
           <button type="button" role="tab" id="tabSwitchSangar" class="sg-suite-pill is-active" aria-selected="true" aria-controls="sectionSangar">
             <i data-lucide="sparkles"></i>
@@ -174,8 +174,8 @@
             <span class="badge-count" id="countBadgeSangar">15</span>
           </button>
           <button type="button" role="tab" id="tabSwitchMoxen" class="sg-suite-pill" aria-selected="false" aria-controls="sectionMoxen">
-            <i data-lucide="play-circle"></i>
-            <span>Librería de Animaciones Moxen</span>
+            <i data-lucide="film"></i>
+            <span>Sangar Motion Vault</span>
             <span class="badge-count" id="countBadgeMoxen">880</span>
           </button>
         </div>
@@ -217,26 +217,26 @@
           <div id="componentsShowcaseGrid" class="components-grid sg-stagger"></div>
         </section>
 
-        <!-- Section 2: Moxen Animation Components (880 Items) -->
+        <!-- Section 2: Sangar Motion Vault (880 Animaciones Locales) -->
         <section id="sectionMoxen" role="tabpanel" aria-labelledby="tabSwitchMoxen" style="display: none;">
           <div class="sg-greeting sg-greeting--compact">
-            <h1 class="sg-greeting__title">Librería de Animaciones Moxen</h1>
-            <p class="sg-greeting__desc">Catálogo exhaustivo de 880 microinteracciones, transiciones físicas y componentes cinéticos. Pasa el cursor por encima para previsualizar la animación en vídeo o copia en un solo clic el prompt optimizado para tu agente de IA (Claude Code, Cursor, v0, ChatGPT).</p>
+            <h1 class="sg-greeting__title">Sangar Motion Vault</h1>
+            <p class="sg-greeting__desc">Bóveda privada de 880 microinteracciones, transiciones físicas y componentes cinéticos descargados en local. Pasa el cursor por encima para previsualizar la animación en vídeo o copia en un solo clic el prompt optimizado para tu asistente de código (Claude Code, Cursor, v0, ChatGPT).</p>
             <div class="sg-greeting__actions">
-              <span class="sg-badge sg-badge--coral"><i data-lucide="zap"></i> 880 Animaciones</span>
+              <span class="sg-badge sg-badge--coral"><i data-lucide="shield-check"></i> 880 Animaciones en Bóveda Local</span>
               <span class="sg-badge"><i data-lucide="code-2"></i> 864 Sin Dependencias (HTML/CSS/JS)</span>
               <span class="sg-badge"><i data-lucide="cpu"></i> WebGL &amp; Canvas</span>
             </div>
           </div>
 
-          <!-- Moxen Search & Filters -->
+          <!-- Vault Search & Filters -->
           <div class="moxen-controls">
             <div class="search-box-wrapper">
               <span class="search-icon"><i data-lucide="search"></i></span>
-              <input type="text" id="moxenSearchInput" class="search-input" aria-label="Buscar animaciones Moxen" placeholder="Buscar entre 880 animaciones por nombre, concepto, categoría o dependencia...">
+              <input type="text" id="moxenSearchInput" class="search-input" aria-label="Buscar en la bóveda de animaciones" placeholder="Buscar entre 880 animaciones por nombre, concepto, categoría o dependencia...">
             </div>
 
-            <div class="moxen-category-scroll" id="moxenCategoryPills" role="group" aria-label="Filtrar animaciones Moxen por categoría">
+            <div class="moxen-category-scroll" id="moxenCategoryPills" role="group" aria-label="Filtrar animaciones por categoría">
               <button type="button" class="sg-filter-pill is-active" data-cat="all">Todas <span class="badge-count">880</span></button>
             </div>
           </div>
@@ -342,9 +342,9 @@
         <div class="sg-moxen-meta-row">
           <span class="sg-badge" id="moxenModalDeps"><i data-lucide="box"></i> Sin dependencias</span>
           <span class="sg-badge" id="moxenModalFiles"><i data-lucide="file-code"></i> 3 archivos</span>
-          <a href="#" id="moxenModalExternalLink" target="_blank" rel="noopener noreferrer" class="sg-fusion-card__link" style="margin-left: auto;">
-            Ver en Moxen.cl <i data-lucide="external-link"></i>
-          </a>
+          <span class="sg-badge sg-badge--coral" style="margin-left: auto;">
+            <i data-lucide="shield-check"></i> Bóveda Local Offline
+          </span>
         </div>
 
         <div class="sg-moxen-prompt-box">

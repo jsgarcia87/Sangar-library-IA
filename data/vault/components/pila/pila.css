@@ -1,0 +1,73 @@
+/* Pila · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --pl-fondo: #0a0a0a;
+  --pl-texto: #f4f4f4;
+  --pl-suave: rgba(255, 255, 255, .52);
+  --pl-tarjeta: #171717;
+  --pl-borde: rgba(255, 255, 255, .09);
+  --pl-icono: rgba(255, 255, 255, .08);
+  --pl-sombra: 0 18px 40px -18px rgba(0, 0, 0, .9);
+  --pl-ok: #3ccf6e;
+  --pl-error: #ff5a4e;
+  --pl-ancho: 580px;
+  --pl-alto: 94px;          /* el alto de cada aviso */
+}
+:root[data-tema="claro"] {
+  --pl-fondo: #eeeeee;
+  --pl-texto: #0a0a0a;
+  --pl-suave: rgba(0, 0, 0, .5);
+  --pl-tarjeta: #ffffff;
+  --pl-borde: rgba(0, 0, 0, .08);
+  --pl-icono: rgba(0, 0, 0, .06);
+  --pl-sombra: 0 18px 36px -20px rgba(0, 0, 0, .35);
+  --pl-ok: #18a34a;
+  --pl-error: #e0362c;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--pl-fondo); color: var(--pl-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* los avisos se colocan a mano (posición absoluta + transform): así cada
+   uno puede ir a su sitio con su propio resorte */
+.pl-pila { position: relative; width: min(var(--pl-ancho), 100%); }
+.pl-aviso {
+  position: absolute; left: 0; top: 0; width: 100%; height: var(--pl-alto);
+  display: grid; grid-template-columns: 50px 1fr auto; align-items: center; gap: 18px;
+  padding: 0 18px 0 20px; border-radius: 22px;
+  background: var(--pl-tarjeta); border: 1px solid var(--pl-borde); box-shadow: var(--pl-sombra);
+  transform-origin: 50% 100%; will-change: transform, opacity; touch-action: pan-y; user-select: none;
+}
+.pl-icono {
+  width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center;
+  background: var(--pl-icono); color: var(--pl-texto);
+}
+.pl-icono svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.pl-icono[data-tono="ok"] { color: var(--pl-ok); background: color-mix(in srgb, var(--pl-ok) 14%, transparent); }
+.pl-icono[data-tono="error"] { color: var(--pl-error); background: color-mix(in srgb, var(--pl-error) 14%, transparent); }
+.pl-cuerpo { min-width: 0; display: grid; gap: 3px; }
+.pl-cuerpo strong { font-size: 1.14rem; font-weight: 500; letter-spacing: -.01em; }
+.pl-cuerpo span { font-size: 1rem; color: var(--pl-suave); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-lado { display: flex; align-items: center; gap: 10px; }
+.pl-lado time { font-size: .86rem; color: var(--pl-suave); white-space: nowrap; }
+.pl-cerrar {
+  width: 32px; height: 32px; margin-right: -4px; border: 0; border-radius: 10px; display: grid; place-items: center;
+  background: none; color: var(--pl-suave); cursor: pointer;
+}
+.pl-cerrar:hover, .pl-cerrar:focus-visible { background: var(--pl-icono); color: var(--pl-texto); outline: none; }
+.pl-cerrar svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.pl-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.4rem; padding: 2rem 1rem;
+}
+.pl-boton {
+  display: inline-flex; align-items: center; gap: .55rem; padding: .9rem 1.5rem; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--pl-borde); background: var(--pl-texto); color: var(--pl-fondo);
+  font: 500 1.02rem "General Sans", system-ui, sans-serif; transition: transform .2s cubic-bezier(.22, 1, .36, 1);
+}
+.pl-boton:active { transform: scale(.96); }
+.pl-boton svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.pl-pista { margin: -1rem 0 0; color: var(--pl-suave); font-size: .9rem; text-align: center; }

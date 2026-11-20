@@ -1,0 +1,70 @@
+/* Rayas · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ry-fondo: #0a0a0a;
+  --ry-texto: #f4f4f4;
+  --ry-suave: rgba(255, 255, 255, .45);
+  --ry-carril: rgba(255, 255, 255, .07);
+  --ry-linea: rgba(255, 255, 255, .1);
+  --ry-raya: rgba(10, 10, 10, .2);       /* las rayas, sobre el relleno */
+  --ry-verde: #34d17a;
+  --ry-alto: 40px;
+  --ry-paso: 34px;                       /* lo que mide una raya y su hueco */
+}
+:root[data-tema="claro"] {
+  --ry-fondo: #eeeeee;
+  --ry-texto: #0a0a0a;
+  --ry-suave: rgba(0, 0, 0, .5);
+  --ry-carril: rgba(0, 0, 0, .06);
+  --ry-linea: rgba(0, 0, 0, .08);
+  --ry-raya: rgba(255, 255, 255, .2);
+  --ry-verde: #1fa458;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ry-fondo); color: var(--ry-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ry-barra {
+  position: relative; height: var(--ry-alto); border-radius: calc(var(--ry-alto) / 2); overflow: hidden;
+  background: var(--ry-carril); box-shadow: inset 0 0 0 1px var(--ry-linea);
+}
+/* El relleno lleva las rayas en un fondo de 45° que se repite justo cada
+   --ry-paso en horizontal: moverlo esa distancia es una vuelta exacta,
+   así que la animación no salta nunca. */
+.ry-relleno {
+  position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--ry-avance, 0) * 100%);
+  min-width: var(--ry-alto); border-radius: inherit; background-color: var(--ry-texto);
+  background-image: linear-gradient(-45deg, var(--ry-raya) 25%, transparent 25% 50%, var(--ry-raya) 50% 75%, transparent 75%);
+  background-size: var(--ry-paso) var(--ry-paso);
+  animation: ry-corre .7s linear infinite;
+  transition: opacity .3s;
+}
+.ry-carga:not(.is-andando) .ry-relleno { opacity: 0; }
+@keyframes ry-corre { from { background-position: 0 0; } to { background-position: var(--ry-paso) 0; } }
+/* un brillo en la punta, por donde avanza */
+.ry-relleno::after {
+  content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 60px; border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35));
+  mix-blend-mode: soft-light;
+}
+/* al terminar, las rayas se quedan quietas y se apagan: queda lleno y liso */
+.is-lista .ry-relleno { animation-play-state: paused; background-image: none; transition: opacity .3s, background-image .4s; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ry-escena { height: 100%; display: grid; place-items: center; cursor: pointer; }
+.ry-carga { width: min(840px, 88vw); display: flex; flex-direction: column; gap: 1.1rem; }
+.ry-cabeza { display: flex; justify-content: space-between; align-items: baseline; }
+.ry-nombre { display: grid; font-size: 1.3rem; font-weight: 500; }
+.ry-nombre span { grid-area: 1 / 1; transition: opacity .3s, translate .5s cubic-bezier(.22, 1, .36, 1); }
+.ry-nombre span:last-child { opacity: 0; translate: 0 .5em; }
+.is-lista .ry-nombre span:first-child { opacity: 0; translate: 0 -.5em; }
+.is-lista .ry-nombre span:last-child { opacity: 1; translate: 0 0; }
+.ry-nombre span:last-child::before { content: "✓ "; color: var(--ry-verde); }
+.ry-por { font-size: 4.4rem; font-weight: 500; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.ry-pie { display: flex; justify-content: space-between; font-size: 1rem; color: var(--ry-suave); font-variant-numeric: tabular-nums; }
+.ry-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--ry-suave); font-size: .95rem; }
+
+.sin-paso, .sin-paso * { transition: none !important; }
+
+@media (prefers-reduced-motion: reduce) { .ry-relleno { animation: none; } }

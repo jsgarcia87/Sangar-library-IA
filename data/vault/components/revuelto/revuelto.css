@@ -1,0 +1,44 @@
+/* Revuelto · Moxen — la página de demostración.
+   Los colores van en variables: cámbialos aquí o en tu propia hoja. */
+:root {
+  --rv-fondo: #0a0a0a;
+  --rv-texto: #f4f4f4;
+  --rv-suave: rgba(255, 255, 255, .55);
+  --rv-linea: rgba(255, 255, 255, .16);
+}
+:root[data-tema="claro"] {
+  --rv-fondo: #eeeeee;
+  --rv-texto: #0a0a0a;
+  --rv-suave: rgba(0, 0, 0, .55);
+  --rv-linea: rgba(0, 0, 0, .16);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rv-fondo); color: var(--rv-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+.rv-escena {
+  min-height: 100%; display: flex; flex-direction: column; justify-content: center;
+  gap: 1.2rem; padding: clamp(1.5rem, 6vw, 5rem); max-width: 60rem;
+}
+.rv-etiqueta {
+  margin: 0; font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--rv-suave);
+}
+.rv-titulo {
+  margin: 0; font-size: clamp(2.6rem, 8vw, 5.6rem); font-weight: 600; line-height: .95; letter-spacing: -.045em;
+}
+.rv-bajada { margin: 0; max-width: 34ch; font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.35; color: var(--rv-suave); }
+
+/* el selector: una píldora con los tres idiomas */
+.rv-idiomas {
+  display: inline-flex; gap: .15rem; width: fit-content; margin-top: 1rem;
+  padding: .3rem; border: 1px solid var(--rv-linea); border-radius: 99px;
+}
+.rv-idiomas button {
+  min-width: 2.6rem; height: 2rem; padding: 0 .7rem; border: 0; border-radius: 99px; cursor: pointer;
+  background: none; color: var(--rv-suave);
+  font-family: inherit; font-size: .8rem; font-weight: 500; line-height: 1; letter-spacing: .06em;
+  transition: background-color .25s, color .25s;
+}
+.rv-idiomas button:hover { color: var(--rv-texto); }
+.rv-idiomas button.is-on { background: var(--rv-linea); color: var(--rv-texto); }

@@ -1,0 +1,27 @@
+/* Ondas · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --on-fondo: #0a0a0a;
+  --on-texto: #f4f4f4;
+  --on-suave: rgba(255, 255, 255, .5);
+  --on-trazo: 244, 244, 244;    /* r, g, b de las líneas (lo lee el JS) */
+}
+:root[data-tema="claro"] {
+  --on-fondo: #eeeeee;
+  --on-texto: #0a0a0a;
+  --on-suave: rgba(0, 0, 0, .5);
+  --on-trazo: 10, 10, 10;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--on-fondo); color: var(--on-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-ondas] { position: relative; isolation: isolate; overflow: hidden; touch-action: manipulation; }
+.on-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.on-escena { min-height: 100%; display: grid; place-items: center; text-align: center; padding: 2rem; user-select: none; }
+.on-contenido { pointer-events: none; padding: 5rem 7rem; background: radial-gradient(closest-side, var(--on-fondo) 62%, transparent); }   /* un claro en el agua, sin bordes */
+.on-titulo { margin: 0; font-size: clamp(2.6rem, 7.4vw, 6rem); font-weight: 500; line-height: .98; letter-spacing: -.05em; }
+.on-pista { margin: 1.4rem 0 0; font-size: .9rem; color: var(--on-suave); }

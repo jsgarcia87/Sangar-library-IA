@@ -1,0 +1,79 @@
+/* Capas · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --cp-fondo: #0a0a0a;
+  --cp-texto: #f4f4f4;
+  --cp-suave: rgba(255, 255, 255, .5);
+  --cp-hueco: rgba(255, 255, 255, .22);   /* el contorno de las capas del fondo */
+  --cp-linea: rgba(255, 255, 255, .16);
+  --cp-tramo: 82vh;                        /* el alto de cada tramo */
+}
+:root[data-tema="claro"] {
+  --cp-fondo: #eeeeee;
+  --cp-texto: #0a0a0a;
+  --cp-suave: rgba(0, 0, 0, .5);
+  --cp-hueco: rgba(0, 0, 0, .2);
+  --cp-linea: rgba(0, 0, 0, .16);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--cp-fondo); color: var(--cp-texto); overflow: hidden; }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el contenedor tiene su propio scroll; la barra se esconde porque la
+   rueda la lleva el script y la página entera es la escena */
+[data-capas] {
+  height: 100%; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
+  scrollbar-width: none; position: relative;
+}
+[data-capas]::-webkit-scrollbar { display: none; }
+[data-capa] { will-change: transform; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.cp-tramo {
+  position: relative; height: var(--cp-tramo); padding: 0 8vw;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+}
+.cp-derecha { align-items: flex-end; text-align: right; }
+.cp-ultimo { height: calc(var(--cp-tramo) + 40vh); padding-bottom: 40vh; }
+
+/* portada: el nombre gigante al fondo y el título delante */
+.cp-portada { height: 100vh; align-items: center; text-align: center; }
+.cp-fondo {
+  position: absolute; left: 50%; top: 50%; translate: -50% -54%;
+  font-size: 31vw; font-weight: 600; letter-spacing: -.06em; line-height: 1; white-space: nowrap;
+  color: transparent; -webkit-text-stroke: 1.5px var(--cp-hueco); user-select: none;
+}
+.cp-titulo {
+  position: relative; margin: 0; font-size: 7.2vw; font-weight: 600; line-height: .98; letter-spacing: -.045em;
+}
+.cp-pista {
+  position: absolute; left: 0; right: 0; bottom: 7vh; margin: 0;
+  font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-suave);
+}
+.cp-pista::after {
+  content: ""; display: block; width: 1px; height: 44px; margin: 14px auto 0; background: var(--cp-suave);
+}
+
+/* tramos: número hueco al fondo, palabra en medio, nota delante */
+.cp-numero {
+  position: absolute; top: 50%; right: 6vw; translate: 0 -52%;
+  font-size: 26vw; font-weight: 600; line-height: 1; letter-spacing: -.06em;
+  color: transparent; -webkit-text-stroke: 1.5px var(--cp-hueco); user-select: none;
+}
+.cp-derecha .cp-numero { right: auto; left: 6vw; }
+.cp-palabra {
+  position: relative; margin: 0; font-size: 13.5vw; font-weight: 600; line-height: .9; letter-spacing: -.055em;
+}
+.cp-nota {
+  position: relative; margin: 2.2rem 0 0; display: flex; align-items: center; gap: 14px;
+  font-size: .82rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-suave);
+}
+.cp-nota::before { content: ""; width: 56px; height: 1px; background: var(--cp-suave); }
+.cp-derecha .cp-nota { flex-direction: row-reverse; }
+
+@media (max-width: 640px) {
+  .cp-titulo { font-size: 12vw; }
+  .cp-palabra { font-size: 19vw; }
+  .cp-numero { font-size: 40vw; }
+}

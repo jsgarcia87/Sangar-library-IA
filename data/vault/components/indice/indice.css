@@ -1,0 +1,101 @@
+/* Índice · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ix-fondo: #0a0a0a;
+  --ix-texto: #f4f4f4;
+  --ix-suave: rgba(255, 255, 255, .5);
+  --ix-tenue: rgba(255, 255, 255, .3);
+  --ix-linea: rgba(255, 255, 255, .12);
+  --ix-papel: rgba(255, 255, 255, .03);   /* el fondo del documento */
+}
+:root[data-tema="claro"] {
+  --ix-fondo: #eeeeee;
+  --ix-texto: #0a0a0a;
+  --ix-suave: rgba(0, 0, 0, .55);
+  --ix-tenue: rgba(0, 0, 0, .32);
+  --ix-linea: rgba(0, 0, 0, .12);
+  --ix-papel: rgba(255, 255, 255, .6);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ix-fondo); color: var(--ix-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ix-lista { list-style: none; margin: 0; padding: 0; }
+/* Cada entrada lleva su tramo de riel a la izquierda: uno debajo del
+   otro forman una sola línea que se va llenando mientras se lee. */
+.ix-entrada { position: relative; padding: 0 0 0 1.4rem; }
+.ix-entrada::before, .ix-relleno {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; border-radius: 2px;
+}
+.ix-entrada::before { background: var(--ix-linea); }
+.ix-relleno {
+  background: var(--ix-texto); transform-origin: 50% 0; transform: scaleY(var(--ix-p, 0));
+}
+.ix-boton {
+  display: flex; align-items: baseline; gap: .8rem; width: 100%; padding: .78rem 0; border: 0; background: none;
+  font: inherit; font-size: 1.05rem; text-align: left; color: var(--ix-tenue); cursor: pointer;
+  transition: color .4s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.ix-boton small { font-size: .74rem; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.ix-boton:hover { color: var(--ix-suave); }
+.ix-entrada.is-leida .ix-boton { color: var(--ix-suave); }
+/* la sección que se está leyendo: más clara y un poco adelantada */
+.ix-entrada.is-activa .ix-boton { color: var(--ix-texto); transform: translateX(.35rem); }
+.ix-boton:focus-visible { outline: 2px solid var(--ix-suave); outline-offset: 4px; border-radius: 4px; }
+/* la cabeza lectora: un punto que baja por el riel */
+.ix-cabezal {
+  position: absolute; left: 1px; top: 0; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  background: var(--ix-texto); box-shadow: 0 0 0 4px var(--ix-fondo); pointer-events: none;
+  transform: translateY(var(--ix-y, 0px));
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ix-escena {
+  height: 100%; display: grid; grid-template-columns: 250px minmax(0, 660px); gap: 4rem;
+  align-items: center; justify-content: center; padding: 2rem;
+}
+.ix-indice { position: relative; }
+.ix-titulo, .ix-etiqueta {
+  margin: 0 0 1.2rem; font-size: .74rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ix-suave);
+}
+.ix-total { display: flex; justify-content: space-between; margin: 1.6rem 0 0; padding-top: 1rem; border-top: 1px solid var(--ix-linea); color: var(--ix-suave); font-size: .9rem; }
+.ix-total b { font-weight: 500; color: var(--ix-texto); font-variant-numeric: tabular-nums; }
+
+/* el marco lleva el borde; dentro, el documento se desvanece arriba y abajo */
+.ix-marco {
+  height: min(640px, calc(100vh - 4rem)); border: 1px solid var(--ix-linea); border-radius: 22px;
+  background: var(--ix-papel); overflow: hidden;
+}
+.ix-doc {
+  height: 100%; overflow-y: auto; overscroll-behavior: contain;
+  padding: 3rem 3.4rem 40vh; scrollbar-width: none; outline: none;
+  /* el texto se desvanece al llegar a los bordes */
+  -webkit-mask-image: linear-gradient(transparent, #000 56px, #000 calc(100% - 72px), transparent);
+  mask-image: linear-gradient(transparent, #000 56px, #000 calc(100% - 72px), transparent);
+}
+.ix-doc::-webkit-scrollbar { display: none; }
+.ix-cabeza h1 { margin: 0 0 1rem; font-size: 2.3rem; font-weight: 500; letter-spacing: -.03em; line-height: 1.1; }
+.ix-doc section { padding-top: 2.4rem; }
+.ix-doc h2 { margin: 0 0 1rem; font-size: 1.55rem; font-weight: 500; letter-spacing: -.02em; }
+.ix-doc p { margin: 0 0 1.05rem; font-size: 1.06rem; line-height: 1.65; color: var(--ix-suave); }
+.ix-muestras { display: flex; gap: .6rem; margin: 1.4rem 0; }
+.ix-muestras i { flex: 1; height: 54px; border-radius: 10px; border: 1px solid var(--ix-linea); }
+.ix-muestras i:nth-child(1) { background: #0a0a0a; }
+.ix-muestras i:nth-child(2) { background: #2a2a2a; }
+.ix-muestras i:nth-child(3) { background: #6b6b6b; }
+.ix-muestras i:nth-child(4) { background: #bdbdbd; }
+.ix-muestras i:nth-child(5) { background: #f4f4f4; }
+.ix-muestra-tipo { display: flex; align-items: baseline; gap: 1.2rem; margin: 1.2rem 0 1.6rem; }
+.ix-muestra-tipo span { font-size: 5rem; font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+.ix-muestra-tipo small { color: var(--ix-suave); font-size: .85rem; }
+.ix-curva { display: block; width: 100%; max-width: 360px; margin: 1.2rem 0 1.6rem; }
+.ix-curva path { fill: none; stroke: var(--ix-texto); stroke-width: 2; stroke-linecap: round; }
+
+@media (max-width: 860px) {
+  .ix-escena { grid-template-columns: 1fr; gap: 1.5rem; align-content: center; }
+  .ix-indice { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ix-boton { transition: none; }
+}

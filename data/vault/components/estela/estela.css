@@ -1,0 +1,42 @@
+/* Estela · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --et-fondo: #0a0a0a;
+  --et-texto: #f4f4f4;
+  --et-suave: rgba(255, 255, 255, .45);
+  --et-tenue: rgba(255, 255, 255, .07);
+  --et-punto: #f4f4f4;       /* el color de la estela */
+}
+:root[data-tema="claro"] {
+  --et-fondo: #eeeeee;
+  --et-texto: #0a0a0a;
+  --et-suave: rgba(0, 0, 0, .45);
+  --et-tenue: rgba(0, 0, 0, .07);
+  --et-punto: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--et-fondo); color: var(--et-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.et-activo, .et-activo * { cursor: none !important; }
+.et-capa { position: fixed; inset: 0; z-index: 1000; pointer-events: none; overflow: hidden; }
+/* cada punto mide --et-tam y el JS lo escala y lo mueve con transform */
+.et-punto {
+  position: absolute; left: 0; top: 0; width: var(--et-tam, 16px); height: var(--et-tam, 16px);
+  margin: calc(var(--et-tam, 16px) / -2) 0 0 calc(var(--et-tam, 16px) / -2);
+  border-radius: 50%; background: var(--et-punto); will-change: transform;
+}
+.et-capa:not([data-visible]) { opacity: 0; transition: opacity .3s ease; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.et-escena {
+  position: relative; min-height: 100%; display: grid; place-items: center; overflow: hidden;
+  /* una retícula de puntos muy tenue, para que se note el movimiento */
+  background: radial-gradient(circle, var(--et-tenue) 1.2px, transparent 1.6px) 0 0 / 32px 32px;
+}
+.et-titulo {
+  margin: 0; font-size: clamp(3.5rem, 13vw, 10.5rem); font-weight: 500; letter-spacing: -.055em; line-height: 1;
+  color: var(--et-tenue); -webkit-text-stroke: 1px var(--et-suave); user-select: none;
+}
+.et-pista { position: absolute; left: 0; right: 0; bottom: 2.4rem; margin: 0; text-align: center; font-size: .9rem; color: var(--et-suave); }

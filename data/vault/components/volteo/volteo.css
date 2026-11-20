@@ -1,0 +1,66 @@
+/* Volteo · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --vo-fondo: #0a0a0a;
+  --vo-texto: #f4f4f4;
+  --vo-suave: rgba(255, 255, 255, .45);
+  --vo-frente: #161616;          /* la cara de delante */
+  --vo-frente-tinta: #f4f4f4;
+  --vo-dorso: #f4f4f4;           /* y la de atrás, invertida */
+  --vo-dorso-tinta: #0a0a0a;
+  --vo-sombra: rgba(0, 0, 0, .75);
+  --vo-ancho: 360px;
+  --vo-alto: 500px;
+}
+:root[data-tema="claro"] {
+  --vo-fondo: #eeeeee;
+  --vo-texto: #0a0a0a;
+  --vo-suave: rgba(0, 0, 0, .5);
+  --vo-frente: #ffffff;
+  --vo-frente-tinta: #0a0a0a;
+  --vo-dorso: #0a0a0a;
+  --vo-dorso-tinta: #f4f4f4;
+  --vo-sombra: rgba(0, 0, 0, .3);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--vo-fondo); color: var(--vo-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* volteo.js escribe --giro (grados), --alza (px hacia ti) y la sombra
+   de cada cara (--luz-frente, --luz-dorso) */
+.vo-tarjeta { position: relative; width: var(--vo-ancho); height: var(--vo-alto); perspective: 1400px; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+.vo-tarjeta:focus-visible .vo-giro { outline: 2px solid var(--vo-suave); outline-offset: 8px; border-radius: 28px; }
+/* la sombra en el suelo: se abre y se aclara cuando la tarjeta se levanta */
+.vo-tarjeta::before {
+  content: ""; position: absolute; left: 8%; right: 8%; bottom: -18px; height: 40px; border-radius: 50%;
+  background: var(--vo-sombra); filter: blur(22px);
+  transform: scale(calc(1 + var(--alza, 0) / 260)); opacity: calc(1 - var(--alza, 0) / 180);
+}
+.vo-giro {
+  position: absolute; inset: 0; transform-style: preserve-3d;
+  transform: translateZ(calc(var(--alza, 0) * 1px)) rotateY(calc(var(--giro, 0) * 1deg));
+}
+.vo-cara {
+  position: absolute; inset: 0; border-radius: 28px; padding: 32px; overflow: hidden;
+  display: flex; flex-direction: column; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+/* de canto, la cara se oscurece: así se lee que gira y no que se encoge */
+.vo-cara::after { content: ""; position: absolute; inset: 0; background: #000; pointer-events: none; }
+.vo-frente { background: var(--vo-frente); color: var(--vo-frente-tinta); box-shadow: inset 0 0 0 1px rgba(128, 128, 128, .18); }
+.vo-frente::after { opacity: var(--luz-frente, 0); }
+.vo-dorso { background: var(--vo-dorso); color: var(--vo-dorso-tinta); transform: rotateY(180deg); }
+.vo-dorso::after { opacity: var(--luz-dorso, 0); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.vo-escena { height: 100%; display: grid; place-items: center; }
+.vo-rotulo { font-size: .78rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; opacity: .55; }
+.vo-icono { width: 46%; margin: auto 0; fill: none; stroke: currentColor; stroke-width: 2.4; }
+.vo-icono circle { fill: currentColor; stroke: none; }
+.vo-titulo { margin: 0 0 22px; font-size: 2.5rem; font-weight: 600; line-height: .98; letter-spacing: -.045em; }
+.vo-pie { margin: 0; padding-top: 18px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(128, 128, 128, .28); font-size: .95rem; font-weight: 500; }
+.vo-flecha { font-size: 1.3rem; line-height: 1; }
+.vo-lista { list-style: none; margin: auto 0; padding: 0; display: grid; gap: 18px; font-size: 1.35rem; font-weight: 500; letter-spacing: -.02em; }
+.vo-lista li { display: flex; gap: 14px; align-items: baseline; }
+.vo-lista li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: currentColor; translate: 0 -.15em; }
+.vo-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--vo-suave); font-size: .95rem; }

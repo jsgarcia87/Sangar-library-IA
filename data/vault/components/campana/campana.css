@@ -1,0 +1,66 @@
+/* Campana · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --cm-fondo: #0a0a0a;
+  --cm-texto: #f4f4f4;
+  --cm-suave: rgba(255, 255, 255, .5);
+  --cm-linea: rgba(255, 255, 255, .14);
+  --cm-tam: 300px;          /* el lado de la campana */
+}
+:root[data-tema="claro"] {
+  --cm-fondo: #eeeeee;
+  --cm-texto: #0a0a0a;
+  --cm-suave: rgba(0, 0, 0, .5);
+  --cm-linea: rgba(0, 0, 0, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--cm-fondo); color: var(--cm-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.cm-campana {
+  position: relative; width: var(--cm-tam); height: var(--cm-tam); padding: 0; border: 0;
+  background: none; color: var(--cm-texto); cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.cm-campana svg { width: 100%; height: 100%; overflow: visible; }
+.cm-campana svg * { fill: none; stroke: currentColor; stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.cm-campana .cm-badajo circle { fill: currentColor; stroke: none; }
+/* la copa va rellena del color del fondo: tapa la varilla del badajo */
+.cm-campana .cm-copa { fill: var(--cm-fondo); }
+/* los dos cuelgan del mismo punto, arriba: de ahí giran */
+.cm-cuerpo, .cm-badajo { transform-box: view-box; transform-origin: 60px 18px; }
+.cm-campana:focus-visible { outline: 2px solid var(--cm-suave); outline-offset: 8px; border-radius: 24px; }
+
+/* el contador: una ventana que deja ver una cifra a la vez */
+.cm-cuenta {
+  position: absolute; top: 15%; right: 15%; height: 46px; min-width: 46px; padding: 0 13px;
+  display: grid; place-items: center; overflow: hidden; border-radius: 99px;
+  background: var(--cm-texto); color: var(--cm-fondo); box-shadow: 0 0 0 5px var(--cm-fondo);
+  font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1;
+  transform: scale(0); transition: min-width .3s cubic-bezier(.22, 1, .36, 1);
+}
+.cm-cuenta span { grid-area: 1 / 1; }
+
+/* las ondas del golpe */
+.cm-onda {
+  stroke: currentColor; stroke-width: 3.5; fill: none; stroke-linecap: round;
+  transform-box: view-box; animation: cm-onda .7s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+@keyframes cm-onda {
+  from { opacity: .9; transform: translateX(0) scale(.8); }
+  to   { opacity: 0;  transform: translateX(var(--cm-dx)) scale(1.15); }
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.cm-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.6rem; padding: 2rem 1rem;
+}
+.cm-boton {
+  margin-top: 1rem; padding: .85rem 1.5rem; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--cm-linea); background: none; color: var(--cm-texto);
+  font: 500 1rem "General Sans", system-ui, sans-serif; transition: border-color .2s, transform .2s cubic-bezier(.22, 1, .36, 1);
+}
+.cm-boton:hover { border-color: var(--cm-suave); }
+.cm-boton:active { transform: scale(.96); }
+.cm-pista { margin: 0; color: var(--cm-suave); font-size: .92rem; text-align: center; }

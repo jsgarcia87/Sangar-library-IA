@@ -1,0 +1,67 @@
+/* Avión · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --av-fondo: #0a0a0a;
+  --av-texto: #f4f4f4;
+  --av-suave: rgba(255, 255, 255, .5);
+  --av-linea: rgba(255, 255, 255, .22);
+  --av-papel: #f4f4f4;           /* la cara del botón y el ala del avión */
+  --av-pliegue: #a8a8a8;         /* la quilla, en sombra */
+  --av-letra: #0a0a0a;
+  --av-ok: #1f9d55;
+}
+:root[data-tema="claro"] {
+  --av-fondo: #eeeeee;
+  --av-texto: #0a0a0a;
+  --av-suave: rgba(0, 0, 0, .5);
+  --av-linea: rgba(0, 0, 0, .25);
+  --av-papel: #0a0a0a;
+  --av-pliegue: #555555;
+  --av-letra: #f4f4f4;
+  --av-ok: #4ade80;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--av-fondo); color: var(--av-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.av-boton {
+  position: relative; display: inline-grid; place-items: center;
+  min-width: 320px; height: 104px; padding: 0 2em; border: 0; border-radius: 20px;
+  background: var(--av-papel); color: var(--av-letra); cursor: pointer;
+  font: 500 2.2rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+.av-boton:focus-visible { outline: 2px solid var(--av-texto); outline-offset: 6px; }
+.av-etiqueta, .av-hecho {
+  grid-area: 1 / 1; display: inline-flex; align-items: center; gap: .45em; white-space: nowrap;
+  transition: opacity .22s, transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.av-etiqueta svg, .av-hecho svg { width: .85em; height: .85em; }
+.av-etiqueta path, .av-hecho path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.av-hecho path { stroke: var(--av-ok); stroke-width: 2.8; }
+.av-hecho { opacity: 0; transform: translateY(35%); }
+
+.av-boton.is-plegando .av-etiqueta { opacity: 0; transform: scale(.8); }
+.av-boton.is-hecho .av-etiqueta { opacity: 0; transform: translateY(-35%); }
+.av-boton.is-hecho .av-hecho { opacity: 1; transform: none; }
+/* mientras vuela, en su sitio queda la huella de la pista de aterrizaje */
+.av-boton.is-fuera { background: transparent; outline: 1.5px dashed var(--av-linea); outline-offset: -1.5px; }
+
+/* el cielo: una capa fija sobre la página, solo para el avión y su estela */
+.av-cielo { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; overflow: visible; }
+.av-ala { fill: var(--av-papel); }
+.av-quilla { fill: var(--av-pliegue); }
+.av-ala, .av-quilla { stroke: var(--av-papel); stroke-width: .6; stroke-linejoin: round; }
+.av-estela {
+  fill: none; stroke: var(--av-texto); stroke-width: 2.4; stroke-linecap: round;
+  stroke-dasharray: .1 11; opacity: .45; transition: opacity .5s;
+}
+.av-estela.is-seca { opacity: 0; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.av-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem;
+}
+.av-pista { margin: 0; color: var(--av-suave); font-size: .95rem; }

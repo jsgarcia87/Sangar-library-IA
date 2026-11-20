@@ -1,0 +1,59 @@
+/* Resaltador · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --rs-fondo: #0a0a0a;
+  --rs-texto: #f4f4f4;
+  --rs-suave: rgba(255, 255, 255, .5);
+  --rs-linea: rgba(255, 255, 255, .14);
+  /* el marcador se pinta en «diferencia»: claro sobre fondo oscuro y la
+     letra que tapa pasa a negra; en el tema claro, al revés */
+  --rs-tinta: #f4f4f4;
+}
+:root[data-tema="claro"] {
+  --rs-fondo: #eeeeee;
+  --rs-texto: #0a0a0a;
+  --rs-suave: rgba(0, 0, 0, .5);
+  --rs-linea: rgba(0, 0, 0, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rs-fondo); color: var(--rs-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.rs-palabra {
+  display: inline-block; opacity: 0; transform: translateY(.32em); filter: blur(6px);
+  transition: opacity .55s ease-out, transform .7s cubic-bezier(.22, 1, .36, 1), filter .55s ease-out;
+}
+.rs-palabra.is-vista { opacity: 1; transform: none; filter: none; }
+
+.rs-marca { position: relative; background: none; color: inherit; white-space: nowrap; }
+/* el trazo: un poco torcido y con los bordes desiguales, como a mano */
+.rs-marca::after {
+  content: ""; position: absolute; inset: .17em -.09em .05em -.12em; pointer-events: none;
+  background: var(--rs-tinta); mix-blend-mode: difference;
+  border-radius: .16em .5em .2em .42em / .42em .22em .5em .18em;
+  transform: rotate(-1.2deg) scaleX(0); transform-origin: 0 50%;
+  transition: transform var(--rs-dura, .5s) cubic-bezier(.65, 0, .35, 1);
+}
+.rs-marca.is-pintada::after { transform: rotate(-1.2deg) scaleX(1); }
+/* al volver a empezar, todo a cero de golpe: sin ver el trazo encogerse */
+.is-reinicio .rs-palabra, .is-reinicio .rs-marca::after { transition: none; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.rs-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3rem; padding: 2rem 1.25rem;
+}
+.rs-parrafo {
+  margin: 0; max-width: 19.5ch; font-size: clamp(2rem, 5.4vw, 5rem); font-weight: 500; line-height: 1.16; letter-spacing: -.035em;
+}
+.rs-boton {
+  padding: .8rem 1.4rem; border-radius: 99px; cursor: pointer; border: 1px solid var(--rs-linea);
+  background: none; color: var(--rs-texto); font: 500 .95rem "General Sans", system-ui, sans-serif;
+  transition: border-color .2s;
+}
+.rs-boton:hover { border-color: var(--rs-suave); }
+@media (prefers-reduced-motion: reduce) {
+  .rs-palabra { transition: none; }
+  .rs-marca::after { transition: none; }
+}

@@ -1,0 +1,67 @@
+/* Lectura · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --le-fondo: #0a0a0a;
+  --le-texto: #f4f4f4;
+  --le-cuerpo: rgba(255, 255, 255, .74);
+  --le-suave: rgba(255, 255, 255, .45);
+  --le-linea: rgba(255, 255, 255, .12);
+  --le-alto-barra: 3px;
+}
+:root[data-tema="claro"] {
+  --le-fondo: #eeeeee;
+  --le-texto: #0a0a0a;
+  --le-cuerpo: rgba(0, 0, 0, .74);
+  --le-suave: rgba(0, 0, 0, .45);
+  --le-linea: rgba(0, 0, 0, .12);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--le-fondo); color: var(--le-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* la barra: una línea que se llena de izquierda a derecha (scaleX) */
+.le-barra { position: relative; height: var(--le-alto-barra); background: var(--le-linea); }
+.le-barra > i {
+  position: absolute; inset: 0; background: var(--le-texto);
+  transform-origin: 0 50%; transform: scaleX(var(--le-avance, 0));
+}
+/* una marca por cada apartado; se encienden al pasarlas */
+.le-marca-apartado {
+  position: absolute; top: -3px; width: 2px; height: calc(var(--le-alto-barra) + 6px); margin-left: -1px;
+  background: var(--le-suave); transition: background-color .3s ease, transform .5s cubic-bezier(.34, 1.6, .5, 1);
+}
+.le-marca-apartado[data-leida] { background: var(--le-texto); transform: scaleY(1.6); }
+
+/* el círculo: un aro que se cierra y, al terminar, ofrece volver arriba */
+.le-circulo {
+  position: fixed; right: 28px; bottom: 28px; z-index: 10; width: 58px; height: 58px; padding: 0; border: 0; border-radius: 50%;
+  display: grid; place-items: center; background: var(--le-fondo); color: var(--le-texto); font: inherit; cursor: default;
+  transition: background-color .4s ease, color .4s ease, transform .5s cubic-bezier(.34, 1.6, .5, 1);
+}
+.le-circulo svg { position: absolute; inset: 0; transform: rotate(-90deg); fill: none; stroke-width: 2; }
+.le-circulo circle:first-child { stroke: var(--le-linea); }
+.le-circulo circle + circle { stroke: var(--le-texto); stroke-dasharray: 100; stroke-dashoffset: calc(100 - var(--le-avance, 0) * 100); stroke-linecap: round; }
+.le-circulo span { font-size: .75rem; font-weight: 500; font-variant-numeric: tabular-nums; transition: opacity .25s ease; }
+.le-circulo i { position: absolute; font-style: normal; font-size: 1.2rem; opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .5s cubic-bezier(.34, 1.6, .5, 1); }
+.le-circulo[data-fin] { background: var(--le-texto); color: var(--le-fondo); cursor: pointer; }
+.le-circulo[data-fin] span { opacity: 0; }
+.le-circulo[data-fin] i { opacity: 1; transform: none; }
+.le-circulo[data-fin]:hover { transform: translateY(-3px); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.le-pagina { position: fixed; inset: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--le-linea) transparent; }
+.le-cabecera {
+  position: sticky; top: 0; z-index: 5;
+  background: color-mix(in srgb, var(--le-fondo) 86%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.le-fila { display: flex; justify-content: space-between; align-items: center; height: 64px; padding: 0 32px; font-size: .9rem; }
+.le-marca { font-weight: 500; }
+.le-resta { color: var(--le-suave); font-variant-numeric: tabular-nums; }
+.le-articulo { max-width: 680px; margin: 0 auto; padding: 88px 24px 160px; }
+.le-antetitulo { margin: 0 0 1rem; font-size: .8rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--le-suave); }
+.le-articulo h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 500; line-height: 1.04; letter-spacing: -.045em; }
+.le-entrada { margin: 1.6rem 0 0 !important; font-size: 1.35rem !important; color: var(--le-texto) !important; }
+.le-articulo h2 { margin: 3.2rem 0 0; font-size: 1.6rem; font-weight: 500; letter-spacing: -.03em; }
+.le-articulo p { margin: 1.1rem 0 0; font-size: 1.15rem; line-height: 1.7; color: var(--le-cuerpo); }
+.le-firma { color: var(--le-suave) !important; }

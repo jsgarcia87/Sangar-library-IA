@@ -1,0 +1,97 @@
+/* Destacado · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --de-fondo: #0a0a0a;
+  --de-tarjeta: #111111;
+  --de-texto: #f4f4f4;
+  --de-suave: rgba(255, 255, 255, .52);
+  --de-linea: rgba(255, 255, 255, .1);
+  --de-luz: #ffffff;                       /* la cabeza del destello */
+  --de-cola: rgba(255, 255, 255, .4);      /* la estela que deja detrás */
+  --de-grosor: 2px;
+}
+:root[data-tema="claro"] {
+  --de-fondo: #eeeeee;
+  --de-tarjeta: #f8f8f8;
+  --de-texto: #0a0a0a;
+  --de-suave: rgba(0, 0, 0, .52);
+  --de-linea: rgba(0, 0, 0, .1);
+  --de-luz: #0a0a0a;
+  --de-cola: rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--de-fondo); color: var(--de-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-destacado] { position: relative; isolation: isolate; }
+
+/* Un degradado cónico que arranca en --de-angulo: blanco en la cabeza,
+   nada delante y una cola que se apaga detrás (desde --de-cola-desde). La máscara deja ver solo
+   el anillo del borde (todo menos la caja de contenido). */
+.de-luz, .de-halo, .de-halo::before { position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; }
+.de-luz, .de-halo::before {
+  background: conic-gradient(from var(--de-angulo, 0deg),
+    var(--de-luz) 0deg, transparent 24deg, transparent var(--de-cola-desde, 160deg), var(--de-cola) 300deg, var(--de-luz) 360deg);
+  padding: var(--de-grosor);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+/* El halo es el mismo anillo, más grueso y desenfocado. El desenfoque va
+   en el padre y la máscara en el hijo: al revés, la máscara recortaría
+   el desenfoque y no se derramaría nada. */
+.de-halo { z-index: -1; filter: blur(16px); opacity: .5; }
+.de-halo::before { content: ""; inset: 0; padding: 4px; }
+
+/* un brillo muy suave dentro de la tarjeta, donde está el cursor */
+[data-destacado]::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background: radial-gradient(420px circle at var(--de-x, 50%) var(--de-y, 0%), var(--de-linea), transparent 70%);
+  opacity: 0; transition: opacity .5s ease;
+}
+[data-destacado][data-encima]::after { opacity: 1; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.de-escena { min-height: 100%; display: grid; place-items: center; padding: 3rem 1.5rem; }
+.de-planes { display: flex; align-items: center; gap: 22px; }
+.de-plan {
+  width: 286px; display: flex; flex-direction: column; padding: 30px 28px 28px;
+  background: var(--de-tarjeta); border: 1px solid var(--de-linea); border-radius: 26px;
+}
+.de-plan[data-destacado] { width: 326px; padding: 40px 32px 32px; border-color: transparent; }
+.de-insignia {
+  position: absolute; top: 22px; right: 22px; padding: .32rem .7rem; border-radius: 99px;
+  font-size: .72rem; font-weight: 500; letter-spacing: .04em;
+  background: var(--de-texto); color: var(--de-fondo);
+}
+.de-nombre { margin: 0 0 1.4rem; font-size: .95rem; font-weight: 500; color: var(--de-suave); }
+.de-precio { margin: 0; font-size: 2.3rem; font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+[data-destacado] .de-precio { font-size: 2.7rem; }
+.de-precio--texto { font-size: 2rem; }
+.de-precio span { margin-left: .2rem; font-size: .95rem; font-weight: 500; letter-spacing: 0; color: var(--de-suave); }
+.de-nota { margin: .8rem 0 1.5rem; font-size: .92rem; line-height: 1.4; color: var(--de-suave); }
+.de-lista {
+  margin: 0 0 1.8rem; padding: 1.3rem 0 0; list-style: none; border-top: 1px solid var(--de-linea);
+  display: grid; gap: .8rem; font-size: .95rem;
+}
+.de-lista li { display: flex; align-items: center; gap: .65rem; }
+/* el visto, dibujado con dos bordes */
+.de-lista li::before {
+  content: ""; flex: none; width: 9px; height: 5px; margin-top: -3px;
+  border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg);
+  opacity: .7;
+}
+.de-boton {
+  display: block; padding: .85rem 1rem; border-radius: 99px; border: 1px solid var(--de-linea);
+  text-align: center; text-decoration: none; color: inherit; font-size: .92rem; font-weight: 500;
+  transition: background-color .3s ease, border-color .3s ease, transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.de-boton:hover { border-color: var(--de-suave); }
+.de-boton--lleno { background: var(--de-texto); color: var(--de-fondo); border-color: var(--de-texto); }
+.de-boton--lleno:hover { transform: translateY(-2px); }
+
+@media (max-width: 980px) {
+  .de-planes { flex-direction: column; }
+  .de-plan, .de-plan[data-destacado] { width: min(100%, 340px); }
+}

@@ -1,0 +1,75 @@
+/* Cuenta · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ct-fondo: #0a0a0a;
+  --ct-texto: #f4f4f4;
+  --ct-suave: rgba(255, 255, 255, .45);
+  --ct-carta-a: #1d1d1d;        /* las paletas, arriba */
+  --ct-carta-b: #141414;        /* y abajo */
+  --ct-cifra: #f4f4f4;
+  --ct-corte: rgba(0, 0, 0, .75);
+  --ct-ancho: clamp(38px, 10.4vw, 132px);
+  --ct-alto: calc(var(--ct-ancho) * 1.42);
+  --ct-radio: calc(var(--ct-ancho) * .1);
+}
+:root[data-tema="claro"] {
+  --ct-fondo: #eeeeee;
+  --ct-texto: #0a0a0a;
+  --ct-suave: rgba(0, 0, 0, .5);
+  /* las paletas siguen oscuras: así son los relojes de verdad */
+  --ct-carta-a: #1d1d1d;
+  --ct-carta-b: #121212;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ct-fondo); color: var(--ct-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ct-reloj { display: flex; align-items: flex-start; gap: clamp(10px, 2.6vw, 34px); }
+.ct-grupo { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.ct-par { display: flex; gap: clamp(4px, .8vw, 10px); }
+.ct-dos { margin-top: calc(var(--ct-alto) / 2 - 21px); display: grid; gap: 22px; }
+.ct-dos i { width: 10px; height: 10px; border-radius: 50%; background: var(--ct-suave); }
+.ct-nombre { font-size: .78rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ct-suave); }
+
+/* Una paleta son cuatro mitades: dos quietas detrás (arriba la cifra
+   nueva, abajo la vieja) y dos que giran delante (arriba la vieja, que
+   cae, y abajo la nueva, que termina de bajar). */
+.ct-carta { position: relative; width: var(--ct-ancho); height: var(--ct-alto); perspective: 520px; }
+.ct-mitad {
+  position: absolute; left: 0; right: 0; height: 50%; overflow: hidden;
+  font-size: calc(var(--ct-alto) * .74); font-weight: 600; letter-spacing: -.04em; text-align: center;
+  line-height: var(--ct-alto); color: var(--ct-cifra); font-variant-numeric: tabular-nums;
+  backface-visibility: hidden;
+}
+.ct-mitad span { display: block; height: var(--ct-alto); }
+.ct-arriba { top: 0; border-radius: var(--ct-radio) var(--ct-radio) 0 0; background: var(--ct-carta-a); transform-origin: 50% 100%; }
+.ct-abajo { bottom: 0; border-radius: 0 0 var(--ct-radio) var(--ct-radio); background: var(--ct-carta-b); transform-origin: 50% 0; }
+.ct-abajo span { margin-top: calc(var(--ct-alto) / -2); }
+/* el corte entre las dos mitades, y una sombra que oscurece la hoja al girar */
+.ct-arriba { box-shadow: inset 0 -1px 0 var(--ct-corte); }
+.ct-abajo { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 10px 22px -12px rgba(0, 0, 0, .7); }
+.ct-mitad::after { content: ""; position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+
+.ct-hoja { z-index: 2; visibility: hidden; }
+.is-voltea .ct-hoja { visibility: visible; }
+/* la de arriba cae hasta quedar de canto, oscureciéndose */
+.is-voltea .ct-hoja.ct-arriba { animation: ct-cae .3s cubic-bezier(.55, 0, .9, .45) both; }
+.is-voltea .ct-hoja.ct-arriba::after { animation: ct-oscurece .3s ease-in both; }
+@keyframes ct-cae { from { transform: rotateX(0); } to { transform: rotateX(-90deg); } }
+@keyframes ct-oscurece { to { opacity: .45; } }
+/* la de abajo sigue desde el canto hasta su sitio, con un rebote corto */
+.is-voltea .ct-hoja.ct-abajo { animation: ct-baja .42s cubic-bezier(.2, .7, .3, 1.25) .3s both; }
+.is-voltea .ct-hoja.ct-abajo::after { animation: ct-aclara .42s ease-out .3s both; }
+@keyframes ct-baja { from { transform: rotateX(90deg); } to { transform: rotateX(0); } }
+@keyframes ct-aclara { from { opacity: .45; } to { opacity: 0; } }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ct-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.4rem; cursor: pointer; }
+.ct-rotulo { margin: 0; font-size: .85rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ct-suave); }
+.ct-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--ct-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-voltea .ct-hoja { visibility: hidden; }
+  .is-voltea .ct-hoja, .is-voltea .ct-hoja::after { animation: none; }
+}

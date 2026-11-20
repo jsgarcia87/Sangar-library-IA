@@ -1,0 +1,71 @@
+/* Triturar · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --tr-fondo: #0a0a0a;
+  --tr-texto: #f4f4f4;
+  --tr-suave: rgba(255, 255, 255, .5);
+  --tr-linea: rgba(255, 255, 255, .22);
+  --tr-papel: #f4f4f4;           /* la cara del botón y las tiras */
+  --tr-letra: #0a0a0a;
+  --tr-peligro: #e5484d;         /* el rojo de las acciones que no se deshacen */
+  --tr-boca: #0a0a0a;
+}
+:root[data-tema="claro"] {
+  --tr-fondo: #eeeeee;
+  --tr-texto: #0a0a0a;
+  --tr-suave: rgba(0, 0, 0, .5);
+  --tr-linea: rgba(0, 0, 0, .25);
+  --tr-papel: #0a0a0a;
+  --tr-letra: #f4f4f4;
+  --tr-peligro: #ff6b6f;
+  --tr-boca: #eeeeee;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--tr-fondo); color: var(--tr-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.tr-sitio { position: relative; display: inline-block; }
+.tr-boton {
+  position: relative; display: inline-grid; place-items: center; overflow: hidden;
+  min-width: 340px; height: 104px; padding: 0 2em; border: 0; border-radius: 20px;
+  background: var(--tr-papel); color: var(--tr-letra); cursor: pointer;
+  font: 500 2.2rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  transition: background-color .3s, box-shadow .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tr-boton:focus-visible { outline: 2px solid var(--tr-texto); outline-offset: 6px; }
+.tr-etiqueta, .tr-hecho { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: .45em; white-space: nowrap; }
+.tr-etiqueta svg, .tr-tira svg { width: .9em; height: .9em; }
+.tr-etiqueta path, .tr-tira path { fill: none; stroke: var(--tr-peligro); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* la boca de la trituradora: una ranura con dientes en el canto de abajo */
+.tr-boca {
+  position: absolute; left: 10px; right: 10px; bottom: 0; height: 7px; border-radius: 4px 4px 0 0;
+  background: repeating-linear-gradient(90deg, var(--tr-boca) 0 5px, transparent 5px 8px), var(--tr-boca);
+  transform: scaleY(0); transform-origin: bottom; transition: transform .2s cubic-bezier(.22, 1, .36, 1);
+}
+.is-triturando .tr-boca { transform: none; }
+/* el motor: un temblor fino mientras tritura */
+.is-triturando { animation: tr-motor .09s linear infinite; }
+@keyframes tr-motor { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(.7px, -.4px); } 75% { transform: translate(-.7px, .4px); } }
+
+/* las tiras salen por debajo; lo que aún no ha cruzado la ranura no se ve */
+.tr-tiras { position: absolute; left: 0; right: 0; top: 100%; height: 0; clip-path: inset(0 -100vw -100vh -100vw); pointer-events: none; }
+.tr-tira {
+  position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--tr-papel); color: var(--tr-letra); white-space: nowrap; will-change: transform, opacity;
+}
+
+/* y cuando ya no queda nada, el hueco dice lo que pasó */
+.tr-hecho { opacity: 0; color: var(--tr-suave); transform: translateY(-40%); transition: opacity .35s, transform .5s cubic-bezier(.22, 1, .36, 1); }
+.is-eliminado { background: transparent; box-shadow: inset 0 0 0 1.5px var(--tr-linea); }
+.is-eliminado .tr-hecho { opacity: 1; transform: none; }
+.is-eliminado .tr-etiqueta { visibility: hidden; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.tr-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.6rem; padding: 2rem 2rem 9rem;
+}
+.tr-pista { margin: 0; color: var(--tr-suave); font-size: .95rem; position: relative; z-index: -1; }

@@ -1,0 +1,103 @@
+/* Carpetas · Moxen — los estilos del efecto y de la demostración. */
+/* registrada para que el color de la carpeta cambie con transición */
+@property --cp-color { syntax: "<color>"; inherits: true; initial-value: #222222; }
+
+:root {
+  --cp-fondo: #0a0a0a;
+  --cp-texto: #f4f4f4;
+  --cp-suave: rgba(255, 255, 255, .5);
+  --cp-linea: rgba(255, 255, 255, .1);
+  /* de la carpeta del frente a la del fondo */
+  --cp-tono-0: #262626;
+  --cp-tono-1: #1d1d1d;
+  --cp-tono-2: #171717;
+  --cp-tono-3: #121212;
+  --cp-sombra: rgba(0, 0, 0, .65);
+  --cp-ancho: 720px;
+  --cp-pestana: 160px;
+  --cp-oreja: 14px;          /* la curva donde la pestaña se une a la carpeta */
+}
+:root[data-tema="claro"] {
+  --cp-fondo: #eeeeee;
+  --cp-texto: #0a0a0a;
+  --cp-suave: rgba(0, 0, 0, .55);
+  --cp-linea: rgba(0, 0, 0, .1);
+  --cp-tono-0: #ffffff;
+  --cp-tono-1: #e4e4e4;
+  --cp-tono-2: #d8d8d8;
+  --cp-tono-3: #cccccc;
+  --cp-sombra: rgba(0, 0, 0, .18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--cp-fondo); color: var(--cp-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* todas las carpetas en el mismo sitio; solo cambian el orden y el tono */
+.cp-pila { position: relative; width: var(--cp-ancho); height: 460px; }
+.cp-carpeta {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 410px;
+  --cp-color: var(--cp-tono-3);
+  transition: --cp-color .5s cubic-bezier(.22, 1, .36, 1);
+  filter: drop-shadow(0 -1px 0 var(--cp-linea));
+}
+.cp-carpeta[data-fondo="0"] { --cp-color: var(--cp-tono-0); filter: drop-shadow(0 -1px 0 var(--cp-linea)) drop-shadow(0 18px 30px var(--cp-sombra)); }
+.cp-carpeta[data-fondo="1"] { --cp-color: var(--cp-tono-1); }
+.cp-carpeta[data-fondo="2"] { --cp-color: var(--cp-tono-2); }
+.cp-cuerpo {
+  position: relative; height: 100%; padding: 2.4rem 2.6rem; border-radius: 0 22px 22px 22px;
+  background: var(--cp-color); overflow: hidden;
+}
+/* la pestaña: un rectángulo con la base curvada hacia fuera, como un lomo */
+.cp-pestana {
+  position: absolute; left: var(--x, 0px); bottom: 100%; width: var(--cp-pestana); height: 46px;
+  display: flex; align-items: center; gap: .6rem; padding: 0 1.2rem;
+  border: 0; border-radius: 16px 16px 0 0; background: var(--cp-color);
+  font: inherit; font-size: 1rem; font-weight: 500; color: var(--cp-suave); cursor: pointer; text-align: left;
+  transition: color .3s;
+}
+.cp-pestana small { font-size: .72rem; letter-spacing: .08em; opacity: .7; }
+.cp-pestana::before, .cp-pestana::after {
+  content: ""; position: absolute; bottom: 0; width: var(--cp-oreja); height: var(--cp-oreja);
+}
+.cp-pestana::before { right: 100%; background: radial-gradient(circle at 0 0, transparent var(--cp-oreja), var(--cp-color) calc(var(--cp-oreja) + .5px)); }
+.cp-pestana::after { left: 100%; background: radial-gradient(circle at 100% 0, transparent var(--cp-oreja), var(--cp-color) calc(var(--cp-oreja) + .5px)); }
+/* la primera pestaña va pegada al borde: sin curva a la izquierda */
+.cp-carpeta:first-child .cp-pestana::before { display: none; }
+.cp-pestana:hover, .cp-carpeta[data-fondo="0"] .cp-pestana { color: var(--cp-texto); }
+.cp-pestana:focus-visible { outline: 2px solid var(--cp-suave); outline-offset: -4px; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.cp-escena { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; padding: 4rem 2rem 2rem; }
+.cp-pista { margin: 0; color: var(--cp-suave); font-size: .95rem; }
+.cp-cuerpo h2 { margin: 0; font-size: 2.6rem; font-weight: 500; letter-spacing: -.04em; line-height: 1; }
+.cp-meta { margin: .7rem 0 1.8rem; color: var(--cp-suave); font-size: .9rem; }
+.cp-cuerpo p { max-width: 46ch; font-size: 1.08rem; line-height: 1.55; }
+.cp-lista { margin: 1.2rem 0 0; padding: 0; list-style: none; display: grid; gap: .7rem; }
+.cp-lista li { display: flex; gap: .8rem; align-items: center; color: var(--cp-suave); }
+.cp-lista li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cp-texto); }
+.cp-pantallas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.cp-pantallas i {
+  height: 190px; border-radius: 14px; border: 1px solid var(--cp-linea);
+  background: linear-gradient(var(--cp-linea) 0 0) 16px 18px / 40% 8px no-repeat,
+              linear-gradient(var(--cp-linea) 0 0) 16px 36px / 64% 8px no-repeat,
+              linear-gradient(var(--cp-linea) 0 0) 16px 100% / calc(100% - 32px) 52% no-repeat;
+  background-position: 16px 18px, 16px 36px, 16px calc(100% - 16px);
+}
+.cp-tabla { display: grid; grid-template-columns: 1fr auto; margin: 0; font-size: 1.05rem; }
+.cp-tabla dt, .cp-tabla dd { margin: 0; padding: .85rem 0; border-bottom: 1px solid var(--cp-linea); }
+.cp-tabla dt { color: var(--cp-suave); }
+.cp-tabla dd { font-variant-numeric: tabular-nums; text-align: right; }
+.cp-tabla .cp-total { border-bottom: 0; color: var(--cp-texto); font-weight: 600; }
+.cp-renglones { display: grid; gap: .9rem; }
+.cp-renglones i { height: 9px; border-radius: 9px; background: var(--cp-linea); }
+.cp-renglones i:nth-child(2) { width: 88%; } .cp-renglones i:nth-child(3) { width: 94%; } .cp-renglones i:nth-child(4) { width: 62%; }
+.cp-firma { margin-top: 3.2rem; }
+.cp-firma span { display: inline-block; min-width: 240px; padding-top: .5rem; border-top: 1px solid var(--cp-suave); color: var(--cp-suave); font-size: .9rem; }
+
+@media (max-width: 800px) {
+  :root { --cp-ancho: calc(100vw - 2rem); --cp-pestana: calc((100vw - 3rem) / 4); }
+  .cp-pestana { font-size: .85rem; padding: 0 .6rem; }
+  .cp-pestana small { display: none; }
+}

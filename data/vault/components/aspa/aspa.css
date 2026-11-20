@@ -1,0 +1,61 @@
+/* Aspa · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --as-fondo: #0a0a0a;
+  --as-texto: #f4f4f4;
+  --as-suave: rgba(255, 255, 255, .38);
+  --as-linea: rgba(255, 255, 255, .14);
+  --as-grosor: 2.5px;        /* el trazo de las aspas */
+}
+:root[data-tema="claro"] {
+  --as-fondo: #eeeeee;
+  --as-texto: #0a0a0a;
+  --as-suave: rgba(0, 0, 0, .38);
+  --as-linea: rgba(0, 0, 0, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--as-fondo); color: var(--as-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* con el cursor propio activo, el del sistema desaparece en toda la página */
+.as-activo, .as-activo * { cursor: none !important; }
+
+.as-cursor {
+  position: fixed; left: 0; top: 0; z-index: 1000; width: 0; height: 0; pointer-events: none;
+  /* blanco en «diferencia»: se ve igual sobre fondo claro que oscuro */
+  mix-blend-mode: difference; opacity: 0; transition: opacity .25s ease;
+}
+.as-cursor[data-visible] { opacity: 1; transition: none; }   /* aparece de golpe, se va fundido */
+/* dos barras cruzadas; el JS gira el conjunto y estira las barras */
+.as-cursor i {
+  position: absolute; left: 0; top: 0; width: var(--as-largo, 30px); height: var(--as-grosor);
+  margin: calc(var(--as-grosor) / -2) 0 0 calc(var(--as-largo, 30px) / -2);
+  background: #fff; border-radius: var(--as-grosor);
+}
+.as-cursor i + i { transform: rotate(90deg); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.as-escena {
+  position: relative; min-height: 100%; display: flex; align-items: center; justify-content: center;
+  gap: clamp(2rem, 12vw, 11rem); padding: 3rem clamp(1.5rem, 6vw, 5rem);
+}
+.as-etiqueta { margin: 0 0 1.2rem; font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--as-suave); }
+.as-menu { display: flex; flex-direction: column; align-items: flex-start; }
+.as-menu a {
+  font-size: clamp(2.6rem, 7.6vw, 6rem); font-weight: 500; line-height: 1.04; letter-spacing: -.045em;
+  color: var(--as-suave); text-decoration: none;
+  transition: color .35s ease, transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.as-menu a:hover, .as-menu a:focus-visible { color: var(--as-texto); transform: translateX(14px); outline: none; }
+.as-redondo {
+  flex: none; width: 190px; height: 190px; border-radius: 50%; border: 1px solid var(--as-linea);
+  background: none; color: var(--as-texto); font: inherit; font-size: 1.05rem; font-weight: 500;
+  transition: background-color .4s ease, color .4s ease, border-color .4s ease;
+}
+.as-redondo:hover { background: var(--as-texto); color: var(--as-fondo); border-color: var(--as-texto); }
+.as-pista { position: absolute; left: 0; right: 0; bottom: 2.2rem; margin: 0; text-align: center; font-size: .9rem; color: var(--as-suave); }
+
+@media (max-width: 760px) {
+  .as-escena { flex-direction: column; }
+}

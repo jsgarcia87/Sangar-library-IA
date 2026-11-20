@@ -1,0 +1,98 @@
+/* Píldora · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --pi-fondo: #0a0a0a;
+  --pi-texto: #f4f4f4;
+  --pi-suave: rgba(255, 255, 255, .55);
+  --pi-linea: rgba(255, 255, 255, .1);
+  --pi-pantalla: #0f0f0f;                    /* el fondo de la página de dentro */
+  --pi-cristal: rgba(28, 28, 28, .72);       /* la píldora: cristal oscuro */
+  --pi-bloque: rgba(255, 255, 255, .06);
+  --pi-cara: #f4f4f4;
+  --pi-letra: #0a0a0a;
+  --pi-ancho: 580px;                         /* el ancho de la píldora */
+  --pi-sombra: rgba(0, 0, 0, .8);
+}
+:root[data-tema="claro"] {
+  --pi-fondo: #eeeeee;
+  --pi-texto: #0a0a0a;
+  --pi-suave: rgba(0, 0, 0, .55);
+  --pi-linea: rgba(0, 0, 0, .1);
+  --pi-pantalla: #f8f8f8;
+  --pi-cristal: rgba(255, 255, 255, .72);
+  --pi-bloque: rgba(0, 0, 0, .06);
+  --pi-cara: #0a0a0a;
+  --pi-letra: #f4f4f4;
+  --pi-sombra: rgba(0, 0, 0, .18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--pi-fondo); color: var(--pi-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* la cabecera pega arriba y no ocupa: la barra flota dentro de ella */
+.pi-cabecera { position: sticky; top: 0; z-index: 5; height: 0; }
+.pi-nav {
+  position: absolute; left: 50%; top: 0; translate: -50% 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  width: 100%; height: 80px; padding: 0 2rem;
+  background: var(--pi-pantalla); border: 1px solid transparent; border-bottom-color: var(--pi-linea); border-radius: 0;
+  /* todo a la vez y con la misma curva: así se lee como un solo gesto */
+  transition: width .6s cubic-bezier(.22, 1, .36, 1), height .6s cubic-bezier(.22, 1, .36, 1),
+              top .6s cubic-bezier(.22, 1, .36, 1), padding .6s cubic-bezier(.22, 1, .36, 1),
+              border-radius .6s cubic-bezier(.22, 1, .36, 1), background-color .4s, border-color .4s, box-shadow .6s;
+}
+.pi-nav.is-pildora {
+  width: var(--pi-ancho); height: 60px; top: 16px; padding: 0 .55rem 0 .8rem; border-radius: 30px;
+  background: var(--pi-cristal); border-color: var(--pi-linea);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .55);
+}
+/* el nombre se recoge y queda el monograma; los enlaces se juntan */
+.pi-marca { display: inline-flex; align-items: center; gap: .7rem; color: inherit; text-decoration: none; font-weight: 600; font-size: 1.1rem; white-space: nowrap; }
+.pi-marca i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid currentColor; font-style: normal; font-size: .8rem; flex: none; }
+.pi-marca span { max-width: 9em; overflow: hidden; transition: max-width .55s cubic-bezier(.22, 1, .36, 1), opacity .3s; }
+.is-pildora .pi-marca span { max-width: 0; opacity: 0; }
+.is-pildora .pi-marca { gap: 0; }
+.pi-enlaces { display: flex; gap: 2.2rem; transition: gap .6s cubic-bezier(.22, 1, .36, 1); }
+.is-pildora .pi-enlaces { gap: 1.4rem; }
+.pi-enlaces a { color: var(--pi-suave); text-decoration: none; font-size: 1.05rem; font-weight: 500; transition: color .2s; }
+.pi-enlaces a:hover { color: var(--pi-texto); }
+.pi-boton {
+  display: inline-flex; align-items: center; height: 46px; padding: 0 1.3rem; border-radius: 23px;
+  background: var(--pi-cara); color: var(--pi-letra); text-decoration: none; font-weight: 500; font-size: 1rem; white-space: nowrap;
+  transition: height .6s cubic-bezier(.22, 1, .36, 1);
+}
+.is-pildora .pi-boton { height: 44px; }
+.pi-nav a:focus-visible { outline: 2px solid var(--pi-texto); outline-offset: 3px; border-radius: 8px; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.pi-escena { height: 100%; display: grid; place-items: center; padding: 2rem; }
+.pi-ventana {
+  width: min(1080px, 100%); height: min(660px, calc(100vh - 4rem)); display: flex; flex-direction: column;
+  border: 1px solid var(--pi-linea); border-radius: 22px; overflow: hidden; background: var(--pi-pantalla);
+  box-shadow: 0 40px 80px -40px var(--pi-sombra);
+}
+.pi-marco { display: flex; gap: 8px; align-items: center; height: 42px; padding: 0 18px; flex: none; border-bottom: 1px solid var(--pi-linea); }
+.pi-marco i { width: 11px; height: 11px; border-radius: 50%; background: var(--pi-linea); }
+.pi-pantalla { position: relative; flex: 1; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.pi-pantalla::-webkit-scrollbar { display: none; }
+.pi-pantalla:focus-visible { outline: none; }
+.pi-contenido { display: flex; flex-direction: column; gap: 1.2rem; padding: 150px 4rem 4rem; }
+.pi-titulo { display: block; height: 58px; border-radius: 12px; background: var(--pi-bloque); }
+.pi-linea { display: block; height: 18px; margin: .8rem 0 2.6rem; border-radius: 9px; background: var(--pi-bloque); }
+.pi-rejilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 3rem; }
+.pi-rejilla i { height: 250px; border-radius: 18px; background: var(--pi-bloque); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-nav, .pi-nav * { transition-duration: .01s !important; }
+}
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  :root { --pi-ancho: calc(100% - 24px); }
+  .pi-enlaces { display: none; }
+  .pi-nav { padding: 0 1rem; }
+  .pi-contenido { padding: 120px 1.2rem 2rem; }
+  .pi-rejilla { grid-template-columns: 1fr 1fr; }
+}

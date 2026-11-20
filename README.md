@@ -9,7 +9,7 @@
 | Suite | Archivo | Descripción |
 | :--- | :--- | :--- |
 | **Sangar AI Studio** | [`index.html`](./index.html) | Generador de prompts para Runway Gen-3 Alpha, Kling AI 1.5, Luma Dream Machine, OpenAI Sora / MiniMax Hailuo, Midjourney v6.1 / Flux, Higgsfield AI, Remotion 3D, Claude Artifacts (Canvas 30fps), expresiones de After Effects, 5 storyboards técnicos, glosario ampliado y biblioteca con 27 prompts curados. |
-| **Galería de Referencias UI** | [`components.html`](./components.html) | Galería dual con selector de suites: **Sangar Studio Core** (15 componentes interactivos en vivo con código en HTML/CSS y React + prompts de agente) y la **Librería de Animaciones Moxen** (880 animaciones interactivas con preview en vídeo al pasar el cursor y prompts para agentes de código). |
+| **Galería de Referencias UI** | [`components.html`](./components.html) | Galería dual con selector de suites: **Sangar Studio Core** (15 componentes interactivos en vivo con código en HTML/CSS y React + prompts de agente) y **Sangar Motion Vault** (880 animaciones interactivas descargadas en local con preview en vídeo al pasar el cursor y prompts para agentes de código). |
 
 ---
 
@@ -82,13 +82,13 @@ La biblioteca ha sido alimentada con el contenido curado y recursos técnicos de
 - **Pulse Glowing Status Badge:** Insignia con micro-indicador pulsante y halo reactivo perimetral.
 - **Pestañas de Código & Prompts:** Alternancia instantánea entre **Vista Previa**, **Prompt Agente** (para Claude Code, Cursor y v0), **HTML / CSS** y **React + Tailwind CSS**.
 
-### 3. Librería de Animaciones Moxen (`components.html#moxen`)
-- **880 Animaciones Indexadas:** Extraídas y estructuradas a partir del catálogo técnico de [Moxen](https://moxen.cl/recursos.html).
+### 3. Sangar Motion Vault (`components.html#vault`)
+- **880 Animaciones Privadas en Local:** Bóveda privada completa de 880 microinteracciones y transiciones descargadas íntegramente en local (posters, vídeos MP4 y archivos fuente de código).
 - **24 Categorías Especializadas:** Formularios (119), Sistemas (99), Gráficos (63), Listas (59), Texto cinético (55), Navegación (51), Secciones (45), Avisos (40), Precios (39), Generativo (38), Tarjetas (32), Media (31), Cargas/Spinners (27), Diagramas (27), Botones (24), Galerías (22), Iconos animados (21), Interruptores (19), Transiciones (14), 3D (14), Scroll (11), Portadas (11), Fondos (10) y Punteros/Cursor (9).
 - **Zero-Dependency First:** 864 componentes sin dependencias externas (HTML, CSS y JavaScript nativo), más componentes especializados en WebGL2, WebGL y Matter.js.
-- **Reproducción de Vídeo en Hover:** Tarjetas optimizadas con carga perezosa (`preload="none"` y `data-src`) que reproducen el bucle MP4 solo al situar el ratón encima, manteniendo el rendimiento del navegador al 100%.
+- **Reproducción de Vídeo en Hover (100% Local):** Tarjetas optimizadas con carga perezosa (`preload="none"` y `data-src`) que reproducen el bucle MP4 local solo al situar el ratón encima, manteniendo el rendimiento del navegador al 100%.
 - **Buscador & Filtros Dinámicos:** Búsqueda en tiempo real por nombre, concepto, descripción, dependencia o categoría, con paginación progresiva (+24 componentes por tanda).
-- **Modal de Detalle & Prompts para Agentes:** Diálogo nativo `<dialog>` con reproductor de vídeo ampliado, lista de archivos modulares (`index.html`, `{slug}.css`, `{slug}.js`), enlace directo a la fuente y botón para **Copiar Prompt de Agente** en 1 clic optimizado para Claude Code, Cursor, v0 o ChatGPT.
+- **Modal de Detalle & Prompts para Agentes:** Diálogo nativo `<dialog>` con reproductor de vídeo ampliado, lista de archivos fuente locales (`index.html`, `{slug}.css`, `{slug}.js` en `data/vault/components/{id}/`) y botón para **Copiar Prompt de Agente** en 1 clic optimizado para Claude Code, Cursor, v0 o ChatGPT.
 
 ### 4. Sistema de Diseño *Warm Studio OS* ([`design.md`](./design.md))
 - **Estética:** Superficies cálidas (`#FCFAFB` en modo claro / `#131211` en modo oscuro), carbón `#191716` / `#F0ECE8` y acento coral `#FF7E67` / `#FF8E7A` mediante tokens CSS `--sg-*` definidos en [`public/assets/app.css`](./public/assets/app.css).
@@ -143,7 +143,10 @@ Sangar-library-IA/
 │       ├── membrete.css         # Estilos del visor de membretes/facturas
 │       ├── membrete.js          # Lógica del visor de membretes
 │       ├── fonts/               # StingerFit-Light.ttf y Raleway (Regular, SemiBold, Bold)
-│       └── logos/               # sangar-s-negro.svg, sangar-s-blanco.svg, sangar-lockup-negro.svg
+│       ├── logos/               # sangar-s-negro.svg, sangar-s-blanco.svg, sangar-lockup-negro.svg
+│       └── vault/               # Bóveda local de activos descargados
+│           ├── posters/         # 880 carátulas JPG en local
+│           └── videos/          # 880 animaciones MP4 en local
 ├── data/                        # Conjuntos de datos JSON modulares
 │   ├── after-effects-tools.json # Expresiones matemáticas de After Effects (7 scripts)
 │   ├── ai-tools.json            # Directorio comparativo de herramientas IA (10 herramientas)
@@ -153,6 +156,8 @@ Sangar-library-IA/
 │   ├── prompts-library.json     # Biblioteca de prompts curados listos para copiar (27 prompts)
 │   ├── storyboard-templates.json# Plantillas de storyboards técnicos (5 estructuras)
 │   ├── ui-components.json       # Galería de Referencias UI con código y prompts de agente (15 componentes)
-│   └── moxen-components.json    # Catálogo completo de animaciones Moxen (880 animaciones, vídeos y prompts)
+│   ├── vault-components.json    # Bóveda Sangar Motion Vault (880 animaciones con rutas locales y prompts)
+│   └── vault/                   # Archivos fuente de componentes
+│       └── components/          # 880 carpetas con index.html, CSS y JS por componente
 └── docs/                        # Guías técnicas de referencia
 ```

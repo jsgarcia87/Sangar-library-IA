@@ -1,0 +1,114 @@
+/* Perfil · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --pf-fondo: #0a0a0a;
+  --pf-tarjeta: #121212;
+  --pf-texto: #f4f4f4;
+  --pf-suave: rgba(255, 255, 255, .5);
+  --pf-linea: rgba(255, 255, 255, .1);
+  --pf-avatar: #f4f4f4;          /* el círculo de las iniciales */
+  --pf-avatar-texto: #0a0a0a;
+  --pf-verde: #3ccf7a;           /* disponible: el único color */
+  --pf-curva: cubic-bezier(.22, 1, .36, 1);
+  --pf-radio: 26px;
+}
+:root[data-tema="claro"] {
+  --pf-fondo: #eeeeee;
+  --pf-tarjeta: #fafafa;
+  --pf-texto: #0a0a0a;
+  --pf-suave: rgba(0, 0, 0, .5);
+  --pf-linea: rgba(0, 0, 0, .09);
+  --pf-avatar: #0a0a0a;
+  --pf-avatar-texto: #f4f4f4;
+  --pf-verde: #1fa35a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--pf-fondo); color: var(--pf-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* Dos formas de la misma tarjeta. Las piezas no se animan con CSS: el
+   JS mide dónde estaban y dónde quedan, y las lleva de una a otra. */
+.pf-tarjeta { position: relative; }
+/* el fondo va en su propia capa para que el borde y la sombra se vean
+   también mientras cambia de tamaño (el contenido va recortado) */
+.pf-capa { position: absolute; inset: 0; z-index: -1; border-radius: var(--pf-radio); }
+.pf-contenido { position: relative; padding: 16px 18px; }
+.pf-cabeza { display: flex; align-items: center; gap: 16px; }
+.pf-avatar { width: 64px; height: 64px; font-size: 1.3rem; }
+.pf-nombre { font-size: 1.12rem; }
+.pf-extra { display: none; }
+
+.pf-tarjeta[data-abierta] .pf-contenido { padding: 40px 32px 30px; }
+.pf-tarjeta[data-abierta] .pf-cabeza { flex-direction: column; gap: 18px; }
+/* cada pieza mide lo que su texto: así la escala del FLIP es la de la letra */
+.pf-nombre, .pf-rol { width: fit-content; }
+.pf-tarjeta[data-abierta] .pf-quien { display: flex; flex-direction: column; align-items: center; }
+.pf-tarjeta[data-abierta] .pf-avatar { width: 128px; height: 128px; font-size: 2.6rem; }
+.pf-tarjeta[data-abierta] .pf-nombre { font-size: 1.75rem; }
+.pf-tarjeta[data-abierta] .pf-extra { display: block; }
+
+/* los datos entran escalonados al abrir, y se van juntos al cerrar */
+.pf-tarjeta[data-abierta] .pf-extra > * { animation: pf-entra .7s var(--pf-curva) backwards; }
+.pf-tarjeta[data-abierta] .pf-extra > :nth-child(1) { animation-delay: .16s; }
+.pf-tarjeta[data-abierta] .pf-extra > :nth-child(2) { animation-delay: .24s; }
+.pf-tarjeta[data-abierta] .pf-extra > :nth-child(3) { animation-delay: .32s; }
+.pf-tarjeta[data-cerrando] .pf-extra > * { animation: pf-sale .2s ease forwards; }
+@keyframes pf-entra { from { opacity: 0; transform: translateY(16px); } }
+@keyframes pf-sale { to { opacity: 0; transform: translateY(6px); } }
+
+/* el anillo del avatar se dibuja al abrir */
+.pf-anillo { position: absolute; inset: -7px; width: calc(100% + 14px); height: calc(100% + 14px); transform: rotate(-90deg); overflow: visible; }
+.pf-anillo circle { fill: none; stroke: var(--pf-texto); stroke-width: 1.2; stroke-dasharray: 100; stroke-dashoffset: 100; opacity: 0; }
+.pf-tarjeta[data-abierta] .pf-anillo circle { opacity: .55; animation: pf-anillo 1.1s var(--pf-curva) .15s backwards; stroke-dashoffset: 0; }
+.pf-tarjeta[data-cerrando] .pf-anillo circle { opacity: 0; transition: opacity .2s ease; }
+@keyframes pf-anillo { from { stroke-dashoffset: 100; } }
+
+/* el + de la esquina gira hasta ser una × (giran las barras: la caja
+   ya la mueve el JS) */
+.pf-mas { position: absolute; top: 18px; right: 18px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--pf-linea); }
+.pf-mas::before, .pf-mas::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; margin: -.75px 0 0 -5.5px;
+  background: var(--pf-texto); border-radius: 2px; transition: transform .6s var(--pf-curva);
+}
+.pf-mas::after { transform: rotate(90deg); }
+.pf-tarjeta[data-abierta] .pf-mas::before { transform: rotate(135deg); }
+.pf-tarjeta[data-abierta] .pf-mas::after { transform: rotate(225deg); }
+.pf-tarjeta[data-cerrando] .pf-mas::before { transform: none; }
+.pf-tarjeta[data-cerrando] .pf-mas::after { transform: rotate(90deg); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.pf-escena { position: relative; min-height: 100%; display: grid; place-items: center; padding: 2rem 1rem; }
+.pf-tarjeta {
+  width: min(100%, 400px); border-radius: var(--pf-radio); isolation: isolate; cursor: pointer; outline: none;
+}
+.pf-capa { background: var(--pf-tarjeta); border: 1px solid var(--pf-linea); box-shadow: 0 40px 80px -50px rgba(0, 0, 0, .8); }
+.pf-tarjeta:focus-visible { outline: 2px solid var(--pf-texto); outline-offset: 4px; }
+.pf-cabeza p { margin: 0; }
+.pf-avatar {
+  position: relative; flex: none; display: grid; place-items: center; border-radius: 50%;
+  background: var(--pf-avatar); color: var(--pf-avatar-texto); font-weight: 600; letter-spacing: -.02em;
+}
+.pf-iniciales { line-height: 1; }
+.pf-nombre { font-weight: 600; letter-spacing: -.025em; line-height: 1.15; }
+.pf-rol { margin-top: 3px !important; font-size: .9rem; color: var(--pf-suave); }
+.pf-estado {
+  display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px 0 0; font-size: .85rem; color: var(--pf-suave);
+}
+.pf-estado i { width: 7px; height: 7px; border-radius: 50%; background: var(--pf-verde); box-shadow: 0 0 0 0 var(--pf-verde); animation: pf-late 2.4s ease-out infinite; }
+@keyframes pf-late { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--pf-verde) 60%, transparent); } 70%, 100% { box-shadow: 0 0 0 7px transparent; } }
+.pf-cifras { display: grid; grid-template-columns: repeat(3, 1fr); margin: 26px 0 0; padding: 20px 0; border-block: 1px solid var(--pf-linea); text-align: center; }
+.pf-cifras div + div { border-left: 1px solid var(--pf-linea); }
+.pf-cifras dd { margin: 0; font-size: 1.7rem; font-weight: 600; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.pf-cifras dt { margin-top: 2px; font-size: .8rem; color: var(--pf-suave); }
+.pf-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.pf-boton {
+  padding: .8rem 1rem; border-radius: 99px; border: 1px solid var(--pf-linea); text-align: center;
+  color: inherit; text-decoration: none; font-size: .92rem; font-weight: 500;
+}
+.pf-boton--lleno { background: var(--pf-texto); color: var(--pf-fondo); border-color: var(--pf-texto); }
+.pf-pista { position: absolute; left: 0; right: 0; bottom: 2.4rem; margin: 0; text-align: center; font-size: .9rem; color: var(--pf-suave); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-tarjeta * { animation: none !important; transition: none !important; }
+}

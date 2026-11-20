@@ -1,0 +1,52 @@
+/* Resorte · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --rs-fondo: #0a0a0a;
+  --rs-texto: #f4f4f4;
+  --rs-suave: rgba(255, 255, 255, .5);
+  --rs-cara: #f4f4f4;        /* el botón */
+  --rs-letra: #0a0a0a;
+  --rs-onda: #f4f4f4;        /* el anillo de la onda expansiva */
+  --rs-alto: 104px;
+  --rs-radio: 52px;
+}
+:root[data-tema="claro"] {
+  --rs-fondo: #eeeeee;
+  --rs-texto: #0a0a0a;
+  --rs-suave: rgba(0, 0, 0, .5);
+  --rs-cara: #0a0a0a;
+  --rs-letra: #f4f4f4;
+  --rs-onda: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rs-fondo); color: var(--rs-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.rs-sitio { position: relative; display: inline-grid; }
+.rs-boton {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: .55em;
+  height: var(--rs-alto); padding: 0 1.9em 0 2.1em; border: 0; border-radius: var(--rs-radio);
+  background: var(--rs-cara); color: var(--rs-letra); cursor: pointer;
+  font: 500 2.2rem/1 "General Sans", system-ui, sans-serif; letter-spacing: -.02em;
+  /* la escala la pone el resorte en JS, fotograma a fotograma */
+  transform: scale(var(--rs-x, 1), var(--rs-y, 1));
+  will-change: transform; touch-action: manipulation; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.rs-boton svg { width: .9em; height: .9em; }
+.rs-boton path { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.rs-boton:focus-visible { outline: 2px solid var(--rs-texto); outline-offset: 6px; }
+
+/* la onda: un anillo con la forma del botón que se abre y se apaga */
+.rs-onda {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  border: 3px solid var(--rs-onda); border-radius: var(--rs-radio); opacity: 0;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.rs-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3rem; padding: 2rem;
+}
+.rs-pista { margin: 0; color: var(--rs-suave); font-size: .95rem; }

@@ -1,0 +1,89 @@
+/* Imprenta · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --im-fondo: #0a0a0a;
+  --im-texto: #f4f4f4;
+  --im-suave: rgba(255, 255, 255, .5);
+  --im-papel: #f4f4f4;                 /* la cara del botón */
+  --im-tinta: #0a0a0a;                 /* el texto y el cabezal */
+  --im-estela: rgba(0, 0, 0, .1);      /* la sombra que arrastra el cabezal */
+  --im-ok: #1f9d55;                    /* la palomita */
+  --im-alto: 116px;
+  --im-letra: 2.5rem;
+  --im-radio: 26px;
+}
+:root[data-tema="claro"] {
+  --im-fondo: #eeeeee;
+  --im-texto: #0a0a0a;
+  --im-suave: rgba(0, 0, 0, .5);
+  --im-papel: #0a0a0a;
+  --im-tinta: #f4f4f4;
+  --im-estela: rgba(255, 255, 255, .16);
+  --im-ok: #4ade80;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--im-fondo); color: var(--im-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.im-boton {
+  position: relative; display: inline-grid; place-items: center;
+  height: var(--im-alto); padding: 0 2.2em; border: 0; border-radius: var(--im-radio);
+  background: var(--im-papel); color: var(--im-tinta); cursor: pointer;
+  font: 500 var(--im-letra)/1 "General Sans", system-ui, sans-serif; letter-spacing: -.01em;
+  overflow: hidden;                    /* el cabezal entra y sale por los bordes */
+  transition: transform .25s cubic-bezier(.22, 1, .36, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+.im-boton:active { transform: scale(.97); }
+.im-boton:focus-visible { outline: 2px solid var(--im-texto); outline-offset: 4px; }
+
+/* las dos frases en la misma celda: el ancho es el de la más larga */
+.im-capa { grid-area: 1 / 1; display: inline-flex; align-items: center; white-space: pre; }
+.im-letra { display: inline-block; opacity: 0; }
+.im-letra.is-tinta { opacity: 1; }
+/* el golpe del tipo contra el papel: llega grande, borroso, y se asienta */
+.im-letra.is-recien { animation: im-golpe .45s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes im-golpe {
+  from { opacity: 0; transform: translateY(-.22em) scale(1.3); filter: blur(4px); }
+  35%  { opacity: 1; }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+
+.im-palomita { margin-left: .32em; }
+.im-palomita svg { display: block; width: .95em; height: .95em; }
+.im-palomita path {
+  fill: none; stroke: var(--im-ok); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 24; stroke-dashoffset: 0;
+}
+.im-palomita.is-recien path { animation: im-trazo .5s .12s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes im-trazo { from { stroke-dashoffset: 24; } }
+
+/* el cabezal: una cuchilla de tinta con dos zapatas y una estela detrás */
+.im-cabezal {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 2px; margin-left: -1px;
+  background: var(--im-tinta); opacity: 0; pointer-events: none;
+  transition: opacity .16s;
+}
+.is-imprimiendo .im-cabezal { opacity: 1; }
+.im-cabezal::before {
+  content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 3.4em;
+  background: linear-gradient(to left, var(--im-estela), transparent);
+}
+.is-vuelta .im-cabezal::before { right: auto; left: 100%; background: linear-gradient(to right, var(--im-estela), transparent); }
+.im-cabezal::after {
+  content: ""; position: absolute; left: -5px; top: 0; width: 12px; height: 7px;
+  background: var(--im-tinta); border-radius: 0 0 3px 3px;
+  box-shadow: 0 calc(var(--im-alto) - 7px) 0 var(--im-tinta);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.im-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.2rem; padding: 2rem;
+}
+.im-pista { margin: 0; color: var(--im-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .im-letra.is-recien, .im-palomita.is-recien path { animation: none; }
+}

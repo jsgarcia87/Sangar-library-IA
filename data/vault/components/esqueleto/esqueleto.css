@@ -1,0 +1,83 @@
+/* Esqueleto · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --eq-fondo: #0a0a0a;
+  --eq-texto: #f4f4f4;
+  --eq-suave: rgba(255, 255, 255, .5);
+  --eq-tarjeta: rgba(255, 255, 255, .035);
+  --eq-linea: rgba(255, 255, 255, .08);
+  --eq-hueso: rgba(255, 255, 255, .09);      /* el hueso */
+  --eq-brillo: rgba(255, 255, 255, .22);     /* el brillo que pasa */
+  --eq-arte: #181818;
+  --eq-trazo: rgba(255, 255, 255, .16);
+  --eq-curva: cubic-bezier(.22, 1, .36, 1);
+}
+:root[data-tema="claro"] {
+  --eq-fondo: #eeeeee;
+  --eq-texto: #0a0a0a;
+  --eq-suave: rgba(0, 0, 0, .5);
+  --eq-tarjeta: rgba(255, 255, 255, .6);
+  --eq-linea: rgba(0, 0, 0, .07);
+  --eq-hueso: rgba(0, 0, 0, .07);
+  --eq-brillo: rgba(255, 255, 255, .85);
+  --eq-arte: #dcdcdc;
+  --eq-trazo: rgba(0, 0, 0, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--eq-fondo); color: var(--eq-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-esqueleto] { position: relative; }
+.eq-capa { position: absolute; inset: 0; pointer-events: none; }
+/* El brillo es un solo degradado fijo a la ventana: pasa por todos los
+   huesos a la vez, como una sola luz, en vez de uno por hueso. */
+.eq-hueso {
+  position: absolute; border-radius: 8px;
+  background: linear-gradient(105deg, var(--eq-hueso) 42%, var(--eq-brillo) 50%, var(--eq-hueso) 58%);
+  background-size: 250vw 100%; background-attachment: fixed;
+  animation: eq-brilla 1.6s linear infinite;
+  transition: opacity .45s var(--eq-curva) var(--eq-espera, 0s);
+}
+/* el centro del brillo va de un poco antes del borde izquierdo a un poco después del derecho */
+@keyframes eq-brilla { from { background-position: -155vw 0; } to { background-position: 5vw 0; } }
+
+/* cargando: huesos encima y el contenido escondido debajo */
+[data-hueso] { transition: opacity .6s var(--eq-curva) var(--eq-espera, 0s), translate .7s var(--eq-curva) var(--eq-espera, 0s); }
+.is-cargando [data-hueso] { opacity: 0; translate: 0 8px; transition-duration: .25s; transition-delay: 0s; }
+[data-esqueleto]:not(.is-cargando) .eq-hueso { opacity: 0; }
+.is-cargando .eq-hueso { transition-duration: .3s; transition-delay: 0s; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.eq-escena { min-height: 100%; display: grid; place-items: center; padding: 2rem 1rem 5rem; cursor: pointer; }
+.eq-fila { display: grid; grid-template-columns: repeat(3, 320px); gap: 28px; }
+/* en pantallas estrechas, una columna */
+@media (max-width: 1060px) { .eq-fila { grid-template-columns: minmax(0, 340px); } }
+.eq-tarjeta {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 16px 16px 20px;
+  border-radius: 24px; background: var(--eq-tarjeta); box-shadow: inset 0 0 0 1px var(--eq-linea);
+}
+.eq-arte { width: 100%; height: 196px; border-radius: 14px; background-color: var(--eq-arte); }
+/* tres composiciones hechas solo con degradados, sin imágenes */
+.eq-arte--1 { background-image: repeating-radial-gradient(circle at 72% 64%, var(--eq-trazo) 0 1.5px, transparent 2px 17px); }
+.eq-arte--2 {
+  background-image:
+    linear-gradient(var(--eq-trazo), var(--eq-trazo)), linear-gradient(var(--eq-trazo), var(--eq-trazo)),
+    linear-gradient(var(--eq-trazo), var(--eq-trazo)), linear-gradient(var(--eq-trazo), var(--eq-trazo)),
+    linear-gradient(var(--eq-texto), var(--eq-texto));
+  background-size: 34px 38%, 34px 62%, 34px 48%, 34px 80%, 34px 30%;
+  background-position: 18% 100%, 36% 100%, 54% 100%, 72% 100%, 90% 100%;
+  background-repeat: no-repeat;
+}
+.eq-arte--3 {
+  background-image: radial-gradient(circle at 34% 50%, var(--eq-texto) 0 30px, transparent 31px), radial-gradient(var(--eq-trazo) 1.6px, transparent 2px);
+  background-size: auto, 16px 16px;
+}
+.eq-tema { padding: 5px 11px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--eq-linea); font-size: .75rem; font-weight: 500; color: var(--eq-suave); }
+.eq-titulo { margin: 0; font-size: 1.4rem; font-weight: 500; line-height: 1.22; letter-spacing: -.02em; }
+.eq-pie { width: 100%; display: flex; align-items: center; gap: 10px; margin-top: 4px; font-size: .9rem; color: var(--eq-suave); }
+.eq-avatar { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--eq-texto); color: var(--eq-fondo); font-size: .7rem; font-weight: 600; }
+.eq-min { margin-left: auto; }
+.eq-pista { position: absolute; bottom: 2.2rem; margin: 0; color: var(--eq-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) { .eq-hueso { animation: none; } }

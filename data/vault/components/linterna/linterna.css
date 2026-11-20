@@ -1,0 +1,59 @@
+/* Linterna · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ln-fondo: #0a0a0a;
+  --ln-texto: #f4f4f4;
+  --ln-suave: rgba(255, 255, 255, .45);
+  --ln-dormido: rgba(255, 255, 255, .07);   /* lo que se ve sin luz */
+  --ln-plano: rgba(255, 255, 255, .46);     /* las guías de los planos */
+  --ln-halo: rgba(255, 255, 255, .06);
+  --ln-radio: 230px;
+}
+:root[data-tema="claro"] {
+  --ln-fondo: #eeeeee;
+  --ln-texto: #0a0a0a;
+  --ln-suave: rgba(0, 0, 0, .5);
+  --ln-dormido: rgba(0, 0, 0, .08);
+  --ln-plano: rgba(0, 0, 0, .38);
+  --ln-halo: rgba(255, 255, 255, .7);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ln-fondo); color: var(--ln-texto); overflow: hidden; }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+[data-linterna] { position: relative; overflow: hidden; touch-action: none; }
+/* sin luz, la composición apenas se adivina */
+.ln-composicion { position: absolute; inset: 0; color: var(--ln-dormido); }
+/* La capa iluminada es una copia exacta encima, recortada por un círculo
+   de borde suave que linterna.js mueve con --x, --y. */
+.ln-luz {
+  position: absolute; inset: 0; pointer-events: none; color: var(--ln-texto);
+  background: radial-gradient(circle var(--ln-radio) at var(--x, -999px) var(--y, -999px), var(--ln-halo), transparent);
+  -webkit-mask-image: radial-gradient(circle var(--ln-radio) at var(--x, -999px) var(--y, -999px), #000 50%, transparent 100%);
+  mask-image: radial-gradient(circle var(--ln-radio) at var(--x, -999px) var(--y, -999px), #000 50%, transparent 100%);
+}
+.ln-luz .ln-composicion { color: var(--ln-texto); }
+/* los planos: guías, medidas y rótulos que solo existen bajo la luz */
+.ln-planos { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ln-planos line, .ln-planos rect, .ln-planos circle { stroke: var(--ln-plano); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+.ln-planos .ln-punteada { stroke-dasharray: 3 5; }
+.ln-planos text { fill: var(--ln-plano); font: 500 12px/1 "General Sans", system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ln-escena { height: 100%; cursor: crosshair; }
+.ln-texto {
+  position: absolute; left: 96px; top: 50%; translate: 0 -52%; margin: 0;
+  font-size: clamp(3.4rem, 11vw, 8.8rem); font-weight: 600; line-height: .92; letter-spacing: -.05em;
+}
+.ln-linea { display: block; white-space: nowrap; }
+.ln-figura {
+  position: absolute; right: 7%; top: 50%; width: min(30vw, 360px); translate: 0 -50%;
+  fill: none; stroke: currentColor; stroke-width: 1.4;
+}
+.ln-pista { position: absolute; left: 96px; bottom: 2.2rem; margin: 0; color: var(--ln-suave); font-size: .95rem; z-index: 2; }
+/* en el teléfono, más margen para el texto y la figura detrás, abajo */
+@media (max-width: 700px) {
+  .ln-texto, .ln-pista { left: 24px; }
+  .ln-figura { right: -18%; top: 78%; width: 70vw; }
+}

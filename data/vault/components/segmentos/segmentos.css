@@ -1,0 +1,81 @@
+/* Segmentos · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --sg-fondo: #0a0a0a;
+  --sg-texto: #f4f4f4;
+  --sg-suave: rgba(255, 255, 255, .5);
+  --sg-linea: rgba(255, 255, 255, .1);
+  --sg-carril: rgba(255, 255, 255, .06);   /* el fondo del control */
+  --sg-pildora: #f4f4f4;                   /* lo que se desliza */
+  --sg-sobre: #0a0a0a;                     /* el texto encima de la píldora */
+  --sg-alto: 62px;
+}
+:root[data-tema="claro"] {
+  --sg-fondo: #eeeeee;
+  --sg-texto: #0a0a0a;
+  --sg-suave: rgba(0, 0, 0, .5);
+  --sg-linea: rgba(0, 0, 0, .1);
+  --sg-carril: rgba(0, 0, 0, .06);
+  --sg-pildora: #0a0a0a;
+  --sg-sobre: #f4f4f4;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--sg-fondo); color: var(--sg-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.sg-control {
+  position: relative; display: flex; height: var(--sg-alto); padding: 5px; border-radius: 99px;
+  background: var(--sg-carril); border: 1px solid var(--sg-linea); isolation: isolate;
+}
+.sg-opcion, .sg-tinta span {
+  flex: 1 1 0; display: grid; place-items: center; padding: 0 1.6rem; white-space: nowrap;
+  font: inherit; font-size: 1.1rem; font-weight: 500;
+}
+.sg-opcion {
+  border: 0; border-radius: 99px; background: none; color: var(--sg-suave); cursor: pointer;
+  transition: color .25s; -webkit-tap-highlight-color: transparent;
+}
+.sg-opcion:hover { color: var(--sg-texto); }
+.sg-opcion:focus-visible { outline: 2px solid var(--sg-suave); outline-offset: -4px; }
+/* la píldora, debajo de los textos; el JS la mueve con un resorte */
+.sg-pildora {
+  position: absolute; left: 0; top: 5px; bottom: 5px; width: 0; border-radius: 99px; z-index: -1;
+  background: var(--sg-pildora); box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .5); will-change: transform, width;
+}
+/* Una copia de los textos en el color de encima, recortada justo a la
+   píldora: así una letra a medio cubrir sale mitad de cada color. */
+.sg-tinta {
+  position: absolute; inset: 0; display: flex; padding: 5px; pointer-events: none; color: var(--sg-sobre);
+  clip-path: inset(0 100% 0 0 round 99px);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.sg-escena { height: 100%; display: grid; place-items: center; padding: 2rem; }
+.sg-tarjeta {
+  width: min(760px, 100%); padding: 2.4rem; border-radius: 30px;
+  border: 1px solid var(--sg-linea); background: rgba(127, 127, 127, .05);
+}
+.sg-dato { margin: 2.4rem 0 1.4rem; }
+.sg-cifra { margin: 0; font-size: 4.4rem; font-weight: 500; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums; }
+.sg-leyenda { margin: .6rem 0 0; color: var(--sg-suave); font-size: .95rem; }
+.sg-barras { display: flex; align-items: flex-end; gap: 10px; height: 170px; }
+.sg-barras i {
+  flex: 1; height: calc(var(--h, 0) * 100%); min-height: 6px; border-radius: 8px 8px 3px 3px; background: var(--sg-texto);
+  transition: height .8s cubic-bezier(.22, 1, .36, 1);
+}
+.sg-barras i:nth-child(odd) { opacity: .55; }
+.sg-barras i:nth-child(1) { transition-delay: 0ms; }   .sg-barras i:nth-child(2) { transition-delay: 25ms; }
+.sg-barras i:nth-child(3) { transition-delay: 50ms; }  .sg-barras i:nth-child(4) { transition-delay: 75ms; }
+.sg-barras i:nth-child(5) { transition-delay: 100ms; } .sg-barras i:nth-child(6) { transition-delay: 125ms; }
+.sg-barras i:nth-child(7) { transition-delay: 150ms; } .sg-barras i:nth-child(8) { transition-delay: 175ms; }
+.sg-barras i:nth-child(9) { transition-delay: 200ms; } .sg-barras i:nth-child(10) { transition-delay: 225ms; }
+.sg-barras i:nth-child(11) { transition-delay: 250ms; } .sg-barras i:nth-child(12) { transition-delay: 275ms; }
+
+@media (max-width: 560px) {
+  .sg-opcion, .sg-tinta span { padding: 0 .8rem; font-size: .95rem; }
+  .sg-cifra { font-size: 3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sg-barras i { transition: none; }
+}

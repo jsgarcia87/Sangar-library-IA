@@ -745,8 +745,8 @@ function initSuiteSwitching() {
       }
       if (navSangar) navSangar.classList.remove('is-active');
       if (navMoxen) navMoxen.classList.add('is-active');
-      if (window.location.hash !== '#moxen') {
-        history.replaceState(null, '', '#moxen');
+      if (window.location.hash !== '#vault' && window.location.hash !== '#moxen') {
+        history.replaceState(null, '', '#vault');
       }
     } else {
       secSangar.style.display = 'block';
@@ -761,7 +761,7 @@ function initSuiteSwitching() {
       }
       if (navSangar) navSangar.classList.add('is-active');
       if (navMoxen) navMoxen.classList.remove('is-active');
-      if (window.location.hash !== '#sangar' && window.location.hash === '#moxen') {
+      if (window.location.hash !== '#sangar' && (window.location.hash === '#vault' || window.location.hash === '#moxen')) {
         history.replaceState(null, '', '#sangar');
       }
     }
@@ -774,7 +774,7 @@ function initSuiteSwitching() {
   if (navMoxen) navMoxen.addEventListener('click', (e) => { e.preventDefault(); switchSuite('moxen'); });
 
   window.addEventListener('hashchange', () => {
-    if (window.location.hash === '#moxen') {
+    if (window.location.hash === '#vault' || window.location.hash === '#moxen') {
       switchSuite('moxen');
     } else if (window.location.hash === '#sangar') {
       switchSuite('sangar');
@@ -782,26 +782,29 @@ function initSuiteSwitching() {
   });
 
   // Initial hash check
-  if (window.location.hash === '#moxen') {
+  if (window.location.hash === '#vault' || window.location.hash === '#moxen') {
     switchSuite('moxen');
   }
 }
 
 /* ==========================================================================
-   MOXEN ANIMATIONS SUITE (880 Components)
+   SANGAR MOTION VAULT (880 Animaciones Locales)
    ========================================================================== */
 
 async function loadMoxenComponents() {
   try {
-    const res = await fetch('data/moxen-components.json');
+    let res = await fetch('data/vault-components.json');
+    if (!res.ok) {
+      res = await fetch('data/moxen-components.json');
+    }
     if (res.ok) {
       moxenData = await res.json();
     } else {
-      console.warn('No se pudo cargar data/moxen-components.json vía fetch');
+      console.warn('No se pudo cargar data/vault-components.json ni data/moxen-components.json');
       moxenData = [];
     }
   } catch (err) {
-    console.warn('Error al cargar data/moxen-components.json', err);
+    console.warn('Error al cargar vault components', err);
     moxenData = [];
   }
 
@@ -1084,10 +1087,7 @@ function openMoxenModal(item) {
   if (filesEl) {
     const filesCount = Array.isArray(item.files) ? item.files.length : 3;
     const fileNames = Array.isArray(item.files) ? item.files.join(', ') : 'index.html, css, js';
-    filesEl.innerHTML = `<i data-lucide="file-code"></i> ${filesCount} archivos (${escapeHtml(fileNames)})`;
-  }
-  if (extLinkEl) {
-    extLinkEl.href = `https://moxen.cl/recursos.html#${item.id}`;
+    filesEl.innerHTML = `<i data-lucide="file-code"></i> ${filesCount} archivos locales (${escapeHtml(fileNames)})`;
   }
   if (promptEl) {
     promptEl.textContent = item.promptAgent || '';
@@ -1132,9 +1132,9 @@ function registerMoxenInCmd() {
     scope: 'components',
     title: item.name,
     subtitle: `${item.categoryLabel || item.category} · ${item.tagline || item.description}`,
-    keywords: `${item.name} ${item.category} ${item.categoryLabel} ${item.tagline} moxen animacion`,
-    icon: 'play-circle',
-    badge: 'Moxen',
+    keywords: `${item.name} ${item.category} ${item.categoryLabel} ${item.tagline} sangar vault animacion microinteraccion`,
+    icon: 'film',
+    badge: 'Vault',
     action: () => {
       const btnMoxen = document.getElementById('tabSwitchMoxen');
       if (btnMoxen) btnMoxen.click();

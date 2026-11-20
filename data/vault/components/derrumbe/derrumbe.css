@@ -1,0 +1,45 @@
+/* Derrumbe · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --dr-fondo: #0a0a0a;
+  --dr-texto: #f4f4f4;
+  --dr-suave: rgba(255, 255, 255, .5);
+  --dr-linea: rgba(255, 255, 255, .16);
+}
+:root[data-tema="claro"] {
+  --dr-fondo: #eeeeee;
+  --dr-texto: #0a0a0a;
+  --dr-suave: rgba(0, 0, 0, .5);
+  --dr-linea: rgba(0, 0, 0, .16);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--dr-fondo); color: var(--dr-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* la caja es el mundo: sus bordes son el suelo y las paredes */
+[data-derrumbe-caja] { position: relative; overflow: hidden; }
+.dr-palabra { white-space: nowrap; }
+.dr-letra { display: inline-block; font-style: normal; cursor: pointer; }
+.dr-capa { position: absolute; inset: 0; pointer-events: none; }
+.dr-copia {
+  position: absolute; left: 0; top: 0; display: inline-block;
+  font-style: normal; will-change: transform; text-align: center;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.dr-escena { height: 100%; display: flex; flex-direction: column; }
+.dr-escena[data-derrumbe-caja] { padding: clamp(1.5rem, 6vw, 4.5rem); }
+.dr-etiqueta {
+  margin: 0 0 1rem; font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--dr-suave);
+}
+.dr-texto {
+  margin: 0; max-width: 22ch; font-size: clamp(2rem, 5.4vw, 3.6rem); font-weight: 500;
+  line-height: 1.12; letter-spacing: -.03em;
+}
+.dr-pie { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--dr-suave); font-size: .9rem; position: relative; z-index: 2; }
+.dr-boton {
+  padding: .55rem 1rem; border: 1px solid var(--dr-linea); border-radius: 99px; cursor: pointer;
+  background: none; color: var(--dr-texto); font: inherit; font-size: .85rem;
+}
+.dr-boton:hover { border-color: var(--dr-suave); }

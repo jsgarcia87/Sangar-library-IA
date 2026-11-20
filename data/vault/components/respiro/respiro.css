@@ -1,0 +1,36 @@
+/* Respiro · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --rs-fondo: #0a0a0a;
+  --rs-texto: #f4f4f4;
+  --rs-globo: rgba(255, 255, 255, .06);
+  --rs-linea: rgba(255, 255, 255, .1);
+  --rs-tam: 46px;            /* cada punto */
+  --rs-hueco: 38px;
+}
+:root[data-tema="claro"] {
+  --rs-fondo: #eeeeee;
+  --rs-texto: #0a0a0a;
+  --rs-globo: rgba(0, 0, 0, .05);
+  --rs-linea: rgba(0, 0, 0, .08);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rs-fondo); color: var(--rs-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* los puntos solo tienen forma: el tamaño, la altura y la luz los pone
+   respiro.js en cada cuadro, con su resorte */
+.rs-punto {
+  width: var(--rs-tam); height: var(--rs-tam); border-radius: 50%;
+  background: var(--rs-texto); opacity: .35; will-change: transform, opacity;
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.rs-escena { height: 100%; display: grid; place-items: center; }
+/* un globo de conversación, que es donde más se ven estos puntos */
+.rs-globo {
+  position: relative; display: flex; align-items: center; gap: var(--rs-hueco);
+  padding: 70px 86px; border-radius: 110px 110px 110px 26px;
+  background: var(--rs-globo); box-shadow: inset 0 0 0 1px var(--rs-linea);
+}

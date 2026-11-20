@@ -1,0 +1,66 @@
+/* Salto · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --sa-fondo: #0a0a0a;
+  --sa-texto: #f4f4f4;
+  --sa-suave: rgba(255, 255, 255, .45);
+  --sa-linea: rgba(255, 255, 255, .1);
+  --sa-barra: #161616;
+  --sa-bola: #f4f4f4;          /* el indicador que salta */
+  --sa-bola-r: 27px;
+}
+:root[data-tema="claro"] {
+  --sa-fondo: #eeeeee;
+  --sa-texto: #0a0a0a;
+  --sa-suave: rgba(0, 0, 0, .45);
+  --sa-linea: rgba(0, 0, 0, .08);
+  --sa-barra: #ffffff;
+  --sa-bola: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--sa-fondo); color: var(--sa-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.sa-barra {
+  position: relative; display: flex;
+  isolation: isolate;                 /* los íconos se mezclan solo con la barra y la bola */
+  padding: 0 10px; border: 1px solid var(--sa-linea); border-radius: 34px; background: var(--sa-barra);
+}
+/* la bola va detrás de los íconos; sale por arriba de la barra al saltar */
+.sa-bola {
+  position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none;
+  width: calc(var(--sa-bola-r) * 2); height: calc(var(--sa-bola-r) * 2); border-radius: 50%;
+  background: var(--sa-bola); will-change: transform;
+}
+.sa-pestana {
+  /* sin z-index: si la pestaña formara su propio contexto, el ícono no
+     podría mezclarse con la bola que pasa por detrás */
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  width: 116px; padding: 22px 0 16px; border: 0; background: none; cursor: pointer;
+  color: var(--sa-suave); font: 500 .9rem/1 "General Sans", system-ui, sans-serif; letter-spacing: .01em;
+  transition: color .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.sa-pestana:focus-visible { outline: none; }
+.sa-pestana:focus-visible span { text-decoration: underline; text-underline-offset: 4px; }
+.sa-pestana.is-activa { color: var(--sa-texto); }
+/* el ícono es blanco y se mezcla por diferencia: sobre la bola, se invierte */
+.sa-icono {
+  width: 30px; height: 30px; color: #fff; mix-blend-mode: difference;
+  transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+.sa-icono path, .sa-icono circle, .sa-icono rect { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.sa-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3rem; padding: 2rem;
+}
+.sa-pista { margin: 0; color: var(--sa-suave); font-size: .95rem; }
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  .sa-barra { padding: 0 4px; }
+  .sa-pestana { width: calc((100vw - 3rem) / 5); font-size: .75rem; }
+}

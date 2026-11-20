@@ -1,0 +1,51 @@
+/* Máquina · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --mq-fondo: #0a0a0a;
+  --mq-texto: #f4f4f4;
+  --mq-suave: rgba(255, 255, 255, .42);
+  --mq-pista: rgba(255, 255, 255, .5);
+  --mq-cursor: #f4f4f4;
+}
+:root[data-tema="claro"] {
+  --mq-fondo: #eeeeee;
+  --mq-texto: #0a0a0a;
+  --mq-suave: rgba(0, 0, 0, .4);
+  --mq-pista: rgba(0, 0, 0, .5);
+  --mq-cursor: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--mq-fondo); color: var(--mq-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.mq-linea { white-space: pre; }
+/* cada letra nueva cae medio cuerpo y aparece: la tecla «golpea» */
+.mq-letra { display: inline-block; white-space: pre; animation: mq-golpe .16s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes mq-golpe { from { opacity: 0; transform: translateY(-.14em); } }
+
+/* para borrar de una vez: la palabra se selecciona, como con el teclado */
+.mq-texto { border-radius: .08em; }
+.mq-letra.is-elegida { background: var(--mq-texto); color: var(--mq-fondo); }
+
+.mq-cursor {
+  display: inline-block; width: .065em; height: .86em; margin-left: .05em; vertical-align: -.06em;
+  border-radius: .03em; background: var(--mq-cursor);
+  animation: mq-parpadeo 1.05s ease-in-out infinite;
+}
+/* escribiendo no parpadea: un cursor que late mientras se teclea distrae */
+.mq-linea.is-escribe .mq-cursor { animation: none; opacity: 1; }
+@keyframes mq-parpadeo { 0%, 42% { opacity: 1; } 55%, 92% { opacity: 0; } 100% { opacity: 1; } }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.mq-escena {
+  min-height: 100%; display: flex; flex-direction: column; justify-content: center;
+  gap: 2.4rem; padding: 2rem clamp(1.5rem, 11vw, 10rem);
+}
+.mq-titulo {
+  margin: 0; display: flex; flex-direction: column; gap: .06em;
+  font-size: clamp(2.6rem, 9.6vw, 9rem); font-weight: 600; line-height: 1; letter-spacing: -.045em;
+}
+.mq-fija { color: var(--mq-suave); }
+.mq-pista { margin: 0; color: var(--mq-pista); font-size: .95rem; }
+@media (prefers-reduced-motion: reduce) { .mq-letra { animation: none; } }

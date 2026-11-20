@@ -1,0 +1,26 @@
+/* Esquiva · Moxen — los estilos del efecto y de la demostración. */
+:root { --es-fondo: #0a0a0a; --es-texto: #f4f4f4; --es-suave: rgba(255, 255, 255, .5); }
+:root[data-tema="claro"] { --es-fondo: #eeeeee; --es-texto: #0a0a0a; --es-suave: rgba(0, 0, 0, .5); }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--es-fondo); color: var(--es-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.es-palabra { white-space: nowrap; }
+.es-letra {
+  display: inline-block; font-style: normal;
+  /* la vuelta es elástica: se pasa un poco y se asienta */
+  transition: transform .28s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.es-escena {
+  height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;
+  padding: clamp(1.5rem, 6vw, 5rem);
+}
+.es-texto {
+  margin: 0; max-width: 14ch; font-size: clamp(2.4rem, 8vw, 7.5rem); font-weight: 500;
+  line-height: 1.05; letter-spacing: -.04em;
+}
+.es-pista { margin: 0; color: var(--es-suave); font-size: .95rem; }

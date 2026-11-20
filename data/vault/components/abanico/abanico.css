@@ -1,0 +1,121 @@
+/* Abanico · Moxen — los estilos del efecto y de la demostración. */
+@property --ab-abre { syntax: "<number>"; inherits: false; initial-value: 0; }
+
+:root {
+  --ab-fondo: #0a0a0a;
+  --ab-texto: #f4f4f4;
+  --ab-suave: rgba(255, 255, 255, .5);
+  --ab-linea: rgba(255, 255, 255, .18);
+  --ab-cara: #f4f4f4;                      /* el botón principal */
+  --ab-letra: #0a0a0a;
+  --ab-chapa: #161616;                     /* las opciones */
+  --ab-pliegue-a: rgba(255, 255, 255, .075);
+  --ab-pliegue-b: rgba(255, 255, 255, .03);
+  --ab-ok: #1f9d55;
+  --ab-radio: 230px;                       /* el abanico abierto */
+  --ab-hueco: 70px;                        /* el centro vacío, alrededor del botón */
+}
+:root[data-tema="claro"] {
+  --ab-fondo: #eeeeee;
+  --ab-texto: #0a0a0a;
+  --ab-suave: rgba(0, 0, 0, .5);
+  --ab-linea: rgba(0, 0, 0, .16);
+  --ab-cara: #0a0a0a;
+  --ab-letra: #f4f4f4;
+  --ab-chapa: #ffffff;
+  --ab-pliegue-a: rgba(0, 0, 0, .07);
+  --ab-pliegue-b: rgba(0, 0, 0, .025);
+  --ab-ok: #4ade80;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ab-fondo); color: var(--ab-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ab-raiz { position: relative; display: inline-grid; place-items: center; }
+.ab-raiz > * { grid-area: 1 / 1; }
+
+/* la tela del abanico: pliegues alternos, recortados en media corona,
+   y un barrido que la abre de izquierda a derecha */
+.ab-tela {
+  width: calc(var(--ab-radio) * 2); height: calc(var(--ab-radio) * 2); border-radius: 50%; pointer-events: none;
+  background:
+    radial-gradient(circle, transparent calc(var(--ab-radio) - 2px), var(--ab-linea) calc(var(--ab-radio) - 1.5px)),
+    repeating-conic-gradient(from 270deg, var(--ab-pliegue-a) 0deg 9deg, var(--ab-pliegue-b) 9deg 18deg);
+  -webkit-mask:
+    radial-gradient(circle, transparent calc(var(--ab-hueco) - 1px), #000 var(--ab-hueco)),
+    conic-gradient(from 270deg, #000 calc(var(--ab-abre) * 180deg), transparent 0);
+  mask:
+    radial-gradient(circle, transparent calc(var(--ab-hueco) - 1px), #000 var(--ab-hueco)),
+    conic-gradient(from 270deg, #000 calc(var(--ab-abre) * 180deg), transparent 0);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  transition: --ab-abre .5s cubic-bezier(.65, 0, .35, 1);
+}
+.is-abierto .ab-tela { --ab-abre: 1; transition-duration: .62s; transition-timing-function: cubic-bezier(.22, 1, .36, 1); }
+
+/* las opciones salen del centro a su sitio sobre la tela, una tras otra */
+.ab-opcion {
+  position: relative; z-index: 1; display: grid; place-items: center;
+  width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--ab-linea); padding: 0; cursor: pointer;
+  background: var(--ab-chapa); color: var(--ab-texto);
+  opacity: 0; pointer-events: none;
+  transform: translate(0, 0) scale(.3) rotate(-120deg);
+  transition: transform .4s cubic-bezier(.5, 0, .75, 0), opacity .25s, background-color .2s, color .2s;
+  transition-delay: calc((var(--ab-n) - var(--ab-i) - 1) * 35ms);
+  -webkit-tap-highlight-color: transparent;
+}
+.is-abierto .ab-opcion {
+  opacity: 1; pointer-events: auto;
+  transform: translate(var(--ab-x), var(--ab-y)) scale(1) rotate(0);
+  transition: transform .6s cubic-bezier(.34, 1.5, .55, 1), opacity .2s, background-color .2s, color .2s;
+  transition-delay: calc(var(--ab-i) * 55ms + 60ms);
+}
+.ab-opcion:hover, .ab-opcion:focus-visible { background: var(--ab-cara); color: var(--ab-letra); outline: none; transition-delay: 0s; }
+.ab-opcion svg { width: 26px; height: 26px; }
+/* el nombre de cada opción, al pasar por encima */
+.ab-opcion::after {
+  content: attr(aria-label); position: absolute; bottom: calc(100% + 10px); left: 50%;
+  padding: .35rem .6rem; border-radius: 8px; background: var(--ab-cara); color: var(--ab-letra);
+  font: 500 .85rem/1 "General Sans", system-ui, sans-serif; white-space: nowrap;
+  opacity: 0; transform: translate(-50%, 4px); transition: opacity .2s, transform .25s; pointer-events: none;
+}
+.ab-opcion:hover::after, .ab-opcion:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+
+.ab-boton {
+  position: relative; z-index: 2; display: grid; place-items: center;
+  width: 108px; height: 108px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: var(--ab-cara); color: var(--ab-letra);
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+.ab-boton:active { transform: scale(.94); }
+.ab-boton:focus-visible { outline: 2px solid var(--ab-texto); outline-offset: 5px; }
+.ab-boton svg { grid-area: 1 / 1; width: 40px; height: 40px; transition: transform .45s cubic-bezier(.34, 1.4, .55, 1), opacity .25s; }
+.ab-cierra, .ab-hecho { opacity: 0; transform: rotate(-90deg) scale(.6); }
+.is-abierto .ab-compartir { opacity: 0; transform: rotate(90deg) scale(.6); }
+.is-abierto .ab-cierra { opacity: 1; transform: none; }
+.is-hecho .ab-compartir { opacity: 0; transform: scale(.6); }
+.is-hecho .ab-hecho { opacity: 1; transform: none; }
+.ab-raiz .ab-hecho path { stroke: var(--ab-ok); stroke-width: 2.6; }
+
+.ab-raiz path, .ab-raiz circle { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ab-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0; padding: 8rem 2rem 0;
+}
+.ab-raiz { margin-bottom: calc(var(--ab-radio) * -1 + 54px); }   /* la mitad de abajo del abanico no ocupa */
+.ab-pista { margin: 3rem 0 0; color: var(--ab-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ab-opcion, .is-abierto .ab-opcion, .ab-tela, .is-abierto .ab-tela { transition-duration: .01s; transition-delay: 0s; }
+}
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  :root { --ab-radio: 178px; --ab-hueco: 60px; }
+  .ab-boton { width: 92px; height: 92px; }
+  .ab-opcion { width: 54px; height: 54px; }
+}

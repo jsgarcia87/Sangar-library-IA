@@ -1,0 +1,104 @@
+/* Acordeón · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ac-fondo: #0a0a0a;
+  --ac-texto: #f4f4f4;
+  --ac-suave: rgba(255, 255, 255, .5);
+  --ac-linea: rgba(255, 255, 255, .12);
+  --ac-relleno: rgba(255, 255, 255, .045);
+  --ac-curva: cubic-bezier(.22, 1, .36, 1);
+  --ac-dura: .62s;
+}
+:root[data-tema="claro"] {
+  --ac-fondo: #eeeeee;
+  --ac-texto: #0a0a0a;
+  --ac-suave: rgba(0, 0, 0, .5);
+  --ac-linea: rgba(0, 0, 0, .12);
+  --ac-relleno: rgba(0, 0, 0, .04);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ac-fondo); color: var(--ac-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ac-panel {
+  border: 1px solid var(--ac-linea); border-radius: 22px;
+  transition: background-color var(--ac-dura) var(--ac-curva), border-color var(--ac-dura) var(--ac-curva);
+}
+.ac-panel[data-abierto] { background: var(--ac-relleno); border-color: transparent; }
+
+/* La altura se anima con la rejilla (0fr → 1fr): así el panel llega
+   justo a la altura de su contenido, sea cual sea, sin medir nada. */
+.ac-cuerpo {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows var(--ac-dura) var(--ac-curva);
+}
+.ac-panel[data-abierto] .ac-cuerpo { grid-template-rows: 1fr; }
+.ac-interior { min-height: 0; overflow: hidden; }
+
+/* el contenido entra un instante después de que se abra el hueco */
+.ac-interior > * {
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.ac-panel[data-abierto] .ac-interior > * {
+  opacity: 1; transform: none;
+  transition: opacity .5s ease .14s, transform .7s var(--ac-curva) .14s;
+}
+.ac-panel[data-abierto] .ac-interior > * + * { transition-delay: .22s; }
+
+/* el signo: la barra vertical gira hasta tumbarse y el + queda en − */
+.ac-signo {
+  position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--ac-linea);
+  transition: background-color var(--ac-dura) var(--ac-curva), border-color var(--ac-dura) var(--ac-curva);
+}
+.ac-signo::before, .ac-signo::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 1.5px; margin: -.75px 0 0 -7px;
+  background: var(--ac-texto); border-radius: 2px;
+  transition: transform var(--ac-dura) var(--ac-curva), background-color var(--ac-dura) var(--ac-curva);
+}
+.ac-signo::after { transform: rotate(90deg); }
+.ac-panel[data-abierto] .ac-signo { background: var(--ac-texto); border-color: var(--ac-texto); }
+.ac-panel[data-abierto] .ac-signo::before { background: var(--ac-fondo); transform: rotate(180deg); }
+.ac-panel[data-abierto] .ac-signo::after { background: var(--ac-fondo); transform: rotate(180deg); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ac-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.6rem; padding: 3rem 1.5rem;
+}
+.ac-lista { width: min(100%, 760px); display: flex; flex-direction: column; gap: 10px; }
+.ac-cabeza { margin: 0; font: inherit; }
+.ac-boton {
+  width: 100%; display: flex; align-items: center; gap: 1.4rem; padding: 18px 18px 18px 28px;
+  border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: 22px;
+}
+.ac-boton:focus-visible { outline: 2px solid var(--ac-texto); outline-offset: 3px; }
+.ac-num { width: 2.2rem; font-size: .85rem; font-weight: 500; letter-spacing: .08em; color: var(--ac-suave); font-variant-numeric: tabular-nums; }
+.ac-titulo {
+  flex: 1; font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 500; letter-spacing: -.03em; color: var(--ac-suave);
+  transition: color var(--ac-dura) var(--ac-curva), transform var(--ac-dura) var(--ac-curva);
+}
+.ac-panel[data-abierto] .ac-titulo { color: var(--ac-texto); }
+.ac-boton:hover .ac-titulo { color: var(--ac-texto); transform: translateX(6px); }
+.ac-interior p {
+  margin: 0; padding: 0 28px 0 calc(28px + 2.2rem + 1.4rem); max-width: 40em;
+  font-size: 1.08rem; line-height: 1.55; color: var(--ac-suave);
+}
+.ac-etiquetas {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 0; list-style: none;
+  padding: 18px 28px 26px calc(28px + 2.2rem + 1.4rem);
+}
+.ac-etiquetas li {
+  padding: .38rem .8rem; border: 1px solid var(--ac-linea); border-radius: 99px; font-size: .82rem; font-weight: 500;
+}
+.ac-pista { margin: 0; font-size: .9rem; color: var(--ac-suave); }
+
+@media (max-width: 560px) {
+  .ac-boton { padding-left: 18px; gap: .9rem; }
+  .ac-interior p, .ac-etiquetas { padding-left: 18px; padding-right: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ac-cuerpo, .ac-interior > *, .ac-signo, .ac-signo::before, .ac-signo::after, .ac-titulo { transition: none !important; }
+}

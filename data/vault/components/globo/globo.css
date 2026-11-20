@@ -1,0 +1,74 @@
+/* Globo · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --gl-fondo: #0a0a0a;
+  --gl-texto: #f4f4f4;
+  --gl-suave: rgba(255, 255, 255, .5);
+  --gl-barra: #151515;
+  --gl-borde: rgba(255, 255, 255, .09);
+  --gl-hover: rgba(255, 255, 255, .07);
+  --gl-globo: #f4f4f4;          /* el globo va en negativo: claro sobre oscuro */
+  --gl-globo-texto: #0a0a0a;
+}
+:root[data-tema="claro"] {
+  --gl-fondo: #eeeeee;
+  --gl-texto: #0a0a0a;
+  --gl-suave: rgba(0, 0, 0, .5);
+  --gl-barra: #ffffff;
+  --gl-borde: rgba(0, 0, 0, .08);
+  --gl-hover: rgba(0, 0, 0, .06);
+  --gl-globo: #0a0a0a;
+  --gl-globo-texto: #f4f4f4;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--gl-fondo); color: var(--gl-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el globo cuelga de un punto sin tamaño, la punta de la cola: girar y
+   escalar desde ahí es lo que lo hace balancearse como un globo atado */
+.gl-globo {
+  position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 50; pointer-events: none;
+  transform-origin: 0 0; opacity: 0; will-change: transform, opacity;
+}
+.gl-caja {
+  position: absolute; left: 0; bottom: 8px; height: 48px; translate: -50% 0;
+  border-radius: 13px; background: var(--gl-globo); color: var(--gl-globo-texto); overflow: hidden;
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .5);
+}
+.gl-texto {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 9px;
+  white-space: nowrap; font-size: 1.08rem; font-weight: 500; letter-spacing: -.01em;
+}
+.gl-texto kbd, .gl-mide kbd { font: inherit; font-size: .88rem; opacity: .5; }
+.gl-cola {
+  position: absolute; left: -8px; bottom: 0; width: 16px; height: 9px; background: var(--gl-globo);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+/* una copia invisible para medir el ancho del texto nuevo */
+.gl-mide { position: absolute; visibility: hidden; white-space: nowrap; font-size: 1.08rem; font-weight: 500; letter-spacing: -.01em; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.gl-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.2rem; padding: 2rem 1rem;
+}
+.gl-barra {
+  display: flex; align-items: center; gap: 6px; padding: 11px; margin-top: 4rem;
+  border-radius: 28px; background: var(--gl-barra); border: 1px solid var(--gl-borde);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+}
+.gl-barra button {
+  width: 78px; height: 78px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 16px;
+  background: none; color: var(--gl-texto); cursor: pointer; transition: background .2s;
+}
+.gl-barra button:hover, .gl-barra button:focus-visible { background: var(--gl-hover); outline: none; }
+.gl-barra svg { width: 31px; height: 31px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.gl-separa { width: 1px; height: 34px; margin: 0 6px; background: var(--gl-borde); }
+.gl-pista { margin: 0; color: var(--gl-suave); font-size: .95rem; text-align: center; }
+@media (max-width: 640px) {
+  .gl-barra { gap: 2px; padding: 6px; border-radius: 20px; }
+  .gl-barra button { width: 40px; height: 40px; border-radius: 12px; }
+  .gl-barra svg { width: 21px; height: 21px; }
+  .gl-separa { margin: 0 3px; height: 24px; }
+}

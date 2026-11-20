@@ -1,0 +1,89 @@
+/* Hamburguesa · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --hb-fondo: #0a0a0a;
+  --hb-texto: #f4f4f4;
+  --hb-suave: rgba(255, 255, 255, .45);
+  --hb-linea-borde: rgba(255, 255, 255, .14);
+  --hb-caja: #121212;
+  --hb-trazo: #f4f4f4;        /* el color de las tres líneas */
+  --hb-largo: 54px;
+  --hb-grueso: 4px;
+  --hb-hueco: 15px;           /* distancia entre líneas */
+}
+:root[data-tema="claro"] {
+  --hb-fondo: #eeeeee;
+  --hb-texto: #0a0a0a;
+  --hb-suave: rgba(0, 0, 0, .45);
+  --hb-linea-borde: rgba(0, 0, 0, .12);
+  --hb-caja: #ffffff;
+  --hb-trazo: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--hb-fondo); color: var(--hb-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.hb-boton {
+  position: relative; display: grid; place-items: center; width: 150px; height: 150px; padding: 0;
+  border: 1px solid var(--hb-linea-borde); border-radius: 34px; background: var(--hb-caja); cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.hb-boton:focus-visible { outline: 2px solid var(--hb-texto); outline-offset: 5px; }
+.hb-linea, .hb-eje { grid-area: 1 / 1; }
+.hb-linea {
+  display: block; width: var(--hb-largo); height: var(--hb-grueso); border-radius: 4px; background: var(--hb-trazo);
+}
+/* «translate», «rotate» y «scale» por separado: cada uno con su propio tiempo */
+.hb-linea:nth-child(1) { translate: 0 calc(var(--hb-hueco) * -1); }
+.hb-linea:nth-child(3) { translate: 0 var(--hb-hueco); }
+
+/* 1 · Cruce — al abrir: primero se juntan, luego giran; al cerrar, al revés */
+.hb-cruce .hb-linea { transition: translate .22s cubic-bezier(.5, 0, .2, 1) .2s, rotate .22s cubic-bezier(.5, 0, .2, 1), scale .2s .2s; }
+.hb-cruce.is-abierta .hb-linea { transition: translate .22s cubic-bezier(.5, 0, .2, 1), rotate .42s cubic-bezier(.34, 1.56, .64, 1) .2s, scale .2s; }
+.hb-cruce.is-abierta .hb-linea:nth-child(1) { translate: 0 0; rotate: 45deg; }
+.hb-cruce.is-abierta .hb-linea:nth-child(2) { scale: 0 1; }
+.hb-cruce.is-abierta .hb-linea:nth-child(3) { translate: 0 0; rotate: -45deg; }
+
+/* 2 · Giro — el eje da media vuelta y la línea de en medio sale despedida */
+.hb-eje { display: grid; place-items: center; transition: rotate .6s cubic-bezier(.65, 0, .35, 1); }
+.hb-giro .hb-linea { grid-area: 1 / 1; transition: translate .45s cubic-bezier(.65, 0, .35, 1), rotate .45s cubic-bezier(.65, 0, .35, 1), opacity .3s, scale .45s; }
+.hb-giro.is-abierta .hb-eje { rotate: 180deg; }
+.hb-giro.is-abierta .hb-linea:nth-child(1) { translate: 0 0; rotate: 45deg; }
+.hb-giro.is-abierta .hb-linea:nth-child(2) { translate: 36px 0; scale: .2 1; opacity: 0; }
+.hb-giro.is-abierta .hb-linea:nth-child(3) { translate: 0 0; rotate: -45deg; }
+
+/* 3 · Trazo — un tramo visible que corre por el camino hasta la diagonal */
+.hb-trazo svg { width: 118px; height: 118px; overflow: visible; }
+.hb-trazo path {
+  fill: none; stroke: var(--hb-trazo); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 45 var(--hb-l, 300); stroke-dashoffset: 0;
+  transition: stroke-dashoffset .62s cubic-bezier(.65, 0, .3, 1), stroke-dasharray .4s;
+}
+.hb-trazo.is-abierta path { stroke-dashoffset: calc(45px - var(--hb-l, 300px)); }
+/* la de en medio se recoge hacia su centro (y se apaga: con punta redonda,
+   un tramo de largo cero todavía pinta un punto) */
+.hb-trazo path:nth-child(2) { stroke-dasharray: 45 300; transition: stroke-dasharray .35s cubic-bezier(.65, 0, .35, 1), stroke-dashoffset .35s cubic-bezier(.65, 0, .35, 1), opacity .2s .15s; }
+.hb-trazo.is-abierta path:nth-child(2) { stroke-dasharray: 0 300; stroke-dashoffset: -22.5; opacity: 0; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.hb-escena {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3.4rem; padding: 2rem;
+}
+.hb-fila { display: flex; gap: 4.5rem; }
+.hb-muestra { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.hb-muestra figcaption { color: var(--hb-suave); font-size: .95rem; letter-spacing: .02em; }
+.hb-pista { margin: 0; color: var(--hb-suave); font-size: .95rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hb-boton *, .hb-boton { transition-duration: .01s !important; transition-delay: 0s !important; }
+}
+
+/* en el teléfono: lo mismo, a su tamaño */
+@media (max-width: 700px) {
+  .hb-fila { gap: 1.2rem; }
+  .hb-boton { width: 100px; height: 100px; border-radius: 26px; }
+  :root { --hb-largo: 40px; --hb-hueco: 11px; --hb-grueso: 3.5px; }
+  .hb-trazo svg { width: 88px; height: 88px; }
+}

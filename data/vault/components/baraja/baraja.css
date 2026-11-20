@@ -1,0 +1,111 @@
+/* Baraja · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --ba-fondo: #0a0a0a;
+  --ba-texto: #f4f4f4;
+  --ba-suave: rgba(255, 255, 255, .5);
+  --ba-oscura: #161616;          /* las caras oscuras */
+  --ba-clara: #ececec;           /* las caras claras */
+  --ba-borde: rgba(255, 255, 255, .1);
+  --ba-sombra: 0 30px 60px -25px rgba(0, 0, 0, .9);
+  --ba-ancho: 250px;
+  --ba-alto: 345px;
+  --ba-pivote: 200%;             /* el eje del abanico, bajo las cartas */
+  --ba-giro: 1;                  /* cuánto se abre (1 = los grados que pide el JS) */
+  --ba-abre: cubic-bezier(.34, 1.32, .5, 1);   /* con un pequeño rebote */
+  --ba-cierra: cubic-bezier(.22, 1, .36, 1);
+}
+:root[data-tema="claro"] {
+  --ba-fondo: #eeeeee;
+  --ba-texto: #0a0a0a;
+  --ba-suave: rgba(0, 0, 0, .5);
+  --ba-oscura: #141414;
+  --ba-clara: #fafafa;
+  --ba-borde: rgba(0, 0, 0, .1);
+  --ba-sombra: 0 30px 50px -28px rgba(0, 0, 0, .45);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ba-fondo); color: var(--ba-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.ba-baraja { position: relative; }
+/* Todas las cartas comparten el centro del mazo. El giro es alrededor de
+   un eje muy por debajo (--ba-pivote): al girar, se reparten en arco. */
+.ba-carta {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--ba-ancho); height: var(--ba-alto);
+  margin: calc(var(--ba-alto) / -2) 0 0 calc(var(--ba-ancho) / -2);
+  transform-origin: 50% var(--ba-pivote);
+  /* en el mazo: un desorden leve, como dejado sobre la mesa */
+  transform: translate(var(--x, 0px), var(--y, 0px)) rotate(var(--giro, 0deg));
+  transition: transform .6s var(--ba-cierra) var(--retraso, 0s);
+}
+.ba-baraja[data-abierta] .ba-carta {
+  transform: rotate(calc((var(--abanico, 0deg) + var(--aparte, 0deg)) * var(--ba-giro)));
+  transition: transform .8s var(--ba-abre) var(--retraso, 0s);
+}
+/* la cara sube por su propio eje, sin retraso, al pasar por encima */
+.ba-cara {
+  position: absolute; inset: 0; border-radius: 20px; overflow: hidden;
+  box-shadow: var(--ba-sombra);
+  transition: transform .45s var(--ba-cierra);
+}
+.ba-baraja[data-abierta] .ba-carta[data-foco] { z-index: 10; }
+.ba-baraja[data-abierta] .ba-carta[data-foco] .ba-cara { transform: translateY(-34px) scale(1.04); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.ba-escena {
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  overflow: hidden;
+}
+.ba-baraja { width: min(100vw, 940px); height: 560px; }
+.ba-carta { display: block; color: inherit; text-decoration: none; outline: none; }
+.ba-carta:focus-visible .ba-cara { outline: 2px solid var(--ba-texto); outline-offset: 4px; }
+.ba-cara--oscura { background: var(--ba-oscura); color: #f4f4f4; border: 1px solid rgba(255, 255, 255, .08); }
+.ba-cara--clara { background: var(--ba-clara); color: #0a0a0a; border: 1px solid rgba(0, 0, 0, .06); }
+.ba-num, .ba-nombre { position: absolute; left: 20px; font-weight: 500; }
+.ba-num { top: 18px; font-size: .78rem; letter-spacing: .1em; opacity: .55; }
+.ba-nombre { bottom: 18px; font-size: 1.15rem; letter-spacing: -.02em; }
+
+/* cinco dibujos hechos solo con degradados */
+.ba-arte { position: absolute; inset: 0; }
+.ba-arte--orbitas {
+  background: repeating-radial-gradient(circle at 20% 105%, transparent 0 17px, rgba(255, 255, 255, .5) 17px 18px);
+  -webkit-mask: linear-gradient(to top, #000 30%, transparent 85%); mask: linear-gradient(to top, #000 30%, transparent 85%);
+}
+.ba-arte--trama {
+  background: repeating-linear-gradient(-55deg, #0a0a0a 0 1.5px, transparent 1.5px 13px);
+  -webkit-mask: radial-gradient(circle at 70% 40%, #000 0 35%, transparent 62%); mask: radial-gradient(circle at 70% 40%, #000 0 35%, transparent 62%);
+}
+.ba-arte--puntos {
+  background: radial-gradient(circle, rgba(255, 255, 255, .75) 1.6px, transparent 2.2px) 0 0 / 18px 18px;
+  -webkit-mask: linear-gradient(135deg, #000 10%, transparent 70%); mask: linear-gradient(135deg, #000 10%, transparent 70%);
+  inset: 50px 20px 60px;
+}
+.ba-arte--arcos {
+  background:
+    radial-gradient(circle at 50% 100%, #0a0a0a 0 32%, transparent 32.4%),
+    radial-gradient(circle at 50% 100%, transparent 0 46%, #0a0a0a 46.4% 47.6%, transparent 48%),
+    radial-gradient(circle at 50% 100%, transparent 0 61%, #0a0a0a 61.4% 62.4%, transparent 62.8%);
+  inset: 0 0 64px;
+}
+.ba-arte--cifra {
+  display: grid; place-items: center; padding-bottom: 20px;
+  font-size: 260px; font-weight: 600; line-height: 1; letter-spacing: -.06em;
+  background: linear-gradient(#f4f4f4, rgba(244, 244, 244, .15)); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.ba-pista { margin: 0; font-size: .9rem; color: var(--ba-suave); }
+
+/* en el teléfono, cartas más chicas: el abanico cabe a lo ancho */
+@media (max-width: 640px) {
+  :root { --ba-ancho: 120px; --ba-alto: 166px; --ba-giro: .75; }
+  .ba-baraja { height: 380px; }
+  .ba-cara { border-radius: 14px; }
+  .ba-nombre { font-size: .95rem; bottom: 12px; left: 14px; }
+  .ba-num { top: 12px; left: 14px; }
+  .ba-arte--cifra { font-size: 136px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ba-carta, .ba-cara { transition: none !important; }
+}

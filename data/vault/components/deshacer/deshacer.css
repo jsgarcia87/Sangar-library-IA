@@ -1,0 +1,94 @@
+/* Deshacer · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --dh-fondo: #0a0a0a;
+  --dh-texto: #f4f4f4;
+  --dh-suave: rgba(255, 255, 255, .5);
+  --dh-tarjeta: #141414;
+  --dh-linea: rgba(255, 255, 255, .08);
+  --dh-chip: rgba(255, 255, 255, .07);
+  /* el aviso va en negativo para que se vea por encima de todo */
+  --dh-aviso: #f4f4f4;
+  --dh-aviso-texto: #0a0a0a;
+  --dh-aviso-suave: rgba(0, 0, 0, .14);
+  --dh-ok: #18a34a;
+}
+:root[data-tema="claro"] {
+  --dh-fondo: #eeeeee;
+  --dh-texto: #0a0a0a;
+  --dh-suave: rgba(0, 0, 0, .5);
+  --dh-tarjeta: #ffffff;
+  --dh-linea: rgba(0, 0, 0, .07);
+  --dh-chip: rgba(0, 0, 0, .05);
+  --dh-aviso: #0a0a0a;
+  --dh-aviso-texto: #f4f4f4;
+  --dh-aviso-suave: rgba(255, 255, 255, .2);
+  --dh-ok: #3ccf6e;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--dh-fondo); color: var(--dh-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el aviso siempre ocupa su sitio (oculto): así se mide y se anima sin saltos */
+.dh-aviso {
+  position: fixed; left: 50%; bottom: 44px; translate: -50% 0; z-index: 30;
+  display: flex; align-items: center; gap: 16px; padding: 10px 10px 10px 12px; border-radius: 22px;
+  background: var(--dh-aviso); color: var(--dh-aviso-texto); white-space: nowrap;
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .6); visibility: hidden;
+}
+.dh-aviso.is-visible { visibility: visible; }
+/* el anillo se vacía con el tiempo; la cifra rueda hacia abajo */
+.dh-anillo { position: relative; width: 46px; height: 46px; flex: none; }
+.dh-aro { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.dh-anillo circle { fill: none; stroke-width: 3; }
+.dh-anillo .dh-pista-anillo { stroke: var(--dh-aviso-suave); }
+.dh-anillo .dh-resto { stroke: currentColor; stroke-linecap: round; }
+.dh-cifra {
+  position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden;
+  font-size: 1.1rem; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.dh-cifra span { grid-area: 1 / 1; }
+.dh-hecho { position: absolute; inset: 8px; color: var(--dh-ok); opacity: 0; }
+.dh-hecho path { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; }
+.dh-mensaje { font-size: 1.05rem; font-weight: 500; letter-spacing: -.01em; padding-right: 6px; }
+.dh-deshaz {
+  padding: .75rem 1.2rem; border: 0; border-radius: 14px; cursor: pointer;
+  background: var(--dh-aviso-texto); color: var(--dh-aviso); font: 500 1rem "General Sans", system-ui, sans-serif;
+  transition: transform .2s cubic-bezier(.22, 1, .36, 1), opacity .25s;
+}
+.dh-deshaz:active { transform: scale(.95); }
+.dh-aviso.is-hecho .dh-deshaz { display: none; }
+.dh-aviso.is-hecho { overflow: hidden; padding-right: 22px; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.dh-escena {
+  /* arriba y no centrada: al plegarse una fila, la tarjeta no se mueve */
+  min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  gap: 1.6rem; padding: max(2rem, 14vh) 1rem 8rem;
+}
+.dh-tarjeta {
+  width: min(560px, 100%); padding: 10px; border-radius: 26px;
+  background: var(--dh-tarjeta); border: 1px solid var(--dh-linea);
+}
+.dh-cabeza { display: flex; align-items: baseline; justify-content: space-between; padding: 16px 18px 12px; }
+.dh-cabeza h1 { margin: 0; font-size: 1.5rem; font-weight: 600; letter-spacing: -.03em; }
+.dh-cabeza span { color: var(--dh-suave); font-size: .9rem; }
+.dh-lista { list-style: none; margin: 0; padding: 0; }
+.dh-fila {
+  display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 16px;
+  height: 78px; padding: 0 10px 0 14px; border-top: 1px solid var(--dh-linea); overflow: hidden;
+}
+.dh-tipo {
+  width: 52px; height: 52px; display: grid; place-items: center; border-radius: 14px;
+  background: var(--dh-chip); font-size: .74rem; font-weight: 600; letter-spacing: .06em;
+}
+.dh-fila strong { display: block; font-size: 1.08rem; font-weight: 500; letter-spacing: -.01em; }
+.dh-fila div span { font-size: .9rem; color: var(--dh-suave); }
+.dh-borra {
+  width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 12px;
+  background: none; color: var(--dh-suave); cursor: pointer; transition: background .2s, color .2s;
+}
+.dh-borra:hover, .dh-borra:focus-visible { background: var(--dh-chip); color: var(--dh-texto); outline: none; }
+.dh-borra svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.dh-pista { margin: 0; color: var(--dh-suave); font-size: .92rem; text-align: center; }

@@ -1,0 +1,71 @@
+/* Flotante · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --fl-fondo: #0a0a0a;
+  --fl-texto: #f4f4f4;
+  --fl-suave: rgba(255, 255, 255, .5);
+  --fl-linea: rgba(255, 255, 255, .18);
+  --fl-sube: -34px;       /* cuánto sube la etiqueta */
+  --fl-escala: .6;        /* y cuánto se encoge; el JS lo lee de aquí */
+}
+:root[data-tema="claro"] {
+  --fl-fondo: #eeeeee;
+  --fl-texto: #0a0a0a;
+  --fl-suave: rgba(0, 0, 0, .5);
+  --fl-linea: rgba(0, 0, 0, .2);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--fl-fondo); color: var(--fl-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+.fl-campo { position: relative; display: block; padding-top: 30px; cursor: text; }
+.fl-entrada {
+  display: block; width: 100%; height: 58px; padding: 0; border: 0; outline: none; background: none;
+  color: var(--fl-texto); font: inherit; font-size: 1.6rem; letter-spacing: -.01em; caret-color: var(--fl-texto);
+}
+/* la línea de abajo: gris en reposo; la clara crece desde donde tocaste */
+.fl-campo::before, .fl-campo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--fl-linea); }
+.fl-campo::after {
+  height: 2px; background: var(--fl-texto); transform: scaleX(0); transform-origin: var(--fl-origen, 50%) 50%;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+.fl-campo.is-foco::after { transform: scaleX(1); }
+
+.fl-etiqueta {
+  position: absolute; left: 0; top: 30px; height: 58px; display: flex; align-items: center;
+  font-size: 1.6rem; color: var(--fl-suave); pointer-events: none; white-space: pre;
+}
+/* Cada letra sube y se encoge por su cuenta, un poco después que la
+   anterior: --dx la corre hacia la izquierda lo que se encoge todo lo de
+   antes, así la palabra llega arriba entera y sin huecos. Al bajar, la
+   ola va al revés —de la última a la primera— para que las letras que
+   crecen nunca pisen a las que aún están pequeñas. */
+.fl-letra {
+  display: inline-block; transform-origin: 0 100%;
+  transition: transform .62s cubic-bezier(.34, 1.45, .64, 1), color .3s;
+  transition-delay: calc((var(--n) - 1 - var(--i)) * 20ms);
+}
+.fl-campo.is-arriba .fl-letra {
+  transform: translate(var(--dx), var(--fl-sube)) scale(var(--fl-escala));
+  transition-delay: calc(var(--i) * 24ms);
+}
+.fl-campo.is-foco .fl-letra { color: var(--fl-texto); }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.fl-escena { height: 100%; display: grid; place-items: center; padding: 2rem; }
+.fl-formulario { width: min(600px, 100%); display: grid; gap: 1.6rem; }
+.fl-pie { display: flex; justify-content: flex-end; gap: .8rem; margin-top: 1.2rem; }
+.fl-boton {
+  height: 50px; padding: 0 1.5rem; border-radius: 99px; border: 1px solid var(--fl-linea); background: none;
+  color: var(--fl-texto); font: inherit; font-size: 1rem; font-weight: 500; cursor: pointer;
+  transition: border-color .2s, transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.fl-boton:hover { border-color: var(--fl-suave); }
+.fl-boton:active { transform: scale(.96); }
+.fl-boton-lleno { background: var(--fl-texto); color: var(--fl-fondo); border-color: var(--fl-texto); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fl-letra { transition-duration: .01s; transition-delay: 0s; }
+  .fl-campo::after { transition: none; }
+}

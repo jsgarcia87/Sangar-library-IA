@@ -1,0 +1,28 @@
+/* Retícula · Moxen — los estilos del efecto y de la demostración. */
+:root {
+  --rt-fondo: #0a0a0a;
+  --rt-texto: #f4f4f4;
+  --rt-suave: rgba(255, 255, 255, .5);
+  --rt-punto: #f4f4f4;       /* el color de los puntos (lo lee el JS) */
+}
+:root[data-tema="claro"] {
+  --rt-fondo: #eeeeee;
+  --rt-texto: #0a0a0a;
+  --rt-suave: rgba(0, 0, 0, .5);
+  --rt-punto: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--rt-fondo); color: var(--rt-texto); }
+body { font-family: "General Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── el efecto ─────────────────────────────────────────────────────── */
+/* el lienzo ocupa toda la sección, por detrás de su contenido */
+[data-reticula] { position: relative; isolation: isolate; overflow: hidden; }
+.rt-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+/* ── la demostración ───────────────────────────────────────────────── */
+.rt-escena { min-height: 100%; display: grid; place-items: center; text-align: center; padding: 2rem; }
+.rt-contenido { pointer-events: none; }
+.rt-etiqueta { margin: 0 0 1.2rem; font-size: .8rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--rt-suave); }
+.rt-titulo { margin: 0; font-size: clamp(2.6rem, 7.4vw, 6rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; }
