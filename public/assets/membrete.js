@@ -1,5 +1,5 @@
 /* =====================================================================
-   Membrete · Moxen adaptado para Sangar Studio OS
+   Membrete · Sangar Studio OS
    Motor interactivo de facturas con odómetro, resortes FLIP y 3 estilos.
    ===================================================================== */
 (function () {
