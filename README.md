@@ -8,7 +8,7 @@
 
 | Suite | Archivo | Descripción |
 | :--- | :--- | :--- |
-| **Sangar AI Studio** | [`index.html`](./index.html) | Generador de prompts para Runway Gen-3 Alpha, Kling AI 1.5, Luma Dream Machine, OpenAI Sora / MiniMax Hailuo, Midjourney v6.1 / Flux, Higgsfield AI, Remotion 3D, Claude Artifacts (Canvas 30fps), expresiones de After Effects, 5 storyboards técnicos, glosario ampliado y biblioteca con 27 prompts curados. |
+| **Sangar AI Studio** | [`index.html`](./index.html) | Generador de prompts para Runway Gen-3 Alpha, Kling AI 1.5, Luma Dream Machine, OpenAI Sora / MiniMax Hailuo, Midjourney v6.1 / Flux, Higgsfield AI, Remotion 3D, Claude Artifacts (Canvas 30fps), expresiones de After Effects, 5 storyboards técnicos, **Generador de Prompts UX/UI (Founderz Framework de 8 capas)**, glosario ampliado y biblioteca con 32 prompts curados. |
 | **Galería de Referencias UI** | [`components.html`](./components.html) | Galería dual con selector de suites: **Sangar Studio Core** (15 componentes interactivos en vivo con código en HTML/CSS y React + prompts de agente) y **Sangar Motion Vault** (880 animaciones interactivas descargadas en local con preview en vídeo al pasar el cursor y prompts para agentes de código). |
 
 ---
@@ -62,9 +62,37 @@ La biblioteca ha sido alimentada con el contenido curado y recursos técnicos de
 - **Hero Frames (Midjourney v6.1 & Flux):** Generador de fotogramas maestros en alta resolución (`--style raw`, `--stylize`, lentes, materiales e iluminación de estudio).
 - **Expresiones After Effects:** Scripts matemáticos listos para copiar (*Inertia Bounce*, *Wiggle*, *LoopOut Ping-Pong/Cycle*, *Auto Fade*, *Count-Up Numbers*, *Follow Leader Delay*, *Neon Flicker*).
 - **5 Storyboards Técnicos:** Plantillas plano a plano para *Reel Viral de 15s*, *Spot Comercial de 30s*, *Spot de Lujo 10s (Higgsfield)*, *UGC Fitness 10s* y *Pipeline de Videojuego 3D en 5 Rondas*.
-- **Biblioteca de 27 Prompts Curados:** Filtro por categorías (*Todos*, *Estilos Animación*, *Video IA & Social*, *Claude Code & SaaS*, *Logo Reveal*, *Tipografía Cinética*, *Bucles & VJ*, *UI & Spatial*, *Productos 3D*), búsqueda instantánea y guardado de favoritos en `localStorage`.
+- **Biblioteca de 32 Prompts Curados:** Filtro por categorías (*Todos*, *UX/UI & Producto (Founderz)*, *Estilos Animación*, *Video IA & Social*, *Claude Code & SaaS*, *Logo Reveal*, *Tipografía Cinética*, *Bucles & VJ*, *UI & Spatial*, *Productos 3D*), búsqueda instantánea y guardado de favoritos en `localStorage`.
 
-### 2. Galería de Referencias UI & Prompts de Agentes (`components.html`)
+### 2. Generador de Prompts UX/UI & Product Design — Founderz Framework (`index.html#uxui`)
+Generador paramétrico profesional de prompts de diseño de interfaces y producto digital basado en las reglas oficiales y el framework estructurado de **Founderz UX/UI Prompt Generator**:
+- **Arquitectura de 8 Capas Estrictas:**
+  1. `# ROLE`: Diseñador de producto senior metódico fundamentado en ergonomía cognitiva, sistemas de diseño y psicología del usuario.
+  2. `# GOAL`: Entregable concreto sin dispersión (7 modalidades: *Pantalla individual*, *Flujo completo de 3 a 5 pantallas*, *Mapa IA / Flujo global*, *Handoff técnico para ingeniería*, *Auditoría heurística con matriz de severidad*, *Prompt para herramienta generativa de código*, *Microcopy & Contenido de interfaz*).
+  3. `# CONTEXT`: Brief acotado entre delimitadores `[START OF BRIEF]` y `[END OF BRIEF]`, plataforma destino (Web, iOS, Android, Responsive), perfil de usuario, tipo de flujo (Onboarding, Checkout, Dashboard, Soporte, etc.) y dirección visual.
+  4. `# SOURCE MATERIAL`: Material de trabajo de referencia (wireframe, captura de pantalla, sistema de diseño existente o datos de investigación cualitativa).
+  5. `# CONSTRAINTS`: Restricciones de diseño no negociables:
+     - **Regla de oro anti-alucinación:** Prohibición absoluta de inventar datos externos; cualquier detalle asumido se etiqueta obligatoriamente como `[to validate]` o `[assumption]`.
+     - **1 Acción Primaria Destacada:** Exactamente un CTA primario por pantalla visualmente dominante.
+     - **Contenido Realista:** Eliminación total de *lorem ipsum*.
+     - **WCAG 2.2 Nivel AA:** Ratio de contraste de texto normal >= 4.5:1 (3:1 texto grande) y áreas táctiles mínimas de 24x24px (44x44px en entornos móviles).
+     - **Respeto a Propiedad Intelectual:** Sin logotipos ni marcas de terceros no autorizadas.
+  6. `# HOW TO WORK`: Metodología paso a paso: resumen motivacional de 3 líneas del usuario, desglose por pantalla y bloques, especificación exhaustiva de estados (*default, hover, active, loading, empty, error*) y simulación del recorrido desde la perspectiva de un usuario novato.
+  7. `# OUTPUT FORMAT`: Estructura rigurosa en tablas de componentes y wireframes markdown jerárquicos, cerrando con un máximo de 5 supuestos explícitos que requieren validación con el cliente o equipo de producto.
+  8. `# BEFORE YOU ANSWER, CHECK`: Checklist de autoverificación previa de 4 puntos críticos (1 CTA primario, cumplimiento de Nielsen y WCAG, marcado de supuestos y ausencia de lorem ipsum).
+- **6 Presets Listos para Producción:**
+  - *Onboarding SaaS B2B:* Flujo de 4 pantallas orientado a reducir el *time-to-value*.
+  - *Checkout Móvil de Alta Conversión:* Pantalla de pago optimizada para el pulgar con wallets express y garantía de devolución.
+  - *Dashboard Analítico B2B:* Panel logístico de alta densidad con 4 KPIs, gráficos interactivos y tabla con acciones en lote.
+  - *Soporte & Chat con IA:* Flujo resolutivo con estados de espera, citas de fuentes y escalado a agente humano.
+  - *Configuración de Equipo / Admin:* Matriz de roles y permisos RBAC con invitaciones granulares.
+  - *App Móvil B2C:* Experiencia nativa optimizada para una sola mano y feedback háptico.
+- **Herramientas de Destino Soportadas:** ChatGPT / Claude, v0 by Vercel, Figma Make, Lovable, Google Stitch y Uizard.
+- **Salida Bilingüe (Español / Inglés):** Conmutador instantáneo de idioma para prompts en inglés o español técnico.
+- **Toggle de Preguntas Previas de Descubrimiento:** Obliga al modelo a formular 3 preguntas clave antes de responder para resolver ambigüedades de producto.
+- **Sugerencias de Seguimiento Post-Respuesta:** Recomendaciones automáticas para iterar el resultado (*"Pásame la tabla a código Tailwind"*, *"Detalla los casos de borde y mensajes de error"*, *"Genera los criterios BDD Given/When/Then"*).
+
+### 3. Galería de Referencias UI & Prompts de Agentes (`components.html`)
 - **Spotlight Border Card:** Halo radial reactivo al puntero.
 - **Border Beam Glow:** Haz de luz continuo recorriendo el perímetro mediante `conic-gradient`.
 - **Kinetic Text Decryptor / Scramble:** Descifrado tipográfico dinámico al pasar el cursor.
@@ -90,7 +118,15 @@ La biblioteca ha sido alimentada con el contenido curado y recursos técnicos de
 - **Buscador & Filtros Dinámicos:** Búsqueda en tiempo real por nombre, concepto, descripción, dependencia o categoría, con paginación progresiva (+24 componentes por tanda).
 - **Modal de Detalle & Prompts para Agentes:** Diálogo nativo `<dialog>` con reproductor de vídeo ampliado, lista de archivos fuente locales (`index.html`, `{slug}.css`, `{slug}.js` en `data/vault/components/{id}/`) y botón para **Copiar Prompt de Agente** en 1 clic optimizado para Claude Code, Cursor, v0 o ChatGPT.
 
-### 4. Sistema de Diseño *Warm Studio OS* ([`design.md`](./design.md))
+### 4. Sangar Motion Vault (`components.html#vault`)
+- **880 Animaciones Privadas en Local:** Bóveda privada completa de 880 microinteracciones y transiciones descargadas íntegramente en local (posters, vídeos MP4 y archivos fuente de código).
+- **24 Categorías Especializadas:** Formularios (119), Sistemas (99), Gráficos (63), Listas (59), Texto cinético (55), Navegación (51), Secciones (45), Avisos (40), Precios (39), Generativo (38), Tarjetas (32), Media (31), Cargas/Spinners (27), Diagramas (27), Botones (24), Galerías (22), Iconos animados (21), Interruptores (19), Transiciones (14), 3D (14), Scroll (11), Portadas (11), Fondos (10) y Punteros/Cursor (9).
+- **Zero-Dependency First:** 864 componentes sin dependencias externas (HTML, CSS y JavaScript nativo), más componentes especializados en WebGL2, WebGL y Matter.js.
+- **Reproducción de Vídeo en Hover (100% Local):** Tarjetas optimizadas con carga perezosa (`preload="none"` y `data-src`) que reproducen el bucle MP4 local solo al situar el ratón encima, manteniendo el rendimiento del navegador al 100%.
+- **Buscador & Filtros Dinámicos:** Búsqueda en tiempo real por nombre, concepto, descripción, dependencia o categoría, con paginación progresiva (+24 componentes por tanda).
+- **Modal de Detalle & Prompts para Agentes:** Diálogo nativo `<dialog>` con reproductor de vídeo ampliado, lista de archivos fuente locales (`index.html`, `{slug}.css`, `{slug}.js` en `data/vault/components/{id}/`) y botón para **Copiar Prompt de Agente** en 1 clic optimizado para Claude Code, Cursor, v0 o ChatGPT.
+
+### 5. Sistema de Diseño *Warm Studio OS* ([`design.md`](./design.md))
 - **Estética:** Superficies cálidas (`#FCFAFB` en modo claro / `#131211` en modo oscuro), carbón `#191716` / `#F0ECE8` y acento coral `#FF7E67` / `#FF8E7A` mediante tokens CSS `--sg-*` definidos en [`public/assets/app.css`](./public/assets/app.css).
 - **Tipografía corporativa local:** `Stinger Fit Light` para titulares y métricas y `Raleway` (`400`, `600`, `700`) para interfaz, cargadas desde `public/assets/fonts/`.
 - **App Shell unificado (`shell.js`):**
@@ -125,10 +161,10 @@ También puedes abrir `index.html` o `components.html` directamente desde el exp
 
 ```text
 Sangar-library-IA/
-├── index.html                   # Suite de IA: Generador Vídeo, Hero Frames, Expresiones, Storyboards y Biblioteca
+├── index.html                   # Suite de IA: Generador Vídeo, Hero Frames, Prompts UX/UI, Expresiones, Storyboards y Biblioteca
 ├── components.html              # Galería de Referencias UI y Prompts para Agentes de Código
 ├── shell.js                     # Controlador compartido del App Shell (tema, sidebar, ⌘K, popover, toasts, iconos)
-├── app.js                       # Lógica del generador de prompts, módulos de estudio y favoritos
+├── app.js                       # Lógica del generador de prompts (vídeo, hero frames y UX/UI), módulos de estudio y favoritos
 ├── components.js                # Motor interactivo de demos UI (spotlight, tilt, scramble, magnetic, island, canvas)
 ├── styles.css                   # Estilos de la plataforma sobre los tokens --sg-* de public/assets/app.css
 ├── components.css               # Estilos de tarjetas showcase y demos interactivos
@@ -150,12 +186,13 @@ Sangar-library-IA/
 ├── data/                        # Conjuntos de datos JSON modulares
 │   ├── after-effects-tools.json # Expresiones matemáticas de After Effects (7 scripts)
 │   ├── ai-tools.json            # Directorio comparativo de herramientas IA (10 herramientas)
-│   ├── animation-glossary.json  # Principios y glosario de Motion Graphics (14 términos)
+│   ├── animation-glossary.json  # Principios y glosario de Motion Graphics, Nielsen y WCAG (19 términos)
 │   ├── hero-frames-generator.json # Presets y parámetros Midjourney/Flux (5 configuraciones)
 │   ├── motion-generator.json    # Presets, estilos, dinámicas y motores (12 presets, 17 estilos, 9 motores)
-│   ├── prompts-library.json     # Biblioteca de prompts curados listos para copiar (27 prompts)
+│   ├── prompts-library.json     # Biblioteca de prompts curados listos para copiar (32 prompts)
 │   ├── storyboard-templates.json# Plantillas de storyboards técnicos (5 estructuras)
 │   ├── ui-components.json       # Galería de Referencias UI con código y prompts de agente (15 componentes)
+│   ├── ux-ui-prompt-rules.json  # Framework Founderz de 8 capas, presets, heurísticas de Nielsen y WCAG 2.2 AA
 │   ├── vault-components.json    # Bóveda Sangar Motion Vault (880 animaciones con rutas locales y prompts)
 │   └── vault/                   # Archivos fuente de componentes
 │       └── components/          # 880 carpetas con index.html, CSS y JS por componente

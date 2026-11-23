@@ -55,6 +55,11 @@
             <i data-lucide="clapperboard"></i>
             <span class="sg-nav__text">Generador Vídeo</span>
           </button>
+          <button type="button" class="sg-nav__item nav-tab-btn" data-tab="uxui">
+            <i data-lucide="layout"></i>
+            <span class="sg-nav__text">Prompts UX/UI</span>
+            <span class="sg-nav__badge" style="background: rgba(255,126,103,0.2); color: #FF7E67;">Founderz</span>
+          </button>
           <button type="button" class="sg-nav__item nav-tab-btn" data-tab="heroframes">
             <i data-lucide="gem"></i>
             <span class="sg-nav__text">Hero Frames</span>
@@ -415,8 +420,212 @@
         </section>
 
         <!-- ============================================================ -->
-        <!-- TAB 2: HERO FRAMES (MIDJOURNEY & FLUX)                       -->
+        <!-- TAB: GENERADOR DE PROMPTS UX/UI (FRAMEWORK FOUNDERZ)         -->
         <!-- ============================================================ -->
+        <section id="tab-uxui" class="tab-pane">
+          <div class="sg-fusion-card sg-page-header-card">
+            <div>
+              <h1>Generador de Prompts UX/UI &amp; Product Design</h1>
+              <p>Metodología estructurada en 8 capas basada en el framework oficial de Founderz: intención, rol senior, heurísticas de Nielsen, accesibilidad WCAG 2.2 AA, restricciones estrictas y especificación de entrega para Claude, ChatGPT, Gemini, v0, Figma y Lovable.</p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="sg-badge sg-badge--coral"><i data-lucide="shield-check"></i> Founderz Framework</span>
+              <span class="sg-badge"><i data-lucide="eye"></i> WCAG 2.2 AA</span>
+              <span class="sg-badge"><i data-lucide="check-circle-2"></i> Sin Datos Inventados</span>
+            </div>
+          </div>
+
+          <!-- Quick Presets -->
+          <div class="presets-bar">
+            <span class="presets-label"><i data-lucide="zap"></i> Presets UX/UI:</span>
+            <button type="button" class="preset-chip uxui-preset-chip" data-preset="onboarding">Onboarding SaaS</button>
+            <button type="button" class="preset-chip uxui-preset-chip" data-preset="checkout">Checkout Móvil</button>
+            <button type="button" class="preset-chip uxui-preset-chip" data-preset="dashboard">Dashboard Logístico</button>
+            <button type="button" class="preset-chip uxui-preset-chip" data-preset="soporte">Centro de Ayuda</button>
+            <button type="button" class="preset-chip uxui-preset-chip" data-preset="admin">Gestión de Permisos</button>
+            <button type="button" class="preset-chip uxui-preset-chip" data-preset="movil">App de Reservas</button>
+          </div>
+
+          <div class="generator-layout">
+            <!-- Left: Config Column -->
+            <div class="config-card">
+              <div class="card-header-clean">
+                <h2><i data-lucide="sliders"></i> Parámetros del Brief y Experiencia</h2>
+                <button type="button" id="resetUxuiBtn" class="sg-btn sg-btn--outline sg-btn--sm">
+                  <i data-lucide="rotate-ccw"></i> Restaurar
+                </button>
+              </div>
+
+              <form id="uxuiPromptForm">
+                <div class="form-group-grid">
+                  <!-- Bloque 1: Lo Esencial -->
+                  <div class="col-span-2">
+                    <label class="field-label" for="uxuiBriefInput">¿Qué necesita resolver esta experiencia? (Brief del Producto) *</label>
+                    <textarea id="uxuiBriefInput" class="custom-textarea" rows="4" placeholder="Ej: Producto, usuario objetivo, tarea que quiere completar, qué falla hoy en la interfaz y qué no puede cambiar..."></textarea>
+                    <span style="font-size: 11px; color: var(--sg-gris-55); display:block; margin-top: 4px;">Describe el contexto real. Solo este campo es obligatorio: todo lo demás puede dejarse en Auto.</span>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiTaskSelect">¿Qué entregable necesitas? (Objetivo)</label>
+                    <select id="uxuiTaskSelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiToolSelect">Herramienta de Diseño / IA Destino</label>
+                    <select id="uxuiToolSelect" class="custom-select"></select>
+                  </div>
+
+                  <div class="col-span-2">
+                    <div class="toggle-row" style="background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--sg-gris-12); margin-top: 4px;">
+                      <label class="toggle-info" for="uxuiAskBeforeToggle" style="cursor:pointer;">
+                        <strong>Preguntar antes de diseñar</strong>
+                        <span>Obliga al modelo a formular 3 preguntas clave de descubrimiento antes de proponer pantallas</span>
+                      </label>
+                      <label class="switch">
+                        <input type="checkbox" id="uxuiAskBeforeToggle" aria-label="Preguntar antes de diseñar">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Bloque 2: Pantalla y Usuario -->
+                  <div class="col-span-2" style="border-top: 1px solid var(--sg-gris-12); padding-top: 14px; margin-top: 4px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--sg-coral); text-transform: uppercase; letter-spacing: 0.05em;">Pantalla &amp; Contexto de Usuario</span>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiFlowSelect">Tipo de Pantalla o Flujo</label>
+                    <select id="uxuiFlowSelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiUserSelect">Usuario Principal</label>
+                    <select id="uxuiUserSelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiPlatformSelect">Plataforma / Dispositivo</label>
+                    <select id="uxuiPlatformSelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiContentSelect">Estrategia de Contenido &amp; Datos</label>
+                    <select id="uxuiContentSelect" class="custom-select"></select>
+                  </div>
+
+                  <!-- Bloque 3: Dirección Visual y Estados -->
+                  <div class="col-span-2" style="border-top: 1px solid var(--sg-gris-12); padding-top: 14px; margin-top: 4px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--sg-coral); text-transform: uppercase; letter-spacing: 0.05em;">Dirección Visual &amp; Estados Críticos</span>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiDirectionSelect">Dirección Visual</label>
+                    <select id="uxuiDirectionSelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiDensitySelect">Densidad de Información &amp; Prioridad</label>
+                    <select id="uxuiDensitySelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiStatesSelect">Estados a Cubrir</label>
+                    <select id="uxuiStatesSelect" class="custom-select"></select>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiLangSelect">Idioma del Prompt Generado</label>
+                    <select id="uxuiLangSelect" class="custom-select">
+                      <option value="es" selected>Español (Equipos hispanohablantes)</option>
+                      <option value="en">Inglés (Optimizado para LLM y v0)</option>
+                    </select>
+                  </div>
+
+                  <!-- Bloque 4: Controles Extra y Restricciones -->
+                  <div class="col-span-2" style="border-top: 1px solid var(--sg-gris-12); padding-top: 14px; margin-top: 4px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--sg-coral); text-transform: uppercase; letter-spacing: 0.05em;">Controles de Entrega &amp; Restricciones</span>
+                  </div>
+
+                  <div>
+                    <label class="field-label" for="uxuiMaterialSelect">Material que Aportarás (Opcional)</label>
+                    <select id="uxuiMaterialSelect" class="custom-select"></select>
+                  </div>
+
+                  <div class="col-span-2">
+                    <label class="field-label">Entregables y Controles Extra (Opcionales)</label>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-top: 6px;">
+                      <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--sg-texto); cursor:pointer;">
+                        <input type="checkbox" class="uxui-control-checkbox" value="ctl_criterios"> Criterios de Aceptación (BDD Given-When-Then)
+                      </label>
+                      <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--sg-texto); cursor:pointer;">
+                        <input type="checkbox" class="uxui-control-checkbox" value="ctl_metricas"> Métricas de Éxito &amp; Eventos de Analítica
+                      </label>
+                      <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--sg-texto); cursor:pointer;">
+                        <input type="checkbox" class="uxui-control-checkbox" value="ctl_test"> Plan de Test de Usabilidad (5 usuarios, 4 tareas)
+                      </label>
+                      <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--sg-texto); cursor:pointer;">
+                        <input type="checkbox" class="uxui-control-checkbox" value="ctl_privacidad"> Privacidad y Consentimiento Explícito
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-span-2">
+                    <label class="field-label" for="uxuiLimitsInput">Restricciones Técnicas o de Diseño Adicionales (Opcional)</label>
+                    <input type="text" id="uxuiLimitsInput" class="custom-input" placeholder="Ej: Usamos Material 3; el backend de pago no puede cambiar; color corporativo #FF7E67...">
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right: Output Column -->
+            <div class="output-column">
+              <div class="output-card highlight">
+                <div class="output-header">
+                  <h3><i data-lucide="sparkles"></i> Prompt UX/UI Estructurado</h3>
+                  <span id="uxuiTargetBadge" class="sg-badge sg-badge--coral">Una Pantalla Clave</span>
+                </div>
+
+                <div id="uxuiParamsBar" class="params-container">
+                  <span class="param-pill">8 Capas Founderz</span>
+                  <span class="param-pill">WCAG 2.2 AA</span>
+                  <span class="param-pill">Nielsen Heuristics</span>
+                  <span class="param-pill">Sin Datos Inventados</span>
+                </div>
+
+                <div class="prompt-box-wrapper">
+                  <div class="prompt-box-header">
+                    <label class="prompt-box-title" for="uxuiPromptOutput">Prompt para IA (Listo para Copiar)</label>
+                    <button type="button" id="copyUxuiPromptBtn" class="btn-copy-mini"><i data-lucide="copy"></i> Copiar</button>
+                  </div>
+                  <textarea id="uxuiPromptOutput" class="prompt-textarea" style="height: 380px; font-size: 12px; line-height: 1.55;" readonly></textarea>
+                </div>
+
+                <div class="action-buttons-group">
+                  <button type="button" id="copyFullUxuiActionBtn" class="sg-btn sg-btn--primary">
+                    <i data-lucide="copy"></i> Copiar Prompt Completo
+                  </button>
+                  <button type="button" id="saveUxuiFavoriteBtn" class="sg-btn sg-btn--secondary">
+                    <i data-lucide="star"></i> Guardar Favorito
+                  </button>
+                </div>
+
+                <!-- Follow-ups suggestions -->
+                <div id="uxuiFollowupsCard" style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--sg-gris-12);">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--sg-coral); text-transform: uppercase;">Prompts de Seguimiento Recomendados:</span>
+                  <ul id="uxuiFollowupsList" style="margin: 8px 0 0; padding-left: 18px; font-size: 12px; color: var(--sg-gris-70); line-height: 1.6;"></ul>
+                </div>
+
+                <!-- Quality Rules Summary -->
+                <div class="sg-ai-hint" style="margin-top: 16px;">
+                  <span class="sg-ai-hint__icon"><i data-lucide="info"></i></span>
+                  <p class="sg-ai-hint__text">
+                    <strong>Garantía de Calidad Founderz:</strong> El prompt inyecta las 6 restricciones no negociables (WCAG 2.2 AA 4.5:1, targets táctiles 24×24px, 1 acción primaria por pantalla, contenido real sin lorem ipsum y prohibición estricta de inventar datos).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <section id="tab-heroframes" class="tab-pane">
           <div class="sg-fusion-card sg-page-header-card">
             <div>
@@ -591,6 +800,7 @@
 
             <div class="sg-filter-pills" id="categoryFilterContainer" role="group" aria-label="Filtrar por categoría">
               <button type="button" class="sg-filter-pill is-active" data-cat="all">Todos</button>
+              <button type="button" class="sg-filter-pill" data-cat="ux_ui">UX/UI &amp; Producto (Founderz)</button>
               <button type="button" class="sg-filter-pill" data-cat="animation_styles">Estilos Animación</button>
               <button type="button" class="sg-filter-pill" data-cat="video_ia">Video IA &amp; Social</button>
               <button type="button" class="sg-filter-pill" data-cat="claude_code">Claude Code &amp; SaaS</button>

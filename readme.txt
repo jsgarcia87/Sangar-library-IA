@@ -21,10 +21,22 @@ SUITES DE LA PLATAFORMA
      ChatGPT / Claude, Higgsfield AI, Remotion + Three.js, Claude Canvas y Unreal Engine 5).
    - 12 Presets rápidos de movimiento y 17 estilos visuales curados.
    - Hero Frames Studio: configuración de fotogramas maestros para Image-to-Video.
+   - Generador de Prompts UX/UI & Product Design (Founderz Framework de 8 capas):
+     * Arquitectura de 8 capas: ROLE, GOAL, CONTEXT, SOURCE MATERIAL, CONSTRAINTS,
+       HOW TO WORK, OUTPUT FORMAT, BEFORE YOU ANSWER, CHECK.
+     * 7 Entregables: Pantalla individual, Flujo de 3-5 pantallas, Mapa IA / Flujo global,
+       Handoff técnico, Auditoría heurística, Prompt para herramienta de código, Microcopy.
+     * 6 Presets listos: Onboarding SaaS B2B, Checkout Móvil, Dashboard Analítico,
+       Soporte & Chat con IA, Configuración Admin RBAC, App Móvil B2C.
+     * Heurísticas de Nielsen y WCAG 2.2 AA integradas como restricciones innegociables.
+     * Regla de oro: Cero datos externos inventados ([to validate] / [assumption]).
+     * Soporte para herramientas: ChatGPT/Claude, v0 by Vercel, Figma Make, Lovable, Stitch, Uizard.
+     * Salida bilingüe (ES / EN), toggle de preguntas previas y sugerencias de seguimiento.
    - Expresiones de After Effects: 7 scripts listos para producción.
    - Storyboards: 5 estructuras técnicas plano a plano (15s, 30s, Lujo 10s, UGC 10s y GameDev 5 Rondas).
-   - Biblioteca de 27 Prompts Curados con filtros dinámicos por categorías.
-   - Glosario de Motion: 14 conceptos clave (físicas, cámaras, ópticas y sincronía).
+   - Biblioteca de 32 Prompts Curados con filtros dinámicos (incluye categoría UX/UI).
+   - Glosario de Motion, Usabilidad & Accesibilidad: 19 conceptos clave (físicas, cámaras,
+     10 Heurísticas de Nielsen, WCAG 2.2 AA y ergonomía del pulgar).
    - Directorio de Herramientas IA: comparativa detallada de 10 motores.
    - Favoritos locales con exportación a JSON.
 
