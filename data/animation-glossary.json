@@ -112,7 +112,7 @@
     "recommendedUse": "Diseño de formularios, paletas de color, botones, modales y cualquier componente interactivo web o móvil."
   },
   {
-    "term": "Framework Founderz de 8 Capas para Prompts UX/UI",
+    "term": "Framework de 8 Capas para Prompts UX/UI",
     "category": "UX/UI & Prompt Engineering",
     "description": "Metodología estructurada de 8 capas para instruir a LLMs en diseño de producto sin alucinaciones: 1. ROLE (diseñador senior metódico), 2. GOAL (entregable preciso), 3. CONTEXT (brief delimitado con [START/END OF BRIEF]), 4. SOURCE MATERIAL (referencias o wireframes), 5. CONSTRAINTS (reglas innegociables: 1 acción primaria, no fake data, contraste WCAG), 6. HOW TO WORK (paso a paso), 7. OUTPUT FORMAT (tablas/wireframes), 8. BEFORE YOU ANSWER, CHECK (lista de verificación previa).",
     "promptSnippet": "Structure prompt across 8 layers: # ROLE, # GOAL, # CONTEXT, # SOURCE MATERIAL, # CONSTRAINTS, # HOW TO WORK, # OUTPUT FORMAT, # BEFORE YOU ANSWER, CHECK.",

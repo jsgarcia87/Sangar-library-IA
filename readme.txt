@@ -21,7 +21,7 @@ SUITES DE LA PLATAFORMA
      ChatGPT / Claude, Higgsfield AI, Remotion + Three.js, Claude Canvas y Unreal Engine 5).
    - 12 Presets rápidos de movimiento y 17 estilos visuales curados.
    - Hero Frames Studio: configuración de fotogramas maestros para Image-to-Video.
-   - Generador de Prompts UX/UI & Product Design (Founderz Framework de 8 capas):
+   - Generador de Prompts UX/UI & Product Design (Framework de 8 Capas):
      * Arquitectura de 8 capas: ROLE, GOAL, CONTEXT, SOURCE MATERIAL, CONSTRAINTS,
        HOW TO WORK, OUTPUT FORMAT, BEFORE YOU ANSWER, CHECK.
      * 7 Entregables: Pantalla individual, Flujo de 3-5 pantallas, Mapa IA / Flujo global,

@@ -8,7 +8,7 @@
 
 | Suite | Archivo | Descripción |
 | :--- | :--- | :--- |
-| **Sangar AI Studio** | [`index.html`](./index.html) | Generador de prompts para Runway Gen-3 Alpha, Kling AI 1.5, Luma Dream Machine, OpenAI Sora / MiniMax Hailuo, Midjourney v6.1 / Flux, Higgsfield AI, Remotion 3D, Claude Artifacts (Canvas 30fps), expresiones de After Effects, 5 storyboards técnicos, **Generador de Prompts UX/UI (Founderz Framework de 8 capas)**, glosario ampliado y biblioteca con 32 prompts curados. |
+| **Sangar AI Studio** | [`index.html`](./index.html) | Generador de prompts para Runway Gen-3 Alpha, Kling AI 1.5, Luma Dream Machine, OpenAI Sora / MiniMax Hailuo, Midjourney v6.1 / Flux, Higgsfield AI, Remotion 3D, Claude Artifacts (Canvas 30fps), expresiones de After Effects, 5 storyboards técnicos, **Generador de Prompts UX/UI (Framework de 8 Capas)**, glosario ampliado y biblioteca con 32 prompts curados. |
 | **Galería de Referencias UI** | [`components.html`](./components.html) | Galería dual con selector de suites: **Sangar Studio Core** (15 componentes interactivos en vivo con código en HTML/CSS y React + prompts de agente) y **Sangar Motion Vault** (880 animaciones interactivas descargadas en local con preview en vídeo al pasar el cursor y prompts para agentes de código). |
 
 ---
@@ -62,10 +62,10 @@ La biblioteca ha sido alimentada con el contenido curado y recursos técnicos de
 - **Hero Frames (Midjourney v6.1 & Flux):** Generador de fotogramas maestros en alta resolución (`--style raw`, `--stylize`, lentes, materiales e iluminación de estudio).
 - **Expresiones After Effects:** Scripts matemáticos listos para copiar (*Inertia Bounce*, *Wiggle*, *LoopOut Ping-Pong/Cycle*, *Auto Fade*, *Count-Up Numbers*, *Follow Leader Delay*, *Neon Flicker*).
 - **5 Storyboards Técnicos:** Plantillas plano a plano para *Reel Viral de 15s*, *Spot Comercial de 30s*, *Spot de Lujo 10s (Higgsfield)*, *UGC Fitness 10s* y *Pipeline de Videojuego 3D en 5 Rondas*.
-- **Biblioteca de 32 Prompts Curados:** Filtro por categorías (*Todos*, *UX/UI & Producto (Founderz)*, *Estilos Animación*, *Video IA & Social*, *Claude Code & SaaS*, *Logo Reveal*, *Tipografía Cinética*, *Bucles & VJ*, *UI & Spatial*, *Productos 3D*), búsqueda instantánea y guardado de favoritos en `localStorage`.
+- **Biblioteca de 32 Prompts Curados:** Filtro por categorías (*Todos*, *UX/UI & Producto (8 Capas)*, *Estilos Animación*, *Video IA & Social*, *Claude Code & SaaS*, *Logo Reveal*, *Tipografía Cinética*, *Bucles & VJ*, *UI & Spatial*, *Productos 3D*), búsqueda instantánea y guardado de favoritos en `localStorage`.
 
-### 2. Generador de Prompts UX/UI & Product Design — Founderz Framework (`index.html#uxui`)
-Generador paramétrico profesional de prompts de diseño de interfaces y producto digital basado en las reglas oficiales y el framework estructurado de **Founderz UX/UI Prompt Generator**:
+### 2. Generador de Prompts UX/UI & Product Design — Framework de 8 Capas (`index.html#uxui`)
+Generador paramétrico profesional de prompts de diseño de interfaces y producto digital basado en una arquitectura estructurada de 8 capas de ingeniería de prompts:
 - **Arquitectura de 8 Capas Estrictas:**
   1. `# ROLE`: Diseñador de producto senior metódico fundamentado en ergonomía cognitiva, sistemas de diseño y psicología del usuario.
   2. `# GOAL`: Entregable concreto sin dispersión (7 modalidades: *Pantalla individual*, *Flujo completo de 3 a 5 pantallas*, *Mapa IA / Flujo global*, *Handoff técnico para ingeniería*, *Auditoría heurística con matriz de severidad*, *Prompt para herramienta generativa de código*, *Microcopy & Contenido de interfaz*).
@@ -192,7 +192,7 @@ Sangar-library-IA/
 │   ├── prompts-library.json     # Biblioteca de prompts curados listos para copiar (32 prompts)
 │   ├── storyboard-templates.json# Plantillas de storyboards técnicos (5 estructuras)
 │   ├── ui-components.json       # Galería de Referencias UI con código y prompts de agente (15 componentes)
-│   ├── ux-ui-prompt-rules.json  # Framework Founderz de 8 capas, presets, heurísticas de Nielsen y WCAG 2.2 AA
+│   ├── ux-ui-prompt-rules.json  # Framework de 8 capas, presets, heurísticas de Nielsen y WCAG 2.2 AA
 │   ├── vault-components.json    # Bóveda Sangar Motion Vault (880 animaciones con rutas locales y prompts)
 │   └── vault/                   # Archivos fuente de componentes
 │       └── components/          # 880 carpetas con index.html, CSS y JS por componente

@@ -5,8 +5,8 @@
   "title": "UX/UI prompt generator",
   "shortTitle": "Build your UX/UI prompt",
   "intro": "Describe the screen or flow you need to solve and get a prompt that makes ChatGPT, Claude or Gemini deliver screens, flows, specs or a prompt ready for Figma, Stitch, v0 or Lovable. Only step 1 is required: everything else stays on Auto.",
-  "privacyUrl": "https://founderz.com/privacy-policy/",
-  "courseUrl": "https://founderz.com/business/",
+  "privacyUrl": "#",
+  "courseUrl": "#",
   "briefField": "brief",
   "controlsField": "controls",
   "placeholderBy": "task",
@@ -28,8 +28,8 @@
     "portal": "25912905",
     "form": "6c899256-a8cb-4012-b42d-83249a1685d6",
     "subscription": 141476705,
-    "consentText": "I agree that Founderz may process my email to deliver the requested prompt to me.",
-    "commsText": "I agree to receive communications from Founderz."
+    "consentText": "I agree to receive the requested prompt.",
+    "commsText": "I agree to receive product communications."
   },
   "infer": [
     {
@@ -177,11 +177,11 @@
     "unlock": "Show my prompt",
     "consentA": "I have read and accept the ",
     "privacyLink": "Privacy Policy",
-    "consentB": " so that Founderz can process my email and deliver the prompt to me.",
-    "marketing": "I want to receive communications from Founderz about training, resources, and news. This is optional.",
+    "consentB": " to process and deliver the prompt.",
+    "marketing": "I want to receive communications about training, resources, and news. This is optional.",
     "emailError": "Enter a valid email address.",
     "consentError": "Accept the Privacy Policy to receive the prompt.",
-    "privacyNoteA": "Your details are sent to Founderz when you unlock the prompt, in line with the ",
+    "privacyNoteA": "Your details are processed to unlock the prompt, in line with the ",
     "privacyNoteB": ". Usage statistics only record the options you select, never your description or the prompt.",
     "promptLabel": "Prompt",
     "copy": "Copy prompt",

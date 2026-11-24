@@ -585,7 +585,7 @@ const state = {
 
 const TAB_LABELS = {
   generator: 'Generador de Motion Graphics',
-  uxui: 'Prompts UX/UI (Founderz Framework)',
+  uxui: 'Prompts UX/UI (Framework de 8 Capas)',
   heroframes: 'Hero Frames (Midjourney & Flux)',
   expressions: 'Expresiones After Effects',
   storyboard: 'Storyboards & Guiones Técnicos',
@@ -873,7 +873,7 @@ function updateHeroFramePrompt() {
 
 /**
  * ============================================================================
- * UX/UI PROMPT GENERATOR MODULE (Founderz Framework)
+ * UX/UI PROMPT GENERATOR MODULE (8-Layer Framework)
  * ============================================================================
  */
 
@@ -957,7 +957,7 @@ function initUxuiGenerator() {
         title: `UX/UI: ${taskText.split('(')[0].trim()}`,
         description: brief.length > 120 ? brief.slice(0, 120) + '...' : brief,
         category: 'ux_ui',
-        tags: ['UX/UI', 'Founderz', 'Diseño de Producto'],
+        tags: ['UX/UI', '8 Capas', 'Diseño de Producto'],
         prompt_es: promptText,
         prompt_en: promptText,
         recommended_tool: document.getElementById('uxuiToolSelect')?.selectedOptions[0]?.textContent || 'Claude / v0'
@@ -1873,7 +1873,7 @@ function registerCommandPaletteItems() {
     { id: 'view-heroframes', scope: 'views', title: 'Hero Frames (Midjourney & Flux)', subtitle: 'Fotogramas maestros para Image-to-Video', icon: 'gem', badge: 'Módulo', action: () => switchTab('heroframes') },
     { id: 'view-expressions', scope: 'views', title: 'Expresiones After Effects', subtitle: 'Scripts de rebote, wiggle y bucles', icon: 'wand-sparkles', badge: 'Módulo', action: () => switchTab('expressions') },
     { id: 'view-storyboard', scope: 'views', title: 'Storyboards & Guiones', subtitle: 'Plantillas de 15s y 30s plano a plano', icon: 'film', badge: 'Módulo', action: () => switchTab('storyboard') },
-    { id: 'view-uxui', scope: 'views', title: 'Generador de Prompts UX/UI (Founderz Framework)', subtitle: 'Diseño de producto, pantallas, flujos, auditorías y handoff en 8 capas', icon: 'layout', badge: 'UX/UI', action: () => switchTab('uxui') },
+    { id: 'view-uxui', scope: 'views', title: 'Generador de Prompts UX/UI (Framework de 8 Capas)', subtitle: 'Diseño de producto, pantallas, flujos, auditorías y handoff en 8 capas', icon: 'layout', badge: 'UX/UI', action: () => switchTab('uxui') },
     { id: 'view-library', scope: 'views', title: 'Biblioteca de Prompts', subtitle: 'Colección curada lista para copiar', icon: 'book-open', badge: 'Módulo', action: () => switchTab('library') },
     { id: 'view-glossary', scope: 'views', title: 'Guía & Glosario de Motion', subtitle: 'Flujo Image-to-Video y snippets', icon: 'graduation-cap', badge: 'Módulo', action: () => switchTab('glossary') },
     { id: 'view-tools', scope: 'views', title: 'Directorio de Herramientas IA', subtitle: 'Comparativa de modelos de vídeo y diseño', icon: 'cpu', badge: 'Módulo', action: () => switchTab('tools') },
@@ -1905,7 +1905,7 @@ function registerCommandPaletteItems() {
         scope: 'presets',
         title: `UX/UI: ${p.labelEs || p.label}`,
         subtitle: p.briefEs || p.brief,
-        keywords: `ux ui founderz ${p.values?.platform || ''} ${p.values?.task || ''} ${p.values?.user || ''} ${p.values?.flow || ''}`,
+        keywords: `ux ui diseño producto ${p.values?.platform || ''} ${p.values?.task || ''} ${p.values?.user || ''} ${p.values?.flow || ''}`,
         icon: 'layout',
         badge: 'Preset UX/UI',
         action: () => {
